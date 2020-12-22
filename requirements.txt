@@ -1,8 +1,5 @@
 Django==2.0
 mysqlclient==2.0.2
 Pillow==8.0.1
-<<<<<<< HEAD
 pytz==2020.4
-=======
 pytz==2020.4
->>>>>>> 6d82300b89c06213729e487eff70a7a164e44a24
