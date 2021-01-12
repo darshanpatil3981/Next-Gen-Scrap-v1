@@ -7,5 +7,11 @@ def Showhome(request):
 def Login(request):
     return render(request,"app/login.html")
 
-def Register(request):
-    return render(request,"app/register.html")
+def Signin_customer(request):
+    return render(request,"app/signin_customer.html")
+
+def Signin(request):
+    return render(request,"app/signin.html")
+
+def Otp_verification(request):
+    return render(request,"app/otp_verification.html")
