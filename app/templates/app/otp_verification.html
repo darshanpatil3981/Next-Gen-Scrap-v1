@@ -31,21 +31,25 @@
 					<img src="{% static 'loginassets/images/logo.png' %}" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="{% url 'otp_verification' %}">
+				{% csrf_token %}
 					<span class="login100-form-title">
 						OTP Verification
 					</span>
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="otp" placeholder="Enter OTP">
+						<input class="input100" type="text" name="cotp" placeholder="Enter OTP">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-shield" aria-hidden="true"></i>
 						</span>
 					</div>
 					
+					<!-- CUSTOM OTP -->
+					<!-- <input type="hidden" name="sotp" value="{{otp}}"> -->
+					<!--  -->
 					
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" >
 							Verify OTP
 						</button>
 					</div>

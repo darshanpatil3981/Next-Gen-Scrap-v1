@@ -129,6 +129,6 @@ STATIC_URL = '/static/'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'e.plastic10@gmail.com'
-EMAIL_HOST_PASSWORD = 'python1030'
+EMAIL_HOST_USER = 'nextgenscrap@gmail.com'
+EMAIL_HOST_PASSWORD = 'Kachraseth<3'
 EMAIL_PORT = 587
