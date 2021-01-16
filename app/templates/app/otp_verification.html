@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Customer Login  </title>
+		<title>Customer Login OTP Verification  </title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->	
@@ -30,8 +30,9 @@
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="{% static 'loginassets/images/logo.png' %}" alt="IMG">
 				</div>
-
-				<form class="login100-form validate-form" action="{% url 'otp_verification' %}">
+<!-- <p>THIS IS OK</p> -->
+				{% if obj %}
+				<form class="login100-form validate-form" method="POST" action="{% url 'verify_OTP' key=obj.id %}">
 				{% csrf_token %}
 					<span class="login100-form-title">
 						OTP Verification
@@ -45,7 +46,7 @@
 					</div>
 					
 					<!-- CUSTOM OTP -->
-					<!-- <input type="hidden" name="sotp" value="{{otp}}"> -->
+					<!-- <input type="hidden" name="uid" value={{newUser.id}}> -->
 					<!--  -->
 					
 					<div class="container-login100-form-btn">
@@ -53,11 +54,17 @@
 							Verify OTP
 						</button>
 					</div>
+					
 					<div class="mx-auto" style="width: 200px;height: 150px;">
 
 					</div>
 					
 				</form>
+				{% endif %}
+
+				{% if msg %}
+				<p>{{msg}}</p>
+				{% endif %}
 			</div>
 			
 		</div>

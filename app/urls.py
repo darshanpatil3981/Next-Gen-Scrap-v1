@@ -8,4 +8,5 @@ urlpatterns = [
      path("signup_customer/",views.Signup_customer,name="signup_customer"),
      path("otp_verification/",views.Otp_verification,name="otp_verification"),
      path("create_customer/",views.create_Customer,name="create_Customer"),
+     path("verify_otp/<int:key>",views.verify_OTP,name="verify_OTP")
 ]

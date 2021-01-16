@@ -46,8 +46,20 @@ def create_Customer(request):
                 newCustomer = Customer.objects.create(Customer_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
                 email_Subject = "Customer Verification Mail"
                 sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':fname,'otp':otp})
-                return render(request,"app/otp_verification.html",{'otp':otp})
+                return render(request,"app/otp_verification.html",{'obj':newUser})
         else:
             message = "Password Doesnot match"
             return render(request,"app/signup_customer.html",{'msg':message})
 
+
+
+def verify_OTP(request,key):
+    cotp = request.POST['cotp']
+    obj = User_Master.objects.get(pk=key)
+    sotp = str(obj.Otp)
+    cotp = str(cotp)
+    if sotp==cotp:
+        return render(request,"app/index.html")
+    else:
+        message="OTP DID NoT MATCH"
+        return render(request,"app/otp_verification.html",{'msg':message})
