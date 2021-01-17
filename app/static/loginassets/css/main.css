@@ -475,7 +475,7 @@ iframe {
   -webkit-transition: all .4s ease;
   -moz-transition: all .4s ease;
   -ms-transition: all .4s ease;
-  transition: all .4s ease
+  transition: all .4s ease;
   font-family: Poppins-SemiBold;
   font-size: 15px;
  
