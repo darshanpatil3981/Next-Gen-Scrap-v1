@@ -28,12 +28,12 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="{% static 'loginassets/images/logo.png' %}" alt="IMG">
+					<img src="{% static 'loginassets/images/logo.png' %}" alt="IMG" style="padding-top: 75px;">
 				</div>
 
 				<form class="login100-form validate-form" method="POST" action="{% url 'create_Customer' %}">
 				{% csrf_token %}
-					<span class="login100-form-title">
+					<span class="login100-form-title" style="padding-bottom: 23px;">
 						Customer Sign Up
 					</span>
 					<div class="wrap-input100 validate-input">
@@ -80,14 +80,13 @@
 					</div>
 
 				</form>
+				
 
 					<div class="text-center p-t-12">
-						<span class="txt1">
-							Forgot
-						</span>
-						<a class="txt2" href="#">
-							Username / Password?
-						</a>
+						
+						<div class="mx-auto" style="width: 200px;height: 10px;">
+
+						</div>
 					</div>
 					<div class="text-center p-t-12">
 						
@@ -95,23 +94,36 @@
 							Not a Customer?
 						</a>
 					</div>
-
-					<div class="text-center p-t-136">
+					<div class="text-center p-t-12">
+						
 						<a class="txt2" href="#">
-							Already Have a Account? 
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+							Already Have a Account?
 						</a>
 					</div>
+
+					
 <!---				</form>  -->
 					{% if msg %}
 						<p>{{msg}}</p>
 					{% endif %}
 
 			</div>
+			<div class="alert alert-warning" style="border-radius: 40px; padding-bottom: 13px;">
+				<div class="container">
+				  <div class="alert-icon">
+					<i class="material-icons">warning</i>
+				  </div>
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true"><i class="material-icons" style="padding-left: 16px;">close</i></span>
+				  </button>
+				   You have Entered Incorect Password
+				</div>
+			 
 		</div>
 	</div>
 	
-	
+	 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 
 	
 	

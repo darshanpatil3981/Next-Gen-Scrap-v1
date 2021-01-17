@@ -188,7 +188,22 @@ iframe {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 177px 130px 33px 95px;
+  padding: 60px 130px 33px 95px;
+}
+.wrap-loginhardik {
+  width: 960px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 12px 130px 9px 95px;
 }
 
 /*------------------------------------------------------------------
@@ -479,4 +494,66 @@ iframe {
   font-family: Poppins-SemiBold;
   font-size: 15px;
  
+}
+
+/* grhrgt================================= */
+.alert.alert-warning {
+  background-color: #ff9e0f;
+  color: #fff;
+}
+
+.alert {
+  border: 0;
+  border-radius: 0;
+  padding: 20px 15px;
+  line-height: 20px;
+}
+.containerhardik {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.alert .alert-icon {
+  display: block;
+  float: left;
+  margin-right: 1.071rem;
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+.alert .close {
+  color: #ffffff;
+  text-shadow: none;
+  opacity: .9;
+}
+button.close {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+.alert .alert-icon {
+  display: block;
+  float: left;
+  margin-right: 1.071rem;
+}
+
+.alert .alert-icon i {
+  margin-top: -7px;
+  top: 5px;
+  position: relative;
 }
