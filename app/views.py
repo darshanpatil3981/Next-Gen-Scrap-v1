@@ -76,6 +76,8 @@ def verify_OTP(request,sotp):
         message="You have entered incorrect OTP."
         return render(request,"app/otp_verification.html",{'msg':message,'OTP':sotp})
 
+
+
 def create_Customer(request):
     fname = request.POST['fname']
     lname = request.POST['lname']
@@ -88,21 +90,22 @@ def create_Customer(request):
             return render(request,"app/signup_customer.html",{'msg':message})
     
     elif fname!="" or lname!="" or email!="" or pswd!="" or cpswd!="":
-        isCraeatedAlready = User_Master.objects.filter(Email=email)
-        if isCraeatedAlready:
-            message = "This acoount is already created"
-            return render(request,"app/signup_customer.html",{'msg':message})
-
-        elif pswd==cpswd:
-                otp = randint(100000,999999)
-                newUser = User_Master.objects.create(Email=email,Password=pswd,Role="Customer",Otp=otp,is_created=True,is_verified=False,is_active=False,is_updated=False)
+#        isCraeatedAlready = User_Master.objects.filter(Email=email)
+#        if isCraeatedAlready:
+#            message = "This acoount is already created"
+#            return render(request,"app/signup_customer.html",{'msg':message})
+#        elif pswd==cpswd:
+            if pswd==cpswd:
+                #otp = randint(100000,999999)
+                newUser = User_Master.objects.create(Email=email,Password=pswd,Role="Customer",Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
                 newCustomer = Customer.objects.create(Customer_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
-                email_Subject = "Customer Verification Mail"
-                sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':fname,'otp':otp})
-                return render(request,"app/otp_verification.html",{'obj':newUser})
-        else:
-            message = "Password Doesnot match"
-            return render(request,"app/signup_customer.html",{'msg':message})
+                #email_Subject = "Customer Verification Mail"
+                #sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':fname,'otp':otp})
+                #return render(request,"app/otp_verification.html",{'obj':newUser})
+                return render(request,"app/index.html")
+            else:
+                message = "Password Doesnot match"
+                return render(request,"app/signup_customer.html",{'msg':message,'EMAIL':email})
 
 
 
