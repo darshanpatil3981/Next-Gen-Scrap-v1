@@ -19,7 +19,11 @@ def Signup_RCGC(request):
 def Otp_verification(request):
     return render(request,"app/otp_verification.html")
 
+def Enter_email(request):
+    return render(request,"app/enter_email.html")  
 
+def Signup_as(request):
+    return render(request,"app/signup_as.html")  
 #======================================================================================
 
 
