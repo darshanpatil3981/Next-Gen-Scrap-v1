@@ -36,15 +36,12 @@
 
 
 
-				{% ifequal msg '1' %}
-				<form class="login100-form validate-form" method="POST" action="{% url 'is_already_created' key=1 %}">
-				{% endifequal %}
+				
 
-					{% ifequal msg '2' %}
-					<form class="login100-form validate-form" method="POST" action="{% url 'is_already_created' key=2 %}">
-					{% endifequal %}
-
+					
+					<form class="login100-form validate-form" method="POST" action="{% url 'is_already_created' %}">
 						{% csrf_token %}
+						<input type="hidden" name="roleh" value="{{role}}">
 						<span class="login100-form-title">
 							Enter Email
 						</span>
@@ -68,7 +65,7 @@
 
 					</form>
 
-
+				
 
 			</div>
 			{% if error %}

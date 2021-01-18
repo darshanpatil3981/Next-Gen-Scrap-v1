@@ -9,7 +9,7 @@ urlpatterns = [
     
     #Signup Process
      path("signup_as/",views.Signup_as,name="signup_as"),
-     path("enter_email/<int:key>",views.Enter_email,name="enter_email"),
+     path("enter_email/",views.Enter_email,name="enter_email"),
      path("otp_verification/",views.Otp_verification,name="otp_verification"),
      path("signup_customer/",views.Signup_customer,name="signup_customer"),
 
@@ -21,7 +21,7 @@ urlpatterns = [
      
 
 # Views Links (Not callable)
-     path("isalreadycreated/<int:key>",views.is_already_created,name="is_already_created"),
+     path("isalreadycreated/",views.is_already_created,name="is_already_created"),
      path("verify_otp/<int:sotp>",views.verify_OTP,name="verify_OTP"),
      path("create_customer/",views.create_Customer,name="create_Customer"),
    

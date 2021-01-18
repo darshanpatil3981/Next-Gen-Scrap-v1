@@ -12,14 +12,20 @@ def Login_Page(request):
 def Signup_as(request):
     return render(request,"app/signup_as.html")
 
-def Enter_email(request,key):
-    if key==1:
-        message='1'
-    elif key==2:
-        message='2'
-    else:
-        message = "Something went wrong."
-    return render(request,"app/enter_email.html",{'msg':message})  
+def Enter_email(request):
+    role = request.POST['roleh']
+    if role == "customer":
+        return render(request,"app/enter_email.html",{'role':role})
+    elif role == "business":
+        return render(request,"app/enter_email.html",{'role':role})
+
+    # if key==1:
+    #     message='1'
+    # elif key==2:
+    #     message='2'
+    # else:
+    #     message = "Something went wrong."
+    # return render(request,"app/enter_email.html",{'msg':message})  
 
 def Signup_customer(request):
     return render(request,"app/signup_customer.html")
@@ -34,25 +40,26 @@ def Otp_verification(request):
 
 # ====================================Processing Views=================================================
 
-def is_already_created(request,key):
+def is_already_created(request):
+    role = request.POST['roleh']
     email = request.POST['email']
-    if key==1:
+    if role=="customer":
         isCustomerAlready = User_Master.objects.filter(Email=email,Role="Customer")
         if isCustomerAlready:
             message = "This email address is already registered as customer."
-            return render(request,"app/enter_email.html/1",{'error':message})
+            return render(request,"app/enter_email.html",{'error':message,'role':role})
         else:
             otp = randint(100000,999999)
             email_Subject = "Customer Email Verification"
             sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':'Dear customer','otp':otp})
             return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"Customer"})
 
-    elif key==2:
+    elif role == "business":
         isGCRCAlready = User_Master.objects.filter(Email=email,Role="GC")
         isRCAlready = User_Master.objects.filter(Email=email,Role="RC")
         if isGCRCAlready or isRCAlready:
             message = "This email address is already registered as business partner."
-            return render(request,"app/enter_email.html/2",{'error':message})
+            return render(request,"app/enter_email.html",{'error':message,'role':role})
         else:
             otp = randint(100000,999999)
             email_Subject = "Business Partner Email Verification"
