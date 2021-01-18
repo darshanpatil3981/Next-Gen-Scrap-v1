@@ -24,5 +24,6 @@ urlpatterns = [
      path("isalreadycreated/",views.is_already_created,name="is_already_created"),
      path("verify_otp/<int:sotp>",views.verify_OTP,name="verify_OTP"),
      path("create_customer/",views.create_Customer,name="create_Customer"),
+     path("validate_login/",views.Validate_login,name="validate_login"),
    
 ]

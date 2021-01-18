@@ -115,4 +115,24 @@ def create_Customer(request):
                 return render(request,"app/signup_customer.html",{'msg':message,'EMAIL':email})
 
 
+def Validate_login(request):
+    email = request.POST['email']
+    password = request.POST['password']
+
+    is_exist = User_Master.objects.filter(Email=email,Password=password)
+
+    if is_exist:
+        User = User_Master.objects.get(Email=email)
+        if User.Role=="Customer":
+            return render(request,"app/index.html")
+        elif User.Role=="GC":
+            return render(request,"app/gc_dashboard.html")
+        elif User.Role=="RC":
+            return render(request,"app/rc_dashboard.html")
+    else:
+        message = "Invalide Email Id & Password!!"
+        return render(request,"app/login.html",{'msg':message,})
+
+
+
 
