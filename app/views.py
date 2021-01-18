@@ -4,28 +4,77 @@ from random import *
 from .utils import *
 
 # Create your views here.
-#def Showhome(request):
-#    return render(request,"app/base.html")
 
+#==============================Direct Rendering Views================================================
 def Login_Page(request):
     return render(request,"app/login.html")
+
+def Signup_as(request):
+    return render(request,"app/signup_as.html")
+
+def Enter_email(request,key):
+    if key==1:
+        message='1'
+    elif key==2:
+        message='2'
+    else:
+        message = "Something went wrong."
+    return render(request,"app/enter_email.html",{'msg':message})  
 
 def Signup_customer(request):
     return render(request,"app/signup_customer.html")
 
-def Signup_RCGC(request):
+def Signup_GCRC(request):
     return render(request,"app/signup_gcrc.html")
 
 def Otp_verification(request):
     return render(request,"app/otp_verification.html")
 
-def Enter_email(request):
-    return render(request,"app/enter_email.html")  
 
-def Signup_as(request):
-    return render(request,"app/signup_as.html")  
-#======================================================================================
 
+# ====================================Processing Views=================================================
+
+def is_already_created(request,key):
+    email = request.POST['email']
+    if key==1:
+        isCustomerAlready = User_Master.objects.filter(Email=email,Role="Customer")
+        if isCustomerAlready:
+            message = "This email address is already registered as customer."
+            return render(request,"app/enter_email.html/1",{'error':message})
+        else:
+            otp = randint(100000,999999)
+            email_Subject = "Customer Email Verification"
+            sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':'Dear customer','otp':otp})
+            return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"Customer"})
+
+    elif key==2:
+        isGCRCAlready = User_Master.objects.filter(Email=email,Role="GC")
+        isRCAlready = User_Master.objects.filter(Email=email,Role="RC")
+        if isGCRCAlready or isRCAlready:
+            message = "This email address is already registered as business partner."
+            return render(request,"app/enter_email.html/2",{'error':message})
+        else:
+            otp = randint(100000,999999)
+            email_Subject = "Business Partner Email Verification"
+            sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':'Dear Business Partner','otp':otp})
+            return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"GCRC"})
+        
+
+def verify_OTP(request,sotp):
+    cotp = request.POST['cotp']
+    email = request.POST['email']
+    role = request.POST['role']
+    sotp = str(sotp)
+    cotp = str(cotp)
+    if sotp==cotp:
+        if role=="Customer":
+            return render(request,"app/signup_customer.html",{'EMAIL':email})
+        #if role=="GCRC":
+        else:
+            return render(request,"app/signup_gcrc.html",{'EMAIL':email})
+    else:
+        message="You have entered incorrect OTP."
+        return render(request,"app/otp_verification.html",{'msg':message,'OTP':sotp})
 
 def create_Customer(request):
     fname = request.POST['fname']
@@ -57,13 +106,3 @@ def create_Customer(request):
 
 
 
-def verify_OTP(request,key):
-    cotp = request.POST['cotp']
-    obj = User_Master.objects.get(pk=key)
-    sotp = str(obj.Otp)
-    cotp = str(cotp)
-    if sotp==cotp:
-        return render(request,"app/index.html")
-    else:
-        message="OTP DID NoT MATCH"
-        return render(request,"app/otp_verification.html",{'msg':message})

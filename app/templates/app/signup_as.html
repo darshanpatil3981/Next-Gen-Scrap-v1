@@ -18,10 +18,17 @@
 	<div class="container">
 
 		<section class="color-4" style="height: 625px;">
-			<h1 style="font-family:  sans-serif; font-size: 58px">SIGNUP AS</h1>
-			<p style="padding-top: 100px;">
-				<button class="btn btn-4 btn-4c icon-arrow-right" style="width: 330.61px;">Customer</button>
-				<button class="btn btn-4 btn-4c icon-arrow-right">Business Partner</button>
+			<h1 style="font-family:  sans-serif; font-size: 58px">Create My Account As</h1>
+			<p style="padding-top: 25px;">
+				<form action="{% url 'enter_email' key=1 %}" method="post">
+					{% csrf_token %}
+					<button class="btn btn-4 btn-4c icon-arrow-right" style="width: 330.61px;">Customer</button>
+				</form>
+				<form action="{% url 'enter_email' key=2 %}" method="post">
+					{% csrf_token %}
+					<button class="btn btn-4 btn-4c icon-arrow-right">Business Partner</button>
+				</form>
+				
 			</p>
 		</section>
 

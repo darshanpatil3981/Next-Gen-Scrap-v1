@@ -1,42 +1,47 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<title>Customer Login  </title>
+	<title>Customer Login </title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="{% static 'loginassets/images/icons/favicon.png' %}"/>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'loginassets/images/icons/favicon.png' %}" />
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'loginassets/vendor/bootstrap/css/bootstrap.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'loginassets/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+		href="{% static 'loginassets/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'loginassets/vendor/animate/animate.css' %}">
-<!--===============================================================================================-->	
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'loginassets/vendor/css-hamburgers/hamburgers.min.css' %}">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'loginassets/vendor/select2/select2.min.css' %}">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'loginassets/css/util.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'loginassets/css/main.css' %}">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 </head>
+
 <body>
-	
+
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="{% static 'loginassets/images/logo.png' %}" alt="IMG" >
+					<img src="{% static 'loginassets/images/logo.png' %}" alt="IMG">
 				</div>
 
 				<form class="login100-form validate-form">
 					<span class="login100-form-title">
 						Customer Login
 					</span>
-					<center><p>This Is Masage</p></center>
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+					<center>
+						<p>This Is Masage</p>
+					</center>
+					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -44,23 +49,23 @@
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" type="password" name="pass" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
-					
+
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Login
 						</button>
 					</div>
 
-					
+
 				</form>
-				
+
 				<div class="text-center p-t-12">
 					<span class="txt1">
 						Forgot
@@ -69,51 +74,49 @@
 						Username / Password?
 					</a>
 				</div>
-				
+
 				<div class="text-center p-t-12">
-					
-					<a class="txt2" href="{% url 'signup_customer' %}">
+
+					<a class="txt2" href="{% url 'signup_as' %}">
 						Create Your Account
 					</a>
 				</div>
 
 			</div>
-			<div class="alert alert-warning" style="border-radius: 40px; padding-bottom: 13px;">
+			<div class="alert alert-warning container" style="border-radius: 40px; padding-bottom: 13px;">
 				<div class="container">
-				  <div class="alert-icon">
-					<i class="material-icons">warning</i>
-				  </div>
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true"><i class="material-icons" style="padding-left: 16px;">close</i></span>
-				  </button>
-				   You have Entered Incorect Password
+					<div class="alert-icon">
+						<i class="material-icons">warning</i>
+					</div>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true"><i class="material-icons" style="padding-left: 16px;">close</i></span>
+					</button>
+					You have Entered Incorect Password
 				</div>
-			 
+			</div>
 		</div>
-		
-	</div>
-	
-	  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-	
+		<link rel="stylesheet" type="text/css"
+			href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 
-	
-<!--===============================================================================================-->	
-	<script src="{% static 'loginassets/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'loginassets/vendor/bootstrap/js/popper.js' %}"></script>
-	<script src="{% static 'loginassets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'loginassets/vendor/select2/select2.min.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'loginassets/vendor/tilt/tilt.jquery.min.js' %}"></script>
-	<script >
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
-	</script>
-<!--===============================================================================================-->
-	<script src="{% static 'loginassets/js/main.js' %}></script>
+
+
+		<!--===============================================================================================-->
+		<script src="{% static 'loginassets/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+		<!--===============================================================================================-->
+		<script src="{% static 'loginassets/vendor/bootstrap/js/popper.js' %}"></script>
+		<script src="{% static 'loginassets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+		<!--===============================================================================================-->
+		<script src="{% static 'loginassets/vendor/select2/select2.min.js' %}"></script>
+		<!--===============================================================================================-->
+		<script src="{% static 'loginassets/vendor/tilt/tilt.jquery.min.js' %}"></script>
+		<script>
+			$('.js-tilt').tilt({
+				scale: 1.1
+			})
+		</script>
+		<!--===============================================================================================-->
+		<script src="{% static 'loginassets/js/main.js' %}></script>
 
 </body>
 </html>
