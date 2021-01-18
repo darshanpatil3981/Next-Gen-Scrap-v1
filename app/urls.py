@@ -25,5 +25,6 @@ urlpatterns = [
      path("verify_otp/<int:sotp>",views.verify_OTP,name="verify_OTP"),
      path("create_customer/",views.create_Customer,name="create_Customer"),
      path("validate_login/",views.Validate_login,name="validate_login"),
+     path("create_gc_rc/",views.create_gc_rc,name="create_gc_rc"),
    
 ]
