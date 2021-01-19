@@ -48,8 +48,8 @@ def is_already_created(request):
             return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"Customer"})
 
     elif role == "business":
-        isGCRCAlready = User_Master.objects.filter(Email=email,Role="Srap_collector")
-        isRCAlready = User_Master.objects.filter(Email=email,Role="Recycle_company")
+        isGCRCAlready = User_Master.objects.filter(Email=email,Role="GC")
+        isRCAlready = User_Master.objects.filter(Email=email,Role="RC")
         if isGCRCAlready or isRCAlready:
             message = "This email address is already registered as business partner."
             return render(request,"app/enter_email.html",{'error':message,'role':role})
@@ -117,9 +117,9 @@ def create_gc_rc(request):
     elif fname!="" or lname!="" or email!="" or pswd!="" or cpswd!="":
         if pswd==cpswd:
             newUser = User_Master.objects.create(Email=email,Password=pswd,Role=role,Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
-            if role=="Srap_collector":
+            if role=="GC":
                 newsc = GC.objects.create(GC_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
-            if role=="Recycle_company":
+            if role=="RC":
                 newrc = RC.objects.create(RC_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
             return render(request,"app/index.html")
         else:
