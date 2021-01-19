@@ -38,8 +38,11 @@
 
 				
 
-					
+				{% if fpw %}
+				<form class="login100-form validate-form" method="POST" action="{% url 'forgot_password' %}">
+				{% else %}
 					<form class="login100-form validate-form" method="POST" action="{% url 'is_already_created' %}">
+				{% endif %}
 						{% csrf_token %}
 						<input type="hidden" name="roleh" value="{{role}}">
 						<span class="login100-form-title">

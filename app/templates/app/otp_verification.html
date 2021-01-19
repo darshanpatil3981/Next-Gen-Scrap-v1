@@ -34,8 +34,11 @@
 					<img src="{% static 'loginassets/images/logo.png' %}" alt="IMG">
 				</div>
 				<!-- <p>THIS IS OK</p> -->
-				
-				<form class="login100-form validate-form" method="POST" action="{% url 'verify_OTP' sotp=OTP %}">
+				{% if fpw %}
+				<form class="login100-form validate-form" method="POST" action="{% url 'verify_OTP_forgotpw' %}">
+				{% else %}
+				<form class="login100-form validate-form" method="POST" action="{% url 'verify_OTP' %}">
+				{% endif %}
 					{% csrf_token %}
 					<span class="login100-form-title">
 						OTP Verification
@@ -48,9 +51,10 @@
 						</span>
 					</div>
 
-					<input type="hidden" name="email" placeholder="{{EMAIL}}" value="{{EMAIL}}">
+					
 					<input type="hidden" name="role" placeholder="{{ROLE}}" value="{{ROLE}}">
-
+					<input type="hidden" name="otp" value="{{OTP}}">
+					<input type="hidden" name="email" placeholder="{{EMAIL}}" value="{{EMAIL}}">
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Verify OTP

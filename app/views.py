@@ -63,20 +63,22 @@ def is_already_created(request):
             return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"GCRC"})
         
 
-def verify_OTP(request,sotp):
+def verify_OTP(request):
     cotp = request.POST['cotp']
+    otp = request.POST['otp']
     email = request.POST['email']
     role = request.POST['role']
-    sotp = str(sotp)
+    otp = str(otp)
     cotp = str(cotp)
-    if sotp==cotp:
+   
+    if otp==cotp:
         if role=="Customer":
             return render(request,"app/signup_customer.html",{'EMAIL':email})
         else:
             return render(request,"app/signup_gcrc.html",{'EMAIL':email})
     else:
         message="You have entered incorrect OTP."
-        return render(request,"app/otp_verification.html",{'msg':message,'OTP':sotp})
+        return render(request,"app/otp_verification.html",{'msg':message,'OTP':otp})
 
 
 
@@ -148,5 +150,44 @@ def Validate_login(request):
     else:
         message = "Invalide Email Id & Password!!"
         return render(request,"app/login.html",{'msg':message,})
+
+def Forgot_password(request):
+    if request.method=="POST":
+        email = request.POST['email']
+        is_exist = User_Master.objects.filter(Email=email)
+        if is_exist:
+            otp = randint(100000,999999)
+            email_Subject = "Email Verification For Forgot Password"
+            sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':'Dear customer','otp':otp})
+            return render(request,"app/otp_verification.html",{'fpw':"fpw",'OTP':otp,"EMAIL":email})
+        else:
+            message = "This email is not registed With any account!!"
+            return render(request,"app/enter_email.html",{'error':message,'fpw':"fpw"})
+    else:
+        return render(request,"app/enter_email.html",{'fpw':"fpw",})
+
+
+def Verify_OTP_forgotpw(request): 
+    cotp = request.POST['cotp']
+    otp = request.POST['otp']
+    email = request.POST['email']
+    role = request.POST['role']
+    otp = str(otp)
+    cotp = str(cotp)
+    if otp==cotp:
+         return render(request,"app/reset_password.html",{'EMAIL':email})
+    else:
+        message="You have entered incorrect OTP."
+        return render(request,"app/otp_verification.html",{'fpw':"fpw",'msg':message,'OTP':otp,"EMAIL":email})
+
+def Reset_password(request):  
+    email = request.POST['email'] 
+    password=request.POST['password']
+    User = User_Master.objects.get(Email=email)
+    User.Password=password
+    User.save()
+    message = "Your Password Chnaged successfully"
+    return render(request,"app/login.html",{'msg':message})
+
 
 
