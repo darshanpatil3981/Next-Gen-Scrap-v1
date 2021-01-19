@@ -21,7 +21,7 @@
 			<h1 style="font-family:  sans-serif; font-size: 58px">Create My Account As</h1>
 			<p style="padding-top: 25px;">
 				<form action="{% url 'enter_email' %}" method="post">
-					
+					{% csrf_token %}
 					<input type="hidden" name="roleh" value="customer">
 					<button class="btn btn-4 btn-4c icon-arrow-right" style="width: 330.61px;">Customer</button>
 				</form>

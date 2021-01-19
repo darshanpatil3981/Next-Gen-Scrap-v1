@@ -37,9 +37,11 @@ def is_already_created(request):
     role = request.POST['roleh']
     email = request.POST['email']
     if role=="customer":
-        isCustomerAlready = User_Master.objects.filter(Email=email,Role="Customer")
+        isCustomerAlready = User_Master.objects.filter(Email=email)
         if isCustomerAlready:
-            message = "This email address is already registered as customer."
+            obj = User_Master.objects.get(Email=email)
+            err_role= obj.Role
+            message = "This email address is already registered as "+err_role+"!"
             return render(request,"app/enter_email.html",{'error':message,'role':role})
         else:
             otp = randint(100000,999999)
@@ -48,10 +50,11 @@ def is_already_created(request):
             return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"Customer"})
 
     elif role == "business":
-        isGCRCAlready = User_Master.objects.filter(Email=email,Role="GC")
-        isRCAlready = User_Master.objects.filter(Email=email,Role="RC")
-        if isGCRCAlready or isRCAlready:
-            message = "This email address is already registered as business partner."
+        isGCRCAlready = User_Master.objects.filter(Email=email)
+        if isGCRCAlready:
+            obj = User_Master.objects.get(Email=email)
+            err_role= obj.Role
+            message = "This email address is already registered as "+err_role+"!"
             return render(request,"app/enter_email.html",{'error':message,'role':role})
         else:
             otp = randint(100000,999999)
