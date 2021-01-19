@@ -31,26 +31,27 @@
 					<img src="{% static 'loginassets/images/logo.png' %}" alt="IMG" style="padding-top: 100px;">
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="{% url 'create_gc_rc' %}" method="post">
+					{% csrf_token %}
 					<span class="login100-form-title" style="padding-bottom: 20px;">
 						Sigup
 					</span>
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="" placeholder="First Name">
+						<input class="input100" type="text" name="fname" placeholder="First Name">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
 					</div>
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="" placeholder="Last Name">
+						<input class="input100" type="text" name="lname" placeholder="Last Name">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email">
+						<input class="input100" type="text" name="email" placeholder="Email" value="{{EMAIL}}">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -73,7 +74,7 @@
 					</div>
 					<div class="form-group">
 						
-						<select class="form-control" id="sel1">
+						<select class="form-control" id="sel1" name="role">
 						  <option>Srap Collector</option>
 						  <option>Recycle Company</option>
 						

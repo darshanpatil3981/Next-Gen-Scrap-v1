@@ -48,8 +48,8 @@ def is_already_created(request):
             return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"Customer"})
 
     elif role == "business":
-        isGCRCAlready = User_Master.objects.filter(Email=email,Role="GC")
-        isRCAlready = User_Master.objects.filter(Email=email,Role="RC")
+        isGCRCAlready = User_Master.objects.filter(Email=email,Role="Srap_collector")
+        isRCAlready = User_Master.objects.filter(Email=email,Role="Recycle_company")
         if isGCRCAlready or isRCAlready:
             message = "This email address is already registered as business partner."
             return render(request,"app/enter_email.html",{'error':message,'role':role})
@@ -98,4 +98,50 @@ def create_Customer(request):
                 return render(request,"app/signup_customer.html",{'msg':message,'EMAIL':email})
 
 
+def Validate_login(request):
+    email = request.POST['email']
+    password = request.POST['password']
+
+    is_exist = User_Master.objects.filter(Email=email,Password=password)
+
+    if is_exist:
+        User = User_Master.objects.get(Email=email)
+        print(User.Role)
+        if User.Role=="Customer":
+            return render(request,"app/index.html")
+        elif User.Role=="Srap_collector":
+            return render(request,"app/gc_dashboard.html")
+        elif User.Role=="Recycle_company":
+            return render(request,"app/rc_dashboard.html")
+    else:
+        message = "Invalide Email Id & Password!!"
+        return render(request,"app/login.html",{'msg':message,})
+
+def create_gc_rc(request):
+    fname = request.POST['fname']
+    lname = request.POST['lname']
+    email = request.POST['email']
+    pswd = request.POST['pass']
+    cpswd = request.POST['cpass']
+    role = request.POST['role']
+
+    if role == "Srap Collector":
+        role="Srap_collector"
+    elif role == "Recycle Company":
+        role="Recycle_company"
+    
+    if fname=="" or lname=="" or email=="" or pswd=="" or cpswd=="":
+        message = "Please fill all details carefully..." 
+        return render(request,"app/signup_gcrc.html",{'msg':message})
+    elif fname!="" or lname!="" or email!="" or pswd!="" or cpswd!="":
+        if pswd==cpswd:
+            newUser = User_Master.objects.create(Email=email,Password=pswd,Role=role,Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
+            if role=="Srap_collector":
+                newsc = GC.objects.create(GC_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
+            if role=="Recycle_company":
+                newrc = RC.objects.create(RC_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
+            return render(request,"app/index.html")
+        else:
+                message = "Password Doesnot match"
+                return render(request,"app/signup_gcrc.html",{'msg':message,'EMAIL':email})
 
