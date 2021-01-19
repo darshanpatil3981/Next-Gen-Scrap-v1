@@ -95,7 +95,7 @@ def create_Customer(request):
             if pswd==cpswd:
                 newUser = User_Master.objects.create(Email=email,Password=pswd,Role="Customer",Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
                 newCustomer = Customer.objects.create(Customer_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
-             
+                return render(request,"app/index.html")
             else:
                 message = "Password Doesnot match"
                 return render(request,"app/signup_customer.html",{'msg':message,'EMAIL':email})
