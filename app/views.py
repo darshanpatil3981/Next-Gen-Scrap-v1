@@ -98,25 +98,6 @@ def create_Customer(request):
                 return render(request,"app/signup_customer.html",{'msg':message,'EMAIL':email})
 
 
-def Validate_login(request):
-    email = request.POST['email']
-    password = request.POST['password']
-
-    is_exist = User_Master.objects.filter(Email=email,Password=password)
-
-    if is_exist:
-        User = User_Master.objects.get(Email=email)
-        print(User.Role)
-        if User.Role=="Customer":
-            return render(request,"app/index.html")
-        elif User.Role=="Srap_collector":
-            return render(request,"app/gc_dashboard.html")
-        elif User.Role=="Recycle_company":
-            return render(request,"app/rc_dashboard.html")
-    else:
-        message = "Invalide Email Id & Password!!"
-        return render(request,"app/login.html",{'msg':message,})
-
 def create_gc_rc(request):
     fname = request.POST['fname']
     lname = request.POST['lname']
@@ -126,9 +107,9 @@ def create_gc_rc(request):
     role = request.POST['role']
 
     if role == "Srap Collector":
-        role="Srap_collector"
+        role="GC"
     elif role == "Recycle Company":
-        role="Recycle_company"
+        role="RC"
     
     if fname=="" or lname=="" or email=="" or pswd=="" or cpswd=="":
         message = "Please fill all details carefully..." 
@@ -144,4 +125,25 @@ def create_gc_rc(request):
         else:
                 message = "Password Doesnot match"
                 return render(request,"app/signup_gcrc.html",{'msg':message,'EMAIL':email})
+
+
+def Validate_login(request):
+    email = request.POST['email']
+    password = request.POST['password']
+
+    is_exist = User_Master.objects.filter(Email=email,Password=password)
+
+    if is_exist:
+        User = User_Master.objects.get(Email=email)
+        print(User.Role)
+        if User.Role=="Customer":
+            return render(request,"app/index.html")
+        elif User.Role=="GC":
+            return render(request,"app/gc_dashboard.html")
+        elif User.Role=="RC":
+            return render(request,"app/rc_dashboard.html")
+    else:
+        message = "Invalide Email Id & Password!!"
+        return render(request,"app/login.html",{'msg':message,})
+
 
