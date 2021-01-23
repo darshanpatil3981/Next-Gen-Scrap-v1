@@ -5,7 +5,7 @@ from django.utils.html import strip_tags
 
 
 def sendmail(subject,template,to,context):
-    subject = 'Subject'
+    subject = subject
     template_str = 'app/'+ template+'.html'
     html_message = render_to_string(template_str, {'data': context})
     plain_message = strip_tags(html_message)

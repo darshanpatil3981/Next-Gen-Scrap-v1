@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,11 +6,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>This is otp email template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      .button {
+        border-radius: 4px;
+        background-color: #0071b2;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 20px;
+        padding: 6px;
+        width: 154px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+        
+      }
+      
+     
+      </style>
 </head>
 <body>
-   <p>Hello {{data.name}},</p> 
-   <p>Your otp for registration is : {{data.otp}}</p>
-   <p>Please click here to verify :</p>
-  <a href="{{data.link}}">verification link</a>
+  <center><img src="https://i.ibb.co/rvtL83h/logo.png" alt="logo" style="height: 230px;"></center> 
+  <center><strong><h1 style="color: #32a2e1;">Thank You For Registration In Next Gen Scrap</h1></strong></center>
+
+    <p style="color : #6f6f6f; font-family: serif;font-size: 19px;">Hello <strong>{{data.name}},</strong></p> 
+    <p style="color :#6f6f6f; font-family: serif;font-size: 19px;">Welcome To NGS</p> 
+   <p style="color :#6f6f6f; font-family: serif;font-size: 17px;">Your otp for registration is : <strong style="color: #f3652a;">{{data.otp}}</strong></p>
+   <p style="color :#6f6f6f; font-family: serif;font-size: 17px;"> Please click here to verify : </p>
+   <center><button class="button"><span>Verify</span></button></center>
 </body>
 </html>
