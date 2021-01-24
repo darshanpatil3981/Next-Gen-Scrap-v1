@@ -191,3 +191,5 @@ def Reset_password(request):
 
 
 
+def temp(request):
+    return render(request,"app/gc.html")

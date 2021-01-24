@@ -17,7 +17,7 @@ urlpatterns = [
 
      path("signup/",views.Signup_GCRC,name="signup_GCRC"),
      
-     
+     path("tempDarsh/",views.temp,name="temp"),
      
      
 
