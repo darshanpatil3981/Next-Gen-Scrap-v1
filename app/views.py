@@ -191,5 +191,20 @@ def Reset_password(request):
 
 
 
-def temp(request):
-    return render(request,"app/gc.html")
+def Rc_scrap_collectors(request):
+    return render(request,"rc/rc_scrap_collectors.html")
+
+def Rc_blank(request):
+    return render(request,"rc/rc_blank.html")
+
+def Rc_profile(request):
+    return render(request,"rc/rc_profile.html")
+    
+def Rc_orders(request):
+    return render(request,"rc/rc_orders.html")
+
+def Rc_pricing(request):
+    return render(request,"rc/rc_pricing.html")
+
+def Rc_product(request):
+    return render(request,"rc/rc_product.html")
