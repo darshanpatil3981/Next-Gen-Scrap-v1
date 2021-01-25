@@ -199,6 +199,9 @@ def Rc_blank(request):
 
 def Rc_profile(request):
     return render(request,"rc/rc_profile.html")
+
+def Rc_update_profile(request):
+    return render(request,"rc/rc_update_profile.html")
     
 def Rc_orders(request):
     return render(request,"rc/rc_orders.html")

@@ -21,6 +21,7 @@ urlpatterns = [
      path("rc_blank/",views.Rc_blank,name="rc_blank"),
      path("rc_scrap_collectors/",views.Rc_scrap_collectors,name="rc_scrap_collectors"),
      path("rc_profile/",views.Rc_profile,name="rc_profile"),
+     path("rc_update_profile/",views.Rc_update_profile,name="rc_update_profile"),
      path("rc_orders/",views.Rc_orders,name="rc_orders"),
      path("rc_pricing/",views.Rc_pricing,name="rc_pricing"),
      path("rc_product/",views.Rc_product,name="rc_product"),
