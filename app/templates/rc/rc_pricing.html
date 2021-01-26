@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -8,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+ 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{% static 'GCassets/img/brand/favicon.png' %}" >
   <!-- Fonts -->
@@ -20,132 +19,7 @@
   <link rel="stylesheet" href="{% static 'GCassets/css/argon.css' %}" type="text/css">
   <!-- <link rel="stylesheet" href="{% static 'GCassets/css/argon.css?v=1.2.0' %}" type="text/css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style>
- 
   
-    @media (min-width: 900px) {
-      .background {
-        padding: 0 0 25px;
-      }
-    }
-    
-    .container {
-      margin: 0 auto;
-      padding: 50px 0 0;
-      max-width: 960px;
-      width: 100%;
-    }
-    
-    .panel {
-      background-color: #fff;
-      border-radius: 10px;
-      padding: 15px 25px;
-      position: relative;
-      width: 100%;
-      z-index: 10;
-    }
-    
-    .pricing-table {
-      box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.08), 0px 20px 31px 3px rgba(0, 0, 0, 0.09), 0px 8px 20px 7px rgba(0, 0, 0, 0.02);
-      display: flex;
-      flex-direction: column;
-    }
-    
-    @media (min-width: 900px) {
-      .pricing-table {
-        flex-direction: row;
-      }
-    }
-    
-    .pricing-table * {
-      text-align: center;
-      text-transform: uppercase;
-    }
-    
-    .pricing-plan {
-      border-bottom: 1px solid #e1f1ff;
-      padding: 25px;
-    }
-    
-    .pricing-plan:last-child {
-      border-bottom: none;
-    }
-    
-    @media (min-width: 900px) {
-      .pricing-plan {
-        border-bottom: none;
-        border-right: 1px solid #e1f1ff;
-        flex-basis: 100%;
-        padding: 25px 50px;
-      }
-    
-      .pricing-plan:last-child {
-        border-right: none;
-      }
-    }
-    
-    .pricing-img {
-      margin-bottom: 25px;
-      max-width: 100%;
-    }
-    
-    .pricing-header {
-      color: #888;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-    
-    .pricing-features {
-      color: #016FF9;
-      font-weight: 600;
-      letter-spacing: 1px;
-      margin: 50px 0 25px;
-    }
-    
-    .pricing-features-item {
-      border-top: 1px solid #e1f1ff;
-      font-size: 12px;
-      line-height: 1.5;
-      padding: 15px 0;
-    }
-    
-    .pricing-features-item:last-child {
-      border-bottom: 1px solid #e1f1ff;
-    }
-    
-    .pricing-price {
-      color: #016FF9;
-      display: block;
-      font-size: 32px;
-      font-weight: 700;
-    }
-    
-    .pricing-button {
-      border: 1px solid #9dd1ff;
-      border-radius: 10px;
-      color: #348EFE;
-      display: inline-block;
-      margin: 25px 0;
-      padding: 15px 35px;
-      text-decoration: none;
-      transition: all 150ms ease-in-out;
-    }
-    
-    .pricing-button:hover,
-    .pricing-button:focus {
-      background-color: #e1f1ff;
-    }
-    
-    .pricing-button.is-featured {
-      background-color: #48aaff;
-      color: #fff;
-    }
-    
-    .pricing-button.is-featured:hover,
-    .pricing-button.is-featured:active {
-      background-color: #269aff;
-    }
-        </style>
 </head>
 
 <body>
@@ -164,31 +38,31 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="icons.html">
+              <a class="nav-link" href="{% url 'rc_scrap_collectors' %}">
                 <i class="fa fa-users" style="color: #ff8c00;"></i>
-                <span class="nav-link-text">Scrap Collectores</span>
+                <span class="nav-link-text"  href="{% url 'rc_scrap_collectors' %}">Scrap Collectores</span>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="dashboard.html">
+              <a class="nav-link" href="{% url 'rc_orders' %}">
                 <i class="ni ni-tv-2 text-primary" style="color: #673AB7;"></i>
-                <span class="nav-link-text">Ordres</span>
+                <span class="nav-link-text"  href="{% url 'rc_orders' %}">Ordres</span>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="profile.html">
+              <a class="nav-link" href="{% url 'rc_product' %}">
                 <i class="fa fa-product-hunt " style="color: #75bf2c;"></i>
-                <span class="nav-link-text ">Products</span>
+                <span class="nav-link-text "  href="{% url 'rc_product' %}">Products</span>
               </a>
             </li>
 
 
             <li class="nav-item">
-              <a class="nav-link" href="upgrade.html">
+              <a class="nav-link" href="{% url 'rc_pricing' %}">
                 <i class="fa fa-diamond" style="color: #673AB7;"></i>
-                <span class="nav-link-text">Subscription</span>
+                <span class="nav-link-text"  href="{% url 'rc_pricing' %}">Subscription</span>
               </a>
             </li>
           </ul>
@@ -201,13 +75,13 @@
 
             <li class="nav-item">
               <!--      <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html" target="_blank">  -->
-              <a class="nav-link" href="#" target="_blank">
+              <a class="nav-link" href="{% url 'rc_profile' %}">
                 <i class="ni ni-single-02"></i>
-                <span class="nav-link-text">Profile</span>
+                <span class="nav-link-text" href="{% url 'rc_pricing' %}">Profile</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" target="_blank">
+              <a class="nav-link" href="" >
                 <!--	  <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html" target="_blank"> -->
                 <i class="fa fa-lock"></i>
                 <span class="nav-link-text">Change Password</span>
@@ -215,7 +89,7 @@
             </li>
             <li class="nav-item">
               <!--      <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/plugins/charts.html" target="_blank">  -->
-              <a class="nav-link" href="#" target="_blank">
+              <a class="nav-link" href="#" >
                 <i class="ni ni-user-run"></i>
                 <span class="nav-link-text">Logout</span>
               </a>
@@ -287,7 +161,7 @@
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h4 class="mb-0 text-sm">John Snow</h4>
+                            <h4 class="mb-0 text-sm">{{user.Firstname}}  {{user.Lastname}}</h4>
                           </div>
                           <div class="text-right text-muted">
                             <small>2 hrs ago</small>
@@ -344,7 +218,7 @@
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h4 class="mb-0 text-sm">John Snow</h4>
+                            <h4 class="mb-0 text-sm">{{request.session.fname}}  {{request.session.lname}}</h4>
                           </div>
                           <div class="text-right text-muted">
                             <small>2 hrs ago</small>
@@ -434,7 +308,7 @@
                     <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-4.jpg' %}">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{rc.Firstname}} {{rc.Lastname}}</span>
                   </div>
                 </div>
               </a>
@@ -442,7 +316,7 @@
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
-                <a href="#!" class="dropdown-item">
+                <a href="{% url 'rc_profile' %}" class="dropdown-item">
                   <i class="ni ni-single-02" style="color: #172b4d;"></i>
                   <span>My profile</span>
                 </a>
@@ -522,5 +396,130 @@
   <!-- Argon JS -->
   <script src="assets/js/argon.js?v=1.2.0"></script>
 </body>
-
+<style>
+ 
+  
+  @media (min-width: 900px) {
+    .background {
+      padding: 0 0 25px;
+    }
+  }
+  
+  .container {
+    margin: 0 auto;
+    padding: 50px 0 0;
+    max-width: 960px;
+    width: 100%;
+  }
+  
+  .panel {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px 25px;
+    position: relative;
+    width: 100%;
+    z-index: 10;
+  }
+  
+  .pricing-table {
+    box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.08), 0px 20px 31px 3px rgba(0, 0, 0, 0.09), 0px 8px 20px 7px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @media (min-width: 900px) {
+    .pricing-table {
+      flex-direction: row;
+    }
+  }
+  
+  .pricing-table * {
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  .pricing-plan {
+    border-bottom: 1px solid #e1f1ff;
+    padding: 25px;
+  }
+  
+  .pricing-plan:last-child {
+    border-bottom: none;
+  }
+  
+  @media (min-width: 900px) {
+    .pricing-plan {
+      border-bottom: none;
+      border-right: 1px solid #e1f1ff;
+      flex-basis: 100%;
+      padding: 25px 50px;
+    }
+  
+    .pricing-plan:last-child {
+      border-right: none;
+    }
+  }
+  
+  .pricing-img {
+    margin-bottom: 25px;
+    max-width: 100%;
+  }
+  
+  .pricing-header {
+    color: #888;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  
+  .pricing-features {
+    color: #016FF9;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 50px 0 25px;
+  }
+  
+  .pricing-features-item {
+    border-top: 1px solid #e1f1ff;
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 15px 0;
+  }
+  
+  .pricing-features-item:last-child {
+    border-bottom: 1px solid #e1f1ff;
+  }
+  
+  .pricing-price {
+    color: #016FF9;
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+  }
+  
+  .pricing-button {
+    border: 1px solid #9dd1ff;
+    border-radius: 10px;
+    color: #348EFE;
+    display: inline-block;
+    margin: 25px 0;
+    padding: 15px 35px;
+    text-decoration: none;
+    transition: all 150ms ease-in-out;
+  }
+  
+  .pricing-button:hover,
+  .pricing-button:focus {
+    background-color: #e1f1ff;
+  }
+  
+  .pricing-button.is-featured {
+    background-color: #48aaff;
+    color: #fff;
+  }
+  
+  .pricing-button.is-featured:hover,
+  .pricing-button.is-featured:active {
+    background-color: #269aff;
+  }
+      </style>
 </html>
