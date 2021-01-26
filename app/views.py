@@ -146,7 +146,12 @@ def Validate_login(request):
         elif User.Role=="GC":
             return render(request,"app/gc_dashboard.html")
         elif User.Role=="RC":
-            return render(request,"app/rc_dashboard.html")
+            request.session['id']=User.id
+            rc=RC.objects.get(RC_ID=User)
+            request.session['rcid']=rc.id
+            request.session['fname']=rc.Firstname
+            request.session['lname']=rc.Lastname
+            return render(request,"app/rc_dashboard.html",{'user':User,'rc':rc})
     else:
         message = "Invalide Email Id & Password!!"
         return render(request,"app/login.html",{'msg':message,})
@@ -192,22 +197,67 @@ def Reset_password(request):
 
 
 def Rc_scrap_collectors(request):
-    return render(request,"rc/rc_scrap_collectors.html")
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    rc=RC.objects.get(RC_ID=user)
+    return render(request,"rc/rc_scrap_collectors.html",{'user':user,'rc':rc})
 
 def Rc_blank(request):
-    return render(request,"rc/rc_blank.html")
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    rc=RC.objects.get(RC_ID=user)
+    return render(request,"rc/rc_blank.html",{'user':user,'rc':rc})
 
 def Rc_profile(request):
-    return render(request,"rc/rc_profile.html")
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    rc=RC.objects.get(RC_ID=user)
+    return render(request,"rc/rc_profile.html",{'user':user,'rc':rc})
 
 def Rc_update_profile(request):
-    return render(request,"rc/rc_update_profile.html")
+    if request.method=="POST":
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+      
+        add = request.POST['add']
+        contact = request.POST['contact']
+        city = request.POST['city']
+        state = request.POST['state']
+        pincode = request.POST['pincode']
+
+        id=request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        rc=RC.objects.get(RC_ID=user)
+        rc.Firstname=fname
+        rc.Lastname=lname
+      
+        rc.Address=add
+        rc.Contact=contact
+        rc.City=city
+        rc.State=state
+        rc.Pincode=pincode
+        rc.save()
+        return HttpResponseRedirect(reverse('rc_profile'))
+    else:
+        id=request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        rc=RC.objects.get(RC_ID=user)
+        return render(request,"rc/rc_update_profile.html",{'user':user,'rc':rc})
     
 def Rc_orders(request):
-    return render(request,"rc/rc_orders.html")
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    rc=RC.objects.get(RC_ID=user)
+    return render(request,"rc/rc_orders.html",{'user':user,'rc':rc})
 
 def Rc_pricing(request):
-    return render(request,"rc/rc_pricing.html")
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    rc=RC.objects.get(RC_ID=user)
+    return render(request,"rc/rc_pricing.html",{'user':user,'rc':rc})
 
 def Rc_product(request):
-    return render(request,"rc/rc_product.html")
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    rc=RC.objects.get(RC_ID=user)
+    return render(request,"rc/rc_product.html",{'user':user,'rc':rc})

@@ -21,7 +21,7 @@ class Customer(models.Model):
     State = models.CharField(max_length=30)
     Pincode = models.BigIntegerField()
     Contact = models.BigIntegerField(default=0)
-    Profile_Pic = models.ImageField(upload_to='app/Profile_Pics')
+    Profile_Pic = models.ImageField(default='d.jpg',upload_to='app/Profile_Pics')
 
 class GC(models.Model):
     GC_ID = models.ForeignKey(User_Master,on_delete=models.CASCADE)
@@ -32,7 +32,7 @@ class GC(models.Model):
     State = models.CharField(max_length=30)
     Pincode = models.BigIntegerField()
     Contact = models.BigIntegerField(default=0)
-    Profile_Pic = models.ImageField(upload_to='app/Profile_Pics')
+    Profile_Pic = models.ImageField(default='d.jpg',upload_to='app/Profile_Pics')
 
 class RC(models.Model):
     RC_ID = models.ForeignKey(User_Master,on_delete=models.CASCADE)
@@ -43,4 +43,4 @@ class RC(models.Model):
     State = models.CharField(max_length=30)
     Pincode = models.BigIntegerField()
     Contact = models.BigIntegerField(default=0)
-    Profile_Pic = models.ImageField(upload_to='app/Profile_Pics')
+    Profile_Pic = models.ImageField(default='d.jpg',upload_to='app/Profile_Pics')

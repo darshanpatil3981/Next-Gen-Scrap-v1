@@ -52,21 +52,21 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="icons.html">
+              <a class="nav-link" href="{% url 'rc_scrap_collectors' %}">
                 <i class="fa fa-users" style="color: #ff8c00;"></i>
                 <span class="nav-link-text" >Scrap Collectores</span>
               </a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="dashboard.html">
+              <a class="nav-link" href="{% url 'rc_orders' %}">
                 <i class="ni ni-tv-2 text-primary" style="color: #673AB7;"></i>
                 <span class="nav-link-text">Ordres</span>
               </a>
             </li>
            
             <li class="nav-item">
-              <a class="nav-link" href="profile.html">
+              <a class="nav-link" href="{% url 'rc_product' %}">
                 <i class="fa fa-product-hunt " style="color: #75bf2c;"></i>
                 <span class="nav-link-text ">Products</span>
               </a>
@@ -74,7 +74,7 @@
            
             
             <li class="nav-item">
-              <a class="nav-link" href="upgrade.html">
+              <a class="nav-link" href="{% url 'rc_pricing' %}">
                 <i class="fa fa-diamond" style="color: #673AB7;"></i>
                 <span class="nav-link-text">Subscription</span>
               </a>
@@ -88,7 +88,7 @@
           <ul class="navbar-nav mb-md-3">
             
             <li class="nav-item">
-              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html" target="_blank">
+              <a class="nav-link" href="{% url 'rc_profile' %}" `>
                 <i class="ni ni-single-02"></i>
                 <span class="nav-link-text">Profile</span>
               </a>
@@ -313,7 +313,7 @@
                     <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-4.jpg' %}">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{rc.Firstname}} {{rc.Lastname}}</span>
                   </div>
                 </div>
               </a>
@@ -321,7 +321,7 @@
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
-                <a href="#!" class="dropdown-item">
+                <a href="{% url 'rc_profile' %}" class="dropdown-item">
                   <i class="ni ni-single-02" style="color: #172b4d;"></i>
                   <span>My profile</span>
                 </a>
@@ -349,8 +349,8 @@
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Hello Jesse</h1>
-            <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>      
+            <h1 class="display-2 text-white">Hello {{rc.Firstname}}</h1>
+            <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>        
                  
           </div>
         </div>
@@ -366,50 +366,39 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="{% static 'GCassets/img/theme/team-4.jpg' %}" class="rounded-circle">
+                    {% ifequal rc.Profile_Pic "" %}
+                    <img src="{% static 'images/user.png' %}" class="rounded-circle">
+                    {% else %}
+                    <img src="{{rc.Profile_Pic}}" class="rounded-circle">
+                    {% endifequal %}
                   </a>
                 </div>
               </div>
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-              <!-- <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-sm btn-info  mr-4 ">Connect</a>
-                <a href="#" class="btn btn-sm btn-default float-right">Message</a>
-              </div> -->
             </div>
             <div class="card-body pt-0" style="margin-top: 40px;">
-              <!-- <div class="row">
-                <div class="col">
-                  <div class="card-profile-stats d-flex justify-content-center">
-                    <div>
-                      <span class="heading">22</span>
-                      <span class="description">Friends</span>
-                    </div>
-                    <div>
-                      <span class="heading">10</span>
-                      <span class="description">Photos</span>
-                    </div>
-                    <div>
-                      <span class="heading">89</span>
-                      <span class="description">Comments</span>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
               <div class="text-center">
-                <label class="form-label" for="customFile">Edit Profile Picture</label>
-                <input type="file" class="form-control" style="border-color: white;"/>
+               
                 <h5 class="h3" style="padding-top: 10px">
-                  Full Name<span class="font-weight-light"></span>
+                  {{rc.Firstname}} {{rc.Lastname}}<span class="font-weight-light"></span>
                 </h5>
                 <div class="h5 font-weight-300">
+                  {% ifequal rc.City "" %}
                   <i class="ni location_pin mr-2"></i>City , State
+                  {% else %}
+                  <i class="ni location_pin mr-2"></i>{{rc.City}} , {{rc.State}}
+                  {% endifequal %}
                 </div>
                 <div class="h5 mt-4">
                   <i class="ni business_briefcase-24 mr-2"></i>Contect
                 </div>
                 <div>
-                  <i class="ni education_hat mr-2"></i>+91 1234567890
+                  {% ifequal rc.Contact 0 %}
+                 
+                  {% else %}
+                  <i class="ni education_hat mr-2"></i>+91{{rc.Contact}}
+                  {% endifequal %}
                 </div>
               </div>
             </div>
@@ -428,37 +417,36 @@
               </div>
             </div>
             <div class="card-body">
-              <form>
+              <form method="POST" action="{% url 'rc_update_profile' %}">
+                {% csrf_token %}
                 <h6 class="heading-small text-muted mb-4">User information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control" placeholder="First name" value=""  style="color: #172b4d;">
+                        <input type="text" id="input-first-name" class="form-control" placeholder="First name" value="{{rc.Firstname}}" name="fname" style="color: #172b4d;">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control" placeholder="Last name" value=""  style="color: #172b4d;">
+                        <input type="text" id="input-last-name" class="form-control" placeholder="Last name" value="{{rc.Lastname}}" name="lname" style="color: #172b4d;">
                       </div>
                     </div>
                   </div>
                 </div>
                   <div class="row">
-                    <!-- <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-username">Username</label>
-                        <input type="text" id="input-username" class="form-control" placeholder="Username" value="lucky.jesse">
-                      </div>
-                    </div> -->
+                   
                     <div class="col-lg-9" style="padding-left: 41px;">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com"   style="color: #172b4d;">
+                        <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com" name="email" value="{{user.Email}}" disabled style="color: #172b4d;">
                       </div>
+                      <label class="form-control-label" for="input-email">Profile Picture</label>
+                    <input type="file" name="profile_pic" class="form-control" style="border-color: white;"/>
                     </div>
+                    
                   </div>
                   
                 <hr class="my-4" />
@@ -469,7 +457,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="form-control-label" for="input-address">Address</label>
-                        <input id="input-address" class="form-control" placeholder="Home Address" value="" type="text"   style="color: #172b4d;">
+                        <input id="input-address" class="form-control" placeholder="Home Address" name="add" value="{{rc.Address}}" type="text"   style="color: #172b4d;">
                       </div>
                     </div>
                   </div>
@@ -478,7 +466,7 @@
                     <div class="col-lg-6" style="padding-left: 15px;">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Contect</label>
-                        <input type="email" id="input-email" class="form-control" placeholder="1234567890"   style="color: #172b4d;">
+                        <input type="text" id="input-email" class="form-control" placeholder="1234567890" name="contact" value="{{rc.Contact}}"  style="color: #172b4d;">
                       </div>
                     </div>
                   </div>
@@ -486,32 +474,28 @@
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label" for="input-city">City</label>
-                        <input type="text" id="input-city" class="form-control" placeholder="City" value=""   style="color: #172b4d;">
+                        <input type="text" id="input-city" class="form-control" placeholder="City" name="city" value="{{rc.City}}"   style="color: #172b4d;">
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label" for="input-country">State</label>
-                        <input type="text" id="input-country" class="form-control" placeholder="Country" value=""   style="color: #172b4d;">
+                        <input type="text" id="input-country" class="form-control" placeholder="Country" name="state" value="{{rc.State}}"   style="color: #172b4d;">
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label" for="input-country">Postal code</label>
-                        <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code"   style="color: #172b4d;">
+                        <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code" name="pincode" value="{{rc.Pincode}}" style="color: #172b4d;">
                       </div>
                     </div>
                   </div>
                 </div>
                 <hr class="my-4" />
-                <!-- Description -->
-                <!-- <h6 class="heading-small text-muted mb-4">About me</h6>
-                <div class="pl-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label">About Me</label>
-                    <textarea rows="4" class="form-control" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
-                  </div>
-                </div> -->
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block"> Update Profile </button>
+              </div>
+               
               </form>
             </div>
           </div>
