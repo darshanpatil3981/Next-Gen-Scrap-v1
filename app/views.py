@@ -208,11 +208,14 @@ def Rc_blank(request):
     rc=RC.objects.get(RC_ID=user)
     return render(request,"rc/rc_blank.html",{'user':user,'rc':rc})
 
+
 def Rc_profile(request):
     id=request.session.get("id")
-    user = User_Master.objects.get(id=id)
+    user=User_Master.objects.get(id=id)
     rc=RC.objects.get(RC_ID=user)
     return render(request,"rc/rc_profile.html",{'user':user,'rc':rc})
+
+
 
 def Rc_update_profile(request):
     if request.method=="POST":
@@ -224,6 +227,8 @@ def Rc_update_profile(request):
         city = request.POST['city']
         state = request.POST['state']
         pincode = request.POST['pincode']
+        propic = request.FILES['profile_pic']
+        print("image def ma aai")
 
         id=request.session.get("id")
         user = User_Master.objects.get(id=id)
@@ -236,6 +241,8 @@ def Rc_update_profile(request):
         rc.City=city
         rc.State=state
         rc.Pincode=pincode
+        rc.Profile_Pic=propic
+        print("aa save bi thai var ma")
         rc.save()
         return HttpResponseRedirect(reverse('rc_profile'))
     else:
