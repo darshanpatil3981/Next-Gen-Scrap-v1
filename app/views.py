@@ -268,3 +268,4 @@ def Rc_product(request):
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(RC_ID=user)
     return render(request,"rc/rc_product.html",{'user':user,'rc':rc})
+    pass
