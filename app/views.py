@@ -60,7 +60,8 @@ def is_already_created(request):
             otp = randint(100000,999999)
             email_Subject = "Business Partner Email Verification"
             sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':'Dear Business Partner','otp':otp})
-            return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"GCRC"})
+            oc_msg = "We have sent you an otp on "+email+" ! Please verify otp."
+            return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"GCRC",'msg':oc_msg})
         
 
 def verify_OTP(request):
@@ -72,13 +73,14 @@ def verify_OTP(request):
     cotp = str(cotp)
    
     if otp==cotp:
+        success_message = "Your otp is verified successfully."
         if role=="Customer":
-            return render(request,"app/signup_customer.html",{'EMAIL':email})
+            return render(request,"app/signup_customer.html",{'EMAIL':email,'msg':success_message})
         else:
-            return render(request,"app/signup_gcrc.html",{'EMAIL':email})
+            return render(request,"app/signup_gcrc.html",{'EMAIL':email,'msg':success_message})
     else:
         message="You have entered incorrect OTP."
-        return render(request,"app/otp_verification.html",{'msg':message,'OTP':otp})
+        return render(request,"app/otp_verification.html",{'msg':message,'OTP':otp,'EMAIL':email})
 
 
 
@@ -97,7 +99,7 @@ def create_Customer(request):
             if pswd==cpswd:
                 newUser = User_Master.objects.create(Email=email,Password=pswd,Role="Customer",Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
                 newCustomer = Customer.objects.create(Customer_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
-                return render(request,"app/index.html")
+                return render(request,"app/login.html",{'msg':"Your account was created successfully..."})
             else:
                 message = "Password Doesnot match"
                 return render(request,"app/signup_customer.html",{'msg':message,'EMAIL':email})
@@ -118,7 +120,7 @@ def create_gc_rc(request):
     
     if fname=="" or lname=="" or email=="" or pswd=="" or cpswd=="":
         message = "Please fill all details carefully..." 
-        return render(request,"app/signup_gcrc.html",{'msg':message})
+        return render(request,"app/signup_gcrc.html",{'msg':message,'EMAIL':email})
     elif fname!="" or lname!="" or email!="" or pswd!="" or cpswd!="":
         if pswd==cpswd:
             newUser = User_Master.objects.create(Email=email,Password=pswd,Role=role,Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
@@ -126,7 +128,8 @@ def create_gc_rc(request):
                 newsc = GC.objects.create(GC_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
             if role=="RC":
                 newrc = RC.objects.create(RC_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
-            return render(request,"app/index.html")
+            # return render(request,"app/index.html")
+            return HttpResponseRedirect(reverse('login'))
         else:
                 message = "Password Doesnot match"
                 return render(request,"app/signup_gcrc.html",{'msg':message,'EMAIL':email})

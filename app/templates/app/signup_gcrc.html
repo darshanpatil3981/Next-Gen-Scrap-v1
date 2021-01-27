@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Customer Login  </title>
+		<title>Signup Business Partner</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->	
@@ -34,7 +34,7 @@
 				<form class="login100-form validate-form" action="{% url 'create_gc_rc' %}" method="post">
 					{% csrf_token %}
 					<span class="login100-form-title" style="padding-bottom: 20px;">
-						Sigup
+						Enter your details
 					</span>
 					<div class="wrap-input100 validate-input">
 						<input class="input100" type="text" name="fname" placeholder="First Name">
@@ -83,7 +83,7 @@
 					  </div>
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
-							Signin
+							Create My Account
 						</button>
 					</div>
 				</form>
@@ -97,7 +97,7 @@
 						
 					
 				</div>
-				<div class="text-center p-t-12">
+				<!-- <div class="text-center p-t-12">
 					
 					<a class="txt2" href="#">
 						Not a SC/RC?
@@ -109,22 +109,24 @@
 					<a class="txt2" href="#">
 						Already Have a Account?
 					</a>
-				</div>
+				</div> -->
 
 				
 				 
 			</div>
-			<div class="alert alert-warning" style="border-radius: 40px; padding-bottom: 13px;">
+			{% if msg %}
+			<div class="alert alert-warning container" style="border-radius: 40px; padding-bottom: 13px;">
 				<div class="container">
-				  <div class="alert-icon">
-					<i class="material-icons">warning</i>
-				  </div>
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true"><i class="material-icons" style="padding-left: 16px;">close</i></span>
-				  </button>
-				   You have Entered Incorect Password
+					<div class="alert-icon">
+						<i class="material-icons">warning</i>
+					</div>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true"><i class="material-icons" style="padding-left: 16px;">close</i></span>
+					</button>
+					{{msg}}
 				</div>
-		    </div>
+			</div>
+			{% endif %}
 		</div>
 	</div>
 	

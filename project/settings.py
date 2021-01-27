@@ -126,10 +126,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), ) 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+#=================For profile pic=================================================================
+
 MEDIA_URL = '/media/' 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-#MEDIA_URL = '/media/' 
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 #=====================================================================================================
 #==========For otp email===============================
 
@@ -139,5 +142,3 @@ EMAIL_HOST_USER = 'nextgenscrap@gmail.com'
 EMAIL_HOST_PASSWORD = 'Kachraseth<3'
 EMAIL_PORT = 587
 
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
