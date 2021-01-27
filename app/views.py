@@ -151,7 +151,6 @@ def Validate_login(request):
             request.session['rcid']=rc.id
             request.session['fname']=rc.Firstname
             request.session['lname']=rc.Lastname
-            request.session['propic']=rc.Profile_Pic
             return render(request,"app/rc_dashboard.html",{'user':User,'rc':rc})
     else:
         message = "Invalide Email Id & Password!!"
@@ -269,4 +268,4 @@ def Rc_product(request):
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(RC_ID=user)
     return render(request,"rc/rc_product.html",{'user':user,'rc':rc})
-    pass
+    

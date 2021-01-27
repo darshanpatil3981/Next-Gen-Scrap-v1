@@ -310,7 +310,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-4.jpg' %}">
+                    <img alt="Image placeholder" src="{{rc.Profile_Pic.url}}">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{{rc.Firstname}} {{rc.Lastname}}</span>
@@ -370,7 +370,7 @@
                     <img src="{% static 'images/user.png' %}" class="rounded-circle">
                     {% else %}
                     <!-- <img src="{{request.session.propic}}" class="rounded-circle"> -->
-                    <img src="{{rc.Profile_Pic}}" class="rounded-circle">
+                    <img src="{{rc.Profile_Pic.url}}" class="rounded-circle">
                     {% endifequal %}
                   </a>
                 </div>
