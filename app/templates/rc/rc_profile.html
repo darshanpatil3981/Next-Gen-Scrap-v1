@@ -369,7 +369,8 @@
                     {% ifequal rc.Profile_Pic "" %}
                     <img src="{% static 'images/user.png' %}" class="rounded-circle">
                     {% else %}
-                    <img src="/{{rc.Profile_Pic}}" class="rounded-circle">
+                    <!-- <img src="{{request.session.propic}}" class="rounded-circle"> -->
+                    <img src="{{rc.Profile_Pic}}" class="rounded-circle">
                     {% endifequal %}
                   </a>
                 </div>

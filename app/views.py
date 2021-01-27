@@ -151,6 +151,7 @@ def Validate_login(request):
             request.session['rcid']=rc.id
             request.session['fname']=rc.Firstname
             request.session['lname']=rc.Lastname
+            request.session['propic']=rc.Profile_Pic
             return render(request,"app/rc_dashboard.html",{'user':User,'rc':rc})
     else:
         message = "Invalide Email Id & Password!!"
