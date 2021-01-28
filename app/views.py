@@ -271,4 +271,10 @@ def Rc_product(request):
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(RC_ID=user)
     return render(request,"rc/rc_product.html",{'user':user,'rc':rc})
+
+def Rc_add_product(request):
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    rc=RC.objects.get(RC_ID=user)
+    return render(request,"rc/rc_add_product.html",{'user':user,'rc':rc})
     
