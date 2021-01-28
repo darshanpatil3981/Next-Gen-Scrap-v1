@@ -25,7 +25,8 @@ urlpatterns = [
      path("rc_orders/",views.Rc_orders,name="rc_orders"),
      path("rc_pricing/",views.Rc_pricing,name="rc_pricing"),
      path("rc_product/",views.Rc_product,name="rc_product"),
-     path("rc_add_product/",views.Rc_add_product,name="rc_add_product"),
+     path("rc_add_product_page/",views.Rc_add_product_page,name="rc_add_product_page"),
+     path("rc_add_product_process/",views.RC_add_product_process,name="add_product_process"),
      
      
 

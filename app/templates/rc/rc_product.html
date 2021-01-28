@@ -344,82 +344,49 @@
 <div class="background" style="padding-left: 270px; background-color: white;">
   <h1 class="display-2 text-black" style="color: #48aaff;">My Product</h1>
   
-<div style="padding-left: 909px;"><button type="button" onclick="document.location='{% url 'rc_add_product' %}'" class="btn btn-labeled btn-success" style="height: 45px;">
+<div style="padding-left: 909px;"><button type="button" onclick="document.location='{% url 'rc_add_product_page' %}'" class="btn btn-labeled btn-success" style="height: 45px;">
+<!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product_page' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
   <span class="btn-label"  style="background-color: #2dce89; "><i class="fa fa-plus"></i></span>Add Product</button></div>
   <div class="container">
-    <div class="row">
+    <div class="row"> 
       <div class="col-12">
+        {% if products %}
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">No.</th>
+              <th scope="col">Product ID</th>
               <th scope="col">Product Name</th>
               <th scope="col">Product Image</th>
-
               <th scope="col">Price</th>
               <th scope="col">Stock</th>
               <th scope="col">View</th>
             </tr>
           </thead>
           <tbody>
+            {% for i in products %}
             <tr>
-              <th scope="row">1</th>
-              <td>Recycled Paper Basket</td>
+              <th scope="row">{{i.id}}</th>
+              <td>{{i.Product_Name}}</td>
               <td>
               <div class="row">
-                
-                <div class="user-img pull-left" style="margin-left: 33px;padding-left: 20px;"><img src="https://5.imimg.com/data5/MB/VJ/MY-40824460/recycled-waste-paper-basket-500x500.jpg" class="img-circle img-responsive" alt="User Image" style="height: 90px;"> </div>
-                
+                <div class="user-img pull-left" style="margin-left: 33px;padding-left: 20px;"><img src="{{i.Product_Img.url}}" class="img-circle img-responsive" alt="User Image" style="height: 90px;"> </div>
               </td>
-              <td>150 Rs</td>
-              <td>2</td>
+              <td>{{i.Product_Price}}</td>
+              <td>Stock coming</td>
               <td>
                 <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
                 <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
                 <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
               </td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Recycled Female Purse Green</td>
-              <td>
-              <div class="row">
-                
-                  <div class="user-img pull-left" style="margin-left: 33px;padding-left: 20px;"><img src="https://i.pinimg.com/originals/e6/d7/99/e6d799cbb7409c65f38838b1ffae5c74.jpg" class="img-circle img-responsive" alt="User Image" style="height: 90px;"> </div>
-                
-              </td>
-             
-              <td>500 Rs</td>
-              <td>8</td>
-              <td>
-                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-               
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>Mobile Phone Holder </td>
-              <td>
-              <div class="row">
-                
-                  <div class="user-img pull-left" style="margin-left: 33px;padding-left: 20px;"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2BwCccVywL.jpg" class="img-circle img-responsive" alt="User Image" style="height: 90px;"> </div>
-                
-              </td>
-            
-              <td>200 Rs</td>
-              <td>10</td>
-              <td>
-                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-              </td>
-            </tr>
-           
-           
+            {% endfor %}
           </tbody>
         </table>
+        {% else %}
+        <p>
+          Oops...! You dont have any product yet... Add some products.
+        </p>
+        {% endif %}
       </div>
     </div>
   </div>

@@ -231,7 +231,6 @@ def Rc_update_profile(request):
         state = request.POST['state']
         pincode = request.POST['pincode']
         propic = request.FILES['profile_pic']
-        print("image def ma aai")
 
         id=request.session.get("id")
         user = User_Master.objects.get(id=id)
@@ -245,7 +244,6 @@ def Rc_update_profile(request):
         rc.State=state
         rc.Pincode=pincode
         rc.Profile_Pic=propic
-        print("aa save bi thai var ma")
         rc.save()
         return HttpResponseRedirect(reverse('rc_profile'))
     else:
@@ -270,11 +268,25 @@ def Rc_product(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(RC_ID=user)
-    return render(request,"rc/rc_product.html",{'user':user,'rc':rc})
+    products=Product.objects.all().filter(RC_ID=rc)
+    # User.objects.all().values_list('username', flat=True) 
+    return render(request,"rc/rc_product.html",{'user':user,'rc':rc,'products':products})
 
-def Rc_add_product(request):
+def Rc_add_product_page(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(RC_ID=user)
     return render(request,"rc/rc_add_product.html",{'user':user,'rc':rc})
-    
+
+def RC_add_product_process(request):
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    rc = RC.objects.get(RC_ID=user)
+
+    pro_name = request.POST['Pro_name']
+    pro_price = request.POST['Pro_price']
+    pro_desc = request.POST['Pro_desc']
+    pro_img = request.FILES['Pro_img']
+
+    newProduct = Product.objects.create(RC_ID=rc,Product_Name=pro_name,Product_Price=pro_price,Product_Desc=pro_desc,Product_Img=pro_img,Current_orders=0)
+    return HttpResponseRedirect(reverse('rc_product'))

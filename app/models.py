@@ -44,3 +44,14 @@ class RC(models.Model):
     Pincode = models.BigIntegerField()
     Contact = models.BigIntegerField(default=0)
     Profile_Pic = models.ImageField(upload_to='Profile_Pics',default="")
+
+class Product(models.Model):
+    RC_ID = models.ForeignKey(RC,on_delete=models.CASCADE)
+    Product_Name = models.CharField(max_length=30)
+    Product_Price = models.FloatField()
+    Product_Desc = models.TextField()
+    Product_Img = models.ImageField(upload_to='Product_Images',default="")
+    Current_orders = models.IntegerField(default=0)
+
+
+
