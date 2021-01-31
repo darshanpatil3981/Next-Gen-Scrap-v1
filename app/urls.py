@@ -26,8 +26,10 @@ urlpatterns = [
      path("rc_pricing/",views.Rc_pricing,name="rc_pricing"),
      path("rc_product/",views.Rc_product,name="rc_product"),
      path("rc_add_product/",views.Rc_add_product,name="rc_add_product"),
+     path("rc_change_password/",views.Rc_change_password,name="rc_change_password"),
      path("RC_view_product/<int:key>",views.RC_view_product,name="RC_view_product"),
      path("RC_edit_product/<int:key>",views.RC_edit_product,name="RC_edit_product"),
+     
      
      
 

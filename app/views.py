@@ -357,3 +357,28 @@ def RC_edit_product(request,key):
         rc = RC.objects.get(RC_ID=user)
         product = Product.objects.get(id=key)
         return render(request,"rc/rc_edit_product.html",{'user':user,'rc':rc,'product':product})
+
+def Rc_change_password(request):
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    rc=RC.objects.get(RC_ID=user)
+
+    if request.method=="POST":
+        old_password = request.POST['op']
+        new_password = request.POST['np']
+        confirm_password= request.POST['cp']
+
+        if user.Password==old_password:
+            if new_password==confirm_password:
+                user.Password=new_password
+                user.save()
+                msg="Your Password Changed Succsessfully!!!"
+                return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc,'msg':msg})
+            else:
+                msg="New Password & Confirm Password Did Not Match!!!"
+                return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc,'msg':msg})
+        else:
+            msg="Old Password Is Incorect!!!"
+            return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc,'msg':msg})
+    else:
+        return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc})
