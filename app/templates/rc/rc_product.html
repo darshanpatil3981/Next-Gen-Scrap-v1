@@ -344,8 +344,9 @@
 <div class="background" style="padding-left: 270px; background-color: white;">
   <h1 class="display-2 text-black" style="color: #48aaff;">My Product</h1>
   
-<div style="padding-left: 909px;"><button type="button" onclick="document.location='{% url 'rc_add_product_page' %}'" class="btn btn-labeled btn-success" style="height: 45px;">
-<!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product_page' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
+<div style="padding-left: 909px;">
+  <button type="button" onclick="document.location='{% url 'rc_add_product' %}'" class="btn btn-labeled btn-success" style="height: 45px;">
+  <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
   <span class="btn-label"  style="background-color: #2dce89; "><i class="fa fa-plus"></i></span>Add Product</button></div>
   <div class="container">
     <div class="row"> 
@@ -359,7 +360,7 @@
               <th scope="col">Product Image</th>
               <th scope="col">Price</th>
               <th scope="col">Stock</th>
-              <th scope="col">View</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -369,14 +370,20 @@
               <td>{{i.Product_Name}}</td>
               <td>
               <div class="row">
-                <div class="user-img pull-left" style="margin-left: 33px;padding-left: 20px;"><img src="{{i.Product_Img.url}}" class="img-circle img-responsive" alt="User Image" style="height: 90px;"> </div>
+                <div class="user-img pull-left" style="margin-left: 15px;padding-left: 10px;">
+                  <img src="{{i.Product_Img.url}}" class="img-circle img-responsive" alt="User Image" style="height: 80px;"> </div>
               </td>
               <td>{{i.Product_Price}}</td>
-              <td>Stock coming</td>
+              <td>Stock</td>
               <td>
-                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                  <a href="{% url 'RC_view_product' key=i.id %}">
+                  <button type="submit" class="btn btn-primary" action="{% url 'RC_view_product' key=i.id %}"><i class="far fa-eye"></i></button>
+                  </a>
+                <!-- <form action="" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                </form> -->
+                  <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
               </td>
             </tr>
             {% endfor %}

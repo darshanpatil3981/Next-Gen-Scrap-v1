@@ -224,7 +224,6 @@ def Rc_update_profile(request):
     if request.method=="POST":
         fname = request.POST['fname']
         lname = request.POST['lname']
-      
         add = request.POST['add']
         contact = request.POST['contact']
         city = request.POST['city']
@@ -237,7 +236,6 @@ def Rc_update_profile(request):
         rc=RC.objects.get(RC_ID=user)
         rc.Firstname=fname
         rc.Lastname=lname
-      
         rc.Address=add
         rc.Contact=contact
         rc.City=city
@@ -252,6 +250,7 @@ def Rc_update_profile(request):
         rc=RC.objects.get(RC_ID=user)
         return render(request,"rc/rc_update_profile.html",{'user':user,'rc':rc})
     
+
 def Rc_orders(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
@@ -269,24 +268,61 @@ def Rc_product(request):
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(RC_ID=user)
     products=Product.objects.all().filter(RC_ID=rc)
-    # User.objects.all().values_list('username', flat=True) 
     return render(request,"rc/rc_product.html",{'user':user,'rc':rc,'products':products})
 
-def Rc_add_product_page(request):
-    id=request.session.get("id")
-    user = User_Master.objects.get(id=id)
-    rc=RC.objects.get(RC_ID=user)
-    return render(request,"rc/rc_add_product.html",{'user':user,'rc':rc})
 
-def RC_add_product_process(request):
-    id=request.session.get("id")
+
+def Rc_add_product(request):
+    if request.method=="POST":
+        id=request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        rc = RC.objects.get(RC_ID=user)
+
+        pro_name = request.POST['Pro_name']
+        pro_price = request.POST['Pro_price']
+        pro_desc = request.POST['Pro_desc']
+        pro_img = request.FILES['Pro_img']
+
+        newProduct = Product.objects.create(RC_ID=rc,Product_Name=pro_name,Product_Price=pro_price,Product_Desc=pro_desc,Product_Img=pro_img,Current_orders=0)
+        return HttpResponseRedirect(reverse('rc_product'))
+    else:
+        id=request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        rc=RC.objects.get(RC_ID=user)
+        return render(request,"rc/rc_add_product.html",{'user':user,'rc':rc})
+
+
+
+def RC_view_product(request,key):
+    id = request.session.get("id")
     user = User_Master.objects.get(id=id)
     rc = RC.objects.get(RC_ID=user)
+    product = Product.objects.get(id=key)
+    return render(request,"rc/rc_view_product.html",{'user':user,'rc':rc,'product':product})
 
-    pro_name = request.POST['Pro_name']
-    pro_price = request.POST['Pro_price']
-    pro_desc = request.POST['Pro_desc']
-    pro_img = request.FILES['Pro_img']
+def RC_edit_product(request,key):
+    if request.method=="POST":
+        pro_name = request.POST['Pro_name']
+        pro_price = request.POST['Pro_price']
+        pro_desc = request.POST['Pro_desc']
+        pro_img = request.FILES['Pro_img']
 
-    newProduct = Product.objects.create(RC_ID=rc,Product_Name=pro_name,Product_Price=pro_price,Product_Desc=pro_desc,Product_Img=pro_img,Current_orders=0)
-    return HttpResponseRedirect(reverse('rc_product'))
+        product = Product.objects.get(id=key)
+        product.Product_Name = pro_name
+        product.Product_Price = pro_price
+        product.Product_Desc = pro_desc
+        product.Product_Img = pro_img
+        product.save()
+
+        id = request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        rc = RC.objects.get(RC_ID=user)
+        # return HttpResponseRedirect(reverse('RC_view_product',args={'key':product.id}))
+        return HttpResponseRedirect(reverse('RC_view_product',args=[product.id]))
+
+    else:
+        id = request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        rc = RC.objects.get(RC_ID=user)
+        product = Product.objects.get(id=key)
+        return render(request,"rc/rc_edit_product.html",{'user':user,'rc':rc,'product':product})
