@@ -382,3 +382,9 @@ def Rc_change_password(request):
             return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc,'msg':msg})
     else:
         return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc})
+def Index(request):
+    return render(request,"ecom/index.html")
+    
+def Product_detail(request):
+    return render(request,"ecom/product_detail.html")
+    
