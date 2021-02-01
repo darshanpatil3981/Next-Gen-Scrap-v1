@@ -312,21 +312,16 @@ def RC_edit_product(request,key):
         pro_price = request.POST['Pro_price']
         pro_desc = request.POST['Pro_desc']
         
+        product = Product.objects.get(id=key)
+        product.Product_Name = pro_name
+        product.Product_Price = pro_price
+        product.Product_Desc = pro_desc
         try:
             if request.FILES['Pro_img']:
                 pro_img = request.FILES['Pro_img']
-                product = Product.objects.get(id=key)
-                product.Product_Name = pro_name
-                product.Product_Price = pro_price
-                product.Product_Desc = pro_desc
                 product.Product_Img = pro_img
-                product.save()
-                
+                product.save()    
         except:
-            product = Product.objects.get(id=key)
-            product.Product_Name = pro_name
-            product.Product_Price = pro_price
-            product.Product_Desc = pro_desc
             product.save()
 
         id = request.session.get("id")
