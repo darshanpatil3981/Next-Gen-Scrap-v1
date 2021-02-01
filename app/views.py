@@ -322,6 +322,7 @@ def RC_view_product(request,key):
     product = Product.objects.get(id=key)
     return render(request,"rc/rc_view_product.html",{'user':user,'rc':rc,'product':product})
 
+
 def RC_edit_product(request,key):
     if request.method=="POST":
         pro_name = request.POST['Pro_name']
@@ -360,17 +361,12 @@ def RC_edit_product(request,key):
 
 
 def RC_delete_product(request,key):
-    id = request.session.get("id")
-    user = User_Master.objects.get(id=id)
-    rc = RC.objects.get(RC_ID=user)
-
     delProduct = Product.objects.get(id=key)
     if(delProduct.Product_Img):
        delProduct.Product_Img.delete()
     delProduct.delete()
-
-    products=Product.objects.all().filter(RC_ID=rc)
     return HttpResponseRedirect(reverse("rc_product"))
+
 
 def Rc_change_password(request):
     id=request.session.get("id")
