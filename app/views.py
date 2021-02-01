@@ -145,7 +145,7 @@ def Validate_login(request):
         User = User_Master.objects.get(Email=email)
         print(User.Role)
         if User.Role=="Customer":
-            return render(request,"app/index.html")
+            return render(request,"ecom/index.html")
         elif User.Role=="GC":
             return render(request,"app/gc_dashboard.html")
         elif User.Role=="RC":
@@ -154,7 +154,7 @@ def Validate_login(request):
             request.session['rcid']=rc.id
             request.session['fname']=rc.Firstname
             request.session['lname']=rc.Lastname
-            return render(request,"app/rc_dashboard.html",{'user':User,'rc':rc})
+            return render(request,"rc/rc_dashboard.html",{'user':User,'rc':rc})
     else:
         message = "Invalide Email Id & Password!!"
         return render(request,"app/login.html",{'msg':message,})
@@ -222,47 +222,30 @@ def Rc_profile(request):
 
 def Rc_update_profile(request):
     if request.method=="POST":
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        add = request.POST['add']
+        contact = request.POST['contact']
+        city = request.POST['city']
+        state = request.POST['state']
+        pincode = request.POST['pincode']
+
+        id=request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        rc=RC.objects.get(RC_ID=user)
+        rc.Firstname=fname
+        rc.Lastname=lname
+        rc.Address=add
+        rc.Contact=contact
+        rc.City=city
+        rc.State=state
+        rc.Pincode=pincode
         try:
             if request.FILES['profile_pic']:
-                fname = request.POST['fname']
-                lname = request.POST['lname']
-                add = request.POST['add']
-                contact = request.POST['contact']
-                city = request.POST['city']
-                state = request.POST['state']
-                pincode = request.POST['pincode']
                 propic = request.FILES['profile_pic']
-
-                id=request.session.get("id")
-                user = User_Master.objects.get(id=id)
-                rc=RC.objects.get(RC_ID=user)
-                rc.Firstname=fname
-                rc.Lastname=lname
-                rc.Address=add
-                rc.Contact=contact
-                rc.City=city
-                rc.State=state
-                rc.Pincode=pincode
                 rc.Profile_Pic=propic
                 rc.save()
         except:
-            fname = request.POST['fname']
-            lname = request.POST['lname']
-            add = request.POST['add']
-            contact = request.POST['contact']
-            city = request.POST['city']
-            state = request.POST['state']
-            pincode = request.POST['pincode']
-            id=request.session.get("id")
-            user = User_Master.objects.get(id=id)
-            rc=RC.objects.get(RC_ID=user)
-            rc.Firstname=fname
-            rc.Lastname=lname
-            rc.Address=add
-            rc.Contact=contact
-            rc.City=city
-            rc.State=state
-            rc.Pincode=pincode
             rc.save()
 
         return HttpResponseRedirect(reverse('rc_profile'))
