@@ -29,6 +29,7 @@ urlpatterns = [
      path("rc_change_password/",views.Rc_change_password,name="rc_change_password"),
      path("RC_view_product/<int:key>",views.RC_view_product,name="RC_view_product"),
      path("RC_edit_product/<int:key>",views.RC_edit_product,name="RC_edit_product"),
+     path("RC_delete_product/<int:key>",views.RC_delete_product,name="RC_delete_product"),
 
      #E-com
      path("index/",views.Index,name="index"),

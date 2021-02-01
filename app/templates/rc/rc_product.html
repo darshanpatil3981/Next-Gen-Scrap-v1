@@ -367,7 +367,7 @@
             {% for i in products %}
             <tr>
               <th scope="row">{{i.id}}</th>
-              <td>{{i.Product_Name}}</td>
+              <td id="{{i.id}}">{{i.Product_Name}}</td>
               <td>
               <div class="row">
                 <div class="user-img pull-left" style="margin-left: 15px;padding-left: 10px;">
@@ -377,13 +377,15 @@
               <td>Stock</td>
               <td>
                   <a href="{% url 'RC_view_product' key=i.id %}">
-                  <button type="submit" class="btn btn-primary" action="{% url 'RC_view_product' key=i.id %}"><i class="far fa-eye"></i></button>
+                    <button type="submit" class="btn btn-primary" action="{% url 'RC_view_product' key=i.id %}"><i class="far fa-eye"></i></button>
                   </a>
-                <!-- <form action="" method="post">
-                  {% csrf_token %}
-                  <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                </form> -->
-                  <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                  <a href="{% url 'RC_edit_product' key=i.id %}">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                  </a>
+                  <a href="{% url 'RC_delete_product' key=i.id %}" class="confirm-delete">
+                    <!-- <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" onclick="return confirm('Are you sure you want to delete this?')"></i></button> -->
+                    <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" ></i></button>
+                  </a>
               </td>
             </tr>
             {% endfor %}
@@ -415,5 +417,26 @@
 .btn-labeled {padding-top: 0;padding-bottom: 0;}
 .btn { margin-bottom:10px; }
 </style>
+
+
+<script>
+  
+$(document).on('click', '.confirm-delete', function(){
+
+  // $('tbody td #proNAME').click(function() {
+  //       alert($('table th').eq($(this).index()).attr('id'));
+  //   });
+    //  var ind = $(this).index();
+    //  console.log("OK");
+    //  var idOfTh = $('tbody th #proNAME:eq('+ind+')').attr('id');
+    //  console.log("OK");
+    // $('tbody td #proNAME').live('click', function() {
+    // });
+    // return confirm('Are you sure you want to delete product '+$("#proNAME").html()+" ?");
+    // return confirm('Are you sure you want to delete product '+idOfTh+" ?");
+    return confirm('Are you sure you want to delete product?');
+})
+ 
+</script>
 
 </html> 
