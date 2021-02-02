@@ -23,6 +23,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'loginassets/css/util.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'loginassets/css/main.css' %}">
 	<!--===============================================================================================-->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<!--===============================================================================================-->
 </head>
 
 <body>
@@ -36,20 +38,20 @@
 
 
 
-				
+
 
 				{% if fpw %}
 				<form class="login100-form validate-form" method="POST" action="{% url 'forgot_password' %}">
-				{% else %}
+					{% else %}
 					<form class="login100-form validate-form" method="POST" action="{% url 'is_already_created' %}">
-				{% endif %}
+						{% endif %}
 						{% csrf_token %}
 						<input type="hidden" name="roleh" value="{{role}}">
 						<span class="login100-form-title">
 							Enter Email
 						</span>
 						<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-							<input class="input100" type="text" name="email" placeholder="Email">
+							<input class="input100" type="email" name="email" placeholder="Email" required>
 							<span class="focus-input100"></span>
 							<span class="symbol-input100">
 								<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -68,11 +70,11 @@
 
 					</form>
 
-				
+
 
 			</div>
 			{% if error %}
-			<div class="alert alert-warning container" style="border-radius: 40px; padding-bottom: 13px;">
+			<!-- <div class="alert alert-warning container" style="border-radius: 40px; padding-bottom: 13px;">
 				<div class="container">
 					<div class="alert-icon">
 						<i class="material-icons">warning</i>
@@ -82,7 +84,14 @@
 					</button>
 					{{error}}
 				</div>
-			</div>
+			</div> -->
+			<script>
+				Swal.fire(
+					'',
+					'{{error}}',
+					'info'
+				)
+			</script>
 			{% endif %}
 		</div>
 	</div>

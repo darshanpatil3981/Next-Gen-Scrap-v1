@@ -23,6 +23,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'loginassets/css/util.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'loginassets/css/main.css' %}">
 	<!--===============================================================================================-->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<!--===============================================================================================-->
 </head>
 
 <body>
@@ -36,41 +38,42 @@
 				<!-- <p>THIS IS OK</p> -->
 				{% if fpw %}
 				<form class="login100-form validate-form" method="POST" action="{% url 'verify_OTP_forgotpw' %}">
-				{% else %}
-				<form class="login100-form validate-form" method="POST" action="{% url 'verify_OTP' %}">
-				{% endif %}
-					{% csrf_token %}
-					<span class="login100-form-title">
-						OTP Verification
-					</span>
-					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="cotp" placeholder="Enter OTP">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-shield" aria-hidden="true"></i>
+					{% else %}
+					<form class="login100-form validate-form" method="POST" action="{% url 'verify_OTP' %}">
+						{% endif %}
+						{% csrf_token %}
+						<span class="login100-form-title">
+							OTP Verification
 						</span>
-					</div>
+						<div class="wrap-input100 validate-input">
+							<input class="input100" type="text" name="cotp" placeholder="Enter OTP" pattern="^[0-9]+"
+								title="OTP Must be Only Numbers" required>
+							<span class="focus-input100"></span>
+							<span class="symbol-input100">
+								<i class="fa fa-shield" aria-hidden="true"></i>
+							</span>
+						</div>
 
-					
-					<input type="hidden" name="role" placeholder="{{ROLE}}" value="{{ROLE}}">
-					<input type="hidden" name="otp" value="{{OTP}}">
-					<input type="hidden" name="email" placeholder="{{EMAIL}}" value="{{EMAIL}}">
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Verify OTP
-						</button>
-					</div>
 
-					<div class="mx-auto" style="width: 200px;height: 150px;">
+						<input type="hidden" name="role" placeholder="{{ROLE}}" value="{{ROLE}}">
+						<input type="hidden" name="otp" value="{{OTP}}">
+						<input type="hidden" name="email" placeholder="{{EMAIL}}" value="{{EMAIL}}">
+						<div class="container-login100-form-btn">
+							<button class="login100-form-btn">
+								Verify OTP
+							</button>
+						</div>
 
-					</div>
+						<div class="mx-auto" style="width: 200px;height: 150px;">
 
-				</form>
-				
+						</div>
+
+					</form>
+
 
 			</div>
 			{% if msg %}
-			<div class="alert alert-warning container" style="border-radius: 40px; padding-bottom: 13px;">
+			<!-- <div class="alert alert-warning container" style="border-radius: 40px; padding-bottom: 13px;">
 				<div class="container">
 					<div class="alert-icon">
 						<i class="material-icons">warning</i>
@@ -80,7 +83,14 @@
 					</button>
 					{{msg}}
 				</div>
-			</div>
+			</div> -->
+			<script>
+				Swal.fire(
+					'',
+					'{{msg}}'
+					
+				)
+			</script>
 			{% endif %}
 		</div>
 	</div>

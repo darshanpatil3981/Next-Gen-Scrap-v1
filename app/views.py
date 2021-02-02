@@ -35,32 +35,33 @@ def Enter_email(request):
 
 def is_already_created(request):
     role = request.POST['roleh']
-    email = request.POST['email']
+    email = request.POST.get('email', False)
     if role=="customer":
         isCustomerAlready = User_Master.objects.filter(Email=email)
         if isCustomerAlready:
             obj = User_Master.objects.get(Email=email)
             err_role= obj.Role
-            message = "This email address is already registered as "+err_role+"!"
+            message = "This Email Address Is Already Registered As "+err_role+"!"
             return render(request,"app/enter_email.html",{'error':message,'role':role})
         else:
             otp = randint(100000,999999)
             email_Subject = "Customer Email Verification"
             sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':'Dear customer','otp':otp})
-            return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"Customer"})
+            oc_msg = "OTP Sent On "+email+"  Please Verify OTP"
+            return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"Customer",'msg':oc_msg})
 
     elif role == "business":
         isGCRCAlready = User_Master.objects.filter(Email=email)
         if isGCRCAlready:
             obj = User_Master.objects.get(Email=email)
             err_role= obj.Role
-            message = "This email address is already registered as "+err_role+"!"
+            message = "This Email Address Is Already Registered As "+err_role+"!"
             return render(request,"app/enter_email.html",{'error':message,'role':role})
         else:
             otp = randint(100000,999999)
             email_Subject = "Business Partner Email Verification"
             sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':'Dear Business Partner','otp':otp})
-            oc_msg = "We have sent you an otp on "+email+" ! Please verify otp."
+            oc_msg = "OTP Sent On "+email+"  Please Verify OTP"
             return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"GCRC",'msg':oc_msg})
         
 
@@ -73,13 +74,13 @@ def verify_OTP(request):
     cotp = str(cotp)
    
     if otp==cotp:
-        success_message = "Your otp is verified successfully."
+        success_message = "OTP Is Verified Successfully"
         if role=="Customer":
             return render(request,"app/signup_customer.html",{'EMAIL':email,'msg':success_message})
         else:
             return render(request,"app/signup_gcrc.html",{'EMAIL':email,'msg':success_message})
     else:
-        message="You have entered incorrect OTP."
+        message="Incorrect OTP!!"
         return render(request,"app/otp_verification.html",{'msg':message,'OTP':otp,'EMAIL':email})
 
 
@@ -87,7 +88,7 @@ def verify_OTP(request):
 def create_Customer(request):
     fname = request.POST['fname']
     lname = request.POST['lname']
-    email = request.POST['email']
+    email = request.POST.get('email', False)
     pswd = request.POST['pswd']
     cpswd = request.POST['cpswd']
 
@@ -99,16 +100,16 @@ def create_Customer(request):
             if pswd==cpswd:
                 newUser = User_Master.objects.create(Email=email,Password=pswd,Role="Customer",Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
                 newCustomer = Customer.objects.create(Customer_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
-                return render(request,"app/login.html",{'msg':"Your account was created successfully..."})
+                return render(request,"app/login.html")
             else:
-                message = "Password Doesnot match"
-                return render(request,"app/signup_customer.html",{'msg':message,'EMAIL':email})
+                message = "Password Does Not Match"
+                return render(request,"app/signup_customer.html",{'fname':fname,'lname':lname,'pswd':pswd,'msg':message,'EMAIL':email})
 
 
 def create_gc_rc(request):
     fname = request.POST['fname']
     lname = request.POST['lname']
-    email = request.POST['email']
+    email = request.POST.get('email', False)
     pswd = request.POST['pass']
     cpswd = request.POST['cpass']
     role = request.POST['role']
@@ -131,8 +132,8 @@ def create_gc_rc(request):
             # return render(request,"app/index.html")
             return HttpResponseRedirect(reverse('login'))
         else:
-                message = "Password Doesnot match"
-                return render(request,"app/signup_gcrc.html",{'msg':message,'EMAIL':email})
+                message = "Password Does Not Match"
+                return render(request,"app/signup_gcrc.html",{'fname':fname,'lname':lname,'pswd':pswd,'msg':message,'EMAIL':email})
 
 
 def Validate_login(request):
@@ -156,7 +157,7 @@ def Validate_login(request):
             request.session['lname']=rc.Lastname
             return render(request,"rc/rc_dashboard.html",{'user':User,'rc':rc})
     else:
-        message = "Invalide Email Id & Password!!"
+        message = "Invalide Email Id And Password!!"
         return render(request,"app/login.html",{'msg':message,})
 
 def Forgot_password(request):
