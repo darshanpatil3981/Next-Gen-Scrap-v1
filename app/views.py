@@ -2,7 +2,7 @@ from django.shortcuts import render,HttpResponseRedirect,reverse
 from .models import *
 from random import *
 from .utils import *
-
+from django.contrib.auth.hashers import make_password,check_password
 # Create your views here.
 
 #==============================Direct Rendering Views================================================
@@ -92,13 +92,12 @@ def create_Customer(request):
     pswd = request.POST['pswd']
     cpswd = request.POST['cpswd']
 
-    if fname=="" or lname=="" or email=="" or pswd=="" or cpswd=="":
-            message = "Please fill all details carefully..." 
-            return render(request,"app/signup_customer.html",{'msg':message,'EMAIL':email})
+   
     
-    elif fname!="" or lname!="" or email!="" or pswd!="" or cpswd!="":      
+    if fname!="" or lname!="" or email!="" or pswd!="" or cpswd!="":      
             if pswd==cpswd:
-                newUser = User_Master.objects.create(Email=email,Password=pswd,Role="Customer",Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
+                encrypted_pw=make_password(pswd)
+                newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role="Customer",Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
                 newCustomer = Customer.objects.create(Customer_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
                 return render(request,"app/login.html")
             else:
@@ -139,28 +138,33 @@ def create_gc_rc(request):
 def Validate_login(request):
     email = request.POST['email']
     password = request.POST['password']
-
-    is_exist = User_Master.objects.filter(Email=email,Password=password)
+    
+    is_exist = User_Master.objects.filter(Email=email)
 
     if is_exist:
         User = User_Master.objects.get(Email=email)
-        if User.Role=="Customer":
-            request.session['id']=User.id
-            customer=Customer.objects.get(Customer_ID=User)
-            request.session['fname']=customer.Firstname
-            request.session['lname']=customer.Lastname
-            return HttpResponseRedirect(reverse('index'))
-        elif User.Role=="GC":
-            return render(request,"app/gc_dashboard.html")
-        elif User.Role=="RC":
-            request.session['id']=User.id
-            rc=RC.objects.get(RC_ID=User)
-            request.session['rcid']=rc.id
-            request.session['fname']=rc.Firstname
-            request.session['lname']=rc.Lastname
-            return render(request,"rc/rc_dashboard.html",{'user':User,'rc':rc})
+        print(check_password(password,User.Password))
+        if check_password(password,User.Password):
+            if User.Role=="Customer":
+                request.session['id']=User.id
+                customer=Customer.objects.get(Customer_ID=User)
+                request.session['fname']=customer.Firstname
+                request.session['lname']=customer.Lastname
+                return HttpResponseRedirect(reverse('index'))
+            elif User.Role=="GC":
+                return render(request,"app/gc_dashboard.html")
+            elif User.Role=="RC":
+                request.session['id']=User.id
+                rc=RC.objects.get(RC_ID=User)
+                request.session['rcid']=rc.id
+                request.session['fname']=rc.Firstname
+                request.session['lname']=rc.Lastname
+                return render(request,"rc/rc_dashboard.html",{'user':User,'rc':rc})
+        else:
+            message = "Incorect Password!!"
+            return render(request,"app/login.html",{'msg':message,})        
     else:
-        message = "Invalide Email Id And Password!!"
+        message = "This Email Is Not Registed with Any Account"
         return render(request,"app/login.html",{'msg':message,})
 
 def Forgot_password(request):

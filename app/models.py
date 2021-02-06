@@ -4,7 +4,7 @@ from django.db import models
 
 class User_Master(models.Model):
     Email = models.EmailField(max_length=50)
-    Password = models.CharField(max_length=50)
+    Password = models.CharField(max_length=300)
     Role = models.CharField(max_length=20)
     Otp = models.IntegerField()
     is_created = models.DateTimeField(auto_now=True,blank=False)

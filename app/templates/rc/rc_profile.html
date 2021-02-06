@@ -100,7 +100,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/plugins/charts.html" target="_blank">
+              <a class="nav-link" href="{% url 'logout' %}">
                 <i class="ni ni-user-run"></i>
                 <span class="nav-link-text">Logout</span>
               </a>
@@ -337,7 +337,7 @@
                   <span>Change Password</span>
                   
                 <div class="dropdown-divider"></div>
-                <a href="#!" class="dropdown-item">
+                <a href="{% url 'logout' %}" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
                 </a>

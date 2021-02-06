@@ -75,13 +75,13 @@
 
             <li class="nav-item">
               <!--      <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html" target="_blank">  -->
-              <a class="nav-link" href="{% url 'rc_profile' %}">
+              <a class="nav-link" href="{% url 'rc_profile' %}" >
                 <i class="ni ni-single-02"></i>
                 <span class="nav-link-text" href="{% url 'rc_pricing' %}">Profile</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="" >
+              <a class="nav-link" href="{% url 'rc_change_password' %}" >
                 <!--	  <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html" target="_blank"> -->
                 <i class="fa fa-lock"></i>
                 <span class="nav-link-text">Change Password</span>
@@ -89,7 +89,7 @@
             </li>
             <li class="nav-item">
               <!--      <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/plugins/charts.html" target="_blank">  -->
-              <a class="nav-link" href="#" >
+              <a class="nav-link" href="{% url 'logout' %}">
                 <i class="ni ni-user-run"></i>
                 <span class="nav-link-text">Logout</span>
               </a>
@@ -305,7 +305,11 @@
                 aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-4.jpg' %}">
+                    {% ifequal rc.Profile_Pic "" %}
+                    <img alt="Image placeholder" src="{% static 'images/user.png' %}">
+                    {% else %}
+                    <img alt="Image placeholder" src="{{rc.Profile_Pic.url}}">
+                    {% endifequal %}
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{{rc.Firstname}} {{rc.Lastname}}</span>
@@ -320,12 +324,12 @@
                   <i class="ni ni-single-02" style="color: #172b4d;"></i>
                   <span>My profile</span>
                 </a>
-                <a href="#!" class="dropdown-item">
+                <a href="{% url 'rc_change_password' %}" class="dropdown-item">
                   <i class="fa fa-lock" style="color: #172b4d;"></i>
                   <span>Change Password</span>
 
                   <div class="dropdown-divider"></div>
-                  <a href="#!" class="dropdown-item">
+                  <a href="{% url 'logout' %}" class="dropdown-item">
                     <i class="ni ni-user-run"></i>
                     <span>Logout</span>
                   </a>
