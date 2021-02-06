@@ -144,9 +144,12 @@ def Validate_login(request):
 
     if is_exist:
         User = User_Master.objects.get(Email=email)
-        print(User.Role)
         if User.Role=="Customer":
-            return render(request,"ecom/index.html")
+            request.session['id']=User.id
+            customer=Customer.objects.get(Customer_ID=User)
+            request.session['fname']=customer.Firstname
+            request.session['lname']=customer.Lastname
+            return HttpResponseRedirect(reverse('index'))
         elif User.Role=="GC":
             return render(request,"app/gc_dashboard.html")
         elif User.Role=="RC":
@@ -288,8 +291,9 @@ def Rc_add_product(request):
         pro_price = request.POST['Pro_price']
         pro_desc = request.POST['Pro_desc']
         pro_img = request.FILES['Pro_img']
+        seller_name=rc.Firstname+" "+rc.Lastname
 
-        newProduct = Product.objects.create(RC_ID=rc,Product_Name=pro_name,Product_Price=pro_price,Product_Desc=pro_desc,Product_Img=pro_img,Current_orders=0)
+        newProduct = Product.objects.create(RC_ID=rc,Seller_Name=seller_name,Product_Name=pro_name,Product_Price=pro_price,Product_Desc=pro_desc,Product_Img=pro_img,Current_orders=0)
         return HttpResponseRedirect(reverse('rc_product'))
     else:
         id=request.session.get("id")
@@ -374,8 +378,85 @@ def Rc_change_password(request):
 
 
 def Index(request):
-    return render(request,"ecom/index.html")
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    customer=Customer.objects.get(Customer_ID=user)
+    return render(request,"ecom/index.html",{'user':user,'customer':customer})
     
 def Product_detail(request):
     return render(request,"ecom/product_detail.html")
+
+def Profile(request):
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    customer=Customer.objects.get(Customer_ID=user)
+    return render(request,"ecom/profile.html",{'user':user,'customer':customer})
     
+def Logout(request):
+    try:
+        del request.session['id']
+        del request.session['fname']
+        del request.session['lname']
+        return render(request,'app/login.html')
+    except:
+        pass
+
+def Customer_update_profile(request):
+    if request.method=="POST":
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        add = request.POST['add']
+        contact = request.POST['contact']
+        city = request.POST['city']
+        state = request.POST['state']
+        pincode = request.POST['pincode']
+
+        id = request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        customer=Customer.objects.get(Customer_ID=user)
+        customer.Firstname=fname
+        customer.Lastname=lname
+        customer.Address=add
+        customer.Contact=contact
+        customer.City=city
+        customer.State=state
+        customer.Pincode=pincode
+        try:
+            if request.FILES['profile_pic']:
+                propic = request.FILES['profile_pic']
+                customer.Profile_Pic=propic
+                customer.save()
+        except:
+            customer.save()
+
+        return HttpResponseRedirect(reverse('profile'))
+    else:
+        id = request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        customer=Customer.objects.get(Customer_ID=user)
+        return render(request,"ecom/customer_update_profile.html",{'user':user,'customer':customer})
+def Change_password(request):
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    customer=Customer.objects.get(Customer_ID=user)
+    if request.method=="POST":
+        old_password = request.POST['op']
+        new_password = request.POST['np']
+        confirm_password= request.POST['cp']
+        print("OP----------------"+old_password)
+        print("Np----------------"+new_password)
+        print("Np----------------"+confirm_password)
+        if user.Password==old_password:
+            if new_password==confirm_password:
+                user.Password=new_password
+                user.save()
+                msg="Your Password Changed Succsessfully!!!"
+                return render(request,"ecom/change_password.html",{'user':user,'customer':customer,'msg':msg})
+            else:
+                msg="New Password & Confirm Password Did Not Match!!!"
+                return render(request,"rc/change_password.html",{'user':user,'customer':customer,'msg':msg})
+        else:
+            msg="Old Password Is Incorect!!!"
+            return render(request,"ecom/change_password.html",{'user':user,'customer':customer,'msg':msg})
+    else:
+        return render(request,"ecom/change_password.html",{'user':user,'customer':customer})

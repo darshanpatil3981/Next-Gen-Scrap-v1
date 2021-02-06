@@ -24,12 +24,13 @@
   <meta name="author" content="Creative Tim">
   <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="{% static 'GCassets/img/brand/favicon.png' %}" >
+  <link rel="icon" type="image/png" href="{% static 'GCassets/img/brand/favicon.png' %}">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
   <link rel="stylesheet" href="{% static 'GCassets/vendor/nucleo/css/nucleo.css' %}" type="text/css">
-  <link rel="stylesheet" href="{% static 'GCassets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'GCassets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}"
+    type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{% static 'GCassets/css/argon.css' %}" type="text/css">
   <!-- <link rel="stylesheet" href="{% static 'GCassets/css/argon.css?v=1.2.0' %}" type="text/css"> -->
@@ -54,25 +55,25 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'rc_scrap_collectors' %}">
                 <i class="fa fa-users" style="color: #ff8c00;"></i>
-                <span class="nav-link-text" >Scrap Collectores</span>
+                <span class="nav-link-text">Scrap Collectores</span>
               </a>
             </li>
-            
+
             <li class="nav-item">
               <a class="nav-link" href="{% url 'rc_orders' %}">
                 <i class="ni ni-tv-2 text-primary" style="color: #673AB7;"></i>
                 <span class="nav-link-text">Ordres</span>
               </a>
             </li>
-           
+
             <li class="nav-item">
               <a class="nav-link" href="{% url 'rc_product' %}">
                 <i class="fa fa-product-hunt " style="color: #75bf2c;"></i>
                 <span class="nav-link-text ">Products</span>
               </a>
             </li>
-           
-            
+
+
             <li class="nav-item">
               <a class="nav-link" href="{% url 'rc_pricing' %}">
                 <i class="fa fa-diamond" style="color: #673AB7;"></i>
@@ -83,10 +84,10 @@
           <!-- Divider -->
           <hr class="my-3">
           <!-- Heading -->
-          
+
           <!-- Navigation -->
           <ul class="navbar-nav mb-md-3">
-            
+
             <li class="nav-item">
               <a class="nav-link" href="{% url 'rc_profile' %}" `>
                 <i class="ni ni-single-02"></i>
@@ -94,18 +95,20 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html" target="_blank">
+              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html"
+                target="_blank">
                 <i class="fa fa-lock"></i>
                 <span class="nav-link-text">Change Password</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/plugins/charts.html" target="_blank">
+              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/plugins/charts.html"
+                target="_blank">
                 <i class="ni ni-user-run"></i>
                 <span class="nav-link-text">Logout</span>
               </a>
             </li>
-            
+
           </ul>
         </div>
       </div>
@@ -116,7 +119,7 @@
     <!-- Topnav -->
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
       <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
           <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
             <div class="form-group mb-0">
@@ -127,7 +130,8 @@
                 <input class="form-control" placeholder="Search" type="text">
               </div>
             </div>
-            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
+            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main"
+              aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </form>
@@ -135,7 +139,8 @@
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
               <!-- Sidenav toggler -->
-              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
+              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+                data-target="#sidenav-main">
                 <div class="sidenav-toggler-inner">
                   <i class="sidenav-toggler-line"></i>
                   <i class="sidenav-toggler-line"></i>
@@ -149,13 +154,15 @@
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
                 <i class="ni ni-bell-55"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
                 <!-- Dropdown header -->
                 <div class="px-3 py-3">
-                  <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong> notifications.</h6>
+                  <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong> notifications.
+                  </h6>
                 </div>
                 <!-- List group -->
                 <div class="list-group list-group-flush">
@@ -163,7 +170,8 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-1.jpg' %}" class="avatar rounded-circle">
+                        <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-1.jpg' %}"
+                          class="avatar rounded-circle">
                       </div>
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -182,7 +190,8 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-2.jpg' %}" class="avatar rounded-circle">
+                        <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-2.jpg' %}"
+                          class="avatar rounded-circle">
                       </div>
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -201,7 +210,8 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-3.jpg' %}" class="avatar rounded-circle">
+                        <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-3.jpg' %}"
+                          class="avatar rounded-circle">
                       </div>
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -220,7 +230,8 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-4.jpg' %}" class="avatar rounded-circle">
+                        <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-4.jpg' %}"
+                          class="avatar rounded-circle">
                       </div>
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -239,7 +250,8 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-5.jpg' %}" class="avatar rounded-circle">
+                        <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-5.jpg' %}"
+                          class="avatar rounded-circle">
                       </div>
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -260,7 +272,8 @@
               </div>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
                 <i class="ni ni-ungroup"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
@@ -307,7 +320,8 @@
           </ul>
           <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
             <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
                     <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-4.jpg' %}">
@@ -328,12 +342,12 @@
                 <a href="#!" class="dropdown-item">
                   <i class="fa fa-lock" style="color: #172b4d;"></i>
                   <span>Change Password</span>
-                  
-                <div class="dropdown-divider"></div>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-user-run"></i>
-                  <span>Logout</span>
-                </a>
+
+                  <div class="dropdown-divider"></div>
+                  <a href="#!" class="dropdown-item">
+                    <i class="ni ni-user-run"></i>
+                    <span>Logout</span>
+                  </a>
               </div>
             </li>
           </ul>
@@ -342,7 +356,8 @@
     </nav>
     <!-- Header -->
     <!-- Header -->
-    <div class="header pb-6 d-flex align-items-center" style="min-height: 300px; background-image: url({% static 'GCassets/img/theme/profile-cover.jpg' %}); background-size: cover; background-position: center top;">
+    <div class="header pb-6 d-flex align-items-center"
+      style="min-height: 300px; background-image: url({% static 'GCassets/img/theme/profile-cover.jpg' %}); background-size: cover; background-position: center top;">
       <!-- Mask -->
       <span class="mask bg-gradient-default opacity-8"></span>
       <!-- Header container -->
@@ -350,8 +365,9 @@
         <div class="row">
           <div class="col-lg-7 col-md-10">
             <h1 class="display-2 text-white">Hello {{rc.Firstname}}</h1>
-            <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>        
-                 
+            <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your
+              work and manage your projects or assigned tasks</p>
+
           </div>
         </div>
       </div>
@@ -359,9 +375,10 @@
     <!-- Page content -->
     <div class="container-fluid mt--6">
       <div class="row">
-        <div class="col-xl-4 order-xl-2" >
-          <div class="card card-profile" >
-            <img src="{% static 'GCassets/img/theme/img-1-1000x600.jpg' %}" alt="Image placeholder" class="card-img-top">
+        <div class="col-xl-4 order-xl-2">
+          <div class="card card-profile">
+            <img src="{% static 'GCassets/img/theme/img-1-1000x600.jpg' %}" alt="Image placeholder"
+              class="card-img-top">
             <div class="row justify-content-center">
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
@@ -376,45 +393,41 @@
               </div>
             </div>
             <form method="POST" action="{% url 'rc_update_profile' %}" enctype="multipart/form-data">
-            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-            </div>
-            <div class="card-body pt-0" style="margin-top: 40px;">
-              <div class="text-center">
-                <div class="custom-file mt-3 mb-3">
-                  
-                  <input
-                    type="button"
-                    class="btn btn-primary btn-block mx-auto"
-                    value="Upload Profile Picture"
-                    onclick="document.getElementById('fileInput').click();"
-                  />
-                </div>  
-                <h5 class="h3" style="padding-top: 10px">
-                  {{rc.Firstname}} {{rc.Lastname}}<span class="font-weight-light"></span>
-                </h5>
-                <div class="h5 font-weight-300">
-                  {% ifequal rc.City "" %}
-                  <i class="ni location_pin mr-2"></i>City , State
-                  {% else %}
-                  <i class="ni location_pin mr-2"></i>{{rc.City}} , {{rc.State}}
-                  {% endifequal %}
-                </div>
-                <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>Contect
-                </div>
-                <div>
-                  {% ifequal rc.Contact 0 %}
-                 
-                  {% else %}
-                  <i class="ni education_hat mr-2"></i>+91{{rc.Contact}}
-                  {% endifequal %}
+              <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              </div>
+              <div class="card-body pt-0" style="margin-top: 40px;">
+                <div class="text-center">
+                  <div class="custom-file mt-3 mb-3">
+
+                    <input type="button" class="btn btn-primary btn-block mx-auto" value="Upload Profile Picture"
+                      onclick="document.getElementById('fileInput').click();" />
+                  </div>
+                  <h5 class="h3" style="padding-top: 10px">
+                    {{rc.Firstname}} {{rc.Lastname}}<span class="font-weight-light"></span>
+                  </h5>
+                  <div class="h5 font-weight-300">
+                    {% ifequal rc.City "" %}
+                    <i class="ni location_pin mr-2"></i>City , State
+                    {% else %}
+                    <i class="ni location_pin mr-2"></i>{{rc.City}} , {{rc.State}}
+                    {% endifequal %}
+                  </div>
+                  <div class="h5 mt-4">
+                    <i class="ni business_briefcase-24 mr-2"></i>Contect
+                  </div>
+                  <div>
+                    {% ifequal rc.Contact 0 %}
+
+                    {% else %}
+                    <i class="ni education_hat mr-2"></i>+91{{rc.Contact}}
+                    {% endifequal %}
+                  </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
         <div class="col-xl-8 order-xl-1">
-          
+
           <div class="card">
             <div class="card-header">
               <div class="row align-items-center">
@@ -428,111 +441,120 @@
             </div>
             <div class="card-body">
               <!-- <form method="POST" action="{% url 'rc_update_profile' %}" enctype="multipart/form-data"> -->
-                {% csrf_token %}
-                <h6 class="heading-small text-muted mb-4">User information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control" placeholder="First name" value="{{rc.Firstname}}" name="fname" style="color: #172b4d;">
-                      </div>
+              {% csrf_token %}
+              <h6 class="heading-small text-muted mb-4">User information</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-first-name">First name</label>
+                      <input type="text" id="input-first-name" class="form-control" placeholder="First name"
+                        value="{{rc.Firstname}}" name="fname" style="color: #172b4d;">
                     </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control" placeholder="Last name" value="{{rc.Lastname}}" name="lname" style="color: #172b4d;">
-                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-last-name">Last name</label>
+                      <input type="text" id="input-last-name" class="form-control" placeholder="Last name"
+                        value="{{rc.Lastname}}" name="lname" style="color: #172b4d;">
                     </div>
                   </div>
                 </div>
-                  <div class="row">
-                   
-                    <div class="col-lg-9" style="padding-left: 41px;">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com" name="email" value="{{user.Email}}" disabled style="color: #172b4d;">
-                      </div>
-                      <!-- <label class="form-control-label" for="input-email">Profile Picture</label>
-                    <input type="file" name="profile_pic" class="form-control" style="border-color: white;"/> -->
-                    </div>
-                    
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-9" style="padding-left: 41px;">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Profile Picture</label>
-                      <input type="file" id="fileInput" name="profile_pic" class="form-control" style="border-color: white;"/>
-                      </div>
-                      </div>
-                    </div>
-                    
-                  </div>
-                  
-                <hr class="my-4" />
-                <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">Contact information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-address">Address</label>
-                        <input id="input-address" class="form-control" placeholder="Home Address" name="add" value="{{rc.Address}}" type="text"   style="color: #172b4d;">
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-6" style="padding-left: 15px;">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Contect</label>
-                        <input type="text" id="input-email" class="form-control" placeholder="1234567890" name="contact" value="{{rc.Contact}}"  style="color: #172b4d;">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-city">City</label>
-                        <input type="text" id="input-city" class="form-control" placeholder="City" name="city" value="{{rc.City}}"   style="color: #172b4d;">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">State</label>
-                        <input type="text" id="input-country" class="form-control" placeholder="Country" name="state" value="{{rc.State}}"   style="color: #172b4d;">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Postal code</label>
-                        <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code" name="pincode" value="{{rc.Pincode}}" style="color: #172b4d;">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-block"> Update Profile </button>
               </div>
-               
-              </form>
+              <div class="row">
+
+                <div class="col-lg-9" style="padding-left: 41px;">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-email">Email address</label>
+                    <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com"
+                      name="email" value="{{user.Email}}" disabled style="color: #172b4d;">
+                  </div>
+                  <!-- <label class="form-control-label" for="input-email">Profile Picture</label>
+                    <input type="file" name="profile_pic" class="form-control" style="border-color: white;"/> -->
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-lg-9" style="padding-left: 41px;">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-email">Profile Picture</label>
+                    <input type="file" id="fileInput" name="profile_pic" class="form-control"
+                      style="border-color: white;" />
+                  </div>
+                </div>
+              </div>
+
             </div>
+
+            <hr class="my-4" />
+            <!-- Address -->
+            <h6 class="heading-small text-muted mb-4">Contact information</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-address">Address</label>
+                    <input id="input-address" class="form-control" placeholder="Home Address" name="add"
+                      value="{{rc.Address}}" type="text" style="color: #172b4d;">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-6" style="padding-left: 15px;">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-email">Contect</label>
+                    <input type="text" id="input-email" class="form-control" placeholder="1234567890" name="contact"
+                      value="{{rc.Contact}}" style="color: #172b4d;">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-city">City</label>
+                    <input type="text" id="input-city" class="form-control" placeholder="City" name="city"
+                      value="{{rc.City}}" style="color: #172b4d;">
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-country">State</label>
+                    <input type="text" id="input-country" class="form-control" placeholder="Country" name="state"
+                      value="{{rc.State}}" style="color: #172b4d;">
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-country">Postal code</label>
+                    <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code"
+                      name="pincode" value="{{rc.Pincode}}" style="color: #172b4d;">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4" />
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block"> Update Profile </button>
+            </div>
+
+            </form>
           </div>
         </div>
       </div>
-      <!-- Footer -->
-      
-  <!-- Argon Scripts -->
-  <!-- Core -->
-  <script src="{% static 'GCassets/vendor/jquery/dist/jquery.min.js' %}"></script>
-  <script src="{% static 'GCassets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'GCassets/vendor/js-cookie/js.cookie.js' %}"></script>
-  <script src="{% static 'GCassets/vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
-  <script src="{% static 'GCassets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
-  <!-- Argon JS -->
-  <script src="{% static 'GCassets/js/argon.js' %}"></script>
-  <!-- <script src="{% static 'GCassets/js/argon.js?v=1.2.0' %}"></script> -->
+    </div>
+    <!-- Footer -->
+
+    <!-- Argon Scripts -->
+    <!-- Core -->
+    <script src="{% static 'GCassets/vendor/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'GCassets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'GCassets/vendor/js-cookie/js.cookie.js' %}"></script>
+    <script src="{% static 'GCassets/vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
+    <script src="{% static 'GCassets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
+    <!-- Argon JS -->
+    <script src="{% static 'GCassets/js/argon.js' %}"></script>
+    <!-- <script src="{% static 'GCassets/js/argon.js?v=1.2.0' %}"></script> -->
 </body>
 
-</html> 
+</html>

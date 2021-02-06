@@ -47,6 +47,7 @@ class RC(models.Model):
 
 class Product(models.Model):
     RC_ID = models.ForeignKey(RC,on_delete=models.CASCADE)
+    Seller_Name= models.CharField(max_length=30,default="")
     Product_Name = models.CharField(max_length=30)
     Product_Price = models.FloatField()
     Product_Desc = models.TextField()
