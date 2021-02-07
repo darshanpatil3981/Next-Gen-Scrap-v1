@@ -383,7 +383,8 @@ def Index(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
     customer=Customer.objects.get(Customer_ID=user)
-    return render(request,"ecom/index.html",{'user':user,'customer':customer})
+    products = Product.objects.all()
+    return render(request,"ecom/index.html",{'user':user,'customer':customer,'products':products})
     
 def Product_detail(request):
     return render(request,"ecom/product_detail.html")
@@ -437,6 +438,7 @@ def Customer_update_profile(request):
         user = User_Master.objects.get(id=id)
         customer=Customer.objects.get(Customer_ID=user)
         return render(request,"ecom/customer_update_profile.html",{'user':user,'customer':customer})
+
 def Change_password(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
