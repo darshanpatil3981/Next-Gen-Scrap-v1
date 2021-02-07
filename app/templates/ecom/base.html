@@ -42,6 +42,25 @@
 $(document).ready(function() {
 	// jQuery code
 
+	$(".btn, .btn-light").on("click", function()
+	{  
+	  var $button = $(this);
+	  var oldValue = $button.parent().parent().find("#quantity").val();
+	  if ($button.text() == "+") {
+	  		var newVal = parseFloat(oldValue) + 1;
+	  }
+	  else {
+		if (oldValue > 0) { 
+			var newVal = parseFloat(oldValue) - 1;  // Don't allow decrementing below zero
+		} 
+		else {
+		   newVal = 0;
+		}
+	  }
+		$button.parent().parent().find("input").val(newVal);
+  
+	});
+
 }); 
 // jquery end
 </script>
@@ -234,4 +253,5 @@ $(document).ready(function() {
 <!-- ========================= FOOTER END // ========================= -->
 
 </body>
+
 </html>

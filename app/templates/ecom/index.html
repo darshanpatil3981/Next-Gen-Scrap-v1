@@ -84,10 +84,10 @@
         {% if products %}
         {% for i in products %}
         <div class="col-md-3">
-            <div href="#" class="card card-product-grid">
-                <a href="#" class="img-wrap"> <img src="{{i.Product_Img.url}}"> </a>
+            <div href="{% url 'product_detail' key=i.id %}" class="card card-product-grid">
+                <a href="{% url 'product_detail' key=i.id %}" class="img-wrap"> <img src="{{i.Product_Img.url}}"> </a>
                 <figcaption class="info-wrap">
-                    <a href="#" class="title">{{i.Product_Name}}</a>
+                    <a href="{% url 'product_detail' key=i.id %}" class="title">{{i.Product_Name}}</a>
                     <div class="price mt-1">Rs. {{i.Product_Price}}</div> <!-- price-wrap.// -->
                 </figcaption>
             </div>

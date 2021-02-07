@@ -34,7 +34,7 @@ urlpatterns = [
      #E-com
      path("index/",views.Index,name="index"),
      path("profile/",views.Profile,name="profile"),
-     path("product_detail/",views.Product_detail,name="product_detail"),
+     path("product_detail/<int:key>",views.Product_detail,name="product_detail"),
      path("logout",views.Logout,name="logout"),
      path("customer_update_profile/",views.Customer_update_profile,name="customer_update_profile"),
      path("change_password/",views.Change_password,name="change_password"),

@@ -386,8 +386,12 @@ def Index(request):
     products = Product.objects.all()
     return render(request,"ecom/index.html",{'user':user,'customer':customer,'products':products})
     
-def Product_detail(request):
-    return render(request,"ecom/product_detail.html")
+def Product_detail(request,key):
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    customer=Customer.objects.get(Customer_ID=user)
+    product = Product.objects.get(pk=key)
+    return render(request,"ecom/product_detail.html",{'user':user,'customer':customer,'product':product})
 
 def Profile(request):
     id = request.session.get("id")
