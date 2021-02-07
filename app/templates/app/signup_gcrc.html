@@ -37,7 +37,7 @@
 					<img src="{% static 'loginassets/images/logo.png' %}" alt="IMG" style="padding-top: 100px;">
 				</div>
 
-				<form class="login100-form validate-form" action="{% url 'create_gc_rc' %}" method="post">
+				<form class="login100-form validate-form" action="{% url 'create_gc_rc' %}" method="post" style="margin-top: 26px;">
 					{% csrf_token %}
 					<span class="login100-form-title" style="padding-bottom: 20px;">
 						Enter your details
@@ -56,6 +56,14 @@
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="text" name="cname" value="{{cname}}" placeholder="Company Or Shop Name" pattern="^[a-zA-Z]+"
+							title="Last Name Should Contain Only Letters" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-building-o" aria-hidden="true"></i>
 						</span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">

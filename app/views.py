@@ -109,6 +109,7 @@ def create_gc_rc(request):
     pswd = request.POST['pass']
     cpswd = request.POST['cpass']
     role = request.POST['role']
+    cname = request.POST['cname']
 
     if role == "Srap Collector":
         role="GC"
@@ -120,9 +121,9 @@ def create_gc_rc(request):
             encrypted_pw=make_password(pswd)
             newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role=role,Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
             if role=="GC":
-                newsc = GC.objects.create(GC_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
+                newsc = GC.objects.create(GC_ID=newUser,Firstname=fname,Lastname=lname,Shop_name=cname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
             if role=="RC":
-                newrc = RC.objects.create(RC_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
+                newrc = RC.objects.create(RC_ID=newUser,Firstname=fname,Lastname=lname,Company_name=cname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
             # return render(request,"app/index.html")
             return HttpResponseRedirect(reverse('login'))
         else:
