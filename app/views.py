@@ -90,10 +90,7 @@ def create_Customer(request):
     lname = request.POST['lname']
     email = request.POST.get('email', False)
     pswd = request.POST['pswd']
-    cpswd = request.POST['cpswd']
-
-   
-    
+    cpswd = request.POST['cpswd'] 
     if fname!="" or lname!="" or email!="" or pswd!="" or cpswd!="":      
             if pswd==cpswd:
                 encrypted_pw=make_password(pswd)
@@ -118,12 +115,10 @@ def create_gc_rc(request):
     elif role == "Recycle Company":
         role="RC"
     
-    if fname=="" or lname=="" or email=="" or pswd=="" or cpswd=="":
-        message = "Please fill all details carefully..." 
-        return render(request,"app/signup_gcrc.html",{'msg':message,'EMAIL':email})
-    elif fname!="" or lname!="" or email!="" or pswd!="" or cpswd!="":
+    if fname!="" or lname!="" or email!="" or pswd!="" or cpswd!="":
         if pswd==cpswd:
-            newUser = User_Master.objects.create(Email=email,Password=pswd,Role=role,Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
+            encrypted_pw=make_password(pswd)
+            newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role=role,Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
             if role=="GC":
                 newsc = GC.objects.create(GC_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
             if role=="RC":
@@ -200,7 +195,8 @@ def Reset_password(request):
     email = request.POST['email'] 
     password=request.POST['password']
     User = User_Master.objects.get(Email=email)
-    User.Password=password
+    encrypted_pw=make_password(password)
+    User.Password=encrypted_pw
     User.save()
     message = "Your Password Chnaged successfully"
     return render(request,"app/login.html",{'msg':message})
@@ -365,9 +361,10 @@ def Rc_change_password(request):
         new_password = request.POST['np']
         confirm_password= request.POST['cp']
 
-        if user.Password==old_password:
+        if check_password(old_password,user.Password):
             if new_password==confirm_password:
-                user.Password=new_password
+                encrypted_pw=make_password(new_password)
+                user.Password=encrypted_pw
                 user.save()
                 msg="Your Password Changed Succsessfully!!!"
                 return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc,'msg':msg})
@@ -447,18 +444,17 @@ def Change_password(request):
         old_password = request.POST['op']
         new_password = request.POST['np']
         confirm_password= request.POST['cp']
-        print("OP----------------"+old_password)
-        print("Np----------------"+new_password)
-        print("Np----------------"+confirm_password)
-        if user.Password==old_password:
+      
+        if check_password(old_password,user.Password):
             if new_password==confirm_password:
-                user.Password=new_password
+                encrypted_pw=make_password(new_password)
+                user.Password=encrypted_pw
                 user.save()
                 msg="Your Password Changed Succsessfully!!!"
                 return render(request,"ecom/change_password.html",{'user':user,'customer':customer,'msg':msg})
             else:
                 msg="New Password & Confirm Password Did Not Match!!!"
-                return render(request,"rc/change_password.html",{'user':user,'customer':customer,'msg':msg})
+                return render(request,"ecom/change_password.html",{'user':user,'customer':customer,'msg':msg})
         else:
             msg="Old Password Is Incorect!!!"
             return render(request,"ecom/change_password.html",{'user':user,'customer':customer,'msg':msg})

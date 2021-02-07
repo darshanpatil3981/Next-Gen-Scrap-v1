@@ -84,7 +84,17 @@
 				</div>
 
 			</div>
-			{% if msg %}
+		{% if msg %}
+			{% ifequal msg 'Your Password Chnaged successfully' %}
+			<script>
+				Swal.fire(
+					'',
+					'{{msg}}',
+					'success'
+					
+				)
+			</script>
+			{% else %}
 		
 			<script>
 				Swal.fire(
@@ -93,6 +103,7 @@
 					'error'
 				)
 			</script>
+			{% endifequal %}
 			{% endif %}
 		</div>
 		<link rel="stylesheet" type="text/css"
