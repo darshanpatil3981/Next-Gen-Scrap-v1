@@ -467,3 +467,9 @@ def Change_password(request):
             return render(request,"ecom/change_password.html",{'user':user,'customer':customer,'msg':msg})
     else:
         return render(request,"ecom/change_password.html",{'user':user,'customer':customer})
+
+def Cart(request):
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    customer=Customer.objects.get(Customer_ID=user)
+    return render(request,"ecom/cart.html",{'user':user,'customer':customer})

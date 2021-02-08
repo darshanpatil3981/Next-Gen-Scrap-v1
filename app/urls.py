@@ -38,6 +38,7 @@ urlpatterns = [
      path("logout",views.Logout,name="logout"),
      path("customer_update_profile/",views.Customer_update_profile,name="customer_update_profile"),
      path("change_password/",views.Change_password,name="change_password"),
+     path("cart/",views.Cart,name="cart"),
      
      
      
