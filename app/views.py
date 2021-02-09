@@ -7,6 +7,8 @@ from django.contrib.auth.hashers import make_password,check_password
 
 #==============================Direct Rendering Views================================================
 def Login_Page(request):
+    
+    print(otp1)
     return render(request,"app/login.html")
 
 def Signup_as(request):
@@ -24,7 +26,6 @@ def Otp_verification(request):
 
 
 # ====================================Processing Views=================================================
-
 def Enter_email(request):
     role = request.POST['roleh']
     if role == "customer":
@@ -45,10 +46,11 @@ def is_already_created(request):
             return render(request,"app/enter_email.html",{'error':message,'role':role})
         else:
             otp = randint(100000,999999)
+            encrypted_otp=make_password(otp)
             email_Subject = "Customer Email Verification"
             sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':'Dear customer','otp':otp})
             oc_msg = "OTP Sent On "+email+"  Please Verify OTP"
-            return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"Customer",'msg':oc_msg})
+            return render(request,"app/otp_verification.html",{'OTP':encrypted_otp,'EMAIL':email,'ROLE':"Customer",'msg':oc_msg})
 
     elif role == "business":
         isGCRCAlready = User_Master.objects.filter(Email=email)
@@ -59,10 +61,11 @@ def is_already_created(request):
             return render(request,"app/enter_email.html",{'error':message,'role':role})
         else:
             otp = randint(100000,999999)
+            encrypted_otp=make_password(otp)
             email_Subject = "Business Partner Email Verification"
             sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':'Dear Business Partner','otp':otp})
             oc_msg = "OTP Sent On "+email+"  Please Verify OTP"
-            return render(request,"app/otp_verification.html",{'OTP':otp,'EMAIL':email,'ROLE':"GCRC",'msg':oc_msg})
+            return render(request,"app/otp_verification.html",{'OTP':encrypted_otp,'EMAIL':email,'ROLE':"GCRC",'msg':oc_msg})
         
 
 def verify_OTP(request):
@@ -70,10 +73,9 @@ def verify_OTP(request):
     otp = request.POST['otp']
     email = request.POST['email']
     role = request.POST['role']
-    otp = str(otp)
-    cotp = str(cotp)
-   
-    if otp==cotp:
+    print(otp)
+    print(cotp)
+    if check_password(cotp,otp):
         success_message = "OTP Is Verified Successfully"
         if role=="Customer":
             return render(request,"app/signup_customer.html",{'EMAIL':email,'msg':success_message})
@@ -94,7 +96,7 @@ def create_Customer(request):
     if fname!="" or lname!="" or email!="" or pswd!="" or cpswd!="":      
             if pswd==cpswd:
                 encrypted_pw=make_password(pswd)
-                newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role="Customer",Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
+                newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role="Customer",is_created=True,is_verified=False,is_active=False,is_updated=False)
                 newCustomer = Customer.objects.create(Customer_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
                 return render(request,"app/login.html")
             else:
@@ -119,7 +121,7 @@ def create_gc_rc(request):
     if fname!="" or lname!="" or email!="" or pswd!="" or cpswd!="":
         if pswd==cpswd:
             encrypted_pw=make_password(pswd)
-            newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role=role,Otp=12345,is_created=True,is_verified=False,is_active=False,is_updated=False)
+            newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role=role,is_created=True,is_verified=False,is_active=False,is_updated=False)
             if role=="GC":
                 newsc = GC.objects.create(GC_ID=newUser,Firstname=fname,Lastname=lname,Shop_name=cname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
             if role=="RC":
@@ -169,9 +171,10 @@ def Forgot_password(request):
         is_exist = User_Master.objects.filter(Email=email)
         if is_exist:
             otp = randint(100000,999999)
+            encrypted_otp=make_password(otp)
             email_Subject = "Email Verification For Forgot Password"
             sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':'Dear customer','otp':otp})
-            return render(request,"app/otp_verification.html",{'fpw':"fpw",'OTP':otp,"EMAIL":email})
+            return render(request,"app/otp_verification.html",{'fpw':"fpw",'OTP':encrypted_otp,"EMAIL":email})
         else:
             message = "This email is not registed With any account!!"
             return render(request,"app/enter_email.html",{'error':message,'fpw':"fpw"})
@@ -186,7 +189,7 @@ def Verify_OTP_forgotpw(request):
     role = request.POST['role']
     otp = str(otp)
     cotp = str(cotp)
-    if otp==cotp:
+    if check_password(cotp,otp):
          return render(request,"app/reset_password.html",{'EMAIL':email})
     else:
         message="You have entered incorrect OTP."

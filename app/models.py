@@ -6,7 +6,6 @@ class User_Master(models.Model):
     Email = models.EmailField(max_length=50)
     Password = models.CharField(max_length=300)
     Role = models.CharField(max_length=20)
-    Otp = models.IntegerField()
     is_created = models.DateTimeField(auto_now=True,blank=False)
     is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
