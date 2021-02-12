@@ -7,72 +7,92 @@
     <div class="container">
         <h2 class="title-page">Shopping cart</h2>
     </div> <!-- container //  -->
-    </section>
-    <!-- ========================= SECTION INTRO END// ========================= -->
-    
-    <!-- ========================= SECTION CONTENT ========================= -->
-    <section class="section-content padding-y">
+</section>
+<!-- ========================= SECTION INTRO END// ========================= -->
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
     <div class="container">
-    
-    <div class="row">
-        <main class="col-md-9">
-    <div class="card">
-    
-    <table class="table table-borderless table-shopping-cart">
-    <thead class="text-muted">
-    <tr class="small text-uppercase">
-      <th scope="col">Product</th>
-      <th scope="col" width="120">Quantity</th>
-      <th scope="col" width="120">Price</th>
-      <th scope="col" class="text-right" width="200"> </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-            <figure class="itemside">
-                <div class="aside"><img src="{% static 'ecomassets/images/items/1.jpg' %}" class="img-sm"></div>
-                <figcaption class="info">
-                    <a href="#" class="title text-dark">Some name of item goes here nice</a>
-                    <p class="text-muted small">Seller Name : Patel pvt <br> Brand: Gucci</p>
-                </figcaption>
-            </figure>
-        </td>
-        <td> 
-            <select class="form-control">
+        {% if cust_cart %}
+        <div class="row">
+            <main class="col-md-12">
+                <div class="card">
+
+                    <table class="table table-borderless table-shopping-cart">
+                        <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                                <th scope="col">Product</th>
+                                <th scope="col" width="120">Quantity</th>
+                                <th scope="col" width="120">Price</th>
+                                <th scope="col" class="text-right" width="200"> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in cust_cart %}
+                            <tr>
+                                <td>
+                                    <figure class="itemside">
+                                        <div class="aside"><img style="width: 235px;height: 140px;" src="{{i.Product_ID.Product_Img.url}}"
+                                                class="img-sm"></div>
+                                        <figcaption class="info" style="margin-left: 40px;font-size: 24px;">
+                                            <a href="#" class="title text-dark">{{i.Product_ID.Product_Name}}</a>
+                                            <p class="text-muted small">Seller Name : {{i.Product_ID.Seller_Name}} <br></p>
+                                        </figcaption>
+                                    </figure>
+                                </td>
+                                <td>
+
+                                    <div class="form-group col-md flex-grow-0">
+                                        <label>Quantity</label>
+                                        <div class="input-group mb-3 input-spinner">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-light" type="button" id="button-plus">+</button>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{i.Quantity}}" id="quantity">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-light" type="button"
+                                                    id="button-minus">&minus;</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- <select class="form-control">
                 <option>1</option>
                 <option>2</option>	
                 <option>3</option>	
                 <option>4</option>	
-            </select> 
-        </td>
-        <td> 
-            <div class="price-wrap"> 
-                <var class="price">₹1156.00</var> 
-                <small class="text-muted"> ₹315.20 each </small> 
-            </div> <!-- price-wrap .// -->
-        </td>
-        <td class="text-right"> 
-        <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a> 
-        <a href="" class="btn btn-light"> Remove</a>
-        </td>
-    </tr>
-    
-    </tbody>
-    </table>
-    
-    <div class="card-body border-top">
-        <a href="#" class="btn btn-primary float-md-right"> Make Purchase <i class="fa fa-chevron-right"></i> </a>
-        <a href="#" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
-    </div>	
-    </div> <!-- card.// -->
-    
-    <div class="alert alert-success mt-3">
-        <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
-    </div>
-    
-        </main> <!-- col.// -->
-        <aside class="col-md-3">
+            </select>  -->
+                                </td>
+                                <td>
+                                    <div class="price-wrap">
+                                        <var class="price">{{i.Total_Amount}}</var>
+                                        <small class="text-muted"> {{i.Per_Pro_Price}} </small>
+                                    </div> <!-- price-wrap .// -->
+                                </td>
+                                <td class="text-right">
+                                    <!-- <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>  -->
+                                    <a href="" class="btn btn-light"> Remove</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                    <div class="card-body border-top">
+                        <a href="#" class="btn btn-primary float-md-right"> Make Purchase <i
+                                class="fa fa-chevron-right"></i> </a>
+                        <a href="#" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
+                    </div>
+                </div> <!-- card.// -->
+
+                <div class="alert alert-success mt-3">
+                    <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
+                </div>
+
+            </main> <!-- col.// -->
+            <!-- <aside class="col-md-3">
             <div class="card mb-3">
                 <div class="card-body">
                 <form>
@@ -86,8 +106,8 @@
                         </div>
                     </div>
                 </form>
-                </div> <!-- card-body.// -->
-            </div>  <!-- card .// -->
+                </div> 
+            </div> 
             <div class="card">
                 <div class="card-body">
                         <dl class="dlist-align">
@@ -107,11 +127,12 @@
                             <img src="{% static 'ecomassets/images/misc/payments.png' %}" height="26">
                         </p>
                         
-                </div> <!-- card-body.// -->
-            </div>  <!-- card .// -->
-        </aside> <!-- col.// -->
-    </div>
-    <div class="card mb-3" style="margin-top: 18px;">
+                </div> 
+            </div>  
+        </aside>  -->
+        </div>
+        {% endif %}
+        <!-- <div class="card mb-3" style="margin-top: 18px;">
         <article class="card-body">
             <header class="mb-4">
                 <h4 class="card-title">Review cart</h4>
@@ -125,7 +146,7 @@
                                 <span>2x $290 = Total: $430 </span>
                             </figcaption>
                         </figure>
-                    </div> <!-- col.// -->
+                    </div>
                     <div class="col-md-6">
                         <figure class="itemside  mb-3">
                             <div class="aside"><img src="{% static 'ecomassets/images/items/2.jpg' %}" class="border img-xs"></div>
@@ -134,7 +155,7 @@
                                 <span>2x $290 = Total: $430 </span>
                             </figcaption>
                         </figure>
-                    </div> <!-- col.// -->
+                    </div>
                     <div class="col-md-6">
                         <figure class="itemside mb-3">
                             <div class="aside"><img src="{% static 'ecomassets/images/items/3.jpg' %}" class="border img-xs"></div>
@@ -143,7 +164,7 @@
                                 <span>1x $290 = Total: $290 </span>
                             </figcaption>
                         </figure>
-                    </div> <!-- col.// -->
+                    </div>
                     <div class="col-md-6">
                         <figure class="itemside  mb-3">
                             <div class="aside"><img src="{% static 'ecomassets/images/items/4.jpg' %}" class="border img-xs"></div>
@@ -152,9 +173,9 @@
                                 <span>4x $290 = Total: $430 </span>
                             </figcaption>
                         </figure>
-                    </div> <!-- col.// -->
-                </div> <!-- row.// -->
-        </article> <!-- card-body.// -->
+                    </div> 
+                </div> 
+        </article> 
         <article class="card-body border-top">
     
             <dl class="row">
@@ -174,12 +195,12 @@
               <dd class="col-sm-2 text-right"><strong class="h5 text-dark">$1,650</strong></dd>
             </dl>
     
-        </article> <!-- card-body.// -->
-    </div> <!-- card.// -->
-    
-    </div> <!-- container .//  -->
-    
-    </section>
+        </article>
+    </div>  -->
+
+    </div>
+
+</section>
 
 
-    {% endblock content %}
+{% endblock content %}

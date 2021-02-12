@@ -100,10 +100,22 @@
                     </div> -->
             </div> <!-- col.// -->
         </div> <!-- row.// -->
-    
-        <a href="#" class="btn  btn-primary"> Buy now </a>
-        <a href="#" class="btn  btn-outline-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
-    </article> <!-- product-info-aside .// -->
+      
+      
+        
+        
+        <form action="{% url 'cart_buy' key=product.id %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="quantity_copy" id="quantity_copy" value="1">
+          <button type="submit" name="buy_now">Buy Now</button>
+          <button type="submit" name="add_to_cart">ADD TO CART</button>
+          <!-- <button type="submit" class="btn  btn-primary" name="buy_now"> Buy now </button> -->
+          <!-- <button type="submit" class="btn btn-outline-primary" name="add_to_cart"><span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i></button> -->
+          <!-- <a href="" class="btn  btn-primary"> Buy now </a> -->
+          <!-- <a href="" class="btn  btn-outline-primary"><span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i></a> -->
+          <!-- <a href="" class="btn  btn-outline-primary" > <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i></a> -->
+        </form>
+      </article> <!-- product-info-aside .// -->
             </main> <!-- col.// -->
         </div> <!-- row.// -->
     </div> <!-- card.// -->

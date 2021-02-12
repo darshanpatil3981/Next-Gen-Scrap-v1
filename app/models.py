@@ -55,5 +55,12 @@ class Product(models.Model):
     Product_Img = models.ImageField(upload_to='Product_Images',default="")
     Current_orders = models.IntegerField(default=0)
 
+class Cust_Cart(models.Model):
+    Customer_ID = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    Product_ID = models.ForeignKey(Product,on_delete=models.CASCADE)
+    Quantity = models.IntegerField(default=0)
+    Per_Pro_Price = models.FloatField()
+    Total_Amount = models.FloatField()
+
 
 

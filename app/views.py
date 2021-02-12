@@ -3,12 +3,11 @@ from .models import *
 from random import *
 from .utils import *
 from django.contrib.auth.hashers import make_password,check_password
+from itertools import chain
 # Create your views here.
 
 #==============================Direct Rendering Views================================================
 def Login_Page(request):
-    
-    print(otp1)
     return render(request,"app/login.html")
 
 def Signup_as(request):
@@ -471,8 +470,32 @@ def Change_password(request):
     else:
         return render(request,"ecom/change_password.html",{'user':user,'customer':customer})
 
+
+def add_to_cart_or_buy_now(request,key):
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    customer = Customer.objects.get(Customer_ID=user)
+    product = Product.objects.get(id=key)
+    quantity = request.POST['quantity_copy']
+
+    if 'add_to_cart' in request.POST:
+        per_pro_price = product.Product_Price
+        total_amt = float(quantity)*float(per_pro_price)
+        new_cart_item = Cust_Cart.objects.create(Customer_ID=customer,Product_ID=product,Quantity=quantity,Per_Pro_Price=per_pro_price,Total_Amount=total_amt)
+        # AHI "ITEM ADDED TO CART SUCCESSFULLY NO MESSAGE FIRE KARAVO CHE... EK MESSAGE LAI RENDER MA PASS KARVO PADE"
+        # PN RENDER MA PASS KARE TYARE PRODUCT na OBJECTS.ALL() KARI MOKALJE NAI TO ERROR MARSE
+        # return render(request,"ecom/index.html",{'user':user,'customer':customer,'products':product})
+        return HttpResponseRedirect(reverse('product_detail',args=[product.id]))
+
+    elif 'buy_now' in request.POST:
+        print("COMING SOON.....")
+        return HttpResponseRedirect(reverse('portal_sec2'))
+
+
+
 def Cart(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
     customer=Customer.objects.get(Customer_ID=user)
-    return render(request,"ecom/cart.html",{'user':user,'customer':customer})
+    cust_cart = Cust_Cart.objects.filter(Customer_ID=customer)
+    return render(request,"ecom/cart.html",{'user':user,'customer':customer,'cust_cart':cust_cart})
