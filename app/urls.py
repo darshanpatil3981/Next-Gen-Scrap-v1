@@ -40,6 +40,7 @@ urlpatterns = [
      path("change_password/",views.Change_password,name="change_password"),
      path("cart/",views.Cart,name="cart"),
      path("add_cart_buy/<int:key>",views.add_to_cart_or_buy_now,name="cart_buy"),
+     path("edit_order/<int:key>",views.edit_order,name="edit_order"),
      
      
      

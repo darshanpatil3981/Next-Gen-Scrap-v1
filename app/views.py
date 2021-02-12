@@ -499,3 +499,10 @@ def Cart(request):
     customer=Customer.objects.get(Customer_ID=user)
     cust_cart = Cust_Cart.objects.filter(Customer_ID=customer)
     return render(request,"ecom/cart.html",{'user':user,'customer':customer,'cust_cart':cust_cart})
+
+def edit_order(request,key):
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    customer=Customer.objects.get(Customer_ID=user)
+    editing_order = Cust_Cart.objects.get(id=key)
+    return render(request,"product_detail.html",{'user':user,'customer':customer,'editing_order':editing_order})
