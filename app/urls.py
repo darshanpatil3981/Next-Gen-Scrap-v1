@@ -41,6 +41,7 @@ urlpatterns = [
      path("cart/",views.Cart,name="cart"),
      path("add_cart_buy/<int:key>",views.add_to_cart_or_buy_now,name="cart_buy"),
      path("edit_order/<int:key>",views.edit_order,name="edit_order"),
+     path("remove_cart_item/<int:key>",views.remove_cart_item,name="remove_cart_item"),
      
      
      

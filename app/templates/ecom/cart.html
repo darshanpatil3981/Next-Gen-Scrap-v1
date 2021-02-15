@@ -44,16 +44,23 @@
 
                                     <div class="form-group col-md flex-grow-0">
                                         <label>Quantity</label>
-                                        <div class="input-group mb-3 input-spinner">
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-light" type="button" id="button-plus">+</button>
-                                            </div>
-                                            <input type="text" class="form-control" value="{{i.Quantity}}" id="quantity">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-light" type="button"
-                                                    id="button-minus">&minus;</button>
-                                            </div>
+
+                                        <form action="{% url 'edit_order' key=i.id %}" method="post">
+                                            {% csrf_token %}
+                                        <div class="input-group mb-3 input-spinner"> 
+                                            
+                                                <div class="input-group-prepend">
+                                                    <button type="submit" onclick="return confirm('Do you want to update quantity?');" name="update_plus">+</button>
+                                                    <!-- <button class="btn btn-light" type="submit" onclick="return confirm('Do you want to update quantity?');" name="update_plus">+</button> -->
+                                                </div>
+                                                <input type="text" class="form-control" value="{{i.Quantity}}"  name="Quant">
+                                                <div class="input-group-append">
+                                                    <button type="submit" onclick="return confirm('Do you want to update quantity?');" name="update_minus">&minus;</button>
+                                                    <!-- <button class="btn btn-light" type="button" id="button-minus">&minus;</button> -->
+                                                </div>
+                                            
                                         </div>
+                                    </form>
                                     </div>
 
 
@@ -79,7 +86,7 @@
                                 <td class="text-right">
                                    
                                     <!-- <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>  -->
-                                    <a href="" class="btn btn-light"> Remove</a>
+                                    <a href="{% url 'remove_cart_item' key=i.id %}" onclick="return confirm('Are you sure you want to remove this item from cart?');" class="btn btn-light"> Remove</a>
                                     
                                 </td>
                             </tr>
@@ -210,5 +217,11 @@
 
 </section>
 
+<!-- <script>
+    $('Quant').change(function() {
+        console.log("THIS FIRED");
+    $(this).closest('form').submit();
+})
+</script> -->
 
 {% endblock content %}
