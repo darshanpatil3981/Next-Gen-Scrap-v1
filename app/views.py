@@ -481,7 +481,7 @@ def add_to_cart_or_buy_now(request,key):
     if 'add_to_cart' in request.POST:
         per_pro_price = product.Product_Price
         total_amt = float(quantity)*float(per_pro_price)
-        new_cart_item = Cust_Cart.objects.create(Customer_ID=customer,Product_ID=product,Quantity=quantity,Per_Pro_Price=per_pro_price,Total_Amount=total_amt)
+        new_cart_item = Cust_Cart.objects.create(Customer_ID=customer,Product_ID=product,Quantity=quantity,Total_Amount=total_amt)
         # AHI "ITEM ADDED TO CART SUCCESSFULLY NO MESSAGE FIRE KARAVO CHE... EK MESSAGE LAI RENDER MA PASS KARVO PADE"
         # PN RENDER MA PASS KARE TYARE PRODUCT na OBJECTS.ALL() KARI MOKALJE NAI TO ERROR MARSE
         # return render(request,"ecom/index.html",{'user':user,'customer':customer,'products':product})
@@ -505,20 +505,19 @@ def edit_order(request,key):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
     customer=Customer.objects.get(Customer_ID=user)
-    editing_order = Cust_Cart.objects.get(id=key)
+    item = Cust_Cart.objects.get(id=key)
     
     if 'update_plus' in request.POST:
-        print("=================================================INTO IF")
-        new_quant = int(editing_order.Quantity) + 1
-        editing_order.Quantity = new_quant
-        
-        editing_order.save()
+        new_quant = int(item.Quantity) + 1
+        item.Quantity = new_quant
+        item.Total_Amount = item.Product_ID.Product_Price * item.Quantity
+        item.save()
     
     if 'update_minus' in request.POST:
-        print("=================================================INTO IF")
-        new_quant = int(editing_order.Quantity) - 1
-        editing_order.Quantity = new_quant
-        editing_order.save()
+        new_quant = int(item.Quantity) - 1
+        item.Quantity = new_quant
+        item.Total_Amount = item.Product_ID.Product_Price * item.Quantity
+        item.save()
     
     return HttpResponseRedirect(reverse("cart"))
     # cust_cart = Cust_Cart.objects.filter(Customer_ID=customer)

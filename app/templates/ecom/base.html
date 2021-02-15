@@ -42,7 +42,8 @@
 $(document).ready(function() {
 	// jQuery code
 
-	$(".btn, .btn-light").on("click", function()
+	// $(".btn, .btn-light").on("click", function()
+	$("#button-plus, #button-minus").on("click", function()
 	{  
 	  var $button = $(this);
 	  var oldValue = $button.parent().parent().find("#quantity").val();
