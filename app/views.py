@@ -520,8 +520,6 @@ def edit_order(request,key):
         item.save()
     
     return HttpResponseRedirect(reverse("cart"))
-    # cust_cart = Cust_Cart.objects.filter(Customer_ID=customer)
-    # return render(request,"ecom/cart.html",{'user':user,'customer':customer,'cust_cart':cust_cart})
 
 def remove_cart_item(request,key):
     id = request.session.get("id")
