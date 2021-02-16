@@ -488,8 +488,10 @@ def add_to_cart_or_buy_now(request,key):
         return HttpResponseRedirect(reverse('product_detail',args=[product.id]))
 
     elif 'buy_now' in request.POST:
-        print("COMING SOON.....")
-        return HttpResponseRedirect(reverse('portal_sec2'))
+        per_pro_price = product.Product_Price
+        total_amt = float(quantity)*float(per_pro_price)
+        new_cart_item = Cust_Cart.objects.create(Customer_ID=customer,Product_ID=product,Quantity=quantity,Total_Amount=total_amt)
+        return HttpResponseRedirect(reverse('checkout'))
 
 
 
@@ -529,3 +531,17 @@ def remove_cart_item(request,key):
     item = Cust_Cart.objects.get(id=key)
     item.delete()
     return HttpResponseRedirect(reverse("cart"))
+
+def Checkout(request):
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    customer=Customer.objects.get(Customer_ID=user)
+    cust_cart = Cust_Cart.objects.filter(Customer_ID=customer)
+    item=0
+    sub_total=0
+    for i in cust_cart:
+        item=item+i.Quantity
+        sub_total=sub_total+i.Total_Amount
+    total=sub_total+40
+        
+    return render(request,"ecom/checkout.html",{'user':user,'customer':customer,'cust_cart':cust_cart,'item':item,'sub_total':sub_total,'total':total,})

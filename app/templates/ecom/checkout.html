@@ -1,0 +1,105 @@
+{% extends "ecom/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<section class="section-pagetop bg">
+    <div class="container">
+        <h2 class="title-page">Check Out</h2>
+    </div> <!-- container //  -->
+</section>
+<div class="card mb-3" style="width: 83%;margin-left: 9%;margin-top: 17px;">
+    <article class="card-body">
+        <header class="mb-4">
+            <h4 class="card-title">Product Detail</h4>
+        </header>
+        <!-- <div class="row">
+            {% for i in cust_cart %}
+            <div class="col-md-6">
+                <figure class="itemside  mb-3">
+                    <div class="aside"><img src="{{i.Product_ID.Product_Img.url}}"
+                            style="height: 100px;width: 120px;" class="border img-xs"></div>
+                    <figcaption class="info">
+                        <p>{{i.Product_ID.Product_Name}} </p>
+                        <span>{{i.Quantity}}x ₹{{i.Product_ID.Product_Price}} =  Total ₹{{i.Total_Amount}} </span>
+                    </figcaption>
+                </figure>
+
+            </div> 
+            
+
+            {% endfor %}
+
+        </div>  -->
+        <table class="table table-borderless table-shopping-cart">
+            <thead class="text-muted">
+                <tr class="small text-uppercase">
+                    <th scope="col">Product</th>
+                    <th scope="col" width="60" style="padding-left: 260px;">Quantity</th>
+                    <th scope="col"  style="padding-left: 88px;">Price</th>
+                    <th scope="col" class="text-right" width="200"> </th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for i in cust_cart %}
+                <tr>
+                    <td>
+                        <figure class="itemside">
+                            <div class="aside"><img style="width: 235px;height: 140px;" src="{{i.Product_ID.Product_Img.url}}"
+                                    class="img-sm"></div>
+                            <figcaption class="info" style="margin-left: 40px;font-size: 20px;width: 235px;">
+                                <a href="#" class="title text-dark">{{i.Product_ID.Product_Name}}</a>
+                                <p class="text-muted small">Seller Name : {{i.Product_ID.Seller_Name}} <br></p>
+                            </figcaption>
+                        </figure>
+                    </td>
+                    <td>
+
+                        <div class="form-group col-md flex-grow-0">
+                    
+
+                            <form action="{% url 'edit_order' key=i.id %}" method="post">
+                                {% csrf_token %}
+                            <div class="input-group mb-3 input-spinner" style="margin-left: 231px;"> 
+                                
+                                    
+                                  
+                                    <label>{{i.Quantity}} x ₹{{i.Product_ID.Product_Price}}</label>
+                                
+                            </div>
+                        </form>
+                        </div>
+                    </td>
+                    <td style="padding-left: 76px;">
+                        <div class="price-wrap">
+                            <var class="price">₹{{i.Total_Amount}}</var>
+                            
+                        </div> <!-- price-wrap .// -->
+                    </td>
+                  
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </article> <!-- card-body.// -->
+    <article class="card-body border-top">
+
+        <dl class="row">
+            <dt class="col-sm-10">Subtotal: <span class="float-right text-muted">{{item}} items</span></dt>
+            <dd class="col-sm-2 text-right"><strong>₹{{sub_total}}</strong></dd>
+
+           
+
+            <dt class="col-sm-10">Delivery charge: <span class="float-right text-muted">Express delivery</span></dt>
+            <dd class="col-sm-2 text-right"><strong>₹40</strong></dd>
+
+            
+            <dt class="col-sm-10">Total:</dt>
+            <dd class="col-sm-2 text-right"><strong class="h5 text-dark">₹{{total}}</strong></dd>
+        </dl>
+
+    </article> <!-- card-body.// -->
+</div> <!-- card.// -->
+
+{% endblock content %}
