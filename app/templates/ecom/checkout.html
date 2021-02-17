@@ -13,7 +13,8 @@
         <header class="mb-4">
             <h4 class="card-title">Product Detail</h4>
         </header>
-        <!-- <div class="row">
+        {% if cust_cart %}
+        <div class="row">
             {% for i in cust_cart %}
             <div class="col-md-6">
                 <figure class="itemside  mb-3">
@@ -26,12 +27,25 @@
                 </figure>
 
             </div> 
-            
-
             {% endfor %}
+        </div>
+        {% endif %}
 
-        </div>  -->
-        <table class="table table-borderless table-shopping-cart">
+        {% if new_cart_item %}
+        <div class="row">
+            <div class="col-md-6">
+                <figure class="itemside  mb-3">
+                    <div class="aside"><img src="{{new_cart_item.Product_ID.Product_Img.url}}"
+                            style="height: 100px;width: 120px;" class="border img-xs"></div>
+                    <figcaption class="info">
+                        <p>{{new_cart_item.Product_ID.Product_Name}} </p>
+                        <span>{{new_cart_item.Quantity}}x ₹{{new_cart_item.Product_ID.Product_Price}} =  Total ₹{{new_cart_item.Total_Amount}} </span>
+                    </figcaption>
+                </figure>
+            </div> 
+        </div>
+        {% endif %}
+        <!-- <table class="table table-borderless table-shopping-cart">
             <thead class="text-muted">
                 <tr class="small text-uppercase">
                     <th scope="col">Product</th>
@@ -74,14 +88,14 @@
                         <div class="price-wrap">
                             <var class="price">₹{{i.Total_Amount}}</var>
                             
-                        </div> <!-- price-wrap .// -->
+                        </div> 
                     </td>
                   
                 </tr>
                 {% endfor %}
 
             </tbody>
-        </table>
+        </table> -->
     </article> <!-- card-body.// -->
     <article class="card-body border-top">
 

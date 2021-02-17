@@ -135,7 +135,6 @@ def create_gc_rc(request):
 def Validate_login(request):
     email = request.POST['email']
     password = request.POST['password']
-    
     is_exist = User_Master.objects.filter(Email=email)
 
     if is_exist:
@@ -147,6 +146,15 @@ def Validate_login(request):
                 customer=Customer.objects.get(Customer_ID=User)
                 request.session['fname']=customer.Firstname
                 request.session['lname']=customer.Lastname
+
+                user = User_Master.objects.get(id=User.id)
+                customer = Customer.objects.get(Customer_ID=user)
+                cart_items = Cust_Cart.objects.filter(Customer_ID=customer)
+                cart_badge = 0
+                for i in cart_items:
+                    cart_badge = cart_badge + 1
+                request.session['cart_items'] = cart_badge
+
                 return HttpResponseRedirect(reverse('index'))
             elif User.Role=="GC":
                 return render(request,"app/gc_dashboard.html")
@@ -406,6 +414,7 @@ def Logout(request):
         del request.session['id']
         del request.session['fname']
         del request.session['lname']
+        del request.session['cart_items']
         return render(request,'app/login.html')
     except:
         pass
@@ -485,13 +494,19 @@ def add_to_cart_or_buy_now(request,key):
         # AHI "ITEM ADDED TO CART SUCCESSFULLY NO MESSAGE FIRE KARAVO CHE... EK MESSAGE LAI RENDER MA PASS KARVO PADE"
         # PN RENDER MA PASS KARE TYARE PRODUCT na OBJECTS.ALL() KARI MOKALJE NAI TO ERROR MARSE
         # return render(request,"ecom/index.html",{'user':user,'customer':customer,'products':product})
+        cart_i_up = int(request.session['cart_items']) + 1
+        request.session['cart_items'] = cart_i_up
         return HttpResponseRedirect(reverse('product_detail',args=[product.id]))
 
     elif 'buy_now' in request.POST:
         per_pro_price = product.Product_Price
         total_amt = float(quantity)*float(per_pro_price)
+        total = total_amt + 40
         new_cart_item = Cust_Cart.objects.create(Customer_ID=customer,Product_ID=product,Quantity=quantity,Total_Amount=total_amt)
-        return HttpResponseRedirect(reverse('checkout'))
+        cart_i_up = int(request.session['cart_items']) + 1
+        request.session['cart_items'] = cart_i_up
+        return render(request,"ecom/checkout.html",{'user':user,'customer':customer,'new_cart_item':new_cart_item,'item':quantity,'sub_total':total_amt,'total':total})
+        # return HttpResponseRedirect(reverse('checkout'))
 
 
 
@@ -530,12 +545,15 @@ def remove_cart_item(request,key):
 
     item = Cust_Cart.objects.get(id=key)
     item.delete()
+    cart_i_up = int(request.session['cart_items']) - 1
+    request.session['cart_items'] = cart_i_up
     return HttpResponseRedirect(reverse("cart"))
 
 def Checkout(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
     customer=Customer.objects.get(Customer_ID=user)
+
     cust_cart = Cust_Cart.objects.filter(Customer_ID=customer)
     item=0
     sub_total=0
