@@ -45,6 +45,7 @@
             </div> 
         </div>
         {% endif %}
+        <h1>Id {{new_cart_item.id}}</h1>
         <!-- <table class="table table-borderless table-shopping-cart">
             <thead class="text-muted">
                 <tr class="small text-uppercase">
@@ -113,7 +114,17 @@
             <dd class="col-sm-2 text-right"><strong class="h5 text-dark">₹{{total}}</strong></dd>
         </dl>
 
-    </article> <!-- card-body.// -->
+       <form action="{% url 'shipping_detail' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{new_cart_item.Product_ID.id}}">
+        <input type="hidden" name="product_quantity" value="{{item}}">
+        <input type="hidden" name="total" value="{{total}}">
+
+        <button type="submit" class="btn btn-primary">Place Order</button>
+       </form>
+       
+    </article> 
+      
 </div> <!-- card.// -->
 
 {% endblock content %}

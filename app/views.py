@@ -4,6 +4,12 @@ from random import *
 from .utils import *
 from django.contrib.auth.hashers import make_password,check_password
 from itertools import chain
+import razorpay
+from django.views.decorators.csrf import csrf_exempt
+import uuid
+from django.utils import timezone
+
+
 # Create your views here.
 
 #==============================Direct Rendering Views================================================
@@ -489,7 +495,7 @@ def add_to_cart_or_buy_now(request,key):
 
     if 'add_to_cart' in request.POST:
         per_pro_price = product.Product_Price
-        total_amt = float(quantity)*float(per_pro_price)
+        total_amt = int(quantity)*int(per_pro_price)
         new_cart_item = Cust_Cart.objects.create(Customer_ID=customer,Product_ID=product,Quantity=quantity,Total_Amount=total_amt)
         # AHI "ITEM ADDED TO CART SUCCESSFULLY NO MESSAGE FIRE KARAVO CHE... EK MESSAGE LAI RENDER MA PASS KARVO PADE"
         # PN RENDER MA PASS KARE TYARE PRODUCT na OBJECTS.ALL() KARI MOKALJE NAI TO ERROR MARSE
@@ -500,7 +506,7 @@ def add_to_cart_or_buy_now(request,key):
 
     elif 'buy_now' in request.POST:
         per_pro_price = product.Product_Price
-        total_amt = float(quantity)*float(per_pro_price)
+        total_amt = int(quantity)*int(per_pro_price)
         total = total_amt + 40
         new_cart_item = Cust_Cart.objects.create(Customer_ID=customer,Product_ID=product,Quantity=quantity,Total_Amount=total_amt)
         cart_i_up = int(request.session['cart_items']) + 1
@@ -561,5 +567,66 @@ def Checkout(request):
         item=item+i.Quantity
         sub_total=sub_total+i.Total_Amount
     total=sub_total+40
-        
-    return render(request,"ecom/checkout.html",{'user':user,'customer':customer,'cust_cart':cust_cart,'item':item,'sub_total':sub_total,'total':total,})
+    print(type(total))
+    #amount = total*100
+ 
+    # if request.method == "POST":
+    #     name = request.POST.get('name')
+    #     amount = total
+    #     client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
+    #     payment = client.order.create({'amount': amount*100, 'currency': 'INR',
+    #                                    'payment_capture': '1',
+    #                                    })   
+    return render(request,"ecom/checkout.html",{'user':user,'customer':customer,'cust_cart':cust_cart,'item':item,'sub_total':sub_total})
+
+
+def Shipping_detail(request):
+    
+    
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    customer=Customer.objects.get(Customer_ID=user)
+  
+    product_id = request.POST['product_id']
+    product_quantity = request.POST['product_quantity']
+    product_price = int(request.POST['total'])
+    
+    print(type(product_price))
+    product = Product.objects.get(id=product_id)
+    order_id=uuid.uuid4()
+    amount = product_price
+
+    client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
+    payment = client.order.create({'amount': amount*100, 'currency': 'INR','payment_capture': '1',})   
+
+    new_order = Order.objects.create(Order_id=order_id,Customer_ID=customer,Total_Amount=product_price,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="")
+
+    new_product_Order = Product_Order.objects.create(Order_ID=new_order,Product_ID=product,Quantity=product_quantity,Price=product_price)
+    request.session['order_id']=new_order.id
+    return render(request,"ecom/shipping_detail.html",{'user':user,'customer':customer,'payment':payment,'amount':product_price,'order_id':order_id})
+
+@csrf_exempt
+def Success(request):
+    response=request.POST
+    order_id=request.session.get("order_id")
+    verification = {
+        'razorpay_order_id': response['razorpay_order_id'],
+        'razorpay_payment_id': response['razorpay_payment_id'],
+        'razorpay_signature': response['razorpay_signature']
+    }
+    order = Order.objects.get(id=order_id)
+    order.Payment_status = "Success"
+    order.Razorpay_order_id = response['razorpay_order_id']
+    order.Razorpay_payment_id = response['razorpay_payment_id']
+    order.razorpay_signature =  response['razorpay_signature']
+    order.save()
+
+
+    client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
+    try:
+        status = client.utility.verify_payment_signature(verification)
+        return render(request, 'ecom/payment_status.html', {'status':"True"})
+    except:
+        return render(request, 'ecom/payment_status.html', {'status':"False"})
+
+
