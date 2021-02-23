@@ -576,7 +576,7 @@ def Checkout(request):
     #     payment = client.order.create({'amount': amount*100, 'currency': 'INR',
     #                                    'payment_capture': '1',
     #                                    })   
-    return render(request,"ecom/checkout.html",{'user':user,'customer':customer,'cust_cart':cust_cart,'item':item,'sub_total':sub_total})
+    return render(request,"ecom/checkout.html",{'user':user,'customer':customer,'cust_cart':cust_cart,'item':item,'sub_total':sub_total,'total':total})
 
 
 def Shipping_detail(request):
