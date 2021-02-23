@@ -55,7 +55,8 @@
                 </div> <!-- form-group end.// -->
               </div>
               <input type="text" name="order_id" value="{{order_id}}">
-              <center > <div style="padding-top: 20px;"> <form action="{% url 'success' %}" method="POST">
+              <center > <div style="padding-top: 20px;"> 
+                <form action="{% url 'success' %}" method="POST">
                 {% csrf_token %}
                 <script
                     src="https://checkout.razorpay.com/v1/checkout.js"
@@ -68,9 +69,7 @@
                     data-prefill.name="{{customer.Firstname}}"
                     data-prefill.email="{{user.Email}}"
                     data-theme.color="#528FF0"
-                ></script>
-            
-                    
+                ></script>  
                 </form></div>
             </center> 
 

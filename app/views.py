@@ -9,7 +9,6 @@ from django.views.decorators.csrf import csrf_exempt
 import uuid
 from django.utils import timezone
 
-
 # Create your views here.
 
 #==============================Direct Rendering Views================================================
@@ -555,6 +554,7 @@ def remove_cart_item(request,key):
     request.session['cart_items'] = cart_i_up
     return HttpResponseRedirect(reverse("cart"))
 
+
 def Checkout(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
@@ -567,7 +567,6 @@ def Checkout(request):
         item=item+i.Quantity
         sub_total=sub_total+i.Total_Amount
     total=sub_total+40
-    print(type(total))
     #amount = total*100
  
     # if request.method == "POST":
@@ -581,29 +580,49 @@ def Checkout(request):
 
 
 def Shipping_detail(request):
-    
-    
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
     customer=Customer.objects.get(Customer_ID=user)
   
-    product_id = request.POST['product_id']
-    product_quantity = request.POST['product_quantity']
-    product_price = int(request.POST['total'])
+    if 'Single' in request.POST:
+        product_id = request.POST['product_id']
+        product_quantity = request.POST['product_quantity']
+        product_price = int(request.POST['total'])
+        
+        print(type(product_price))
+        product = Product.objects.get(id=product_id)
+        order_id=uuid.uuid4()
+        amount = product_price
+
+        client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
+        payment = client.order.create({'amount': amount*100, 'currency': 'INR','payment_capture': '1',})   
+
+        new_order = Order.objects.create(Order_id=order_id,Customer_ID=customer,Total_Amount=product_price,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="")
+
+        new_product_Order = Product_Order.objects.create(Order_ID=new_order,Product_ID=product,Quantity=product_quantity,Price=product_price)
+        request.session['order_id']=new_order.id
+        return render(request,"ecom/shipping_detail.html",{'user':user,'customer':customer,'payment':payment,'amount':product_price,'order_id':order_id})
     
-    print(type(product_price))
-    product = Product.objects.get(id=product_id)
-    order_id=uuid.uuid4()
-    amount = product_price
+    if 'Multiple' in request.POST:
+        cust_cart = Cust_Cart.objects.filter(Customer_ID=customer)
+        item=0
+        sub_total=0
+        for i in cust_cart:
+            item=item+i.Quantity
+            sub_total=sub_total+i.Total_Amount
+        total=sub_total+40
 
-    client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
-    payment = client.order.create({'amount': amount*100, 'currency': 'INR','payment_capture': '1',})   
+        amount = total
+        client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
+        payment = client.order.create({'amount': amount*100, 'currency': 'INR','payment_capture': '1',})   
 
-    new_order = Order.objects.create(Order_id=order_id,Customer_ID=customer,Total_Amount=product_price,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="")
-
-    new_product_Order = Product_Order.objects.create(Order_ID=new_order,Product_ID=product,Quantity=product_quantity,Price=product_price)
-    request.session['order_id']=new_order.id
-    return render(request,"ecom/shipping_detail.html",{'user':user,'customer':customer,'payment':payment,'amount':product_price,'order_id':order_id})
+        order_id=uuid.uuid4()
+        new_order = Order.objects.create(Order_id=order_id,Customer_ID=customer,Total_Amount=amount,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="")
+        for i in cust_cart:
+            Product_Order.objects.create(Order_ID=new_order,Product_ID=i.Product_ID,Quantity=i.Quantity,Price=i.Total_Amount)
+        request.session['order_id']=new_order.id
+        return render(request,"ecom/shipping_detail.html",{'user':user,'customer':customer,'payment':payment,'amount':amount,'order_id':order_id})
+        
 
 @csrf_exempt
 def Success(request):
