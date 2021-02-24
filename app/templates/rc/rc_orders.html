@@ -366,58 +366,30 @@
             </tr>
           </thead>
           <tbody>
+            {% if order_product %}
+            {% for i in order_product %}
             <tr>
-              <th scope="row">1</th>
-              <td>Recycled Paper Basket</td>
+              <th scope="row">{{i.Order_ID.id}}</th>
+              <td>{{i.Product_ID.Product_Name}}</td>
               <td>
-              <div class="row">
-                
-                <div class="user-img pull-left" style="margin-left: 33px;padding-left: 20px;"><img src="https://5.imimg.com/data5/MB/VJ/MY-40824460/recycled-waste-paper-basket-500x500.jpg" class="img-circle img-responsive" alt="User Image" style="height: 90px;"> </div>
-                
+                <div class="row">
+
+                  <div class="user-img pull-left" style="margin-left: 33px;padding-left: 20px;"><img
+                      src="{{i.Product_ID.Product_Img.url}}"
+                      class="img-circle img-responsive" alt="User Image" style="height: 90px;"> </div>
+
               </td>
-              <td> 12/01/2021</td>
-              <td>150 Rs</td>
-              <td>2</td>
+              <td>{{i.Order_ID.Datetime_of_payment}} </td>
+              <td>{{i.Price}} Rs. </td>
+              <td>{{i.Quantity}}</td>
               <td>
                 <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-               
+
               </td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Recycled Female Purse Green</td>
-              <td>
-              <div class="row">
-                
-                  <div class="user-img pull-left" style="margin-left: 33px;padding-left: 20px;"><img src="https://i.pinimg.com/originals/e6/d7/99/e6d799cbb7409c65f38838b1ffae5c74.jpg" class="img-circle img-responsive" alt="User Image" style="height: 90px;"> </div>
-                
-              </td>
-              <td> 12/02/2021</td>
-              <td>500 Rs</td>
-              <td>6</td>
-              <td>
-                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-               
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>Mobile Phone Holder </td>
-              <td>
-              <div class="row">
-                
-                  <div class="user-img pull-left" style="margin-left: 33px;padding-left: 20px;"><img src="https://images-na.ssl-images-amazon.com/images/I/41%2BwCccVywL.jpg" class="img-circle img-responsive" alt="User Image" style="height: 90px;"> </div>
-                
-              </td>
-              <td> 19/06/2021</td>
-              <td>200 Rs</td>
-              <td>1</td>
-              <td>
-                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-               
-              </td>
-            </tr>
-           
+            
+            {% endfor %}
+            {% endif %}           
            
           </tbody>
         </table>

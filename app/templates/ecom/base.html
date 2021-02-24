@@ -77,7 +77,7 @@ $(document).ready(function() {
 <div class="row align-items-center">
 	<div class="col-lg-2 col-4">
 		<div class="brand-wrap">
-			<img class="logo" src="{% static 'ecomassets/images/logo.png' %}" style="max-height: 48px;">
+			<a href="{% url 'index' %}"><img class="logo" src="{% static 'ecomassets/images/logo.png' %}" style="max-height: 48px;"></a>
 		</div> <!-- brand-wrap.// -->
 	</div>
 	<div class="col-lg-6 col-sm-12">
@@ -167,7 +167,7 @@ $(document).ready(function() {
           <a class="nav-link" href="#">Clothing</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Furnitures</a>
+			<a class="nav-link" href="{% url 'customer_orders' %}">My Orders</a>
         </li>
       </ul>
     </div> <!-- collapse .// -->

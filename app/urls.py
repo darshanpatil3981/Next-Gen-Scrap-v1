@@ -39,6 +39,7 @@ urlpatterns = [
      path("customer_update_profile/",views.Customer_update_profile,name="customer_update_profile"),
      path("change_password/",views.Change_password,name="change_password"),
      path("cart/",views.Cart,name="cart"),
+     path("customer_orders/",views.Customer_orders,name="customer_orders"),
      path("add_cart_buy/<int:key>",views.add_to_cart_or_buy_now,name="cart_buy"),
      path("edit_order/<int:key>",views.edit_order,name="edit_order"),
      path("remove_cart_item/<int:key>",views.remove_cart_item,name="remove_cart_item"),

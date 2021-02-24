@@ -280,7 +280,9 @@ def Rc_orders(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(RC_ID=user)
-    return render(request,"rc/rc_orders.html",{'user':user,'rc':rc})
+    order_product =  Product_Order.objects.filter(RC_ID=rc.id,Payment_status="Success")
+    print(order_product)
+    return render(request,"rc/rc_orders.html",{'user':user,'rc':rc,'order_product':order_product})
 
 def Rc_pricing(request):
     id=request.session.get("id")
@@ -422,7 +424,8 @@ def Logout(request):
         del request.session['cart_items']
         return render(request,'app/login.html')
     except:
-        pass
+        return render(request,'app/login.html')
+
 
 def Customer_update_profile(request):
     if request.method=="POST":
@@ -593,23 +596,27 @@ def Shipping_detail(request):
         product = Product.objects.get(id=product_id)
         order_id=uuid.uuid4()
         amount = product_price
+        rc = RC.objects.get(id = product.RC_ID.id)
 
         client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
         payment = client.order.create({'amount': amount*100, 'currency': 'INR','payment_capture': '1',})   
 
         new_order = Order.objects.create(Order_id=order_id,Customer_ID=customer,Total_Amount=product_price,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="")
 
-        new_product_Order = Product_Order.objects.create(Order_ID=new_order,Product_ID=product,Quantity=product_quantity,Price=product_price)
+        new_product_Order = Product_Order.objects.create(Order_ID=new_order,Product_ID=product,Quantity=product_quantity,Price=product_price,RC_ID=rc.id,Customer_ID = customer.id)
+        
         request.session['order_id']=new_order.id
         return render(request,"ecom/shipping_detail.html",{'user':user,'customer':customer,'payment':payment,'amount':product_price,'order_id':order_id})
-    
+ 
     if 'Multiple' in request.POST:
+        
         cust_cart = Cust_Cart.objects.filter(Customer_ID=customer)
         item=0
         sub_total=0
         for i in cust_cart:
             item=item+i.Quantity
             sub_total=sub_total+i.Total_Amount
+       
         total=sub_total+40
 
         amount = total
@@ -619,7 +626,7 @@ def Shipping_detail(request):
         order_id=uuid.uuid4()
         new_order = Order.objects.create(Order_id=order_id,Customer_ID=customer,Total_Amount=amount,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="")
         for i in cust_cart:
-            Product_Order.objects.create(Order_ID=new_order,Product_ID=i.Product_ID,Quantity=i.Quantity,Price=i.Total_Amount)
+            Product_Order.objects.create(Order_ID=new_order,Product_ID=i.Product_ID,Quantity=i.Quantity,Price=i.Total_Amount,RC_ID=i.Product_ID.RC_ID.id,Customer_ID = customer.id)
         request.session['order_id']=new_order.id
         return render(request,"ecom/shipping_detail.html",{'user':user,'customer':customer,'payment':payment,'amount':amount,'order_id':order_id})
         
@@ -639,8 +646,11 @@ def Success(request):
     order.Razorpay_payment_id = response['razorpay_payment_id']
     order.razorpay_signature =  response['razorpay_signature']
     order.save()
-
-
+    product_order = Product_Order.objects.filter(Order_ID=order)
+    
+    for i in product_order:
+        i.Payment_status="Success"
+        i.save()
     client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
     try:
         status = client.utility.verify_payment_signature(verification)
@@ -648,4 +658,10 @@ def Success(request):
     except:
         return render(request, 'ecom/payment_status.html', {'status':"False"})
 
-
+def Customer_orders(request):
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    customer=Customer.objects.get(Customer_ID=user)
+    order_product =  Product_Order.objects.filter(Customer_ID=customer.id,Payment_status="Success")
+    
+    return render(request,"ecom/customer_orders.html",{'order_product':order_product})
