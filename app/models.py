@@ -78,6 +78,7 @@ class Product_Order(models.Model):
     RC_ID = models.CharField(max_length=20, null=True, blank=True)
     Customer_ID = models.CharField(max_length=20,null=True, blank=True)
     Product_ID = models.ForeignKey(Product,on_delete=models.CASCADE)
+    Cart_ID = models.CharField(max_length=20,null=True, blank=True)
     Payment_status= models.CharField(max_length=20, null=True, blank=True)
     Quantity = models.PositiveIntegerField()
     Price = models.IntegerField(default=0)

@@ -591,8 +591,11 @@ def Shipping_detail(request):
         product_id = request.POST['product_id']
         product_quantity = request.POST['product_quantity']
         product_price = int(request.POST['total'])
-        
-        print(type(product_price))
+        cart_id = request.POST['cart_id']
+        item = Cust_Cart.objects.get(id=cart_id)
+        item.delete()
+        cart_i_up = int(request.session['cart_items']) - 1
+        request.session['cart_items'] = cart_i_up
         product = Product.objects.get(id=product_id)
         order_id=uuid.uuid4()
         amount = product_price
@@ -626,7 +629,7 @@ def Shipping_detail(request):
         order_id=uuid.uuid4()
         new_order = Order.objects.create(Order_id=order_id,Customer_ID=customer,Total_Amount=amount,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="")
         for i in cust_cart:
-            Product_Order.objects.create(Order_ID=new_order,Product_ID=i.Product_ID,Quantity=i.Quantity,Price=i.Total_Amount,RC_ID=i.Product_ID.RC_ID.id,Customer_ID = customer.id)
+            Product_Order.objects.create(Order_ID=new_order,Product_ID=i.Product_ID,Quantity=i.Quantity,Price=i.Total_Amount,RC_ID=i.Product_ID.RC_ID.id,Customer_ID = customer.id,Cart_ID=i.id)
         request.session['order_id']=new_order.id
         return render(request,"ecom/shipping_detail.html",{'user':user,'customer':customer,'payment':payment,'amount':amount,'order_id':order_id})
         
@@ -651,6 +654,10 @@ def Success(request):
     for i in product_order:
         i.Payment_status="Success"
         i.save()
+        item = Cust_Cart.objects.get(id=i.Cart_ID)
+        item.delete()
+        cart_i_up = int(request.session['cart_items']) - 1
+        request.session['cart_items'] = cart_i_up
     client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
     try:
         status = client.utility.verify_payment_signature(verification)
