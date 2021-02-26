@@ -650,25 +650,26 @@ def Success(request):
     order.razorpay_signature =  response['razorpay_signature']
     order.save()
     product_order = Product_Order.objects.filter(Order_ID=order)
-    
-    for i in product_order:
-        i.Payment_status="Success"
-        i.save()
-        item = Cust_Cart.objects.get(id=i.Cart_ID)
-        item.delete()
-        cart_i_up = int(request.session['cart_items']) - 1
-        request.session['cart_items'] = cart_i_up
+    try:
+        for i in product_order:
+            i.Payment_status="Success"
+            i.save()
+            item = Cust_Cart.objects.get(id=i.Cart_ID)
+            item.delete()
+            cart_i_up = int(request.session['cart_items']) - 1
+            request.session['cart_items'] = cart_i_up
+    except:
+         pass
     client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
     try:
         status = client.utility.verify_payment_signature(verification)
-        return render(request, 'ecom/payment_status.html', {'status':"True"})
+        return HttpResponseRedirect(reverse("customer_orders"))
     except:
-        return render(request, 'ecom/payment_status.html', {'status':"False"})
+        return HttpResponseRedirect(reverse("customer_orders"))
 
 def Customer_orders(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
     customer=Customer.objects.get(Customer_ID=user)
     order_product =  Product_Order.objects.filter(Customer_ID=customer.id,Payment_status="Success")
-    
     return render(request,"ecom/customer_orders.html",{'order_product':order_product})
