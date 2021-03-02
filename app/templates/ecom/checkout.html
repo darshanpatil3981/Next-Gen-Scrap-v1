@@ -124,7 +124,7 @@
         <input type="hidden" name="total" value="{{total}}">
 
         {% if new_cart_item %}
-        <input type="text" name="cart_id" value="{{new_cart_item.id}}">
+        <input type="hidden" name="cart_id" value="{{new_cart_item.id}}">
         <button type="submit" class="btn btn-primary" name="Single">Place Order</button>
         {% endif %}
 

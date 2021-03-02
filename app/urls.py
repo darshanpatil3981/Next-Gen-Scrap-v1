@@ -45,7 +45,7 @@ urlpatterns = [
      path("remove_cart_item/<int:key>",views.remove_cart_item,name="remove_cart_item"),
      path("checkout/",views.Checkout,name="checkout"),
      path("shipping_detail/",views.Shipping_detail,name="shipping_detail"),
-     path("success/",views.Success,name="success"),
+     path("invoice/",views.Invoice,name="invoice"),
      
 
      

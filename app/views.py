@@ -600,13 +600,16 @@ def Shipping_detail(request):
         order_id=uuid.uuid4()
         amount = product_price
         rc = RC.objects.get(id = product.RC_ID.id)
-
+        product_Order_price = amount-40
+        
         client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
         payment = client.order.create({'amount': amount*100, 'currency': 'INR','payment_capture': '1',})   
+        invoice_no = randint(1000000,9999999)
+        sub_total = product_price-40
+        new_order = Order.objects.create(Order_id=order_id,Customer_ID=customer,Total_Amount=product_price,Sub_Total_Amount=sub_total,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="",Invoice_No=invoice_no)
+   
 
-        new_order = Order.objects.create(Order_id=order_id,Customer_ID=customer,Total_Amount=product_price,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="")
-
-        new_product_Order = Product_Order.objects.create(Order_ID=new_order,Product_ID=product,Quantity=product_quantity,Price=product_price,RC_ID=rc.id,Customer_ID = customer.id)
+        new_product_Order = Product_Order.objects.create(Order_ID=new_order,Product_ID=product,Quantity=product_quantity,Price=product_Order_price,RC_ID=rc.id,Customer_ID = customer.id)
         
         request.session['order_id']=new_order.id
         return render(request,"ecom/shipping_detail.html",{'user':user,'customer':customer,'payment':payment,'amount':product_price,'order_id':order_id})
@@ -627,15 +630,20 @@ def Shipping_detail(request):
         payment = client.order.create({'amount': amount*100, 'currency': 'INR','payment_capture': '1',})   
 
         order_id=uuid.uuid4()
-        new_order = Order.objects.create(Order_id=order_id,Customer_ID=customer,Total_Amount=amount,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="")
+        invoice_no = randint(1000000,9999999)
+        
+        print(sub_total)
+        new_order = Order.objects.create(Order_id=order_id,Customer_ID=customer,Total_Amount=amount,Sub_Total_Amount=sub_total,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="",Invoice_No=invoice_no)
         for i in cust_cart:
+            product_Order_price = i.Quantity*i.Product_ID.Product_Price
+            print(product_Order_price)
             Product_Order.objects.create(Order_ID=new_order,Product_ID=i.Product_ID,Quantity=i.Quantity,Price=i.Total_Amount,RC_ID=i.Product_ID.RC_ID.id,Customer_ID = customer.id,Cart_ID=i.id)
         request.session['order_id']=new_order.id
         return render(request,"ecom/shipping_detail.html",{'user':user,'customer':customer,'payment':payment,'amount':amount,'order_id':order_id})
         
 
 @csrf_exempt
-def Success(request):
+def Invoice(request):
     response=request.POST
     order_id=request.session.get("order_id")
     verification = {
@@ -644,6 +652,8 @@ def Success(request):
         'razorpay_signature': response['razorpay_signature']
     }
     order = Order.objects.get(id=order_id)
+    product = Product_Order.objects.filter(Order_ID=order)
+   
     order.Payment_status = "Success"
     order.Razorpay_order_id = response['razorpay_order_id']
     order.Razorpay_payment_id = response['razorpay_payment_id']
@@ -663,9 +673,9 @@ def Success(request):
     client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
     try:
         status = client.utility.verify_payment_signature(verification)
-        return HttpResponseRedirect(reverse("customer_orders"))
+        return render(request,"ecom/invoice.html",{'order':order,'product':product})
     except:
-        return HttpResponseRedirect(reverse("customer_orders"))
+        return render(request,"ecom/invoice.html",{'status':status})
 
 def Customer_orders(request):
     id = request.session.get("id")
