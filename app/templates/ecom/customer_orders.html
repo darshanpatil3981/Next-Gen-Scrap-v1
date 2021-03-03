@@ -18,37 +18,58 @@
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Product Name</th>
-                      <th scope="col">Product Image</th>
+                      <th scope="col">Order ID</th>
+                      <!-- <th scope="col">Product Name</th> -->
+                      <!-- <th scope="col">Product Image</th> -->
         
-                      <th scope="col">Ordre Date</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Quantity</th>
-                      <th scope="col">Payment</th>
+                      <th scope="col">Order Date</th>
+                      <th scope="col">Total Amount</th>
+                      <!-- <th scope="col">Quantity</th> -->
+                      <th scope="col">Payment </th>
+                      <th scope="col">Transaction Id </th>
+                      <th scope="col">View Detail </th>
+                      <th scope="col">Invoice</th>
+
                       
             
                     </tr>
                   </thead>
                   <tbody>
-                    {% if order_product %}
-                    {% for i in order_product %}
+                    {% if order %}
+                    {% for i in order %}
                     <tr>
-                      <th scope="row">{{i.Order_ID.id}}</th>
-                      <td>{{i.Product_ID.Product_Name}}</td>
-                      <td>
+                      <th scope="row">{{i.id}}</th>
+
+                      <!-- <td>
+                        {% for j in order_product %}
+                        
+                          {{j.Product_ID.Product_Name}}, 
+
+                        {% endfor %}
+                        </td> -->
+                      <!-- <td>
                         <div class="row">
         
                           <div class="user-img pull-left" style="margin-left: 33px;padding-left: 20px;"><img
                               src="{{i.Product_ID.Product_Img.url}}"
                               class="img-circle img-responsive" alt="User Image" style="height: 90px;"> </div>
         
+                      </td> -->
+                      <td>{{i.Datetime_of_payment}} </td>
+                      <td>{{i.Total_Amount}} Rs. </td>
+                      <!-- <td>{{i.Quantity}}</td> -->
+                      <td><span class="badge badge-success" style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">Success</span>   </td>
+                      <td>{{i.Razorpay_order_id}}</td>
+                      <td>
+                        <a href="{% url 'customer_orders_detail' key=i.id %}">
+                          <button type="submit" class="btn btn-primary" style="margin-left: 30px;" action="{% url 'customer_orders_detail' key=i.id %}"><i class="far fa-eye"></i></button>
+                        </a>
                       </td>
-                      <td>{{i.Order_ID.Datetime_of_payment}} </td>
-                      <td>{{i.Price}} Rs. </td>
-                      <td>{{i.Quantity}}</td>
-                      <td><span class="badge badge-success" style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 28px;">Success</span>   </td>
-                  
+                      <td>
+                        <a href="{% url 'view_Invoice' key=i.id %}">
+                          <button type="submit" class="btn btn-primary" action=""><i class="fa fa-print"></i></button>
+                        </a>
+                      </td>
                     </tr>
                     
                     {% endfor %}

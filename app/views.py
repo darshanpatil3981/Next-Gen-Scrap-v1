@@ -8,7 +8,9 @@ import razorpay
 from django.views.decorators.csrf import csrf_exempt
 import uuid
 from django.utils import timezone
+from django.template.loader import render_to_string
 
+from django.conf import settings 
 # Create your views here.
 
 #==============================Direct Rendering Views================================================
@@ -77,8 +79,7 @@ def verify_OTP(request):
     otp = request.POST['otp']
     email = request.POST['email']
     role = request.POST['role']
-    print(otp)
-    print(cotp)
+    
     if check_password(cotp,otp):
         success_message = "OTP Is Verified Successfully"
         if role=="Customer":
@@ -676,10 +677,34 @@ def Invoice(request):
         return render(request,"ecom/invoice.html",{'order':order,'product':product})
     except:
         return render(request,"ecom/invoice.html",{'status':status})
+def View_Invoice(request,key):
+    order = Order.objects.get(id=key)
+    product = Product_Order.objects.filter(Order_ID=order)
+    return render(request,"ecom/invoice.html",{'order':order,'product':product})
 
 def Customer_orders(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
     customer=Customer.objects.get(Customer_ID=user)
+    order = Order.objects.filter(Customer_ID=customer.id,Payment_status="Success")
     order_product =  Product_Order.objects.filter(Customer_ID=customer.id,Payment_status="Success")
-    return render(request,"ecom/customer_orders.html",{'order_product':order_product})
+    return render(request,"ecom/customer_orders.html",{'order_product':order_product,'order':order})
+
+def Customer_orders_detail(request,key):
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    customer=Customer.objects.get(Customer_ID=user)
+    order_product =  Product_Order.objects.filter(Order_ID=key,Customer_ID=customer.id,Payment_status="Success")
+    return render(request,"ecom/customer_orders_detail.html",{'order_product':order_product,})
+
+def Invoice_pdf(request,key):
+    order=Order.objects.get(id=key)
+    product = Product_Order.objects.filter(Order_ID=order)
+    
+    data = {
+             'order':order,
+             'product':product,
+        }
+    pdf = render_to_pdf('ecom/invoice.html',data)
+    return HttpResponse(pdf, content_type='application/pdf')
+    
