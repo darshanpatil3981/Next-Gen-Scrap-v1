@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from demo.harnishdesign.net/html/koice/index-invoice-flights.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Mar 2021 15:34:55 GMT -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://demo.harnishdesign.net/html/koice/images/favicon.png" rel="icon" />
+<title>Invoice</title>
+<meta name="author" content="harnishdesign.net">
+
+<!-- Web Fonts
+======================= -->
+ <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900' type='text/css'> 
+
+
+<link rel="stylesheet" type="text/css" href="http://demo.harnishdesign.net/html/koice/vendor/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="http://demo.harnishdesign.net/html/koice/vendor/font-awesome/css/all.min.css"/>
+<link rel="stylesheet" type="text/css" href="http://demo.harnishdesign.net/html/koice/css/stylesheet.css"/> 
+</head>
+<body>
+  
+<!-- Container -->
+<div class="container-fluid invoice-container"> 
+  <!-- Header -->
+  <header>
+    <div class="row align-items-center">
+     <center> <div class="col-sm-7 text-center text-sm-left mb-3 mb-sm-0"> <img id="logo" src="https://i.ibb.co/1TQpH1n/logo.png" style="height: 80px;" title="Koice" alt="Koice" /> </center></div>
+      <div class="col-sm-5 text-center text-sm-right">
+        <center><h1>Invoice</h1></center>
+        <p class="mb-0"> <b> Invoice Number - </b>{{data.order.Invoice_No}}</p>
+      </div>
+    </div>
+    <hr>
+  </header>
+  
+  <!-- Main Content -->
+  <main>
+    <div class="row" >
+      <div class="col-sm-6 text-sm-right order-sm-1" style="text-align: right;"> <b>Pay To:</b>
+        <address>
+        Next Gen Scrap Inc<br />
+        2705 N. Enterprise St<br />
+        Orange, India 92865
+        </address>
+      </div>
+      <div class="col-sm-6 order-sm-0" > <b>Invoiced To:</b>
+        <address>
+          {{data.order.Customer_ID.Firstname}} {{data.order.Customer_ID.Lastname}}<br />
+          {{data.order.Customer_ID.Address}}<br />
+          {{data.order.Customer_ID.City}},{{data.order.Customer_ID.State}}-{{data.order.Customer_ID.Pincode}}<br />
+          India.
+        </address>
+      </div>
+    </div>
+    <hr>
+    <br>
+    <div class="row">
+      <div class="col-sm-6 mb-3">  </div>
+      <div class="col-sm-6 mb-3 text-sm-right"> <strong>Booking Date:</strong><br>
+        <span>{{data.order.Datetime_of_payment}}</span> </div>
+    </div>
+    <br>
+    <center>
+    <div class="card">
+      <div class="card-header" style="font-size: 20px;"> <span class="font-weight-600 text-4"><b>Order Summary</b></span> </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table"  cellspacing='15'>
+            <thead style="width:fit-content;">
+              <tr style="width:fit-content;font-size: 15px;" >
+                <td class="col-6 border-top-0" ><strong>Description</strong></td>
+                <td class="col-2 text-center border-top-0"><strong>Price</strong></td>
+                <td class="col-2 text-center border-top-0"><strong>Quantity</strong></td>
+                <td class="col-2 text-right border-top-0"><strong>Total Price</strong></td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in data.product %}
+              <tr  style="width:fit-content;">
+                <td><span class="text-3"><span class="font-weight-500">{{i.Product_ID.Product_Name}}</span>
+                <td class="text-center">{{i.Product_ID.Product_Price}} Rs.</td>
+                <td class="text-center">{{i.Quantity}}</td>
+                <td class="text-right" style="text-align: right;">{{i.Price}} Rs.</td>
+              </tr>
+              <tr>
+                {% endfor %}
+              
+              <tr>
+                
+                <td colspan="2" class="col-2 text-right border-top-0"><strong>Sub Total</strong></td>
+                <td></td>
+              <td colspan="2" class="col-2 text-right border-top-0" style="text-align: right;">{{data.order.Sub_Total_Amount}} Rs.</td>
+              
+              </tr>
+              <tr>
+                <td colspan="2" class="col-2 text-right border-top-0"><strong>Delivery charge:</strong><br>
+               
+                  <td></td>
+                <td colspan="2" class="col-2 text-right border-top-0" style="text-align: right;">+40.0 Rs.</td>
+              </tr>
+              <tr>
+                <td colspan="2" class="col-2 text-right border-top-0"><strong>Total</strong></td>
+                <td></td>
+                <td colspan="2" class="col-2 text-right border-top-0" style="text-align: right;">{{data.order.Total_Amount}} Rs.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </center>
+    <br>
+    <div class="table-responsive d-print-none">
+      <table class="table table-bordered"  cellspacing='5' >
+        <thead>
+          <tr>
+            <td class="text-center"><strong>Transaction Date</strong></td>
+            <td class="text-center"><strong>Gateway</strong></td>
+            <td class="text-center"><strong>Transaction ID</strong></td>
+            <td class="text-center"><strong>Amount</strong></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">{{data.order.Datetime_of_payment}}</td>
+            <td class="text-center">Razer Pay</td>
+            <td class="text-center">{{data.order.Razorpay_payment_id}}</td>
+            <td class="text-center">{{data.order.Total_Amount}} INR  </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <!-- Footer -->
+  
+</div>
+<!-- Back to My Account Link -->
+
+</body>
+
+<!-- Mirrored from demo.harnishdesign.net/html/koice/index-invoice-flights.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Mar 2021 15:34:55 GMT -->
+</html>

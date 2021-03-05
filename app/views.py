@@ -654,7 +654,10 @@ def Invoice(request):
     }
     order = Order.objects.get(id=order_id)
     product = Product_Order.objects.filter(Order_ID=order)
-   
+
+    email = order.Customer_ID.Customer_ID.Email
+    email_Subject = "Your Order Placed Suscessfully"
+    sendmail_invoice(email_Subject,'invoice_email',email,{'order':order,'product':product})    
     order.Payment_status = "Success"
     order.Razorpay_order_id = response['razorpay_order_id']
     order.Razorpay_payment_id = response['razorpay_payment_id']

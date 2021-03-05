@@ -17,6 +17,13 @@ def sendmail(subject,template,to,context):
     from_email = 'nextgenscrap@gmail.com'
     send_mail(subject, plain_message, from_email, [to], html_message=html_message)
 
+def sendmail_invoice(subject,template,to,context):
+    subject = subject
+    template_str = 'ecom/'+ template+'.html'
+    html_message = render_to_string(template_str, {'data': context})
+    plain_message = strip_tags(html_message)
+    from_email = 'nextgenscrap@gmail.com'
+    send_mail(subject, plain_message, from_email, [to], html_message=html_message)
 
 
 def render_to_pdf(template_src, context_dict={}):
