@@ -102,13 +102,13 @@ def create_Customer(request):
             if pswd==cpswd:
                 encrypted_pw=make_password(pswd)
                 newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role="Customer",is_created=True,is_verified=False,is_active=False,is_updated=False)
-                newCustomer = Customer.objects.create(Customer_ID=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
+                newCustomer = Customer.objects.create(User_Master=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
                 return render(request,"app/login.html")
             else:
                 message = "Password Does Not Match"
                 return render(request,"app/signup_customer.html",{'fname':fname,'lname':lname,'pswd':pswd,'msg':message,'EMAIL':email})
 
-
+#done
 def create_gc_rc(request):
     fname = request.POST['fname']
     lname = request.POST['lname']
@@ -128,16 +128,16 @@ def create_gc_rc(request):
             encrypted_pw=make_password(pswd)
             newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role=role,is_created=True,is_verified=False,is_active=False,is_updated=False)
             if role=="GC":
-                newsc = GC.objects.create(GC_ID=newUser,Firstname=fname,Lastname=lname,Shop_name=cname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
+                newsc = GC.objects.create(User_Master=newUser,Firstname=fname,Lastname=lname,Shop_name=cname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
             if role=="RC":
-                newrc = RC.objects.create(RC_ID=newUser,Firstname=fname,Lastname=lname,Company_name=cname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
+                newrc = RC.objects.create(User_Master=newUser,Firstname=fname,Lastname=lname,Company_name=cname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
             # return render(request,"app/index.html")
             return HttpResponseRedirect(reverse('login'))
         else:
                 message = "Password Does Not Match"
                 return render(request,"app/signup_gcrc.html",{'fname':fname,'lname':lname,'pswd':pswd,'msg':message,'EMAIL':email})
 
-
+#done
 def Validate_login(request):
     email = request.POST['email']
     password = request.POST['password']
@@ -145,17 +145,16 @@ def Validate_login(request):
 
     if is_exist:
         User = User_Master.objects.get(Email=email)
-        print(check_password(password,User.Password))
         if check_password(password,User.Password):
             if User.Role=="Customer":
                 request.session['id']=User.id
-                customer=Customer.objects.get(Customer_ID=User)
+                customer=Customer.objects.get(User_Master=User)
                 request.session['fname']=customer.Firstname
                 request.session['lname']=customer.Lastname
 
                 user = User_Master.objects.get(id=User.id)
-                customer = Customer.objects.get(Customer_ID=user)
-                cart_items = Cust_Cart.objects.filter(Customer_ID=customer)
+                customer = Customer.objects.get(User_Master=user)
+                cart_items = Cust_Cart.objects.filter(Customer=customer)
                 cart_badge = 0
                 for i in cart_items:
                     cart_badge = cart_badge + 1
@@ -166,18 +165,18 @@ def Validate_login(request):
                 return render(request,"app/gc_dashboard.html")
             elif User.Role=="RC":
                 request.session['id']=User.id
-                rc=RC.objects.get(RC_ID=User)
+                rc=RC.objects.get(User_Master=User)
                 request.session['rcid']=rc.id
                 request.session['fname']=rc.Firstname
                 request.session['lname']=rc.Lastname
-                return render(request,"rc/rc_dashboard.html",{'user':User,'rc':rc})
+                return render(request,"rc/rc_dashboard.html")
         else:
             message = "Incorect Password!!"
             return render(request,"app/login.html",{'msg':message,})        
     else:
         message = "This Email Is Not Registed with Any Account"
         return render(request,"app/login.html",{'msg':message,})
-
+#done
 def Forgot_password(request):
     if request.method=="POST":
         email = request.POST['email']
@@ -194,7 +193,7 @@ def Forgot_password(request):
     else:
         return render(request,"app/enter_email.html",{'fpw':"fpw",})
 
-
+#done
 def Verify_OTP_forgotpw(request): 
     cotp = request.POST['cotp']
     otp = request.POST['otp']
@@ -207,7 +206,7 @@ def Verify_OTP_forgotpw(request):
     else:
         message="You have entered incorrect OTP."
         return render(request,"app/otp_verification.html",{'fpw':"fpw",'msg':message,'OTP':otp,"EMAIL":email})
-
+#done
 def Reset_password(request):  
     email = request.POST['email'] 
     password=request.POST['password']
@@ -223,20 +222,20 @@ def Reset_password(request):
 def Rc_scrap_collectors(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
-    rc=RC.objects.get(RC_ID=user)
+    rc=RC.objects.get(User_Master=user)
     return render(request,"rc/rc_scrap_collectors.html",{'user':user,'rc':rc})
 
 def Rc_blank(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
-    rc=RC.objects.get(RC_ID=user)
+    rc=RC.objects.get(User_Master=user)
     return render(request,"rc/rc_blank.html",{'user':user,'rc':rc})
 
 
 def Rc_profile(request):
     id=request.session.get("id")
     user=User_Master.objects.get(id=id)
-    rc=RC.objects.get(RC_ID=user)
+    rc=RC.objects.get(User_Master=user)
     return render(request,"rc/rc_profile.html",{'user':user,'rc':rc})
 
 
@@ -253,7 +252,7 @@ def Rc_update_profile(request):
 
         id=request.session.get("id")
         user = User_Master.objects.get(id=id)
-        rc=RC.objects.get(RC_ID=user)
+        rc=RC.objects.get(User_Master=user)
         rc.Firstname=fname
         rc.Lastname=lname
         rc.Address=add
@@ -273,29 +272,29 @@ def Rc_update_profile(request):
     else:
         id=request.session.get("id")
         user = User_Master.objects.get(id=id)
-        rc=RC.objects.get(RC_ID=user)
+        rc=RC.objects.get(User_Master=user)
         return render(request,"rc/rc_update_profile.html",{'user':user,'rc':rc})
     
 
 def Rc_orders(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
-    rc=RC.objects.get(RC_ID=user)
+    rc=RC.objects.get(User_Master=user)
     order_product =  Product_Order.objects.filter(RC_ID=rc.id,Payment_status="Success")
-    print(order_product)
+
     return render(request,"rc/rc_orders.html",{'user':user,'rc':rc,'order_product':order_product})
 
 def Rc_pricing(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
-    rc=RC.objects.get(RC_ID=user)
+    rc=RC.objects.get(User_Master=user)
     return render(request,"rc/rc_pricing.html",{'user':user,'rc':rc})
 
 def Rc_product(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
-    rc=RC.objects.get(RC_ID=user)
-    products=Product.objects.all().filter(RC_ID=rc)
+    rc=RC.objects.get(User_Master=user)
+    products=Product.objects.all().filter(RC=rc)
     return render(request,"rc/rc_product.html",{'user':user,'rc':rc,'products':products})
 
 
@@ -304,7 +303,7 @@ def Rc_add_product(request):
     if request.method=="POST":
         id=request.session.get("id")
         user = User_Master.objects.get(id=id)
-        rc = RC.objects.get(RC_ID=user)
+        rc = RC.objects.get(User_Master=user)
 
         pro_name = request.POST['Pro_name']
         pro_price = request.POST['Pro_price']
@@ -312,12 +311,12 @@ def Rc_add_product(request):
         pro_img = request.FILES['Pro_img']
         seller_name=rc.Firstname+" "+rc.Lastname
 
-        newProduct = Product.objects.create(RC_ID=rc,Seller_Name=seller_name,Product_Name=pro_name,Product_Price=pro_price,Product_Desc=pro_desc,Product_Img=pro_img,Current_orders=0)
+        newProduct = Product.objects.create(RC=rc,Seller_Name=seller_name,Product_Name=pro_name,Product_Price=pro_price,Product_Desc=pro_desc,Product_Img=pro_img,Current_orders=0)
         return HttpResponseRedirect(reverse('rc_product'))
     else:
         id=request.session.get("id")
         user = User_Master.objects.get(id=id)
-        rc=RC.objects.get(RC_ID=user)
+        rc=RC.objects.get(User_Master=user)
         return render(request,"rc/rc_add_product.html",{'user':user,'rc':rc})
 
 
@@ -325,7 +324,7 @@ def Rc_add_product(request):
 def RC_view_product(request,key):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
-    rc = RC.objects.get(RC_ID=user)
+    rc = RC.objects.get(User_Master=user)
     product = Product.objects.get(id=key)
     return render(request,"rc/rc_view_product.html",{'user':user,'rc':rc,'product':product})
 
@@ -350,14 +349,14 @@ def RC_edit_product(request,key):
 
         id = request.session.get("id")
         user = User_Master.objects.get(id=id)
-        rc = RC.objects.get(RC_ID=user)
+        rc = RC.objects.get(User_Master=user)
         # return HttpResponseRedirect(reverse('RC_view_product',args={'key':product.id}))
         return HttpResponseRedirect(reverse('RC_view_product',args=[product.id]))
 
     else:
         id = request.session.get("id")
         user = User_Master.objects.get(id=id)
-        rc = RC.objects.get(RC_ID=user)
+        rc = RC.objects.get(User_Master=user)
         product = Product.objects.get(id=key)
         return render(request,"rc/rc_edit_product.html",{'user':user,'rc':rc,'product':product})
 
@@ -373,7 +372,7 @@ def RC_delete_product(request,key):
 def Rc_change_password(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
-    rc=RC.objects.get(RC_ID=user)
+    rc=RC.objects.get(User_Master=user)
 
     if request.method=="POST":
         old_password = request.POST['op']
@@ -396,58 +395,44 @@ def Rc_change_password(request):
     else:
         return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc})
 
-
+#Done
 def Index(request):
-    id = request.session.get("id")
-    user = User_Master.objects.get(id=id)
-    customer=Customer.objects.get(Customer_ID=user)
     products = Product.objects.all()
-    return render(request,"ecom/index.html",{'user':user,'customer':customer,'products':products})
-    
+    return render(request,"ecom/index.html",{'products':products})
+ #Done   
 def Product_detail(request,key):
-    id = request.session.get("id")
-    user = User_Master.objects.get(id=id)
-    customer=Customer.objects.get(Customer_ID=user)
     product = Product.objects.get(pk=key)
-    return render(request,"ecom/product_detail.html",{'user':user,'customer':customer,'product':product})
-
+    return render(request,"ecom/product_detail.html",{'product':product})
+#Done
 def Profile(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
-    customer=Customer.objects.get(Customer_ID=user)
+    customer=Customer.objects.get(User_Master=user)
     return render(request,"ecom/profile.html",{'user':user,'customer':customer})
-    
+#Done
 def Logout(request):
     try:
         del request.session['id']
         del request.session['fname']
         del request.session['lname']
         del request.session['cart_items']
-        return render(request,'app/login.html')
+        return HttpResponseRedirect(reverse('login'))
     except:
-        return render(request,'app/login.html')
+        return HttpResponseRedirect(reverse('login'))
 
-
+#Done
 def Customer_update_profile(request):
     if request.method=="POST":
-        fname = request.POST['fname']
-        lname = request.POST['lname']
-        add = request.POST['add']
-        contact = request.POST['contact']
-        city = request.POST['city']
-        state = request.POST['state']
-        pincode = request.POST['pincode']
-
         id = request.session.get("id")
         user = User_Master.objects.get(id=id)
-        customer=Customer.objects.get(Customer_ID=user)
-        customer.Firstname=fname
-        customer.Lastname=lname
-        customer.Address=add
-        customer.Contact=contact
-        customer.City=city
-        customer.State=state
-        customer.Pincode=pincode
+        customer=Customer.objects.get(User_Master=user)
+        customer.Firstname=request.POST['fname']
+        customer.Lastname=request.POST['lname']
+        customer.Address=request.POST['add']
+        customer.Contact=request.POST['contact']
+        customer.City=request.POST['city']
+        customer.State=request.POST['state']
+        customer.Pincode=request.POST['pincode']
         try:
             if request.FILES['profile_pic']:
                 propic = request.FILES['profile_pic']
@@ -460,13 +445,12 @@ def Customer_update_profile(request):
     else:
         id = request.session.get("id")
         user = User_Master.objects.get(id=id)
-        customer=Customer.objects.get(Customer_ID=user)
+        customer=Customer.objects.get(User_Master=user)
         return render(request,"ecom/customer_update_profile.html",{'user':user,'customer':customer})
-
+#done
 def Change_password(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
-    customer=Customer.objects.get(Customer_ID=user)
     if request.method=="POST":
         old_password = request.POST['op']
         new_password = request.POST['np']
@@ -478,28 +462,28 @@ def Change_password(request):
                 user.Password=encrypted_pw
                 user.save()
                 msg="Your Password Changed Succsessfully!!!"
-                return render(request,"ecom/change_password.html",{'user':user,'customer':customer,'msg':msg})
+                return render(request,"ecom/change_password.html",{'msg':msg})
             else:
                 msg="New Password & Confirm Password Did Not Match!!!"
-                return render(request,"ecom/change_password.html",{'user':user,'customer':customer,'msg':msg})
+                return render(request,"ecom/change_password.html",{'msg':msg})
         else:
             msg="Old Password Is Incorect!!!"
-            return render(request,"ecom/change_password.html",{'user':user,'customer':customer,'msg':msg})
+            return render(request,"ecom/change_password.html",{'msg':msg})
     else:
-        return render(request,"ecom/change_password.html",{'user':user,'customer':customer})
+        return render(request,"ecom/change_password.html")
 
-
+#done
 def add_to_cart_or_buy_now(request,key):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
-    customer = Customer.objects.get(Customer_ID=user)
+    customer = Customer.objects.get(User_Master=user)
     product = Product.objects.get(id=key)
     quantity = request.POST['quantity_copy']
 
     if 'add_to_cart' in request.POST:
         per_pro_price = product.Product_Price
         total_amt = int(quantity)*int(per_pro_price)
-        new_cart_item = Cust_Cart.objects.create(Customer_ID=customer,Product_ID=product,Quantity=quantity,Total_Amount=total_amt)
+        new_cart_item = Cust_Cart.objects.create(Customer=customer,Product=product,Quantity=quantity,Total_Amount=total_amt)
         # AHI "ITEM ADDED TO CART SUCCESSFULLY NO MESSAGE FIRE KARAVO CHE... EK MESSAGE LAI RENDER MA PASS KARVO PADE"
         # PN RENDER MA PASS KARE TYARE PRODUCT na OBJECTS.ALL() KARI MOKALJE NAI TO ERROR MARSE
         # return render(request,"ecom/index.html",{'user':user,'customer':customer,'products':product})
@@ -511,47 +495,44 @@ def add_to_cart_or_buy_now(request,key):
         per_pro_price = product.Product_Price
         total_amt = int(quantity)*int(per_pro_price)
         total = total_amt + 40
-        new_cart_item = Cust_Cart.objects.create(Customer_ID=customer,Product_ID=product,Quantity=quantity,Total_Amount=total_amt)
+        new_cart_item = Cust_Cart.objects.create(Customer=customer,Product=product,Quantity=quantity,Total_Amount=total_amt)
         cart_i_up = int(request.session['cart_items']) + 1
         request.session['cart_items'] = cart_i_up
-        return render(request,"ecom/checkout.html",{'user':user,'customer':customer,'new_cart_item':new_cart_item,'item':quantity,'sub_total':total_amt,'total':total})
+        return render(request,"ecom/checkout.html",{'new_cart_item':new_cart_item,'item':quantity,'sub_total':total_amt,'total':total})
         # return HttpResponseRedirect(reverse('checkout'))
 
 
-
+#done
 def Cart(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
-    customer=Customer.objects.get(Customer_ID=user)
-    cust_cart = Cust_Cart.objects.filter(Customer_ID=customer)
-    return render(request,"ecom/cart.html",{'user':user,'customer':customer,'cust_cart':cust_cart})
+    customer=Customer.objects.get(User_Master=user)
+    cust_cart = Cust_Cart.objects.filter(Customer=customer)
+    return render(request,"ecom/cart.html",{'cust_cart':cust_cart})
     
-
+#done
 def edit_order(request,key):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
-    customer=Customer.objects.get(Customer_ID=user)
+    customer=Customer.objects.get(User_Master=user)
     item = Cust_Cart.objects.get(id=key)
     
     if 'update_plus' in request.POST:
         new_quant = int(item.Quantity) + 1
         item.Quantity = new_quant
-        item.Total_Amount = item.Product_ID.Product_Price * item.Quantity
+        item.Total_Amount = item.Product.Product_Price * item.Quantity
         item.save()
     
     if 'update_minus' in request.POST:
         new_quant = int(item.Quantity) - 1
         item.Quantity = new_quant
-        item.Total_Amount = item.Product_ID.Product_Price * item.Quantity
+        item.Total_Amount = item.Product.Product_Price * item.Quantity
         item.save()
     
     return HttpResponseRedirect(reverse("cart"))
-
+#done
 def remove_cart_item(request,key):
     id = request.session.get("id")
-    user = User_Master.objects.get(id=id)
-    customer=Customer.objects.get(Customer_ID=user)
-
     item = Cust_Cart.objects.get(id=key)
     item.delete()
     cart_i_up = int(request.session['cart_items']) - 1
@@ -562,31 +543,22 @@ def remove_cart_item(request,key):
 def Checkout(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
-    customer=Customer.objects.get(Customer_ID=user)
+    customer=Customer.objects.get(User_Master=user)
 
-    cust_cart = Cust_Cart.objects.filter(Customer_ID=customer)
+    cust_cart = Cust_Cart.objects.filter(Customer=customer)
     item=0
     sub_total=0
     for i in cust_cart:
         item=item+i.Quantity
         sub_total=sub_total+i.Total_Amount
-    total=sub_total+40
-    #amount = total*100
- 
-    # if request.method == "POST":
-    #     name = request.POST.get('name')
-    #     amount = total
-    #     client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
-    #     payment = client.order.create({'amount': amount*100, 'currency': 'INR',
-    #                                    'payment_capture': '1',
-    #                                    })   
-    return render(request,"ecom/checkout.html",{'user':user,'customer':customer,'cust_cart':cust_cart,'item':item,'sub_total':sub_total,'total':total})
+    total=sub_total+40 
+    return render(request,"ecom/checkout.html",{'cust_cart':cust_cart,'item':item,'sub_total':sub_total,'total':total})
 
 
 def Shipping_detail(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
-    customer=Customer.objects.get(Customer_ID=user)
+    customer=Customer.objects.get(User_Master=user)
   
     if 'Single' in request.POST:
         product_id = request.POST['product_id']
@@ -600,24 +572,24 @@ def Shipping_detail(request):
         product = Product.objects.get(id=product_id)
         order_id=uuid.uuid4()
         amount = product_price
-        rc = RC.objects.get(id = product.RC_ID.id)
+        rc = RC.objects.get(id = product.RC.id)
         product_Order_price = amount-40
         
         client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
         payment = client.order.create({'amount': amount*100, 'currency': 'INR','payment_capture': '1',})   
         invoice_no = randint(1000000,9999999)
         sub_total = product_price-40
-        new_order = Order.objects.create(Order_id=order_id,Customer_ID=customer,Total_Amount=product_price,Sub_Total_Amount=sub_total,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="",Invoice_No=invoice_no)
+        new_order = Order.objects.create(Order_id=order_id,Customer=customer,Total_Amount=product_price,Sub_Total_Amount=sub_total,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="",Invoice_No=invoice_no)
    
 
-        new_product_Order = Product_Order.objects.create(Order_ID=new_order,Product_ID=product,Quantity=product_quantity,Price=product_Order_price,RC_ID=rc.id,Customer_ID = customer.id)
+        new_product_Order = Product_Order.objects.create(Order=new_order,Product=product,Quantity=product_quantity,Price=product_Order_price,RC_ID=rc.id,Customer = customer.id)
         
         request.session['order_id']=new_order.id
         return render(request,"ecom/shipping_detail.html",{'user':user,'customer':customer,'payment':payment,'amount':product_price,'order_id':order_id})
  
     if 'Multiple' in request.POST:
         
-        cust_cart = Cust_Cart.objects.filter(Customer_ID=customer)
+        cust_cart = Cust_Cart.objects.filter(Customer=customer)
         item=0
         sub_total=0
         for i in cust_cart:
@@ -633,12 +605,11 @@ def Shipping_detail(request):
         order_id=uuid.uuid4()
         invoice_no = randint(1000000,9999999)
         
-        print(sub_total)
-        new_order = Order.objects.create(Order_id=order_id,Customer_ID=customer,Total_Amount=amount,Sub_Total_Amount=sub_total,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="",Invoice_No=invoice_no)
+      
+        new_order = Order.objects.create(Order_id=order_id,Customer=customer,Total_Amount=amount,Sub_Total_Amount=sub_total,Payment_status="panding",Razorpay_order_id="",Razorpay_payment_id="",Invoice_No=invoice_no)
         for i in cust_cart:
-            product_Order_price = i.Quantity*i.Product_ID.Product_Price
-            print(product_Order_price)
-            Product_Order.objects.create(Order_ID=new_order,Product_ID=i.Product_ID,Quantity=i.Quantity,Price=i.Total_Amount,RC_ID=i.Product_ID.RC_ID.id,Customer_ID = customer.id,Cart_ID=i.id)
+            product_Order_price = i.Quantity*i.Product.Product_Price
+            Product_Order.objects.create(Order=new_order,Product=i.Product,Quantity=i.Quantity,Price=i.Total_Amount,RC_ID=i.Product.RC.id,Customer = customer.id,Cart_ID=i.id)
         request.session['order_id']=new_order.id
         return render(request,"ecom/shipping_detail.html",{'user':user,'customer':customer,'payment':payment,'amount':amount,'order_id':order_id})
         
@@ -653,9 +624,9 @@ def Invoice(request):
         'razorpay_signature': response['razorpay_signature']
     }
     order = Order.objects.get(id=order_id)
-    product = Product_Order.objects.filter(Order_ID=order)
+    product = Product_Order.objects.filter(Order=order)
 
-    email = order.Customer_ID.Customer_ID.Email
+    email = order.Customer.User_Master.Email
     email_Subject = "Your Order Placed Suscessfully"
     sendmail_invoice(email_Subject,'invoice_email',email,{'order':order,'product':product})    
     order.Payment_status = "Success"
@@ -663,7 +634,7 @@ def Invoice(request):
     order.Razorpay_payment_id = response['razorpay_payment_id']
     order.razorpay_signature =  response['razorpay_signature']
     order.save()
-    product_order = Product_Order.objects.filter(Order_ID=order)
+    product_order = Product_Order.objects.filter(Order=order)
     try:
         for i in product_order:
             i.Payment_status="Success"
@@ -682,27 +653,27 @@ def Invoice(request):
         return render(request,"ecom/invoice.html",{'status':status})
 def View_Invoice(request,key):
     order = Order.objects.get(id=key)
-    product = Product_Order.objects.filter(Order_ID=order)
+    product = Product_Order.objects.filter(Order=order)
     return render(request,"ecom/invoice.html",{'order':order,'product':product})
 
 def Customer_orders(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
-    customer=Customer.objects.get(Customer_ID=user)
-    order = Order.objects.filter(Customer_ID=customer.id,Payment_status="Success")
-    order_product =  Product_Order.objects.filter(Customer_ID=customer.id,Payment_status="Success")
+    customer=Customer.objects.get(User_Master=user)
+    order = Order.objects.filter(Customer=customer.id,Payment_status="Success")
+    order_product =  Product_Order.objects.filter(Customer=customer.id,Payment_status="Success")
     return render(request,"ecom/customer_orders.html",{'order_product':order_product,'order':order})
 
 def Customer_orders_detail(request,key):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
-    customer=Customer.objects.get(Customer_ID=user)
-    order_product =  Product_Order.objects.filter(Order_ID=key,Customer_ID=customer.id,Payment_status="Success")
+    customer=Customer.objects.get(User_Master=user)
+    order_product =  Product_Order.objects.filter(Order=key,Customer=customer.id,Payment_status="Success")
     return render(request,"ecom/customer_orders_detail.html",{'order_product':order_product,})
 
 def Invoice_pdf(request,key):
     order=Order.objects.get(id=key)
-    product = Product_Order.objects.filter(Order_ID=order)
+    product = Product_Order.objects.filter(Order=order)
     
     data = {
              'order':order,
@@ -710,4 +681,5 @@ def Invoice_pdf(request,key):
         }
     pdf = render_to_pdf('ecom/invoice.html',data)
     return HttpResponse(pdf, content_type='application/pdf')
+    
     

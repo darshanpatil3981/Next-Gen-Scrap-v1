@@ -18,11 +18,11 @@
             {% for i in cust_cart %}
             <div class="col-md-6">
                 <figure class="itemside  mb-3">
-                    <div class="aside"><img src="{{i.Product_ID.Product_Img.url}}"
+                    <div class="aside"><img src="{{i.Product.Product_Img.url}}"
                             style="height: 100px;width: 120px;" class="border img-xs"></div>
                     <figcaption class="info">
-                        <p>{{i.Product_ID.Product_Name}} </p>
-                        <span>{{i.Quantity}}x ₹{{i.Product_ID.Product_Price}} =  Total ₹{{i.Total_Amount}} </span>
+                        <p>{{i.Product.Product_Name}} </p>
+                        <span>{{i.Quantity}}x ₹{{i.Product.Product_Price}} =  Total ₹{{i.Total_Amount}} </span>
                     </figcaption>
                 </figure>
 
@@ -35,11 +35,11 @@
         <div class="row">
             <div class="col-md-6">
                 <figure class="itemside  mb-3">
-                    <div class="aside"><img src="{{new_cart_item.Product_ID.Product_Img.url}}"
+                    <div class="aside"><img src="{{new_cart_item.Product.Product_Img.url}}"
                             style="height: 100px;width: 120px;" class="border img-xs"></div>
                     <figcaption class="info">
-                        <p>{{new_cart_item.Product_ID.Product_Name}} </p>
-                        <span>{{new_cart_item.Quantity}}x ₹{{new_cart_item.Product_ID.Product_Price}} =  Total ₹{{new_cart_item.Total_Amount}} </span>
+                        <p>{{new_cart_item.Product.Product_Name}} </p>
+                        <span>{{new_cart_item.Quantity}}x ₹{{new_cart_item.Product.Product_Price}} =  Total ₹{{new_cart_item.Total_Amount}} </span>
                     </figcaption>
                 </figure>
             </div> 
@@ -61,11 +61,11 @@
                 <tr>
                     <td>
                         <figure class="itemside">
-                            <div class="aside"><img style="width: 235px;height: 140px;" src="{{i.Product_ID.Product_Img.url}}"
+                            <div class="aside"><img style="width: 235px;height: 140px;" src="{{i.Product.Product_Img.url}}"
                                     class="img-sm"></div>
                             <figcaption class="info" style="margin-left: 40px;font-size: 20px;width: 235px;">
-                                <a href="#" class="title text-dark">{{i.Product_ID.Product_Name}}</a>
-                                <p class="text-muted small">Seller Name : {{i.Product_ID.Seller_Name}} <br></p>
+                                <a href="#" class="title text-dark">{{i.Product.Product_Name}}</a>
+                                <p class="text-muted small">Seller Name : {{i.Product.Seller_Name}} <br></p>
                             </figcaption>
                         </figure>
                     </td>
@@ -80,7 +80,7 @@
                                 
                                     
                                   
-                                    <label>{{i.Quantity}} x ₹{{i.Product_ID.Product_Price}}</label>
+                                    <label>{{i.Quantity}} x ₹{{i.Product.Product_Price}}</label>
                                 
                             </div>
                         </form>
@@ -118,20 +118,20 @@
        <form action="{% url 'shipping_detail' %}" method="post">
         {% csrf_token %}
         {% if new_cart_item %}
-        <input type="hidden" name="product_id" value="{{new_cart_item.Product_ID.id}}">
+        <input type="hidden" name="product_id" value="{{new_cart_item.Product.id}}">
         {% endif %}
         <input type="hidden" name="product_quantity" value="{{item}}">
         <input type="hidden" name="total" value="{{total}}">
 
         {% if new_cart_item %}
         <input type="hidden" name="cart_id" value="{{new_cart_item.id}}">
-        <button type="submit" class="btn btn-primary" name="Single">Place Order</button>
+        <button type="submit" class="btn btn-primary float-md-right" name="Single">Place Order</button>
         {% endif %}
 
         {% if cust_cart %}
         <input type="hidden" name="all_Prod" value="">
        
-        <button type="submit" class="btn btn-primary" name="Multiple">Place Order</button>
+        <button type="submit" class="btn btn-primary float-md-right" name="Multiple">Place Order</button>
         {% endif %}
        </form>
        

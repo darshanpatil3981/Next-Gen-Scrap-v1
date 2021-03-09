@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'NGS_Git',
+        'NAME': 'ngs',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',

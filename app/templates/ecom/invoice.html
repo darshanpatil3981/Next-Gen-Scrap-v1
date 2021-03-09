@@ -48,9 +48,9 @@
       </div>
       <div class="col-sm-6 order-sm-0" > <strong>Invoiced To:</strong>
         <address>
-          {{order.Customer_ID.Firstname}} {{order.Customer_ID.Lastname}}<br />
-          {{order.Customer_ID.Address}}<br />
-          {{order.Customer_ID.City}},{{order.Customer_ID.State}}-{{order.Customer_ID.Pincode}}<br />
+          {{order.Customer.Firstname}} {{order.Customer.Lastname}}<br />
+          {{order.Customer.Address}}<br />
+          {{order.Customer.City}},{{order.Customer.State}}-{{order.Customer.Pincode}}<br />
           India.
         </address>
       </div>
@@ -76,8 +76,8 @@
             <tbody>
               {% for i in product %}
               <tr>
-                <td><span class="text-3"><span class="font-weight-500">{{i.Product_ID.Product_Name}}</span>
-                <td class="text-center">{{i.Product_ID.Product_Price}}Rs.</td>
+                <td><span class="text-3"><span class="font-weight-500">{{i.Product.Product_Name}}</span>
+                <td class="text-center">{{i.Product.Product_Price}}Rs.</td>
                 <td class="text-center">{{i.Quantity}}</td>
                 <td class="text-right">{{i.Price}}Rs.</td>
               </tr>

@@ -13,7 +13,7 @@ class User_Master(models.Model):
     is_updated = models.DateTimeField(auto_now=True,blank=False)
 
 class Customer(models.Model):
-    Customer_ID = models.ForeignKey(User_Master,on_delete=models.CASCADE)
+    User_Master = models.ForeignKey(User_Master,on_delete=models.CASCADE)
     Firstname = models.CharField(max_length=30)
     Lastname = models.CharField(max_length=30)
     Address = models.CharField(max_length=100)
@@ -24,7 +24,7 @@ class Customer(models.Model):
     Profile_Pic = models.ImageField(upload_to='Profile_Pics',default="")
 
 class GC(models.Model):
-    GC_ID = models.ForeignKey(User_Master,on_delete=models.CASCADE)
+    User_Master = models.ForeignKey(User_Master,on_delete=models.CASCADE)
     Firstname = models.CharField(max_length=30)
     Lastname = models.CharField(max_length=30)
     Shop_name = models.CharField(max_length=30,default="")
@@ -36,7 +36,7 @@ class GC(models.Model):
     Profile_Pic = models.ImageField(upload_to='Profile_Pics',default="")
 
 class RC(models.Model):
-    RC_ID = models.ForeignKey(User_Master,on_delete=models.CASCADE)
+    User_Master = models.ForeignKey(User_Master,on_delete=models.CASCADE)
     Firstname = models.CharField(max_length=30)
     Lastname = models.CharField(max_length=30)
     Company_name = models.CharField(max_length=30,default="")
@@ -48,7 +48,7 @@ class RC(models.Model):
     Profile_Pic = models.ImageField(upload_to='Profile_Pics',default="")
 
 class Product(models.Model):
-    RC_ID = models.ForeignKey(RC,on_delete=models.CASCADE)
+    RC = models.ForeignKey(RC,on_delete=models.CASCADE)
     Seller_Name= models.CharField(max_length=30,default="")
     Product_Name = models.CharField(max_length=30)
     Product_Price = models.FloatField()
@@ -57,14 +57,14 @@ class Product(models.Model):
     Current_orders = models.IntegerField(default=0)
 
 class Cust_Cart(models.Model):
-    Customer_ID = models.ForeignKey(Customer,on_delete=models.CASCADE)
-    Product_ID = models.ForeignKey(Product,on_delete=models.CASCADE)
+    Customer= models.ForeignKey(Customer,on_delete=models.CASCADE)
+    Product = models.ForeignKey(Product,on_delete=models.CASCADE)
     Quantity = models.IntegerField(default=0)
     Total_Amount = models.IntegerField(default=0)
 
 class Order(models.Model):
     Order_id = models.CharField(unique=True, max_length=100, null=True, blank=True, default=None) 
-    Customer_ID = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    Customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
     Total_Amount = models.FloatField(default=0)
     Sub_Total_Amount = models.FloatField(default=0)
     Payment_status= models.CharField(max_length=20, null=True, blank=True)
@@ -75,10 +75,10 @@ class Order(models.Model):
     razorpay_signature = models.CharField(max_length=500, null=True, blank=True)
 
 class Product_Order(models.Model):
-    Order_ID = models.ForeignKey(Order, on_delete = models.CASCADE)
+    Order = models.ForeignKey(Order, on_delete = models.CASCADE)
     RC_ID = models.CharField(max_length=20, null=True, blank=True)
-    Customer_ID = models.CharField(max_length=20,null=True, blank=True)
-    Product_ID = models.ForeignKey(Product,on_delete=models.CASCADE)
+    Customer = models.CharField(max_length=20,null=True, blank=True)
+    Product = models.ForeignKey(Product,on_delete=models.CASCADE)
     Cart_ID = models.CharField(max_length=20,null=True, blank=True)
     Payment_status= models.CharField(max_length=20, null=True, blank=True)
     Quantity = models.PositiveIntegerField()

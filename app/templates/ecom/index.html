@@ -88,7 +88,7 @@
                 <a href="{% url 'product_detail' key=i.id %}" class="img-wrap"> <img src="{{i.Product_Img.url}}"> </a>
                 <figcaption class="info-wrap">
                     <a href="{% url 'product_detail' key=i.id %}" class="title">{{i.Product_Name}}</a>
-                    <div class="price mt-1">Rs. {{i.Product_Price}}</div> <!-- price-wrap.// -->
+                    <div class="price mt-1">₹ {{i.Product_Price}}</div> <!-- price-wrap.// -->
                 </figcaption>
             </div>
         </div>
