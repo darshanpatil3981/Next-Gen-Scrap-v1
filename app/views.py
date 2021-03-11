@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 import uuid
 from django.utils import timezone
 from django.template.loader import render_to_string
+import datetime
 
 from django.conf import settings 
 # Create your views here.
@@ -632,6 +633,7 @@ def Invoice(request):
     order.Payment_status = "Success"
     order.Razorpay_order_id = response['razorpay_order_id']
     order.Razorpay_payment_id = response['razorpay_payment_id']
+    order.Datetime_of_payment = datetime.datetime.now()
     order.razorpay_signature =  response['razorpay_signature']
     order.save()
     product_order = Product_Order.objects.filter(Order=order)
@@ -682,4 +684,5 @@ def Invoice_pdf(request,key):
     pdf = render_to_pdf('ecom/invoice.html',data)
     return HttpResponse(pdf, content_type='application/pdf')
     
-    
+def temp(request):
+    return render(request,"rc/base.html",)
