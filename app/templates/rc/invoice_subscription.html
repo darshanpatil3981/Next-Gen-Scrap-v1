@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from demo.harnishdesign.net/html/koice/index-invoice-flights.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Mar 2021 15:34:55 GMT -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://demo.harnishdesign.net/html/koice/images/favicon.png" rel="icon" />
+<title>Invoice</title>
+<meta name="author" content="harnishdesign.net">
+
+<!-- Web Fonts
+======================= -->
+ <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900' type='text/css'> 
+
+
+<link rel="stylesheet" type="text/css" href="http://demo.harnishdesign.net/html/koice/vendor/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="http://demo.harnishdesign.net/html/koice/vendor/font-awesome/css/all.min.css"/>
+<link rel="stylesheet" type="text/css" href="http://demo.harnishdesign.net/html/koice/css/stylesheet.css"/> 
+</head>
+<body>
+  
+<!-- Container -->
+<div class="container-fluid invoice-container"> 
+  <!-- Header -->
+  <header>
+    <div class="row align-items-center">
+      <div class="col-sm-7 text-center text-sm-left mb-3 mb-sm-0"> <img id="logo" src="https://i.ibb.co/1TQpH1n/logo.png" style="height: 80px;" title="Koice" alt="Koice" /> </div>
+      <div class="col-sm-5 text-center text-sm-right">
+        <h4 class="mb-0">Invoice</h4>
+        <p class="mb-0">Invoice Number - {{subscription.Invoice_No}}</p>
+      </div>
+    </div>
+    <hr>
+  </header>
+  
+  <!-- Main Content -->
+  <main>
+    <div class="row">
+      <div class="col-sm-6 text-sm-right order-sm-1"> <strong>Pay To:</strong>
+        <address>
+        Next Gen Scrap Inc<br />
+        2705 N. Enterprise St<br />
+        Orange, India 92865
+        </address>
+      </div>
+      <div class="col-sm-6 order-sm-0" > <strong>Invoiced To:</strong>
+        <address>
+          {{rc.Firstname}} {{rc.Lastname}}<br />
+          {{rc.Address}}<br />
+          {{rc.City}},{{rc.State}}-{{rc.Pincode}}<br />
+          India.
+        </address>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 mb-3">  </div>
+      <div class="col-sm-6 mb-3 text-sm-right"> <strong>Booking Date:</strong><br>
+        <span>{{subscription.Subscription_Starting_Date}}</span> </div>
+    </div>
+    <div class="card">
+      <div class="card-header"> <span class="font-weight-600 text-4">Order Summary</span> </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <td class="col-2 border-top-0" style="width: 5px;"><strong>Description</strong></td>
+                <td class="col-2  border-top-0" style="width: 5px;"><strong>Starting Date</strong></td>
+                <td class="col-2  border-top-0" style="width: 5px;"><strong>Ending Date</strong></td>
+                <td class="col-2  border-top-0" style="width: 5px;"><strong>Total Amount</strong></td>
+              </tr>
+            </thead>
+            <tbody>
+             
+              <tr>
+                <td><span class="text-3"><span class="font-weight-500">{{subscription.Subscription_Name}}</span>
+                <td class="text-center">{{subscription.Subscription_Starting_Date}}</td>
+                <td class="text-center">{{subscription.Subscription_Ending_Date}}</td>
+                <td class="text-right">{{subscription.Subscription_Amount}} Rs.</td>
+              </tr>
+              <tr>
+                <td colspan="2" class="bg-light-2 " style="width: 5px;"><strong>Total</strong></td>
+                <td colspan="2" class="bg-light-2 text-right">{{subscription.Subscription_Amount}} Rs.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="table-responsive d-print-none">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <td class="text-center"><strong>Transaction Date</strong></td>
+            <td class="text-center"><strong>Gateway</strong></td>
+            <td class="text-center"><strong>Transaction ID</strong></td>
+            <td class="text-center"><strong>Amount</strong></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">{{subscription.Subscription_Starting_Date}}</td>
+            <td class="text-center">Razer Pay</td>
+            <td class="text-center">{{subscription.Razorpay_payment_id}}</td>
+            <td class="text-center">{{subscription.Subscription_Amount}} INR  </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <!-- Footer -->
+  <footer class="text-center">
+    <p class="text-1"><strong>NOTE :</strong> This is computer generated receipt and does not require physical signature.</p>
+    <a href="{% url 'invoice_sub_pdf' key=subscription.id %}" class="btn btn-light border text-black-50 shadow-none"><i class="fa fa-download"></i> Download</a> </div>
+  </footer>
+</div>
+<!-- Back to My Account Link -->
+<p class="text-center d-print-none"><a href="{% url 'rc_scrap_collectors'  %}">&laquo; Back To Home</a></p>
+</body>
+
+<!-- Mirrored from demo.harnishdesign.net/html/koice/index-invoice-flights.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Mar 2021 15:34:55 GMT -->
+</html>

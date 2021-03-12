@@ -30,6 +30,10 @@ urlpatterns = [
      path("RC_view_product/<int:key>",views.RC_view_product,name="RC_view_product"),
      path("RC_edit_product/<int:key>",views.RC_edit_product,name="RC_edit_product"),
      path("RC_delete_product/<int:key>",views.RC_delete_product,name="RC_delete_product"),
+     path("subscription_detail/",views.Subscription_detail,name="subscription_detail"),
+     path("Invoice_Subscription/",views.Invoice_Subscription,name="invoice_subscription"),
+     path("invoice_sub_pdf/<int:key>",views.Invoice_Sub_Pdf,name="invoice_sub_pdf"),
+    
 
      #E-com
      path("index/",views.Index,name="index"),
@@ -47,6 +51,7 @@ urlpatterns = [
      path("checkout/",views.Checkout,name="checkout"),
      path("shipping_detail/",views.Shipping_detail,name="shipping_detail"),
      path("invoice/",views.Invoice,name="invoice"),
+     path("temp/",views.temp,name="temp"),
      path("view_Invoice/<int:key>",views.View_Invoice,name="view_Invoice"),
      path("invoice_pdf/<int:key>",views.Invoice_pdf,name="invoice_pdf"),
      

@@ -1,0 +1,258 @@
+{% extends "rc/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<style>
+  @media (min-width: 900px) {
+    .background {
+      padding: 0 0 25px;
+    }
+  }
+
+  .container {
+    margin: 0 auto;
+    padding: 50px 0 0;
+    max-width: 960px;
+    width: 100%;
+  }
+
+  .panel {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px 25px;
+    position: relative;
+    width: 100%;
+    z-index: 10;
+  }
+
+  .pricing-table {
+    box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.08), 0px 20px 31px 3px rgba(0, 0, 0, 0.09), 0px 8px 20px 7px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 900px) {
+    .pricing-table {
+      flex-direction: row;
+    }
+  }
+
+  .pricing-table * {
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .pricing-plan {
+    border-bottom: 1px solid #e1f1ff;
+    padding: 25px;
+  }
+
+  .pricing-plan:last-child {
+    border-bottom: none;
+  }
+
+  @media (min-width: 900px) {
+    .pricing-plan {
+      border-bottom: none;
+      border-right: 1px solid #e1f1ff;
+      flex-basis: 100%;
+      padding: 25px 50px;
+    }
+
+    .pricing-plan:last-child {
+      border-right: none;
+    }
+  }
+
+  .pricing-img {
+    margin-bottom: 25px;
+    max-width: 100%;
+  }
+
+  .pricing-header {
+    color: #888;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .pricing-features {
+    color: #016FF9;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 50px 0 25px;
+  }
+
+  .pricing-features-item {
+    border-top: 1px solid #e1f1ff;
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 15px 0;
+  }
+
+  .pricing-features-item:last-child {
+    border-bottom: 1px solid #e1f1ff;
+  }
+
+  .pricing-price {
+    color: #016FF9;
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .pricing-button {
+    border: 1px solid #9dd1ff;
+    border-radius: 10px;
+    color: #348EFE;
+    display: inline-block;
+    margin: 25px 0;
+    padding: 15px 35px;
+    text-decoration: none;
+    transition: all 150ms ease-in-out;
+  }
+
+  .pricing-button:hover,
+  .pricing-button:focus {
+    background-color: #e1f1ff;
+  }
+
+  .pricing-button.is-featured {
+    background-color: #48aaff;
+    color: #fff;
+  }
+
+  .pricing-button.is-featured:hover,
+  .pricing-button.is-featured:active {
+    background-color: #269aff;
+  }
+</style>
+
+<div class="background" style="padding-left: 270px;">
+  
+  <h1 class="display-2 text-black" style="color: #48aaff;height: 10px;">Subscription Detail</h1>
+ 
+  <div class="container">
+    <hr class="my-4" />
+    <h6 class="heading-small text-muted mb-4" style="font-size: 17px;">Plan Detail</h6>
+    <div class="pl-lg-4">
+      <div class="row" style="height: 68px;">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-control-label" for="input-address">Subscription Name</label>
+            <input id="input-address" class="form-control" placeholder="Subscription Name" name="subscription_name" value="{{subscription_name}}" type="text"
+              disabled style="color: #172b4d;background-color: #f8f9fe;border: none; padding-bottom: 30px;">
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="height: 68px;">
+        <div class="col-lg-6" style="padding-left: 15px;">
+          <div class="form-group">
+            <label class="form-control-label" for="input-email">Subscription Duration</label>
+            <input type="text" id="input-email" class="form-control" placeholder=" Subscription Duration" name="subscription_duration" value="{{subscription__duration}}"
+              disabled style="color: #172b4d;background-color: #f8f9fe;border: none; padding-bottom: 30px;">
+          </div>
+        </div>
+      </div>
+      <div class="row" style="height: 68px;">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label class="form-control-label" for="input-city">Starting Date</label>
+            <input type="text" id="input-city" class="form-control" placeholder="Starting Date" name="starting_date" value="{{starting_date}}" disabled
+            style="color: #172b4d;background-color: #f8f9fe;border: none; padding-bottom: 30px;">
+          </div>
+        </div>
+        <div class="col-lg-4" >
+          <div class="form-group">
+            <label class="form-control-label" for="input-country">Ending Date </label>
+            <input type="text" id="input-country" class="form-control" placeholder="Ending Date" name="ending_date" value="{{ending_date}}" disabled
+            style="color: #172b4d;background-color: #f8f9fe;border: none; padding-bottom: 30px;">
+          </div>
+        </div>
+       
+      </div>
+      <div class="row" style="height: 68px;">
+        <div class="col-lg-6" style="padding-left: 15px;">
+          <div class="form-group">
+            <label class="form-control-label" for="input-email">Total Amount</label>
+            <input type="text" id="input-email" class="form-control" placeholder="Total Amoun" name="total_amount" value="₹ {{total_amount}}"
+              disabled style="color: #172b4d;background-color: #f8f9fe;border: none; padding-bottom: 30px;">
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="my-4" />
+
+    <h6 class="heading-small text-muted mb-4" style="font-size: 17px;">Billing Address</h6>
+    <div class="pl-lg-4">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-control-label" for="input-address">Address</label>
+            <input id="input-address" class="form-control" placeholder="Home Address" value="{{rc.Address}}" type="text"
+               style="color: #172b4d;">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6" style="padding-left: 15px;">
+          <div class="form-group">
+            <label class="form-control-label" for="input-email">Contect</label>
+            <input type="text" id="input-email" class="form-control" placeholder="1234567890" value="{{rc.Contact}}"
+               style="color: #172b4d;">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label class="form-control-label" for="input-city">City</label>
+            <input type="text" id="input-city" class="form-control" placeholder="City" value="{{rc.City}}" 
+              style="color: #172b4d;">
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label class="form-control-label" for="input-country">State</label>
+            <input type="text" id="input-country" class="form-control" placeholder="State" value="{{rc.State}}" 
+              style="color: #172b4d;">
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label class="form-control-label" for="input-country">Postal code</label>
+            <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code"
+              value="{{rc.Pincode}}"  style="color: #172b4d;">
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="my-4" />
+
+   
+        <center>
+          <div style="padding-top: 20px;">
+            <form action="{% url 'invoice_subscription' %}" method="POST">
+              {% csrf_token %}
+              <script src="https://checkout.razorpay.com/v1/checkout.js" 
+              data-key="rzp_test_UtV7JVYk3ROncb"
+              data-amount="{% widthratio amount 1 100 %}" 
+              data-currency="INR" data-order_id="{{payment.id}}"
+              data-description="Easy To reuse Scrap" 
+              data-prefill.name="{{rc.Firstname}}"
+              data-prefill.email="{{user.Email}}" 
+              data-theme.color="#528FF0"
+              data-payment_button_id="pl_GdRmzRJExgqjHh">
+           </script>
+    
+            </form>
+           
+          </div>
+    
+        </center>
+  </div>
+</div>
+</div>
+{% endblock content %}

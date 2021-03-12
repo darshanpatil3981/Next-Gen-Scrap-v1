@@ -9,6 +9,9 @@ from django.views.decorators.csrf import csrf_exempt
 import uuid
 from django.utils import timezone
 from django.template.loader import render_to_string
+from datetime import datetime, timedelta
+
+
 
 from django.conf import settings 
 # Create your views here.
@@ -151,6 +154,8 @@ def Validate_login(request):
                 customer=Customer.objects.get(User_Master=User)
                 request.session['fname']=customer.Firstname
                 request.session['lname']=customer.Lastname
+               
+
 
                 user = User_Master.objects.get(id=User.id)
                 customer = Customer.objects.get(User_Master=user)
@@ -169,7 +174,8 @@ def Validate_login(request):
                 request.session['rcid']=rc.id
                 request.session['fname']=rc.Firstname
                 request.session['lname']=rc.Lastname
-                return render(request,"rc/rc_dashboard.html")
+                
+                return render(request,"rc/rc_scrap_collectors.html")
         else:
             message = "Incorect Password!!"
             return render(request,"app/login.html",{'msg':message,})        
@@ -394,6 +400,91 @@ def Rc_change_password(request):
             return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc,'msg':msg})
     else:
         return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc})
+def Subscription_detail(request):
+    if 'personal' in request.POST: 
+        subscription_name = "Personal"
+        subscription__duration = "30 Days"
+        starting_date = datetime.now().date()
+        ending_date = starting_date+timedelta(days=30)
+        total_amount = 100
+    elif 'professional' in request.POST: 
+        subscription_name = "Personal"
+        subscription__duration = "184 Days"
+        starting_date = datetime.now().date()
+        ending_date = starting_date+timedelta(days=184)
+        total_amount = 600
+    elif 'enterprise' in request.POST: 
+        subscription_name = "Enterprise"
+        subscription__duration = "365 Days"
+        starting_date = datetime.now().date()
+        ending_date = starting_date+timedelta(days=365)
+        total_amount = 1200
+
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    rc=RC.objects.get(User_Master=user)
+
+
+    client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
+    payment = client.order.create({'amount': total_amount*100, 'currency': 'INR','payment_capture': '1',})   
+    invoice_no = randint(1000000,9999999)
+    new_subscription = Subscription.objects.create(RC=rc,
+                                                       Is_Active=False,
+                                                       Subscription_Name=subscription_name,
+                                                       Subscription_Amount=total_amount,
+                                                       Subscription_Starting_Date=starting_date,
+                                                       Subscription_Ending_Date=ending_date,
+                                                       Invoice_No=invoice_no,
+                                                       Razorpay_order_id="",
+                                                       Razorpay_payment_id="",
+                                                       razorpay_signature="",
+                                                       )
+    request.session['subscription_id']=new_subscription.id
+    return render(request,"rc/Subscription_detail.html",{'payment':payment,'subscription_name':subscription_name,'subscription__duration':subscription__duration,'starting_date':starting_date,'ending_date':ending_date,'amount':total_amount,'total_amount':total_amount,'rc':rc,'user':user})
+
+@csrf_exempt
+def Invoice_Subscription(request):
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    rc=RC.objects.get(User_Master=user)
+    response=request.POST
+    subscription_id=request.session.get("subscription_id")
+    verification = {
+        'razorpay_order_id': response['razorpay_order_id'],
+        'razorpay_payment_id': response['razorpay_payment_id'],
+        'razorpay_signature': response['razorpay_signature']
+    }
+    subscription = Subscription.objects.get(id=subscription_id)
+       
+   
+    client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
+    try:
+        status = client.utility.verify_payment_signature(verification)
+        subscription.Is_Active=True
+        subscription.Razorpay_order_id = response['razorpay_order_id']
+        subscription.Razorpay_payment_id = response['razorpay_payment_id']
+        subscription.razorpay_signature =  response['razorpay_signature']
+        subscription.save()
+        email = user.Email
+        email_Subject = "Your Subscription Activated"
+        sendmail_invoice_subscription(email_Subject,'invoice_subscription_email',email,{'subscription':subscription,'rc':rc,'user':user}) 
+        return render(request,"rc/invoice_subscription.html",{'subscription':subscription,'rc':rc,'user':user})
+    except:
+        print("Filed")
+        return render(request,"rc/invoice_subscription.html",)
+def Invoice_Sub_Pdf(request,key):
+    subscription = Subscription.objects.get(id=key)
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    rc=RC.objects.get(User_Master=user)
+    
+    data = {
+             'subscription':subscription,
+             'rc':rc,
+             'user':user
+        }
+    pdf = render_to_pdf('rc/invoice_subscription.html',data)
+    return HttpResponse(pdf, content_type='application/pdf')
 
 #Done
 def Index(request):
@@ -471,7 +562,7 @@ def Change_password(request):
             return render(request,"ecom/change_password.html",{'msg':msg})
     else:
         return render(request,"ecom/change_password.html")
-
+    
 #done
 def add_to_cart_or_buy_now(request,key):
     id = request.session.get("id")
@@ -632,6 +723,7 @@ def Invoice(request):
     order.Payment_status = "Success"
     order.Razorpay_order_id = response['razorpay_order_id']
     order.Razorpay_payment_id = response['razorpay_payment_id']
+    order.Datetime_of_payment = datetime.datetime.now()
     order.razorpay_signature =  response['razorpay_signature']
     order.save()
     product_order = Product_Order.objects.filter(Order=order)
@@ -661,6 +753,14 @@ def Customer_orders(request):
     user = User_Master.objects.get(id=id)
     customer=Customer.objects.get(User_Master=user)
     order = Order.objects.filter(Customer=customer.id,Payment_status="Success")
+    # for i in order:
+    #      t=i.Datetime_of_payment
+    #      print("Before Add")
+    #      print(t)
+    #      t = t+timedelta(Days=30)
+    #      print("After Add")
+
+    #      print(t)
     order_product =  Product_Order.objects.filter(Customer=customer.id,Payment_status="Success")
     return render(request,"ecom/customer_orders.html",{'order_product':order_product,'order':order})
 
@@ -682,4 +782,5 @@ def Invoice_pdf(request,key):
     pdf = render_to_pdf('ecom/invoice.html',data)
     return HttpResponse(pdf, content_type='application/pdf')
     
-    
+def temp(request):
+    return render(request,"rc/base.html",)
