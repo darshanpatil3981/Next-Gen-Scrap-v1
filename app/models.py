@@ -97,7 +97,11 @@ class Subscription(models.Model):
     razorpay_signature = models.CharField(max_length=500, null=True, blank=True)
 
 
-    
+class Ecom_comments(models.Model):
+    Product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    Customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    Comment_text = models.CharField(max_length=500)
+    Comment_time = models.DateTimeField()
 
 
 

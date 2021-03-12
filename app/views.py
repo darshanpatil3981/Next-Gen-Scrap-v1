@@ -55,6 +55,7 @@ def is_already_created(request):
             return render(request,"app/enter_email.html",{'error':message,'role':role})
         else:
             otp = randint(100000,999999)
+            print(otp)
             encrypted_otp=make_password(otp)
             email_Subject = "Customer Email Verification"
             sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':'Dear customer','otp':otp})
@@ -496,7 +497,8 @@ def Index(request):
  #Done   
 def Product_detail(request,key):
     product = Product.objects.get(pk=key)
-    return render(request,"ecom/product_detail.html",{'product':product})
+    comments = Ecom_comments.objects.filter(Product=product)
+    return render(request,"ecom/product_detail.html",{'product':product,'comments':comments})
 #Done
 def Profile(request):
     id = request.session.get("id")
@@ -787,3 +789,16 @@ def Invoice_pdf(request,key):
     
 def temp(request):
     return render(request,"rc/base.html",)
+
+def Add_coomment_ecom(request,key):
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    customer=Customer.objects.get(User_Master=user)
+    product = Product.objects.get(id=key)
+
+    print("Got HERE")
+    cmt_text = request.POST['cmt_msg']
+    cmt_date = datetime.now().date()
+    cmt_obj = Ecom_comments.objects.create(Product=product,Customer=customer,Comment_text=cmt_text,Comment_time=cmt_date)
+    print("Here too")
+    return HttpResponseRedirect(reverse('product_detail',args=[product.id]))
