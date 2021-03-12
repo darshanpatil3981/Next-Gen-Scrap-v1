@@ -84,6 +84,19 @@ class Product_Order(models.Model):
     Quantity = models.PositiveIntegerField()
     Price = models.FloatField(default=0)
 
+class Subscription(models.Model):
+    RC = models.ForeignKey(RC,on_delete=models.CASCADE)
+    Is_Active = models.BooleanField() 
+    Subscription_Name = models.CharField(max_length=20,null=True, blank=True)
+    Subscription_Amount = models.FloatField(default=0)
+    Subscription_Starting_Date = models.DateTimeField()
+    Subscription_Ending_Date = models.DateTimeField()
+    Invoice_No = models.BigIntegerField(default=0)
+    Razorpay_order_id = models.CharField(max_length=500, null=True, blank=True)
+    Razorpay_payment_id = models.CharField(max_length=500, null=True, blank=True)
+    razorpay_signature = models.CharField(max_length=500, null=True, blank=True)
+
+
     
 
 

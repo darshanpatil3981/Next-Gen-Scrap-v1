@@ -306,10 +306,13 @@
                 aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="{% static 'GCassets/img/theme/team-4.jpg' %}">
+                  
+                   
+                    <img alt="Image placeholder" src="{% static 'images/user.png' %}">
+                    <!-- <img alt="Image placeholder" src="{{request.session.ppic.r}}"> -->
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{request.session.fname}} {{request.session.lname}}</span>
                   </div>
                 </div>
               </a>
@@ -317,16 +320,16 @@
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
-                <a href="#!" class="dropdown-item">
+                <a href="/rc_profile" class="dropdown-item">
                   <i class="ni ni-single-02" style="color: #172b4d;"></i>
                   <span>My profile</span>
                 </a>
-                <a href="#!" class="dropdown-item">
+                <a href="/rc_change_password" class="dropdown-item">
                   <i class="fa fa-lock" style="color: #172b4d;"></i>
                   <span>Change Password</span>
 
                   <div class="dropdown-divider"></div>
-                  <a href="#!" class="dropdown-item">
+                  <a href="/logout" class="dropdown-item">
                     <i class="ni ni-user-run"></i>
                     <span>Logout</span>
                   </a>
