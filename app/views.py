@@ -70,6 +70,7 @@ def is_already_created(request):
             return render(request,"app/enter_email.html",{'error':message,'role':role})
         else:
             otp = randint(100000,999999)
+            print(otp)
             encrypted_otp=make_password(otp)
             email_Subject = "Business Partner Email Verification"
             sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':'Dear Business Partner','otp':otp})
@@ -400,6 +401,8 @@ def Rc_change_password(request):
             return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc,'msg':msg})
     else:
         return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc})
+
+
 def Subscription_detail(request):
     if 'personal' in request.POST: 
         subscription_name = "Personal"
