@@ -799,6 +799,7 @@ def Add_coomment_ecom(request,key):
     print("Got HERE")
     cmt_text = request.POST['cmt_msg']
     cmt_date = datetime.now().date()
+    
     cmt_obj = Ecom_comments.objects.create(Product=product,Customer=customer,Comment_text=cmt_text,Comment_time=cmt_date)
     print("Here too")
     return HttpResponseRedirect(reverse('product_detail',args=[product.id]))
