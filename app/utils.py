@@ -24,9 +24,18 @@ def sendmail_invoice(subject,template,to,context):
     plain_message = strip_tags(html_message)
     from_email = 'nextgenscrap@gmail.com'
     send_mail(subject, plain_message, from_email, [to], html_message=html_message)
-def sendmail_invoice_subscription(subject,template,to,context):
+
+def sendmail_invoice_subscription_sc(subject,template,to,context):
     subject = subject
     template_str = 'rc/'+ template+'.html'
+    html_message = render_to_string(template_str, {'data': context})
+    plain_message = strip_tags(html_message)
+    from_email = 'nextgenscrap@gmail.com'
+    send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
+def sendmail_invoice_subscription_sc(subject,template,to,context):
+    subject = subject
+    template_str = 'sc/'+ template+'.html'
     html_message = render_to_string(template_str, {'data': context})
     plain_message = strip_tags(html_message)
     from_email = 'nextgenscrap@gmail.com'

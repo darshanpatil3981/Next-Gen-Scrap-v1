@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponseRedirect,reverse
+from django.shortcuts import render,HttpResponseRedirect,reverse,redirect
 from .models import *
 from random import *
 from .utils import *
@@ -124,7 +124,7 @@ def create_gc_rc(request):
     cname = request.POST['cname']
 
     if role == "Srap Collector":
-        role="GC"
+        role="SC"
     elif role == "Recycle Company":
         role="RC"
     
@@ -132,8 +132,8 @@ def create_gc_rc(request):
         if pswd==cpswd:
             encrypted_pw=make_password(pswd)
             newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role=role,is_created=True,is_verified=False,is_active=False,is_updated=False)
-            if role=="GC":
-                newsc = GC.objects.create(User_Master=newUser,Firstname=fname,Lastname=lname,Shop_name=cname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
+            if role=="SC":
+                newsc = SC.objects.create(User_Master=newUser,Firstname=fname,Lastname=lname,Shop_name=cname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
             if role=="RC":
                 newrc = RC.objects.create(User_Master=newUser,Firstname=fname,Lastname=lname,Company_name=cname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
             # return render(request,"app/index.html")
@@ -156,9 +156,6 @@ def Validate_login(request):
                 customer=Customer.objects.get(User_Master=User)
                 request.session['fname']=customer.Firstname
                 request.session['lname']=customer.Lastname
-               
-
-
                 user = User_Master.objects.get(id=User.id)
                 customer = Customer.objects.get(User_Master=user)
                 cart_items = Cust_Cart.objects.filter(Customer=customer)
@@ -168,8 +165,14 @@ def Validate_login(request):
                 request.session['cart_items'] = cart_badge
 
                 return HttpResponseRedirect(reverse('index'))
-            elif User.Role=="GC":
-                return render(request,"app/gc_dashboard.html")
+            elif User.Role=="SC":
+                request.session['id']=User.id
+                sc=SC.objects.get(User_Master=User)
+                request.session['scid']=sc.id
+                request.session['fname']=sc.Firstname
+                request.session['lname']=sc.Lastname
+
+                return redirect('sc_scrap_sock')
             elif User.Role=="RC":
                 request.session['id']=User.id
                 rc=RC.objects.get(User_Master=User)
@@ -426,13 +429,13 @@ def Subscription_detail(request):
 
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
-    rc=RC.objects.get(User_Master=user)
 
 
     client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
     payment = client.order.create({'amount': total_amount*100, 'currency': 'INR','payment_capture': '1',})   
     invoice_no = randint(1000000,9999999)
-    new_subscription = Subscription.objects.create(RC=rc,
+    new_subscription = Subscription.objects.create(User=user,
+                                                       Role = user.Role, 
                                                        Is_Active=False,
                                                        Subscription_Name=subscription_name,
                                                        Subscription_Amount=total_amount,
@@ -444,13 +447,18 @@ def Subscription_detail(request):
                                                        razorpay_signature="",
                                                        )
     request.session['subscription_id']=new_subscription.id
-    return render(request,"rc/Subscription_detail.html",{'payment':payment,'subscription_name':subscription_name,'subscription__duration':subscription__duration,'starting_date':starting_date,'ending_date':ending_date,'amount':total_amount,'total_amount':total_amount,'rc':rc,'user':user})
+    if(user.Role=='RC'):
+        rc=RC.objects.get(User_Master=user)
+        return render(request,"rc/Subscription_detail.html",{'payment':payment,'subscription_name':subscription_name,'subscription__duration':subscription__duration,'starting_date':starting_date,'ending_date':ending_date,'amount':total_amount,'total_amount':total_amount,'rc':rc,'user':user})
+    elif(user.Role=="SC"):
+        sc=SC.objects.get(User_Master=user)
+        return render(request,"sc/Subscription_detail.html",{'payment':payment,'subscription_name':subscription_name,'subscription__duration':subscription__duration,'starting_date':starting_date,'ending_date':ending_date,'amount':total_amount,'total_amount':total_amount,'sc':sc,'user':user})
+
 
 @csrf_exempt
 def Invoice_Subscription(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
-    rc=RC.objects.get(User_Master=user)
     response=request.POST
     subscription_id=request.session.get("subscription_id")
     verification = {
@@ -471,21 +479,38 @@ def Invoice_Subscription(request):
         subscription.save()
         email = user.Email
         email_Subject = "Your Subscription Activated"
-        sendmail_invoice_subscription(email_Subject,'invoice_subscription_email',email,{'subscription':subscription,'rc':rc,'user':user}) 
-        return render(request,"rc/invoice_subscription.html",{'subscription':subscription,'rc':rc,'user':user})
+        if(user.Role=='RC'):
+            rc=RC.objects.get(User_Master=user)
+            sendmail_invoice_subscription(email_Subject,'invoice_subscription_email',email,{'subscription':subscription,'rc':rc,'user':user}) 
+            return render(request,"rc/invoice_subscription.html",{'subscription':subscription,'rc':rc,'user':user})
+
+        elif(user.Role=="SC"):
+            sc=SC.objects.get(User_Master=user)
+            sendmail_invoice_subscription_sc(email_Subject,'invoice_subscription_email',email,{'subscription':subscription,'sc':sc,'user':user})
+            return render(request,"sc/invoice_subscription.html",{'subscription':subscription,'sc':sc,'user':user})
+
+        
     except:
         print("Filed")
         return render(request,"rc/invoice_subscription.html",)
+
 def Invoice_Sub_Pdf(request,key):
     subscription = Subscription.objects.get(id=key)
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
-    rc=RC.objects.get(User_Master=user)
-    
-    data = {
-             'subscription':subscription,
-             'rc':rc,
-             'user':user
+    if(user.Role=='RC'):    
+        rc=RC.objects.get(User_Master=user)
+        data = {
+                'subscription':subscription,
+                'rc':rc,
+                'user':user
+        }
+    elif(user.Role=="SC"):
+        sc=SC.objects.get(User_Master=user)
+        data = {
+                'subscription':subscription,
+                'sc':sc,
+                'user':user
         }
     pdf = render_to_pdf('rc/invoice_subscription.html',data)
     return HttpResponse(pdf, content_type='application/pdf')
@@ -803,3 +828,89 @@ def Add_coomment_ecom(request,key):
     cmt_obj = Ecom_comments.objects.create(Product=product,Customer=customer,Comment_text=cmt_text,Comment_time=cmt_date)
     print("Here too")
     return HttpResponseRedirect(reverse('product_detail',args=[product.id]))
+
+
+#SC Views
+
+def Sc_Profile(request):
+    id=request.session.get("id")
+    user=User_Master.objects.get(id=id)
+    sc=SC.objects.get(User_Master=user)
+    return render(request,"sc/sc_profile.html",{'user':user,'sc':sc})
+
+def Sc_Update_Profile(request):
+    if request.method=="POST":
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        add = request.POST['add']
+        contact = request.POST['contact']
+        city = request.POST['city']
+        state = request.POST['state']
+        pincode = request.POST['pincode']
+
+        id=request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        sc=SC.objects.get(User_Master=user)
+        sc.Firstname=fname
+        sc.Lastname=lname
+        sc.Address=add
+        sc.Contact=contact
+        sc.City=city
+        sc.State=state
+        sc.Pincode=pincode
+    
+        try:
+            if request.FILES['profile_pic']:
+                propic = request.FILES['profile_pic']
+                sc.Profile_Pic=propic
+                sc.save()
+        except:
+            sc.save()
+
+        return HttpResponseRedirect(reverse('sc_profile'))
+    else:
+        id=request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        sc=SC.objects.get(User_Master=user)
+        return render(request,"sc/sc_update_profile.html",{'user':user,'sc':sc})
+
+def Sc_Change_Password(request):
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    sc=SC.objects.get(User_Master=user)
+    print("111111111111111111111")
+    if request.method=="POST":
+        old_password = request.POST['op']
+        new_password = request.POST['np']
+        confirm_password= request.POST['cp']
+        print("22222222222222222222")
+        
+        if check_password(old_password,user.Password):
+            print("333333333333333333333")
+            if new_password==confirm_password:
+                encrypted_pw=make_password(new_password)
+                user.Password=encrypted_pw
+                user.save()
+                msg="Your Password Changed Succsessfully!!!"
+                return render(request,"sc/sc_change_password.html",{'user':user,'sc':sc,'msg':msg})
+            else:
+                msg="New Password & Confirm Password Did Not Match!!!"
+                return render(request,"sc/sc_change_password.html",{'user':user,'sc':sc,'msg':msg})
+        else:
+            msg="Old Password Is Incorect!!!"
+            return render(request,"sc/sc_change_password.html",{'user':user,'sc':sc,'msg':msg})
+    else:
+        return render(request,"sc/sc_change_password.html",{'user':user,'sc':sc})
+   
+
+def Sc_Pricing(request):
+    return render(request,"sc/sc_pricing.html")
+
+def Sc_Scrap_Stock(request):
+    return render(request,"sc/sc_scrap_sock.html")
+
+def Sc_Scrap_Request_Customer(request):
+    return render(request,"sc/sc_scrap_request_customer.html")
+
+def Sc_Scrap_Request_Rc(request):
+    return render(request,"sc/sc_scrap_request_rc.html")

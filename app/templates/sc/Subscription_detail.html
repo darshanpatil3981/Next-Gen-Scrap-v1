@@ -1,0 +1,196 @@
+
+{% extends "sc/base.html" %}
+{% load static %}
+{% block content %}
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Subscription</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Subscription</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Subscription Detail</li>
+              </ol>
+            </nav>
+          </div>
+         
+        </div>
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+              <!-- Card body -->
+            
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+              <!-- Card body -->
+             
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+              <!-- Card body -->
+              
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+              <!-- Card body -->
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+    </div>
+    <div class="row">
+      <div class="col-xl-8">
+        <div class="card" style="width: 153%;">
+          <div class="card-header border-0" style="margin-top: -54px;height: 881px;">
+            <div class="row align-items-center">
+             <!-- Any Thing Write Here -->
+             <div class="container">
+              <hr class="my-4" />
+              <h6 class="heading-small text-muted mb-4" style="font-size: 17px;">Plan Detail</h6>
+              <div class="pl-lg-4">
+                <div class="row" style="height: 68px;">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-address">Subscription Name</label>
+                      <input id="input-address" class="form-control" placeholder="Subscription Name" name="subscription_name" value="{{subscription_name}}" type="text"
+                        disabled style="color: #172b4d;background-color: #ffffff;border: none; padding-bottom: 30px;">
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="row" style="height: 68px;">
+                  <div class="col-lg-6" style="padding-left: 15px;">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-email">Subscription Duration</label>
+                      <input type="text" id="input-email" class="form-control" placeholder=" Subscription Duration" name="subscription_duration" value="{{subscription__duration}}"
+                        disabled style="color: #172b4d;background-color: #ffffff;border: none; padding-bottom: 30px;">
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="height: 68px;">
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-city">Starting Date</label>
+                      <input type="text" id="input-city" class="form-control" placeholder="Starting Date" name="starting_date" value="{{starting_date}}" disabled
+                      style="color: #172b4d;background-color: #ffffff;border: none; padding-bottom: 30px;">
+                    </div>
+                  </div>
+                  <div class="col-lg-4" >
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-country">Ending Date </label>
+                      <input type="text" id="input-country" class="form-control" placeholder="Ending Date" name="ending_date" value="{{ending_date}}" disabled
+                      style="color: #172b4d;background-color: #ffffff;border: none; padding-bottom: 30px;">
+                    </div>
+                  </div>
+                 
+                </div>
+                <div class="row" style="height: 68px;">
+                  <div class="col-lg-6" style="padding-left: 15px;">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-email">Total Amount</label>
+                      <input type="text" id="input-email" class="form-control" placeholder="Total Amoun" name="total_amount" value="₹ {{total_amount}}"
+                        disabled style="color: #172b4d;background-color: #ffffff;border: none; padding-bottom: 30px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="my-4" />
+          
+              <h6 class="heading-small text-muted mb-4" style="font-size: 17px;">Billing Address</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-address">Address</label>
+                      <input id="input-address" class="form-control" placeholder="Home Address" value="{{sc.Address}}" type="text"
+                         style="color: #172b4d;">
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="row">
+                  <div class="col-lg-6" style="padding-left: 15px;">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-email">Contect</label>
+                      <input type="text" id="input-email" class="form-control" placeholder="1234567890" value="{{sc.Contact}}"
+                         style="color: #172b4d;">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-city">City</label>
+                      <input type="text" id="input-city" class="form-control" placeholder="City" value="{{sc.City}}" 
+                        style="color: #172b4d;">
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-country">State</label>
+                      <input type="text" id="input-country" class="form-control" placeholder="State" value="{{sc.State}}" 
+                        style="color: #172b4d;">
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-country">Postal code</label>
+                      <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code"
+                        value="{{sc.Pincode}}"  style="color: #172b4d;">
+                    </div>
+                  </div>
+                </div>
+                <center>
+                  <div style="padding-top: 20px;">
+                    <form action="{% url 'invoice_subscription' %}" method="POST">
+                      {% csrf_token %}
+                      <script src="https://checkout.razorpay.com/v1/checkout.js" 
+                      data-key="rzp_test_UtV7JVYk3ROncb"
+                      data-amount="{% widthratio amount 1 100 %}" 
+                      data-currency="INR" data-order_id="{{payment.id}}"
+                      data-description="Easy To reuse Scrap" 
+                      data-prefill.name="{{sc.Firstname}}"
+                      data-prefill.email="{{user.Email}}" 
+                      data-theme.color="#528FF0"
+                      data-payment_button_id="pl_GdRmzRJExgqjHh">
+                   </script>
+            
+                    </form>
+                   
+                  </div>
+            
+                </center>
+              </div>
+              
+              
+          
+             
+  
+            </div>
+             <!-- End With here -->
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    
+    </div>
+
+
+
+{% endblock content %}

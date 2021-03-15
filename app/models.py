@@ -23,7 +23,7 @@ class Customer(models.Model):
     Contact = models.BigIntegerField(default=0)
     Profile_Pic = models.ImageField(upload_to='Profile_Pics',default="")
 
-class GC(models.Model):
+class SC(models.Model):
     User_Master = models.ForeignKey(User_Master,on_delete=models.CASCADE)
     Firstname = models.CharField(max_length=30)
     Lastname = models.CharField(max_length=30)
@@ -48,7 +48,7 @@ class RC(models.Model):
     Profile_Pic = models.ImageField(upload_to='Profile_Pics',default="")
 
 class Product(models.Model):
-    RC = models.ForeignKey(RC,on_delete=models.CASCADE)
+    SC = models.ForeignKey(SC,on_delete=models.CASCADE)
     Seller_Name= models.CharField(max_length=30,default="")
     Product_Name = models.CharField(max_length=30)
     Product_Price = models.FloatField()
@@ -68,7 +68,7 @@ class Order(models.Model):
     Total_Amount = models.FloatField(default=0)
     Sub_Total_Amount = models.FloatField(default=0)
     Payment_status= models.CharField(max_length=20, null=True, blank=True)
-    Datetime_of_payment = models.DateTimeField(default=timezone.now)
+    Datetime_of_payment = models.DateField() 
     Invoice_No = models.BigIntegerField(default=0)
     Razorpay_order_id = models.CharField(max_length=500, null=True, blank=True)
     Razorpay_payment_id = models.CharField(max_length=500, null=True, blank=True)
@@ -85,12 +85,13 @@ class Product_Order(models.Model):
     Price = models.FloatField(default=0)
 
 class Subscription(models.Model):
-    RC = models.ForeignKey(RC,on_delete=models.CASCADE)
+    User = models.ForeignKey(User_Master,on_delete=models.CASCADE)
+    Role = models.CharField(max_length=10, null=True, blank=True)
     Is_Active = models.BooleanField() 
     Subscription_Name = models.CharField(max_length=20,null=True, blank=True)
     Subscription_Amount = models.FloatField(default=0)
-    Subscription_Starting_Date = models.DateTimeField()
-    Subscription_Ending_Date = models.DateTimeField()
+    Subscription_Starting_Date = models.DateField() 
+    Subscription_Ending_Date = models.DateField() 
     Invoice_No = models.BigIntegerField(default=0)
     Razorpay_order_id = models.CharField(max_length=500, null=True, blank=True)
     Razorpay_payment_id = models.CharField(max_length=500, null=True, blank=True)

@@ -33,6 +33,16 @@ urlpatterns = [
      path("subscription_detail/",views.Subscription_detail,name="subscription_detail"),
      path("Invoice_Subscription/",views.Invoice_Subscription,name="invoice_subscription"),
      path("invoice_sub_pdf/<int:key>",views.Invoice_Sub_Pdf,name="invoice_sub_pdf"),
+
+     #SC Dashboard
+     path("sc_update_profile/",views.Sc_Update_Profile,name="sc_update_profile"),
+     path("sc_profile/",views.Sc_Profile,name="sc_profile"),
+     path("sc_change_password/",views.Sc_Change_Password,name="sc_change_password"),
+     path("sc_pricing/",views.Sc_Pricing,name="sc_pricing"),
+     path("sc_scrap_sock/",views.Sc_Scrap_Stock,name="sc_scrap_sock"),
+     path("sc_scrap_request_customer/",views.Sc_Scrap_Request_Customer,name="sc_scrap_request_customer"),
+     path("sc_scrap_request_rc/",views.Sc_Scrap_Request_Rc,name="sc_scrap_request_rc"),
+
     
 
      #E-com
