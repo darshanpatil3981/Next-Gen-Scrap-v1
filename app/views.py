@@ -862,7 +862,7 @@ def Sc_Update_Profile(request):
         try:
             if request.FILES['profile_pic']:
                 propic = request.FILES['profile_pic']
-                sc.Profile_Pic=propic
+                sc.Profile_Pic = propic
                 sc.save()
         except:
             sc.save()
