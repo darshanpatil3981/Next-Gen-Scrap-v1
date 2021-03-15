@@ -488,8 +488,6 @@ def Invoice_Subscription(request):
             sc=SC.objects.get(User_Master=user)
             sendmail_invoice_subscription_sc(email_Subject,'invoice_subscription_email',email,{'subscription':subscription,'sc':sc,'user':user})
             return render(request,"sc/invoice_subscription.html",{'subscription':subscription,'sc':sc,'user':user})
-
-        
     except:
         print("Filed")
         return render(request,"rc/invoice_subscription.html",)
