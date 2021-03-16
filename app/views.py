@@ -932,7 +932,15 @@ def Sc_Change_Password(request):
    
 
 def Sc_Pricing(request):
-    return render(request,"sc/sc_pricing.html")
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    sc=SC.objects.get(User_Master=user)
+    try:
+        subscription = Subscription.objects.get(User=user)
+        return render(request,"sc/sc_pricing.html",{'user':user,'sc':sc,'subscription':subscription})
+    except:
+        return render(request,"sc/sc_pricing.html",{'user':user,'sc':sc})
+    
 
 def Sc_Scrap_Stock(request):
     return render(request,"sc/sc_scrap_sock.html")
