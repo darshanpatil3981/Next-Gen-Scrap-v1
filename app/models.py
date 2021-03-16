@@ -48,7 +48,7 @@ class RC(models.Model):
     Profile_Pic = models.ImageField(upload_to='Profile_Pics',default="")
 
 class Product(models.Model):
-    SC = models.ForeignKey(SC,on_delete=models.CASCADE)
+    RC = models.ForeignKey(RC,on_delete=models.CASCADE)
     Seller_Name= models.CharField(max_length=30,default="")
     Product_Name = models.CharField(max_length=30)
     Product_Price = models.FloatField()

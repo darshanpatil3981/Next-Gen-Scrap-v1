@@ -171,7 +171,15 @@ def Validate_login(request):
                 request.session['scid']=sc.id
                 request.session['fname']=sc.Firstname
                 request.session['lname']=sc.Lastname
-
+                try:
+                    subscription = Subscription.objects.get(User=User)
+                    today_date = datetime.now().date()
+                    end_date = subscription.Subscription_Ending_Date
+                    if(today_date==end_date):
+                        subscription.Is_Active=False
+                        subscription.save()
+                except:
+                    pass
                 return redirect('sc_scrap_sock')
             elif User.Role=="RC":
                 request.session['id']=User.id
@@ -179,6 +187,15 @@ def Validate_login(request):
                 request.session['rcid']=rc.id
                 request.session['fname']=rc.Firstname
                 request.session['lname']=rc.Lastname
+                try:
+                    subscription = Subscription.objects.get(User=User)
+                    today_date = datetime.now().date()
+                    end_date = subscription.Subscription_Ending_Date
+                    if(today_date==end_date):
+                        subscription.Is_Active=False
+                        subscription.save()
+                except:
+                    pass
                 
                 return render(request,"rc/rc_scrap_collectors.html")
         else:
@@ -299,7 +316,11 @@ def Rc_pricing(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(User_Master=user)
-    return render(request,"rc/rc_pricing.html",{'user':user,'rc':rc})
+    try:
+        subscription = Subscription.objects.get(User=user)
+        return render(request,"rc/rc_pricing.html",{'user':user,'rc':rc,'subscription':subscription})
+    except:
+        return render(request,"rc/rc_pricing.html",{'user':user,'rc':rc})
 
 def Rc_product(request):
     id=request.session.get("id")
@@ -415,7 +436,7 @@ def Subscription_detail(request):
         ending_date = starting_date+timedelta(days=30)
         total_amount = 100
     elif 'professional' in request.POST: 
-        subscription_name = "Personal"
+        subscription_name = "Professional"
         subscription__duration = "184 Days"
         starting_date = datetime.now().date()
         ending_date = starting_date+timedelta(days=184)
@@ -434,7 +455,16 @@ def Subscription_detail(request):
     client = razorpay.Client(auth=('rzp_test_UtV7JVYk3ROncb','cgjsHRXA0c7HCFzyDfrZoel4'))
     payment = client.order.create({'amount': total_amount*100, 'currency': 'INR','payment_capture': '1',})   
     invoice_no = randint(1000000,9999999)
-    new_subscription = Subscription.objects.create(User=user,
+    try:
+        subscription = Subscription.objects.get(User=user)
+        subscription.Subscription_Name=subscription_name
+        subscription.Subscription_Amount=total_amount
+        subscription.Subscription_Starting_Date=starting_date
+        subscription.Subscription_Ending_Date=ending_date
+        subscription.save()
+        request.session['subscription_id']=subscription.id
+    except:
+        new_subscription = Subscription.objects.create(User=user,
                                                        Role = user.Role, 
                                                        Is_Active=False,
                                                        Subscription_Name=subscription_name,
@@ -446,7 +476,7 @@ def Subscription_detail(request):
                                                        Razorpay_payment_id="",
                                                        razorpay_signature="",
                                                        )
-    request.session['subscription_id']=new_subscription.id
+        request.session['subscription_id']=new_subscription.id
     if(user.Role=='RC'):
         rc=RC.objects.get(User_Master=user)
         return render(request,"rc/Subscription_detail.html",{'payment':payment,'subscription_name':subscription_name,'subscription__duration':subscription__duration,'starting_date':starting_date,'ending_date':ending_date,'amount':total_amount,'total_amount':total_amount,'rc':rc,'user':user})

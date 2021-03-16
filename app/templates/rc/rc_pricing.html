@@ -127,9 +127,118 @@
     background-color: #269aff;
   }
 </style>
+{% ifequal subscription.Is_Active True %}
+<div class="background" style="padding-left: 270px;">
+    
+
+    
+    
+  <h1 class="display-2 text-black" style="color: #48aaff;">Your Active Subscription</h1>
+  <div class="container">
+    <div class="card bg-gradient-primary" style="width: 550px;">
+      <!-- Card body -->
+      <div class="card-body">
+        <div class="row justify-content-between align-items-center">
+          <div class="col">
+            {% ifequal subscription.Subscription_Name "Personal" %}
+            <img src="{% static 'images/paper_plane.png' %}" alt="Image placeholder" style="height: 100px;"/>
+            {% endifequal %}
+            {% ifequal subscription.Subscription_Name "Professional" %}
+            <img src="{% static 'images/plane.png' %}" alt="Image placeholder" style="height: 100px;"/>
+            {% endifequal %}
+            {% ifequal subscription.Subscription_Name "Enterprise" %}
+            <img src="{% static 'images/space.png' %}" alt="Image placeholder" style="height: 100px;"/>
+            {% endifequal %}
+            
+          </div>
+          <div class="col-auto">
+            <span class="badge badge-lg badge-success" style="font-size: 13px;">Active</span>
+          </div>
+        </div>
+        <div class="my-4">
+          <span class="h6 surtitle text-light">
+            Name Of Customer
+           
+                 <span style="margin-left: 128px;">  Plan Name</span>      
+          </span>
+          <div class="card-serial-number h5 text-white">
+           {{rc.Firstname}} {{rc.Lastname}}
+           <span style="margin-left: 173px;">  {{subscription.Subscription_Name}}</span>   
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span class="h6 surtitle text-light">Starting Date</span>
+            <span class="d-block h3 text-white">{{subscription.Subscription_Starting_Date}}</span>
+          </div>
+          <div class="col">
+            <span class="h6 surtitle text-light">Expiry date</span>
+            <span class="d-block h3 text-white">{{subscription.Subscription_Ending_Date}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="panel pricing-table">
+      {% ifequal subscription.Subscription_Name "Personal" %}
+      <div class="pricing-plan">
+        
+      </div>
+      <div class="pricing-plan">
+        <img src="https://s22.postimg.cc/8mv5gn7w1/paper-plane.png" alt="" class="pricing-img">
+        <h2 class="pricing-header">Personal</h2>
+        <ul class="pricing-features">
+          <li class="pricing-features-item">1 Month</li>
+          <li class="pricing-features-item"> Subscription</li>
+        </ul>
+        <span class="pricing-price">₹ 100</span>
+        <button type="submit" class="pricing-button is-featured" name="personal">Buy Now</button> 
+      </div>
+
+      <div class="pricing-plan">
+        
+      </div> -->
+
+    </div>
+  </div>
+</div>
+      {% else %}
+      <div class="pricing-plan">
+        <img src="https://s28.postimg.cc/ju5bnc3x9/plane.png" alt="" class="pricing-img">
+        <h2 class="pricing-header">Professional</h2>
+        <ul class="pricing-features">
+          <li class="pricing-features-item">6 Month</li>
+          <li class="pricing-features-item"> Subscription</li>
+        </ul>
+        <span class="pricing-price">₹ 600</span>
+        <button type="submit" class="pricing-button is-featured" name="professional">Buy Now</button>
+
+      </div>
+
+      <div class="pricing-plan">
+        <img src="https://s21.postimg.cc/tpm0cge4n/space-ship.png" alt="" class="pricing-img">
+        <h2 class="pricing-header">Enterprise</h2>
+        <ul class="pricing-features">
+          <li class="pricing-features-item">1 Year</li>
+          <li class="pricing-features-item"> Subscription</li>
+        </ul>
+        <span class="pricing-price">₹ 1200</span>
+        <button type="submit" class="pricing-button is-featured" name="enterprise">Buy Now</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endifequal %}
+
+
+{% else %}
 <form action="{% url 'subscription_detail' %}" method="post">
   {% csrf_token %}
   <div class="background" style="padding-left: 270px;">
+    
+
+    
+    
     <h1 class="display-2 text-black" style="color: #48aaff;">Membership Subscription</h1>
     <div class="container">
 
@@ -173,4 +282,5 @@
     </div>
   </div>
 </form>
+{% endifequal %}
 {% endblock content %}
