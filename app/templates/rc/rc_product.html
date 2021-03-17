@@ -4,69 +4,129 @@
   {% block content %}
   
 
-<div class="background" style="padding-left: 270px; background-color: white;">
-  <h1 class="display-2 text-black" style="color: #48aaff;">My Product</h1>
-  
-<div style="padding-left: 909px;">
-  <button type="button" onclick="document.location='{% url 'rc_add_product' %}'" class="btn btn-labeled btn-success" style="height: 45px;">
-  <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
-  <span class="btn-label"  style="background-color: #2dce89; "><i class="fa fa-plus"></i></span>Add Product</button></div>
-  <div class="container">
-    <div class="row"> 
-      <div class="col-12">
-        {% if products %}
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Product ID</th>
-              <th scope="col">Product Name</th>
-              <th scope="col">Product Image</th>
-              <th scope="col">Price</th>
-              <th scope="col">Stock</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for i in products %}
-            <tr>
-              <th scope="row">{{i.id}}</th>
-              <td id="{{i.id}}">{{i.Product_Name}}</td>
-              <td>
-              <div class="row">
-                <div class="user-img pull-left" style="margin-left: 15px;padding-left: 10px;">
-                  <img src="{{i.Product_Img.url}}" class="img-circle img-responsive" alt="User Image" style="height: 80px;"> </div>
-              </td>
-              <td>{{i.Product_Price}}</td>
-              <td>Stock</td>
-              <td>
-                  <a href="{% url 'RC_view_product' key=i.id %}">
-                    <button type="submit" class="btn btn-primary" action="{% url 'RC_view_product' key=i.id %}"><i class="far fa-eye"></i></button>
-                  </a>
-                  <a href="{% url 'RC_edit_product' key=i.id %}">
-                    <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                  </a>
-                  <a href="{% url 'RC_delete_product' key=i.id %}" class="confirm-delete">
-                    <!-- <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" onclick="return confirm('Are you sure you want to delete this?')"></i></button> -->
-                    <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" ></i></button>
-                  </a>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        {% else %}
-        <p>
-          Oops...! You dont have any product yet... Add some products.
-        </p>
-        {% endif %}
+<!-- Starttttttt -->
+
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Products</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Products</li>
+            </ol>
+          </nav>
+        </div>
+       
+      </div>
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+          
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+           
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            
+          </div>
+        </div>
       </div>
     </div>
   </div>
-      
- 
 </div>
-
-
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+  </div>
+  <div class="row">
+    <div class="col-xl-8">
+      <div class="card" style="width: 153%;">
+        <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
+          <div class="row align-items-center">
+           <!-- Any Thing Write Here -->
+           <div style="padding-left: 870px;padding-bottom: 20px;">
+            <button type="button" onclick="document.location='{% url 'rc_add_product' %}'" class="btn btn-labeled btn-success" style="height: 45px;">
+            <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
+            <span class="btn-label"  style="background-color: #2dce89; "><i class="fa fa-plus"></i></span>Add Product</button></div>
+            <div class="container">
+              <div class="row"> 
+                <div class="col-12">
+                  {% if products %}
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Product ID</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Product Image</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for i in products %}
+                      <tr>
+                        <th scope="row">{{i.id}}</th>
+                        <td id="{{i.id}}">{{i.Product_Name}}</td>
+                        <td>
+                        <div class="row">
+                          <div class="user-img pull-left" style="margin-left: 15px;padding-left: 10px;">
+                            <img src="{{i.Product_Img.url}}" class="img-circle img-responsive" alt="User Image" style="height: 80px;"> </div>
+                        </td>
+                        <td>{{i.Product_Price}}</td>
+                        <td>Stock</td>
+                        <td>
+                            <a href="{% url 'RC_view_product' key=i.id %}">
+                              <button type="submit" class="btn btn-primary" action="{% url 'RC_view_product' key=i.id %}"><i class="far fa-eye"></i></button>
+                            </a>
+                            <a href="{% url 'RC_edit_product' key=i.id %}">
+                              <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                            </a>
+                            <a href="{% url 'RC_delete_product' key=i.id %}" class="confirm-delete">
+                              <!-- <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" onclick="return confirm('Are you sure you want to delete this?')"></i></button> -->
+                              <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" ></i></button>
+                            </a>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  {% else %}
+                  <p>
+                    Oops...! You dont have any product yet... Add some products.
+                  </p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+                
+          
+       
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  
+  </div>
 {% endblock content %}
 </body>
 <style>

@@ -1,108 +1,178 @@
-
 {% extends "rc/base.html" %}
 {% load static %}
 {% block content %}
-   
+<!-- Page content -->
+
+     
 
 
-    <!-- Page content -->
-    <div class="background" style="padding-left: 270px; background-color: white;">
-      <h1 class="display-2 text-black" style="color: #48aaff;">Edit Product</h1>
+
+
+
+<!-- starttttttttt -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Products</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="/rc_product">Products</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Edit Product</li>
+            </ol>
+          </nav>
+        </div>
+       
+      </div>
+      <!-- Card stats -->
       <div class="row">
-        <div class="col-xl-4 order-xl-2">
-          <div class="card card-profile">
-
-            <div class="row justify-content-center">
-
-              <div class="image">
-                <a href="#">
-
-                  <img src="{{product.Product_Img.url}}" class="rounded"
-                    style="height: 280px;width: 280px;margin-top: 24px;">
-
-                </a>
-              </div>
-
-            </div>
-            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-              <!-- <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-sm btn-info  mr-4 ">Connect</a>
-              <a href="#" class="btn btn-sm btn-default float-right">Message</a>
-            </div> -->
-              <div class="custom-file mt-3 mb-3">
-
-                <input type="button" class="btn btn-primary btn-block mx-auto" value="Change Product image"
-                  onclick="document.getElementById('fileInput').click();" />
-              </div>
-            </div>
-
-            <div class="card-body pt-0">
-
-
-
-            </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+          
           </div>
         </div>
-        <div class="col-xl-8 order-xl-1">
-          <div class="card">
-            <div class="card-header">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h3 class="mb-0">Edit Product Info</h3>
-                </div>
-
-              </div>
-            </div>
-            <div class="card-body">
-              <form action="{% url 'RC_edit_product' key=product.id %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-9">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">Enter Product Name</label>
-                        <input type="text" class="form-control" placeholder="Product Name" style="color: #172b4d;" name="Pro_name"  value="{{product.Product_Name}}">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-9">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">Product Description</label>
-                        <textarea class="form-control" rows="5" name="Pro_desc"  value="{{product.Product_Desc}}" >{{product.Product_Desc}}</textarea>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-9">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">Enter Product Price</label>
-                        <input type="number" class="form-control" placeholder="Product Price" style="color: #172b4d;" name="Pro_price"  value="{{product.Product_Price}}">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-9">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Product Image</label>
-                        <input type="file" id="fileInput" class="form-control" name="Pro_img" style="border-color: white;" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-
-              <hr class="my-4" />
-              <!-- Address -->
-
-              <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Save Changes </button>
-              </div>
-            </form>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+           
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+  </div>
+  <div class="row">
+    <div class="col-xl-8">
+      <div class="card" style="width: 153%;">
+        <div class="card-header border-0" style="margin-top: -54px;height: 760px;">
+          <div class="container">
+           <!-- Any Thing Write Here -->
+           <div class="row">
+            <div class="col-xl-4 order-xl-2">
+              <div class="card card-profile">
     
-    <!-- Footer -->
+                <div class="row justify-content-center">
+    
+                  <div class="image">
+                    <a href="#">
+    
+                      <img src="{% static 'images/items/16.jpg' %}" class="rounded"
+                        style="height: 280px;width: 280px;margin-top: 24px;">
+    
+                    </a>
+                  </div>
+    
+                </div>
+                <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                  <!-- <div class="d-flex justify-content-between">
+                  <a href="#" class="btn btn-sm btn-info  mr-4 ">Connect</a>
+                  <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                </div> -->
+                  <div class="custom-file mt-3 mb-3">
+    
+                    <input type="button" class="btn btn-primary btn-block mx-auto" value="Upload Product image"
+                      onclick="document.getElementById('fileInput').click();" />
+                  </div>
+                </div>
+    
+                <div class="card-body pt-0">
+    
+    
+    
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-8 order-xl-1">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row align-items-center">
+                    <div class="col-8">
+                      <h3 class="mb-0">Product Information </h3>
+                    </div>
+    
+                  </div>
+                </div>
+                <div class="card-body">
+                  <form action="{% url 'RC_edit_product' key=product.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-9">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-first-name">Enter Product Name</label>
+                            <input type="text" class="form-control" placeholder="Product Name" style="color: #172b4d;" value="{{product.Product_Name}}"
+                              name="Pro_name" required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-9">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-first-name">Product Description</label>
+                            <textarea class="form-control" rows="5" value="{{product.Product_Desc}}"  name="Pro_desc" required>{{product.Product_Desc}}</textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-9">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-first-name">Enter Product Price</label>
+                            <input type="number" class="form-control" placeholder="Product Price" style="color: #172b4d;"
+                            value="{{product.Product_Price}}"  name="Pro_price" required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-9">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-email">Product Image</label>
+                            <input type="file" id="fileInput" class="form-control" name="Pro_img" value="{{product.Product_Img}}"
+                              style="border-color: white;" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+    
+                </div>
+    
+                <hr class="my-4" />
+                <!-- Address -->
+    
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block" style="width: 180px;margin-left: 235px;"> Save Changes </button>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+    
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  
+  </div>
+
+
     {% endblock content %}

@@ -2,89 +2,73 @@
 {% extends "rc/base.html" %}
 {% load static %}
 {% block content %}
-<style>
-  .button {
-    border-radius: 6px;
-    background-color: #48aaff;
-    border: none;
-    color: #FFFFFF;
-    text-align: center;
-    font-size: 30px;
-    padding: 10px;
 
-    width: 330px;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 5px;
-  }
 
-  .button span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-  }
-
-  .button span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-  }
-
-  .button:hover span {
-    padding-right: 25px;
-  }
-
-  .button:hover span:after {
-    opacity: 1;
-    right: 0;
-  }
-</style>
-
-  <div class="background" style="padding-left: 270px;">
-    <h1 class="display-2 text-black" style="color: #48aaff;">Scrap Collectores</h1>
-    <section class="content container-fluid">
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Scrap Collectors</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Scrap Collectors</li>
+            </ol>
+          </nav>
+        </div>
+       
+      </div>
+      <!-- Card stats -->
       <div class="row">
-
-        <div class="col-md-8" style="background-color:#ececec8f;height: 140px; border-radius: 10px;">
-          <div class="chart-box">
-            <div class="row">
-              <div class="col-md-3" style="padding-top: 10px;">
-                <div class="user-img pull-left" style="margin-left: 33px;"><img src="{% static 'GCassets\img\theme\team-1.jpg' %}"
-                    class="img-circle img-responsive" alt="User Image" style="height: 113px;border-radius: 100px;">
-                </div>
-              </div>
-              <div class="col-md-9">
-                <div class="mail-contnet">
-                  <h4 style="padding-top: 10px;">Florence Douglas <span class="desig">- Web Designer</span></h4>
-                  <p class="m-bot-2">15 Barnes Wallis Way, West Road, Chorley, USA</p>
-                  <h5>Phone: +1 (012) 345 6789 </h5>
-
-                </div>
-
-              </div>
-            </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+          
           </div>
         </div>
-        <button class="button"><span>Make Request </span></button>
-        <div class="col-md-8" style="height: 10px; border-radius: 10px;">
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+           
+          </div>
         </div>
-
-
-
-
-        <div class="container">
-
-          <div class="panel pricing-table">
-
-
-
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+  </div>
+  <div class="row">
+    <div class="col-xl-8">
+      <div class="card" style="width: 153%;">
+        <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
+          <div class="row align-items-center">
+           <!-- Any Thing Write Here -->
+       
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  
+  </div>
+
       {% endblock content %}
 
 
