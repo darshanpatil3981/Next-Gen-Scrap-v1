@@ -309,7 +309,6 @@ def Rc_orders(request):
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(User_Master=user)
     order_product =  Product_Order.objects.filter(RC_ID=rc.id,Payment_status="Success")
-
     return render(request,"rc/rc_orders.html",{'user':user,'rc':rc,'order_product':order_product})
 
 def Rc_pricing(request):
@@ -781,7 +780,8 @@ def Invoice(request):
     order.Payment_status = "Success"
     order.Razorpay_order_id = response['razorpay_order_id']
     order.Razorpay_payment_id = response['razorpay_payment_id']
-    order.Datetime_of_payment = datetime.datetime.now()
+    date1 = datetime.now().date()
+    order.Datetime_of_payment = date1
     order.razorpay_signature =  response['razorpay_signature']
     order.save()
     product_order = Product_Order.objects.filter(Order=order)

@@ -68,7 +68,7 @@ class Order(models.Model):
     Total_Amount = models.FloatField(default=0)
     Sub_Total_Amount = models.FloatField(default=0)
     Payment_status= models.CharField(max_length=20, null=True, blank=True)
-    Datetime_of_payment = models.DateField() 
+    Datetime_of_payment = models.DateField(null=True) 
     Invoice_No = models.BigIntegerField(default=0)
     Razorpay_order_id = models.CharField(max_length=500, null=True, blank=True)
     Razorpay_payment_id = models.CharField(max_length=500, null=True, blank=True)
