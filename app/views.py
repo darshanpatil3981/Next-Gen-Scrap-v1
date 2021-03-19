@@ -178,6 +178,8 @@ def Validate_login(request):
                     if(today_date==end_date):
                         subscription.Is_Active=False
                         subscription.save()
+                    if(today_date<end_date):
+                        print("==================================================")
                 except:
                     pass
                 return redirect('sc_scrap_sock')
@@ -867,6 +869,7 @@ def Sc_Profile(request):
     return render(request,"sc/sc_profile.html",{'user':user,'sc':sc})
 
 def Sc_Update_Profile(request):
+    print("----------------------")
     if request.method=="POST":
         fname = request.POST['fname']
         lname = request.POST['lname']
@@ -878,6 +881,7 @@ def Sc_Update_Profile(request):
 
         id=request.session.get("id")
         user = User_Master.objects.get(id=id)
+        print(user)
         sc=SC.objects.get(User_Master=user)
         sc.Firstname=fname
         sc.Lastname=lname

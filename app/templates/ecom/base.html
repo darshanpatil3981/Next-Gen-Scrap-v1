@@ -35,14 +35,22 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
+<script>
+	function preview_propic(input) {
+    if (input.files && input.files[0]) {
+       var reader = new FileReader();
+       reader.onload = function (e) {
+			$('#preview_propic_img').attr('src', e.target.result);
+		}
+    	reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+
+<!-- DARSHAN SCRIPT -->
 <script type="text/javascript">
-/// some script
-
-// jquery ready start
 $(document).ready(function() {
-	// jQuery code
 
-	// $(".btn, .btn-light").on("click", function()
 	$("#button-plus, #button-minus").on("click", function()
 	{  
 	  var $button = $(this);
@@ -64,9 +72,10 @@ $(document).ready(function() {
 	});
 
 }); 
-// jquery end
-</script>
 
+
+</script>
+  <!-- DARSHAN SCRIPT END -->
 </head>
 <body>
 

@@ -37,7 +37,7 @@
                 <div class="form-group">
                   <label class="form-control-label" for="input-email">Profile Picture</label>
                   <input type="file" id="fileInput" name="profile_pic" class="form-control"
-                    style="border-color: white;" />
+                    style="border-color: white;" onchange="preview_propic(this);" />
                 </div>
               </div> <!-- form-row.// -->
               <hr class="my-4" />
@@ -96,10 +96,10 @@
             <div class="form-group">
               {% ifequal customer.Profile_Pic "" %}
               <img src="{% static 'images/user.png' %}" name="profile_pic" style="height: 200px; width: 200px;"
-                class="img-sm rounded-circle border">
+                class="img-sm rounded-circle border" id="preview_propic_img" />
               {% else %}
               <img src="{{customer.Profile_Pic.url}}" name="profile_pic" style="height: 200px; width: 200px;"
-                class="img-sm rounded-circle border">
+                class="img-sm rounded-circle border" id="preview_propic_img" />
               {% endifequal %}
 
             </div>

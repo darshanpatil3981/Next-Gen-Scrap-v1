@@ -28,10 +28,10 @@ style="min-height: 300px; background-image: url({% static 'GCassets/img/theme/pr
           <div class="card-profile-image">
             <a href="#">
               {% ifequal rc.Profile_Pic "" %}
-              <img src="{% static 'images/user.png' %}" class="rounded-circle">
+              <img src="{% static 'images/user.png' %}" class="rounded-circle" id="preview_propic_img">
               {% else %}
               <!-- <img src="{{request.session.propic}}" class="rounded-circle"> -->
-              <img src="{{rc.Profile_Pic.url}}" class="rounded-circle">
+              <img src="{{rc.Profile_Pic.url}}" class="rounded-circle" id="preview_propic_img">
               {% endifequal %}
             </a>
 
@@ -106,12 +106,12 @@ style="min-height: 300px; background-image: url({% static 'GCassets/img/theme/pr
             <h3 class="mb-0">User profile </h3>
           </div>
           <div class="col-4 text-right">
-            <a href="/sc_change_password" class="btn btn-sm btn-primary">Change Password</a>
+            <a href="{% url 'rc_change_password' %}" class="btn btn-sm btn-primary">Change Password</a>
           </div>
         </div>
       </div>
       <div class="card-body">
-        <form method="POST" action="{% url 'sc_update_profile' %}" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'rc_update_profile' %}" enctype="multipart/form-data">
           {% csrf_token %}
           <h6 class="heading-small text-muted mb-4">User information</h6>
           <div class="pl-lg-4">
@@ -152,7 +152,7 @@ style="min-height: 300px; background-image: url({% static 'GCassets/img/theme/pr
               <div class="form-group">
                 <label class="form-control-label" for="input-email">Profile Picture</label>
                 <input type="file" id="fileInput" name="profile_pic" class="form-control"
-                  style="border-color: white;">
+                  style="border-color: white;" onchange="preview_propic_img(this);">
               </div>
             </div>
           </div>
@@ -173,7 +173,7 @@ style="min-height: 300px; background-image: url({% static 'GCassets/img/theme/pr
             <div class="row">
               <div class="col-lg-6" style="padding-left: 15px;">
                 <div class="form-group">
-                  <label class="form-control-label" for="input-email">Contect</label>
+                  <label class="form-control-label" for="input-email">Contact</label>
                   <input type="text" id="input-email" class="form-control" placeholder="1234567890" name="contact"
                     value="{{rc.Contact}}"  style="color: #172b4d;">
                 </div>
@@ -203,7 +203,7 @@ style="min-height: 300px; background-image: url({% static 'GCassets/img/theme/pr
               </div>
             </div>
           </div>
-          <hr class="my-4" />
+          <hr class="my-4" /> 
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block"> Update Profile </button>
           </div>

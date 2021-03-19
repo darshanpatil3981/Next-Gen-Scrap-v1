@@ -21,6 +21,21 @@
 
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{% static 'GCassets/css/argon.css' %}" type="text/css">
+
+  <!-- DARSHAN SCRIPT -->
+  <script type="text/javascript">
+    function preview_propic_img(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#preview_propic_img').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+  <!-- DARSHAN SCRIPT END -->
+
 </head>
 
 <body>

@@ -30,10 +30,10 @@
                 <div class="card-profile-image">
                   <a href="#">
                     {% ifequal sc.Profile_Pic "" %}
-                    <img src="{% static 'images/user.png' %}" class="rounded-circle">
+                    <img src="{% static 'images/user.png' %}" class="rounded-circle" id="preview_propic_img">
                     {% else %}
                     <!-- <img src="{{request.session.propic}}" class="rounded-circle"> -->
-                    <img src="{{sc.Profile_Pic.url}}" class="rounded-circle">
+                    <img src="{{sc.Profile_Pic.url}}" class="rounded-circle" id="preview_propic_img">
                     {% endifequal %}
                   </a>
   
@@ -154,7 +154,7 @@
                     <div class="form-group">
                       <label class="form-control-label" for="input-email">Profile Picture</label>
                       <input type="file" id="fileInput" name="profile_pic" class="form-control"
-                        style="border-color: white;">
+                        style="border-color: white;" onchange="preview_propic_img(this);">
                     </div>
                   </div>
                 </div>
