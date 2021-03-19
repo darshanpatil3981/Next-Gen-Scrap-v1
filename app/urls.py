@@ -69,7 +69,6 @@ urlpatterns = [
 
      
      
-     
 
 # Views Links (Not callable)
      path("isalreadycreated/",views.is_already_created,name="is_already_created"),
@@ -80,4 +79,13 @@ urlpatterns = [
      path("verify_OTP_forgotpw/",views.Verify_OTP_forgotpw,name="verify_OTP_forgotpw"),
      path("reset_password/",views.Reset_password,name="reset_password"),
    
+
+   #Admin
+     path("ngs_admin/",views.Ngs_Admin,name="ngs_admin"),
+     path("scrap_categories/",views.Scrap_Categories1,name="scrap_categories"),
+     path("add_scrap_categories/",views.Add_Scrap_Categories,name="add_scrap_categories"),
+     path("edit_scrap_category/<int:key>",views.Edit_Scrap_Category,name="edit_scrap_category"),
+     path("delete_scrap_category/<int:key>",views.Delete_Scrap_Category,name="delete_scrap_category"),
+
+
 ]

@@ -147,7 +147,15 @@ def Validate_login(request):
     email = request.POST['email']
     password = request.POST['password']
     is_exist = User_Master.objects.filter(Email=email)
-
+    is_admin = Admin.objects.filter(User_Name=email)
+    if is_admin:
+        admin = Admin.objects.get(User_Name=email)
+        print(admin)
+        if(password==admin.Password):
+            return redirect('ngs_admin')
+        else:
+            message = "Incorect Password Of Admin"
+            return render(request,"app/login.html",{'msg':message,})
     if is_exist:
         User = User_Master.objects.get(Email=email)
         if check_password(password,User.Password):
@@ -843,7 +851,8 @@ def Invoice_pdf(request,key):
     return HttpResponse(pdf, content_type='application/pdf')
     
 def temp(request):
-    return render(request,"sc/base.html",)
+    return render(request,"ngs_admin/scrap_categories.html")
+
 
 def Add_coomment_ecom(request,key):
     id = request.session.get("id")
@@ -954,3 +963,51 @@ def Sc_Scrap_Request_Customer(request):
 
 def Sc_Scrap_Request_Rc(request):
     return render(request,"sc/sc_scrap_request_rc.html")
+
+def Ngs_Admin(request):
+    return render(request,"ngs_admin/scrap_categories.html")
+
+def Scrap_Categories1(request):
+    scrap_categories = Scrap_Categories.objects.all()
+    return render(request,"ngs_admin/scrap_categories.html",{'scrap_categories':scrap_categories})
+
+def Add_Scrap_Categories(request):
+    if request.method=="POST":
+        name = request.POST['name']
+        price = request.POST['price']
+        
+        try:
+            img = request.FILES['img']
+            new_scrap = Scrap_Categories.objects.create(Name=name,Price=price,Image=img)
+        except:
+            new_scrap = Scrap_Categories.objects.create(Name=name,Price=price)
+
+        return HttpResponseRedirect(reverse('scrap_categories'))
+    else:
+       return render(request,"ngs_admin/add_scrap_categories.html",)
+
+
+def Edit_Scrap_Category(request,key):
+    cat = Scrap_Categories.objects.get(id=key)
+    if request.method=="POST":
+        name = request.POST['name']
+        price = request.POST['price']
+        cat.Name = name
+        cat.Price = price
+        try:
+            img = request.FILES['img']
+            cat.Image = img
+            cat.save()
+        except:
+            cat.save()
+        return redirect('scrap_categories')
+    else:
+        return render(request,"ngs_admin/update_scrap_categorie.html",{'cat':cat})
+
+def Delete_Scrap_Category(request,key):
+    delcat = Scrap_Categories.objects.get(id=key)
+    if(delcat.Image):
+       delcat.Image.delete()
+    delcat.delete()
+    return redirect('scrap_categories')
+
