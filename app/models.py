@@ -104,6 +104,23 @@ class Ecom_comments(models.Model):
     Comment_text = models.CharField(max_length=500)
     Comment_time = models.DateTimeField()
 
+class Admin(models.Model):
+    User_Name = models.EmailField(max_length=50)
+    Password = models.CharField(max_length=300)
+
+class Scrap_Categories(models.Model):
+    Name = models.CharField(max_length=20,null=True, blank=True)
+    Price = models.FloatField()
+    Image = models.ImageField(upload_to='Scrap_Images',default="default.png")
+
+
+
+
+
+
+
+
+
 
 
 
