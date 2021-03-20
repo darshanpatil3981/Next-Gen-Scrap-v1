@@ -183,11 +183,11 @@ def Validate_login(request):
                     subscription = Subscription.objects.get(User=User)
                     today_date = datetime.now().date()
                     end_date = subscription.Subscription_Ending_Date
-                    if(today_date==end_date):
+                    if(today_date>end_date):
                         subscription.Is_Active=False
                         subscription.save()
-                    if(today_date<end_date):
-                        print("==================================================")
+
+                        
                 except:
                     pass
                 return redirect('sc_scrap_sock')
@@ -201,7 +201,7 @@ def Validate_login(request):
                     subscription = Subscription.objects.get(User=User)
                     today_date = datetime.now().date()
                     end_date = subscription.Subscription_Ending_Date
-                    if(today_date==end_date):
+                    if(today_date>end_date):
                         subscription.Is_Active=False
                         subscription.save()
                 except:
