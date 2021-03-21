@@ -956,7 +956,9 @@ def Sc_Pricing(request):
     
 
 def Sc_Scrap_Stock(request):
-    return render(request,"sc/sc_scrap_sock.html")
+    scrap_categories = Scrap_Categories.objects.all()
+    scrap_stock = Scrap_Stock.objects.all()
+    return render(request,"sc/sc_scrap_sock.html",{'scrap_categories':scrap_categories,'scrap_stock':scrap_stock})
 
 def Sc_Scrap_Request_Customer(request):
     return render(request,"sc/sc_scrap_request_customer.html")
@@ -972,13 +974,14 @@ def Scrap_Categories1(request):
     return render(request,"ngs_admin/scrap_categories.html",{'scrap_categories':scrap_categories})
 
 def Add_Scrap_Categories(request):
+
     if request.method=="POST":
         name = request.POST['name']
         price = request.POST['price']
         
         try:
             img = request.FILES['img']
-            new_scrap = Scrap_Categories.objects.create(Name=name,Price=price,Image=img)
+            new_scrap = Scrap_Categories.objects.create(Name=name,Price=price,Image=img,)
         except:
             new_scrap = Scrap_Categories.objects.create(Name=name,Price=price)
 
@@ -1010,4 +1013,31 @@ def Delete_Scrap_Category(request,key):
        delcat.Image.delete()
     delcat.delete()
     return redirect('scrap_categories')
+
+def Add_Stock(request):
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    sc=SC.objects.get(User_Master=user)
+    cat_name=request.POST['sname']
+    cat = Scrap_Categories.objects.get(Name=cat_name)
+    print(cat)
+    new_scrap = Scrap_Stock.objects.create(Name=cat.Name,Price=cat.Price,Image=cat.Image,In_Stock=True,SC=sc)
+    return redirect('sc_scrap_sock')
+
+def Delete_stock(request,key):
+    stock = Scrap_Stock.objects.get(id=key)
+    if(stock.Image):
+       stock.Image.delete()
+    stock.delete()
+    return redirect('sc_scrap_sock')
+
+def Update_Stock(request,key):
+    stock = Scrap_Stock.objects.get(id=key)
+    if(stock.In_Stock==True):
+        stock.In_Stock=False
+    elif(stock.In_Stock==False):
+        stock.In_Stock=True
+    stock.save()
+    return redirect('sc_scrap_sock')
+
 

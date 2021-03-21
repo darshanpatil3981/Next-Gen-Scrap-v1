@@ -113,6 +113,13 @@ class Scrap_Categories(models.Model):
     Price = models.FloatField()
     Image = models.ImageField(upload_to='Scrap_Images',default="default.png")
 
+class Scrap_Stock(models.Model):
+    SC = models.ForeignKey(SC,on_delete=models.CASCADE)
+    Name = models.CharField(max_length=20,null=True, blank=True)
+    Price = models.FloatField()
+    Image = models.ImageField(upload_to='Scrap_Images',default="default.png")
+    In_Stock = models.BooleanField() 
+
 
 
 

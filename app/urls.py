@@ -42,6 +42,9 @@ urlpatterns = [
      path("sc_scrap_sock/",views.Sc_Scrap_Stock,name="sc_scrap_sock"),
      path("sc_scrap_request_customer/",views.Sc_Scrap_Request_Customer,name="sc_scrap_request_customer"),
      path("sc_scrap_request_rc/",views.Sc_Scrap_Request_Rc,name="sc_scrap_request_rc"),
+     path("add_tock/",views.Add_Stock,name="add_stock"),
+     path("delete_stock/<int:key>",views.Delete_stock,name="delete_stock"),
+     path("update_stock/<int:key>",views.Update_Stock,name="update_stock"),
 
     
 

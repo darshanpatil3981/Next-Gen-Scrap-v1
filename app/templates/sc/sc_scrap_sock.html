@@ -1,72 +1,200 @@
 
 {% extends "sc/base.html" %}
 {% load static %}
-{% block content %}
+
+  {% block content %}
+  
+
+<!-- Starttttttt -->
+
 <div class="header bg-primary pb-6">
-    <div class="container-fluid">
-      <div class="header-body">
-        <div class="row align-items-center py-4">
-          <div class="col-lg-6 col-7">
-            <h6 class="h2 text-white d-inline-block mb-0">Scrap Stock</h6>
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-              <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Scrap Stock</li>
-              </ol>
-            </nav>
-          </div>
-         
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Scrap Stock</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Scrap Stock</li>
+            </ol>
+          </nav>
         </div>
-        <!-- Card stats -->
-        <div class="row">
-          <div class="col-xl-3 col-md-6">
-            <div class="card card-stats">
-              <!-- Card body -->
+       
+      </div>
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+          
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+           
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
             
-            </div>
           </div>
-          <div class="col-xl-3 col-md-6">
-            <div class="card card-stats">
-              <!-- Card body -->
-             
-            </div>
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <div class="card card-stats">
-              <!-- Card body -->
-              
-            </div>
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <div class="card card-stats">
-              <!-- Card body -->
-              
-            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- Page content -->
-  <div class="container-fluid mt--6">
-    <div class="row">
-    </div>
-    <div class="row">
-      <div class="col-xl-8">
-        <div class="card" style="width: 153%;">
-          <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
-            <div class="row align-items-center">
-             <!-- Any Thing Write Here -->
-         
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+  </div>
+  <div class="row">
+    <div class="col-xl-8">
+      <div class="card" style="width: 153%;">
+        <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
+          <div class="row align-items-center">
+           <!-- Any Thing Write Here -->
+           <div style="padding-left: 830px;padding-bottom: 20px;">
+            
+            <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
+            
+            <!-- Start Form -->
+            <button type="button" class="btn btn-icon btn-primary" data-toggle="modal" data-target="#modal-form">Add Scrap Stock</button>
+            <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+              <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                  <div class="modal-body p-0">
+                    <div class="card bg-secondary border-0 mb-0">
+                      <div class="card-header bg-transparent pb-5">
+                        <div class="text-muted text-center mt-2 mb-3"><label for=""> Add Scrap Stock</label></div>
+                        </div>
+                      <div class="card-body px-lg-5 py-lg-5">
+                        
+                        <form method="POST" role="form" action="{% url 'add_stock' %}">
+                          {% csrf_token %}
+                          <div class="form-group mb-3">
+                           
+                            <label class="form-control-label" for="exampleFormControlSelect1">Select Scrap Category</label>
+                            <select name="sname" class="form-control" id="exampleFormControlSelect1">
+                              {% for i in scrap_categories %}
+                              <option>{{i.Name}}</option>
+                              {% endfor %}
+                              
+                            </select>
+                          </div>
+                          
+                        
+                          <div class="text-center">
+                            <button type="submit" class="btn btn-primary my-4">Add Scrap Stock</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+          <!-- End Form -->
+            <div class="container">
+              <div class="row"> 
+                <div class="col-12">
+                  {% if scrap_stock %}
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                      
+                        <th scope="col">Scrap Name</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">In Stock</th>
+                        <th scope="col">Change Stock</th>
+                        <th scope="col">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for i in scrap_stock %}
+                      <tr>
+                       
+                       
+                        
+                        <td id="{{i.id}}">{{i.Name}}</td>
+                        <td>
+                          <div class="row">
+                            <div class="user-img pull-left" style="margin-left: 15px;padding-left: 10px;">
+                              <img src="{{i.Image.url}}" class="img-circle img-responsive" alt="User Image" style="height: 80px;"> </div>
+                          </td>
+                        <td> {{i.Price}}</td>
+                        {% ifequal i.In_Stock True %}
+                      <td><span class="badge badge-success" style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">Yes</span>   </td>
+			                  {% else %}
+                      <td><span class="badge badge-danger" style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">No</span>   </td>
+                      {% endifequal %}
+                      
+                        <td>
+                           
+            
+                            <a href="{% url 'update_stock' key=i.id %}" class="confirm-delete">
+                              <!-- <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" onclick="return confirm('Are you sure you want to delete this?')"></i></button> -->
+                              <button type="submit" class="btn btn-danger" style="background-color: #5e72e4;border-color: #5e72e4;"><i class="fas fa-sync fa-spin" ></i></button>
+                            </a>
+                            
+                        </td>
+                        <td>
+                           
+            
+                          <a href="{% url 'delete_stock' key=i.id %}" class="confirm-delete">
+                            <!-- <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" onclick="return confirm('Are you sure you want to delete this?')"></i></button> -->
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" ></i></button>
+                          </a>
+                          
+                      </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  {% else %}
+                  <p>
+                    Oops...! You Dont Have Any Scrap Stock yet... Add Some New.
+                  </p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+                
           
+       
+          </div>
         </div>
+        
       </div>
-    
     </div>
-
-
-
+  
+  </div>
 {% endblock content %}
+</body>
+<style>
+  .btn-label {position: relative;left: -12px;display: inline-block;padding: 6px 12px;background: rgba(0,0,0,0.15);border-radius: 3px 0 0 3px;}
+.btn-labeled {padding-top: 0;padding-bottom: 0;}
+.btn { margin-bottom:10px; }
+</style>
+
+
+<script>
+  
+$(document).on('click', '.confirm-delete', function(){
+    return confirm('Are you sure you want to delete product?');
+})
+ 
+</script>
+
+</html> 
