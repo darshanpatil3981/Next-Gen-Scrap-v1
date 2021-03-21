@@ -207,7 +207,7 @@ def Validate_login(request):
                 except:
                     pass
                 
-                return render(request,"rc/rc_scrap_collectors.html")
+                return redirect('rc_scrap_collectors')
         else:
             message = "Incorect Password!!"
             return render(request,"app/login.html",{'msg':message,})        
@@ -261,7 +261,9 @@ def Rc_scrap_collectors(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(User_Master=user)
-    return render(request,"rc/rc_scrap_collectors.html",{'user':user,'rc':rc})
+    sc=SC.objects.all()
+    print(sc)
+    return render(request,"rc/rc_scrap_collectors.html",{'user':user,'rc':rc,'sc':sc})
 
 def Rc_blank(request):
     id=request.session.get("id")
