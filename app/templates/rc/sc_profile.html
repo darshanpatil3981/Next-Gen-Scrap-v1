@@ -1,0 +1,125 @@
+{% extends "rc/base.html" %}
+{% load static %}
+{% block content %}
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Scrap Requests</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Customers</li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+            <!-- Card stats -->
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card" style="width: 153%;">
+                <div class="card-header border-0" style="margin-top: -54px;height: 770px;">
+
+                    <!-- Any Thing Write Here -->
+                    <div class="user-details-box">
+                        <div class="item-img">
+                            <img src="{{sc.Profile_Pic.url}}"
+                                style="height: 216px;border-radius: 136px;margin-top: 5px;margin-left: 360px;margin-bottom: 10px;">
+                            <button type="button" class="btn btn-icon btn-primary float-right" data-toggle="modal"
+                                data-target="#modal-form">Add Scrap Stock</button>
+                            <h1 style="margin-left: 380px;margin-bottom: 10px;">{{sc.Firstname}} {{sc.Lastname}}</h1>
+                            
+                        </div>
+                        <div class="item-content">
+                            <div class="info-table table-responsive">
+                                <table class="table text-nowrap">
+                                    <tbody>
+                                      
+                                        <tr>
+                                            <td>Shop Name :</td>
+                                            <td class="font-medium text-dark-medium">{{sc.Shop_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email :</td>
+                                            <td class="font-medium text-dark-medium">{{sc.User_Master.Email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contect Number :</td>
+                                            <td class="font-medium text-dark-medium">{{sc.Contact}}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>E-mail :</td>
+                                            <td class="font-medium text-dark-medium">stevenjohnson@gmail.com</td>
+                                        </tr>
+
+                                        <td>Address :</td>
+                                        <td class="font-medium text-dark-medium">{{sc.Address}}</td>
+                                        </tr>
+                                        </tr>
+                                        <td>State :</td>
+                                        <td class="font-medium text-dark-medium">{{sc.State}}</td>
+                                        </tr>
+                                        <td>City :</td>
+                                        <td class="font-medium text-dark-medium">{{sc.City}}</td>
+                                        </tr>
+
+                                        
+
+                                        <td>Pincode :</td>
+                                        <td class="font-medium text-dark-medium">{{sc.Pincode}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- iiiiiiiiiiiiiiiiiiiiiii -->
+
+
+    {% endblock content %}

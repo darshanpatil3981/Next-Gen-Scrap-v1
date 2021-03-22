@@ -20,6 +20,7 @@ urlpatterns = [
      #RC Dashboard
      path("rc_blank/",views.Rc_blank,name="rc_blank"),
      path("rc_scrap_collectors/",views.Rc_scrap_collectors,name="rc_scrap_collectors"),
+     path("view_sc_profile/<int:key>",views.View_Sc_Profile,name="view_sc_profile"),
      path("rc_profile/",views.Rc_profile,name="rc_profile"),
      path("rc_update_profile/",views.Rc_update_profile,name="rc_update_profile"),
      path("rc_orders/",views.Rc_orders,name="rc_orders"),

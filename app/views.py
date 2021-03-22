@@ -265,6 +265,12 @@ def Rc_scrap_collectors(request):
     print(sc)
     return render(request,"rc/rc_scrap_collectors.html",{'user':user,'rc':rc,'sc':sc})
 
+
+def View_Sc_Profile(request,key):
+    sc=SC.objects.get(id=key)
+    return render(request,"rc/sc_profile.html",{'sc':sc})
+    
+
 def Rc_blank(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
@@ -853,7 +859,7 @@ def Invoice_pdf(request,key):
     return HttpResponse(pdf, content_type='application/pdf')
     
 def temp(request):
-    return render(request,"ngs_admin/scrap_categories.html")
+    return render(request,"rc/sc_profile.html")
 
 
 def Add_coomment_ecom(request,key):
