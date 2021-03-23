@@ -164,6 +164,8 @@ def Validate_login(request):
                 customer=Customer.objects.get(User_Master=User)
                 request.session['fname']=customer.Firstname
                 request.session['lname']=customer.Lastname
+               
+             
                 user = User_Master.objects.get(id=User.id)
                 customer = Customer.objects.get(User_Master=user)
                 cart_items = Cust_Cart.objects.filter(Customer=customer)
@@ -179,6 +181,9 @@ def Validate_login(request):
                 request.session['scid']=sc.id
                 request.session['fname']=sc.Firstname
                 request.session['lname']=sc.Lastname
+                request.session['pic']=sc.Profile_Pic.url
+
+               
                 try:
                     subscription = Subscription.objects.get(User=User)
                     today_date = datetime.now().date()
@@ -197,6 +202,7 @@ def Validate_login(request):
                 request.session['rcid']=rc.id
                 request.session['fname']=rc.Firstname
                 request.session['lname']=rc.Lastname
+                request.session['pic']=rc.Profile_Pic.url
                 try:
                     subscription = Subscription.objects.get(User=User)
                     today_date = datetime.now().date()
@@ -859,7 +865,7 @@ def Invoice_pdf(request,key):
     return HttpResponse(pdf, content_type='application/pdf')
     
 def temp(request):
-    return render(request,"rc/sc_profile.html")
+    return render(request,"rc/temp.html")
 
 
 def Add_coomment_ecom(request,key):

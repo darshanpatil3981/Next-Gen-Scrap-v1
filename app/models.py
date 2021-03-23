@@ -123,6 +123,15 @@ class Scrap_Stock(models.Model):
 
 
 
+    
+
+
+    
+
+
+
+
+
 
 
 
