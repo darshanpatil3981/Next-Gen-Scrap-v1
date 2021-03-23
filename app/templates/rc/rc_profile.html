@@ -88,6 +88,33 @@ style="min-height: 300px; background-image: url({% static 'GCassets/img/theme/pr
             <i class="ni education_hat mr-2"></i>+91{{rc.Contact}}
             {% endifequal %}
           </div>
+
+
+          <div class="h5 mt-4">
+            Profile Status
+            {% ifequal rc.User_Master.is_verified True %}
+            <span class="badge badge-success" style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 10px;">Verified</span> 
+            {% else %}
+            <span class="badge badge-danger" style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 10px;">Pending</span> 
+            
+            <div style="margin-top: 13px;">
+              {% ifequal rc.User_Master.Verify_Request True %}
+              <button type="button" class="btn btn-outline-secondary" style="border-color: #cbdeea;">Requested</button> 
+              {% else %}
+              <a href="{% url 'request_verify_rc' %}"><button type="button" class="btn btn-outline-secondary" style="border-color: #cbdeea;">Request Verify</button></a>
+              {% endifequal %}
+            </div>
+            
+            {% endifequal %}
+          </div>
+  
+          
+          <div>
+            
+
+            
+           
+          </div>
         </div>
       </div>
     </div>

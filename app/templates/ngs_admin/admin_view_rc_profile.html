@@ -1,0 +1,135 @@
+{% extends "ngs_admin/base.html" %}
+{% load static %}
+{% block content %}
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Profile</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#">Verify Company Profile </a></li>
+                            <li class="breadcrumb-item"><a href="#">View Profile</a></li>
+                            
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+            <!-- Card stats -->
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats">
+                        <!-- Card body -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card" style="width: 153%;">
+                <div class="card-header border-0" style="margin-top: -54px;height: 770px;">
+
+                    <!-- Any Thing Write Here -->
+                    <div class="user-details-box">
+                        <div class="item-img">
+                            <img src="{{rc.Profile_Pic.url}}"
+                                style="height: 216px;border-radius: 136px;margin-top: 5px;margin-left: 360px;margin-bottom: 10px;">
+                            {% ifequal rc.User_Master.is_verified True %}
+                            <a href="{% url 'change_verify_status' key=rc.id %}"><button class="btn btn-danger float-right" type="button">
+                                <span class="btn-inner--icon"><i class="fa fa-times" style="margin-right: 3px;"></i></span>
+                                <span class="btn-inner--text">UnVerify This Profile</span>
+                              </button></a>
+                            {% else %}
+                               <a href="{% url 'change_verify_status' key=rc.id %}"><button class="btn btn-success float-right" type="button" style="background-color: #55ce55;border-color: #55ce55;">
+                                    <span class="btn-inner--icon"><i class="ni ni-check-bold"></i></span>
+                                    <span class="btn-inner--text">Verify This Profile</span>
+                                  </button></a>
+                            {% endifequal %}
+                            <h1 style="margin-left: 380px;margin-bottom: 10px;">{{rc.Firstname}} {{rc.Lastname}}</h1>
+                            
+                        </div>
+                        <div class="item-content">
+                            <div class="info-table table-responsive">
+                                <table class="table text-nowrap">
+                                    <tbody>
+                                      
+                                        <tr>
+                                            <td>Company Name :</td>
+                                            <td class="font-medium text-dark-medium">{{rc.Company_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email :</td>
+                                            <td class="font-medium text-dark-medium">{{rc.User_Master.Email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contect Number :</td>
+                                            <td class="font-medium text-dark-medium">{{rc.Contact}}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>E-mail :</td>
+                                            <td class="font-medium text-dark-medium">stevenjohnson@gmail.com</td>
+                                        </tr>
+
+                                        <td>Address :</td>
+                                        <td class="font-medium text-dark-medium">{{rc.Address}}</td>
+                                        </tr>
+                                        </tr>
+                                        <td>State :</td>
+                                        <td class="font-medium text-dark-medium">{{rc.State}}</td>
+                                        </tr>
+                                        <td>City :</td>
+                                        <td class="font-medium text-dark-medium">{{rc.City}}</td>
+                                        </tr>
+
+                                        
+
+                                        <td>Pincode :</td>
+                                        <td class="font-medium text-dark-medium">{{rc.Pincode}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- iiiiiiiiiiiiiiiiiiiiiii -->
+
+
+    {% endblock content %}

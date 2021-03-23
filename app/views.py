@@ -150,7 +150,7 @@ def Validate_login(request):
     is_admin = Admin.objects.filter(User_Name=email)
     if is_admin:
         admin = Admin.objects.get(User_Name=email)
-        print(admin)
+        
         if(password==admin.Password):
             return redirect('ngs_admin')
         else:
@@ -268,7 +268,6 @@ def Rc_scrap_collectors(request):
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(User_Master=user)
     sc=SC.objects.all()
-    print(sc)
     return render(request,"rc/rc_scrap_collectors.html",{'user':user,'rc':rc,'sc':sc})
 
 
@@ -449,6 +448,15 @@ def Rc_change_password(request):
             return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc,'msg':msg})
     else:
         return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc})
+
+def Request_Verify_Rc(request):
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    user.Verify_Request=True
+    user.save()
+    return redirect('rc_profile')
+
+
 
 
 def Subscription_detail(request):
@@ -874,12 +882,11 @@ def Add_coomment_ecom(request,key):
     customer=Customer.objects.get(User_Master=user)
     product = Product.objects.get(id=key)
 
-    print("Got HERE")
     cmt_text = request.POST['cmt_msg']
     cmt_date = datetime.now().date()
     
     cmt_obj = Ecom_comments.objects.create(Product=product,Customer=customer,Comment_text=cmt_text,Comment_time=cmt_date)
-    print("Here too")
+   
     return HttpResponseRedirect(reverse('product_detail',args=[product.id]))
 
 
@@ -892,7 +899,6 @@ def Sc_Profile(request):
     return render(request,"sc/sc_profile.html",{'user':user,'sc':sc})
 
 def Sc_Update_Profile(request):
-    print("----------------------")
     if request.method=="POST":
         fname = request.POST['fname']
         lname = request.POST['lname']
@@ -904,7 +910,6 @@ def Sc_Update_Profile(request):
 
         id=request.session.get("id")
         user = User_Master.objects.get(id=id)
-        print(user)
         sc=SC.objects.get(User_Master=user)
         sc.Firstname=fname
         sc.Lastname=lname
@@ -933,15 +938,11 @@ def Sc_Change_Password(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
     sc=SC.objects.get(User_Master=user)
-    print("111111111111111111111")
     if request.method=="POST":
         old_password = request.POST['op']
         new_password = request.POST['np']
         confirm_password= request.POST['cp']
-        print("22222222222222222222")
-        
         if check_password(old_password,user.Password):
-            print("333333333333333333333")
             if new_password==confirm_password:
                 encrypted_pw=make_password(new_password)
                 user.Password=encrypted_pw
@@ -1021,6 +1022,10 @@ def Edit_Scrap_Category(request,key):
     else:
         return render(request,"ngs_admin/update_scrap_categorie.html",{'cat':cat})
 
+def Verify_Rc_Profile(request):
+    rc = RC.objects.all()
+    return render(request,"ngs_admin/verify_rc_profile.html",{'rc':rc})
+
 def Delete_Scrap_Category(request,key):
     delcat = Scrap_Categories.objects.get(id=key)
     if(delcat.Image):
@@ -1034,7 +1039,6 @@ def Add_Stock(request):
     sc=SC.objects.get(User_Master=user)
     cat_name=request.POST['sname']
     cat = Scrap_Categories.objects.get(Name=cat_name)
-    print(cat)
     new_scrap = Scrap_Stock.objects.create(Name=cat.Name,Price=cat.Price,Image=cat.Image,In_Stock=True,SC=sc)
     return redirect('sc_scrap_sock')
 
@@ -1054,4 +1058,30 @@ def Update_Stock(request,key):
     stock.save()
     return redirect('sc_scrap_sock')
 
+def Admin_view_rc_profile(request,key):
+    rc=RC.objects.get(id=key)
+    return render(request,"ngs_admin/admin_view_rc_profile.html",{'rc':rc})
+
+def Change_Verify_Status(request,key):
+    rc=RC.objects.get(id=key)
+    user_id=rc.User_Master.id
+    user = User_Master.objects.get(id=user_id)
+    if(user.is_verified==True):
+        user.is_verified=False
+        user.Verify_Request=False
+        user.save()
+        return redirect('verified_rc_profiles')
+    elif(user.is_verified==False):
+        user.is_verified=True
+        user.Verify_Request=False
+        user.save()
+        return redirect('verify_rc_profile')
+    
+
+def Verified_Rc_Profiles(request):
+    rc=RC.objects.all()
+    return render(request,"ngs_admin/verified_rc_profiles.html",{'rc':rc})
+
+    
+    
 

@@ -11,6 +11,7 @@ class User_Master(models.Model):
     is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_updated = models.DateTimeField(auto_now=True,blank=False)
+    Verify_Request = models.BooleanField(default=False)
 
 class Customer(models.Model):
     User_Master = models.ForeignKey(User_Master,on_delete=models.CASCADE)
