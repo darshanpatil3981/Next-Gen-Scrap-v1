@@ -101,7 +101,7 @@ style="min-height: 300px; background-image: url({% static 'GCassets/img/theme/pr
               {% ifequal rc.User_Master.Verify_Request True %}
               <button type="button" class="btn btn-outline-secondary" style="border-color: #cbdeea;">Requested</button> 
               {% else %}
-              <a href="{% url 'request_verify_rc' %}"><button type="button" class="btn btn-outline-secondary" style="border-color: #cbdeea;">Request Verify</button></a>
+              <a href="{% url 'request_verify' %}"><button type="button" class="btn btn-outline-secondary" style="border-color: #cbdeea;">Request Verify</button></a>
               {% endifequal %}
             </div>
             

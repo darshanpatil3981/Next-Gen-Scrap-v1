@@ -34,7 +34,7 @@ urlpatterns = [
      path("subscription_detail/",views.Subscription_detail,name="subscription_detail"),
      path("Invoice_Subscription/",views.Invoice_Subscription,name="invoice_subscription"),
      path("invoice_sub_pdf/<int:key>",views.Invoice_Sub_Pdf,name="invoice_sub_pdf"),
-     path("request_verify_rc/",views.Request_Verify_Rc,name="request_verify_rc"),
+     path("request_verify/",views.Request_Verify,name="request_verify"),
 
      #SC Dashboard
      path("sc_update_profile/",views.Sc_Update_Profile,name="sc_update_profile"),
@@ -95,6 +95,14 @@ urlpatterns = [
      path("admin_view_rc_profile/<int:key>",views.Admin_view_rc_profile,name="admin_view_rc_profile"),
      path("change_verify_status/<int:key>",views.Change_Verify_Status,name="change_verify_status"),
      path("verified_rc_profiles/",views.Verified_Rc_Profiles,name="verified_rc_profiles"),
+     path("verify_sc_profile/",views.Verify_Sc_Profile,name="verify_sc_profile"),
+     path("admin_view_sc_profile/<int:key>",views.Admin_view_Sc_profile,name="admin_view_sc_profile"),
+     path("change_verify_status_sc/<int:key>",views.Change_Verify_Status_Sc,name="change_verify_status_sc"),
+     path("verified_sc_profiles/",views.Verified_Sc_Profiles,name="verified_sc_profiles"),
+
+
+
+
 
 
 

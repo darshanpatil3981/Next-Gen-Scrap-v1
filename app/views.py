@@ -449,12 +449,17 @@ def Rc_change_password(request):
     else:
         return render(request,"rc/rc_change_password.html",{'user':user,'rc':rc})
 
-def Request_Verify_Rc(request):
+def Request_Verify(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
     user.Verify_Request=True
     user.save()
-    return redirect('rc_profile')
+    if(user.Role=="RC"):
+        return redirect('rc_profile')
+    elif(user.Role=="SC"):
+        return redirect('sc_profile')
+
+
 
 
 
@@ -1082,6 +1087,35 @@ def Verified_Rc_Profiles(request):
     rc=RC.objects.all()
     return render(request,"ngs_admin/verified_rc_profiles.html",{'rc':rc})
 
+def Verify_Sc_Profile(request):
+    sc = SC.objects.all()
+    return render(request,"ngs_admin/verify_sc_profile.html",{'sc':sc})
+
+def Admin_view_Sc_profile(request,key):
+    sc=SC.objects.get(id=key)
+    return render(request,"ngs_admin/admin_view_sc_profile.html",{'sc':sc})
+
+def Change_Verify_Status_Sc(request,key):
+    sc=SC.objects.get(id=key)
+    user_id=sc.User_Master.id
+    user = User_Master.objects.get(id=user_id)
+    print(sc)
+    print(user.id)
+    if(user.is_verified==True):
+        user.is_verified=False
+        user.Verify_Request=False
+        user.save()
+        return redirect('verify_sc_profile')
+    elif(user.is_verified==False):
+        user.is_verified=True
+        user.Verify_Request=False
+        user.save()
+        print(user.is_verified)
+        print(user.Verify_Request)
+        return redirect('verify_sc_profile')
     
+def Verified_Sc_Profiles(request):
+    sc=SC.objects.all()
+    return render(request,"ngs_admin/verified_sc_profiles.html",{'sc':sc})
     
 

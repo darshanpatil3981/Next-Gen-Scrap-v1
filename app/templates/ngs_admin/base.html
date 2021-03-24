@@ -63,9 +63,15 @@
 
 
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'rc_pricing' %}">
-                <i class="ni ni-diamond" style="color: #5e72e4;"></i>
-                <span class="nav-link-text"  href="{% url 'rc_pricing' %}">Subscription</span>
+              <a class="nav-link" href="{% url 'verify_sc_profile' %}">
+                <i class="fa fa-user-o" style="color: #5e72e4;"></i>
+                <span class="nav-link-text"  href="{% url 'verify_sc_profile' %}">Verify SC Profile</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'verified_sc_profiles' %}">
+                <i class="ni ni-check-bold" style="color: #5e72e4;"></i>
+                <span class="nav-link-text"  href="{% url 'verified_sc_profiles' %}">Verified SC Profiles</span>
               </a>
             </li>
           </ul>
