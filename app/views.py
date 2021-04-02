@@ -912,12 +912,15 @@ def Sc_Update_Profile(request):
         city = request.POST['city']
         state = request.POST['state']
         pincode = request.POST['pincode']
+        area = request.POST['area']
+      
 
         id=request.session.get("id")
         user = User_Master.objects.get(id=id)
         sc=SC.objects.get(User_Master=user)
         sc.Firstname=fname
         sc.Lastname=lname
+        sc.Area = area
         sc.Address=add
         sc.Contact=contact
         sc.City=city
@@ -937,7 +940,8 @@ def Sc_Update_Profile(request):
         id=request.session.get("id")
         user = User_Master.objects.get(id=id)
         sc=SC.objects.get(User_Master=user)
-        return render(request,"sc/sc_update_profile.html",{'user':user,'sc':sc})
+        areas = Areas.objects.all()
+        return render(request,"sc/sc_update_profile.html",{'user':user,'sc':sc,'areas':areas})
 
 def Sc_Change_Password(request):
     id=request.session.get("id")

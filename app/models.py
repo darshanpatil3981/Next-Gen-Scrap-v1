@@ -31,6 +31,7 @@ class SC(models.Model):
     Shop_name = models.CharField(max_length=30,default="")
     Address = models.CharField(max_length=100)
     City = models.CharField(max_length=30)
+    Area = models.CharField(max_length=30,null=True, blank=True)
     State = models.CharField(max_length=30)
     Pincode = models.BigIntegerField()
     Contact = models.BigIntegerField(default=0)
@@ -133,6 +134,8 @@ class RC_Scrap_Request_detail(models.Model):
     Scrap_Name = models.CharField(max_length=30,null=True, blank=True)
     Quantity = models.IntegerField()
 
+class Areas(models.Model):
+    Name = models.CharField(max_length=30,null=True, blank=True)
 
 
 
