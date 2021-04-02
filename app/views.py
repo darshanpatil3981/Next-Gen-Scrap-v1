@@ -878,7 +878,7 @@ def Invoice_pdf(request,key):
     return HttpResponse(pdf, content_type='application/pdf')
     
 def temp(request):
-    return render(request,"rc/temp.html")
+    return render(request,"temp.html")
 
 
 def Add_coomment_ecom(request,key):

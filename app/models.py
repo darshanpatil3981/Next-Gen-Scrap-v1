@@ -121,6 +121,23 @@ class Scrap_Stock(models.Model):
     Image = models.ImageField(upload_to='Scrap_Images',default="default.png")
     In_Stock = models.BooleanField() 
 
+class RC_Scrap_Request(models.Model):
+    RC = models.ForeignKey(RC,on_delete=models.CASCADE)
+    SC = models.ForeignKey(SC,on_delete=models.CASCADE)
+    Date = models.DateField() 
+    Status = models.CharField(max_length=20,null=True, blank=True)
+    Is_Complited = models.BooleanField()
+
+class RC_Scrap_Request_detail(models.Model):
+    RC_Scrap_Request = models.ForeignKey(RC_Scrap_Request,on_delete=models.CASCADE)
+    Scrap_Name = models.CharField(max_length=30,null=True, blank=True)
+    Quantity = models.IntegerField()
+
+
+
+
+
+
 
 
 
