@@ -7,7 +7,7 @@
       <div class="header-body">
         <div class="row align-items-center py-4">
           <div class="col-lg-6 col-7">
-            <h6 class="h2 text-white d-inline-block mb-0">Verified  Profile</h6>
+            <h6 class="h2 text-white d-inline-block mb-0">Verified SC Profile</h6>
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
               <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                 <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
@@ -58,6 +58,18 @@
           <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
             <div class="row align-items-center">
              <!-- Any Thing Write Here -->
+             <ul class="nav nav-tabs" style="font-size: 16px;">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'sc_profiles' %}">SC Profiles</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"  href="{% url 'verify_sc_profile' %}">Verify SC Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'verified_sc_profiles' %}">Verified Sc Profiles</a>
+              </li>
+             
+            </ul>
 
              <div class="table-responsive" style="margin-top: 19px;">
               <table class="table align-items-center table-flush table-striped">
@@ -78,7 +90,7 @@
                   {% ifequal i.User_Master.is_verified True %}
                   <tr style="background-color: white;">
                     <td class="table-user">
-                      <img src="{{i.Profile_Pic.url}}" style="height: 77px;border-radius: 54px;">
+                      <img src="{{i.Profile_Pic.url}}" style="height: 41px;border-radius: 54px;">
                       <b style="margin-left: 18px;">{{i.Firstname}} {{i.Lastname}}</b>
                     </td>
                     <td>

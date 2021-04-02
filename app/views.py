@@ -1079,17 +1079,23 @@ def Change_Verify_Status(request,key):
         user.is_verified=False
         user.Verify_Request=False
         user.save()
-        return redirect('verified_rc_profiles')
+        return redirect('rc_profiles')
     elif(user.is_verified==False):
         user.is_verified=True
         user.Verify_Request=False
         user.save()
-        return redirect('verify_rc_profile')
+        return redirect('rc_profiles')
     
-
+def Rc_Profiles(request):
+    rc=RC.objects.all()
+    return render(request,"ngs_admin/rc_profiles.html",{'rc':rc})
 def Verified_Rc_Profiles(request):
     rc=RC.objects.all()
     return render(request,"ngs_admin/verified_rc_profiles.html",{'rc':rc})
+
+def Sc_Profiles(request):
+    sc=SC.objects.all()
+    return render(request,"ngs_admin/sc_profiles.html",{'sc':sc})
 
 def Verify_Sc_Profile(request):
     sc = SC.objects.all()
@@ -1109,14 +1115,14 @@ def Change_Verify_Status_Sc(request,key):
         user.is_verified=False
         user.Verify_Request=False
         user.save()
-        return redirect('verify_sc_profile')
+        return redirect('sc_profiles')
     elif(user.is_verified==False):
         user.is_verified=True
         user.Verify_Request=False
         user.save()
         print(user.is_verified)
         print(user.Verify_Request)
-        return redirect('verify_sc_profile')
+        return redirect('sc_profiles')
     
 def Verified_Sc_Profiles(request):
     sc=SC.objects.all()

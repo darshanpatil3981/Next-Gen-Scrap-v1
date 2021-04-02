@@ -58,7 +58,18 @@
           <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
             <div class="row align-items-center">
              <!-- Any Thing Write Here -->
-
+             <ul class="nav nav-tabs" style="font-size: 16px;">
+              <li class="nav-item">
+                <a class="nav-link "  href="{% url 'rc_profiles' %}">RC Profiles</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link "  href="{% url 'verify_rc_profile' %}">Verify RC Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'verified_rc_profiles' %}">Verified RC Profiles</a>
+              </li>
+             
+            </ul>
              <div class="table-responsive" style="margin-top: 19px;">
               <table class="table align-items-center table-flush table-striped">
                 <thead class="thead-light">
@@ -78,7 +89,7 @@
                   {% ifequal i.User_Master.is_verified True %}
                   <tr style="background-color: white;">
                     <td class="table-user">
-                      <img src="{{i.Profile_Pic.url}}" style="height: 77px;border-radius: 54px;">
+                      <img src="{{i.Profile_Pic.url}}" style="height: 41px;border-radius: 54px;">
                       <b style="margin-left: 18px;">{{i.Firstname}} {{i.Lastname}}</b>
                     </td>
                     <td>
