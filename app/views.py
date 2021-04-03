@@ -1128,4 +1128,11 @@ def Verified_Sc_Profiles(request):
     sc=SC.objects.all()
     return render(request,"ngs_admin/verified_sc_profiles.html",{'sc':sc})
     
+def Search(request):
+    result = request.POST['result']
+    print(result)
+    products = Product.objects.filter(Product_Name__icontains = result)
+    print(products)
+    return render(request,"ecom/search_result.html",{'products':products})
+    
 

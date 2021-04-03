@@ -67,6 +67,7 @@ urlpatterns = [
      path("shipping_detail/",views.Shipping_detail,name="shipping_detail"),
      path("invoice/",views.Invoice,name="invoice"),
      path("temp/",views.temp,name="temp"),
+     path("search/",views.Search,name="search"),
      path("view_Invoice/<int:key>",views.View_Invoice,name="view_Invoice"),
      path("invoice_pdf/<int:key>",views.Invoice_pdf,name="invoice_pdf"),
      path("add_coomment/<int:key>",views.Add_coomment_ecom,name="add_coomment_ecom"),
