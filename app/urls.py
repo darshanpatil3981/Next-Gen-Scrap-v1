@@ -72,6 +72,7 @@ urlpatterns = [
      path("invoice_pdf/<int:key>",views.Invoice_pdf,name="invoice_pdf"),
      path("add_coomment/<int:key>",views.Add_coomment_ecom,name="add_coomment_ecom"),
      
+     
 
      
      
