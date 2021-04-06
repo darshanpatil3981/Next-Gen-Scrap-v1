@@ -58,7 +58,86 @@
           <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
             <div class="row align-items-center">
              <!-- Any Thing Write Here -->
+             {% if req %}
+        <center> 
       
+            <div class="table-responsive" style="margin-top: 19px;">
+                <table class="table align-items-center table-flush table-striped">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>Id</th>
+                      <th>Customer Name</th>
+                      <th>Email</th>
+                      <th>Phone </th>
+                      <th>Datetime Of Pickup </th>
+
+                      <th>Status</th>
+  
+  
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in req %}
+  
+                    <tr style="background-color: white;">
+                      <td class="table-user">
+                        <b style="margin-left: 18px;">{{i.id}}</b>
+                      </td>
+                      <td>
+                        <span class="text-muted">{{i.Name}}</span>
+                      </td>
+  
+                    
+                     <td>
+                         {{i.Email}}
+                     </td>
+                     <td>
+                       {{i.Phone}}
+                     </td>
+                     <td>
+                         {{i.Datetime_Of_Pickup}}
+                     </td>
+                     {% ifequal i.Is_Complited True %}
+                     <td class="table-actions">
+                       <span class="badge badge-success"
+                         style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 10px;">completed
+                         </span>
+                       {% else %}
+                     <td class="table-actions">
+                       <span class="badge badge-danger"
+                         style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 10px;">Pending</span>
+                       {% endifequal %}
+
+                      <td class="table-actions">
+  <center>
+                        <div>
+                          <a href="{% url 'sc_scrap_request_detail' key=i.id %}" class="table-action" data-toggle="tooltip"
+                            data-original-title="View Detail">
+                            <button type="button"  class="btn btn-primary">
+                              <i class="fa fa-eye">
+                              </i>
+                            </button>
+                          </a>
+                        </div>
+                    </center>
+                     
+                      </td>
+                    </tr>
+  
+                    {% endfor %}
+  
+                  </tbody>
+                </table>
+              </div>
+    </center>
+    {% else %}
+    <center>
+      <h5> Opps!! There Is No Scrap Requests</h5>
+    </center>
+    {% endif %}
+
+      <!-- end Writing here -->
             </div>
           </div>
           

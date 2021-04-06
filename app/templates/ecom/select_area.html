@@ -1,0 +1,36 @@
+{% extends "ecom/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<section class="section-pagetop bg">
+    <div class="container">
+        <h2 class="title-page">Select Area</h2>
+    </div> <!-- container //  -->
+</section>
+<div class="card mb-3" style="width: 83%;margin-left: 9%;margin-top: 17px;">
+    <article class="card-body">
+        <header class="mb-4">
+       <center>     <h5 class="card-title">Select Your Area</h5>
+        <div style="height: 20px;"></div>
+
+       <form method="POST" action="{% url 'select_scrap_collector' %}">
+        {% csrf_token %}
+        <select class="form-control" name="area" data-toggle="select" style="width: 280px;">
+            {% for i in areas %}
+            <option>{{i.Name}}</option>
+            {% endfor %}
+
+         
+        </select>
+        <div style="height: 30px;"></div>
+        <button type="submit" class="btn btn-primary" style="width: 100px;">Next</button>
+
+      </form>
+    </center>
+        </header>
+        
+      
+</div> <!-- card.// -->
+
+{% endblock content %}

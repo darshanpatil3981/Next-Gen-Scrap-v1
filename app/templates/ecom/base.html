@@ -159,23 +159,12 @@ $(document).ready(function() {
             <a class="dropdown-item" href="#">Category 3</a>
           </div>
         </li>
+       
         <li class="nav-item">
-          <a class="nav-link" href="#">Fashion</a>
+          <a class="nav-link" href="{% url 'my_scrap_requests' %}">My Scrap Requests</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Supermarket</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Electronics</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Baby &amp Toys</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Fitness sport</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Clothing</a>
+          <a class="nav-link" href="{% url 'select_area' %}">Sell Scrap</a>
         </li>
         <li class="nav-item">
 			<a class="nav-link" href="{% url 'customer_orders' %}">My Orders</a>

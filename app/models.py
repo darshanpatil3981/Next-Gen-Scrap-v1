@@ -136,7 +136,22 @@ class RC_Scrap_Request_detail(models.Model):
 
 class Areas(models.Model):
     Name = models.CharField(max_length=30,null=True, blank=True)
+class Customer_Scrap_Request(models.Model):
+    Customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    SC = models.ForeignKey(SC,on_delete=models.CASCADE)
+    Name = models.CharField(max_length=50,null=True, blank=True)
+    Phone = models.BigIntegerField()
+    Email = models.EmailField()
+    Address = models.CharField(max_length=200,null=True, blank=True)
+    Pincode = models.IntegerField()
+    City = models.CharField(max_length=20,null=True, blank=True)
+    State = models.CharField(max_length=20,null=True, blank=True)
+    Datetime_Of_Pickup = models.DateTimeField()
+    Is_Complited = models.BooleanField(default=False)
+    
+    
 
+    
 
 
 

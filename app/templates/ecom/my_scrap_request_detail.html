@@ -1,0 +1,86 @@
+{% extends "ecom/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<section class="section-pagetop bg">
+    <div class="container">
+        <h2 class="title-page">My Scrap Requests Detail</h2>
+    </div> <!-- container //  -->
+</section>
+<div class="card mb-3" style="width: 83%;margin-left: 9%;margin-top: 17px;">
+    <article class="card-body">
+        <header class="mb-4">
+           <h5 class="card-title">Scrap Request Detail</h5>
+        <div style="height: 20px;"></div>
+        <center> 
+      
+          <div class="item-content">
+            <div class="info-table table-responsive">
+                <table class="table text-nowrap">
+                    <tbody>
+                      
+                        <tr>
+                            <td>ID :</td>
+                            <td class="font-medium text-dark-medium">{{req.id}}</td>
+                        </tr>
+
+                        <tr>
+                        <td>Datetime Of Pickup :</td>
+                        <td class="font-medium text-dark-medium">{{req.Datetime_Of_Pickup}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Name :</td>
+                            <td class="font-medium text-dark-medium">{{req.Name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone Number :</td>
+                            <td class="font-medium text-dark-medium">{{req.Phone}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>E-mail :</td>
+                            <td class="font-medium text-dark-medium">{{req.Email}}</td>
+                        </tr>
+
+                        <td>Address :</td>
+                        <td class="font-medium text-dark-medium">{{req.Address}}</td>
+                        </tr>
+                        </tr>
+                        <td>State :</td>
+                        <td class="font-medium text-dark-medium">{{req.State}}</td>
+                        </tr>
+                        <td>City :</td>
+                        <td class="font-medium text-dark-medium">{{req.City}}</td>
+                        </tr>
+
+                        
+
+                        <td>Pincode :</td>
+                        <td class="font-medium text-dark-medium">{{req.Pincode}}</td>
+                        </tr>
+                        <td>Status :</td>
+                        <td class="font-medium text-dark-medium">
+                          {% ifequal req.Is_Complited True %}
+                          <span class="badge badge-success"
+                         style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 10px;">completed
+                         </span>
+                         {% else %}
+                         <span class="badge badge-danger"
+                         style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 10px;">Pending</span>
+                       {% endifequal %}
+                        </td>
+                        </tr>
+                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </center>
+        </header>
+        
+      
+</div> <!-- card.// -->
+
+{% endblock content %}

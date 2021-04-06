@@ -1,0 +1,92 @@
+{% extends "ecom/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<section class="section-pagetop bg">
+    <div class="container">
+        <h2 class="title-page">Select Scrap Collector</h2>
+    </div> <!-- container //  -->
+</section>
+<div class="card mb-3" style="width: 83%;margin-left: 9%;margin-top: 17px;">
+    <article class="card-body">
+        <header class="mb-4">
+           <h5 class="card-title">Scrap Collectors</h5>
+        <div style="height: 20px;"></div>
+        <center> 
+          {% if sc %}
+            <div class="table-responsive" style="margin-top: 19px;">
+                <table class="table align-items-center table-flush table-striped">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>Owner</th>
+                      <th>Email</th>
+  
+                      <th>Shop Name </th>
+                      <th>Area </th>
+
+                      <th>Make Scrap Request</th>
+  
+  
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in sc %}
+  
+                    <tr style="background-color: white;">
+                      <td class="table-user">
+                        <img src="{{i.Profile_Pic.url}}" style="height: 41px;border-radius: 54px;">
+                        <b style="margin-left: 18px;">{{i.Firstname}} {{i.Lastname}}</b>
+                      </td>
+                      <td>
+                        <span class="text-muted">{{i.User_Master.Email}}</span>
+                      </td>
+  
+                    
+                     <td>
+                         {{i.Shop_name}}
+                     </td>
+                     <td>
+                         {{i.Area}}
+                     </td>
+                      <td class="table-actions">
+  
+  
+  
+  <center>
+                        <div>
+                          <a href="{% url 'scrap_request_detail' key=i.id %}" class="table-action" data-toggle="tooltip"
+                            data-original-title="View Profile">
+                            <button type="button"  class="btn btn-primary">
+                              <i class="fa fa-plus">
+                              </i>
+                            </button>
+                          </a>
+                        </div>
+                    </center>
+                     
+                      </td>
+                    </tr>
+               
+                   
+
+                    {% endfor %}
+  
+                  </tbody>
+                </table>
+              </div>
+    </center>
+    {% else %}
+    <center>
+      <h5>
+        Ops!! There Is No Scrap Collector In This Area
+      </h5>
+    </center>
+    {% endif %}
+        </header>
+        
+      
+</div> <!-- card.// -->
+
+{% endblock content %}

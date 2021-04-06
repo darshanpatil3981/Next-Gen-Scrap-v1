@@ -994,7 +994,31 @@ def Sc_Scrap_Stock(request):
     return render(request,"sc/sc_scrap_sock.html",{'scrap_categories':scrap_categories,'scrap_stock':scrap_stock})
 
 def Sc_Scrap_Request_Customer(request):
-    return render(request,"sc/sc_scrap_request_customer.html")
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    sc=SC.objects.get(User_Master=user)
+    req = Customer_Scrap_Request.objects.filter(SC=sc)
+    print('-------------')
+    print(req)
+    return render(request,"sc/sc_scrap_request_customer.html",{'req':req})
+
+def Sc_Scrap_Request_Detail(request,key):
+    req = Customer_Scrap_Request.objects.get(id=key)
+    return render(request,"sc/sc_scrap_request_detail.html",{'req':req})
+
+def Change_Request_Status(request,key):
+    req = Customer_Scrap_Request.objects.get(id=key)
+    if (req.Is_Complited == True):
+        req.Is_Complited = False
+    elif(req.Is_Complited == False):
+        req.Is_Complited = True
+    req.save()
+    return redirect('sc_scrap_request_customer')
+
+
+ 
+
+
 
 def Sc_Scrap_Request_Rc(request):
     return render(request,"sc/sc_scrap_request_rc.html")
@@ -1139,9 +1163,64 @@ def Verified_Sc_Profiles(request):
     
 def Search(request):
     result = request.POST['result']
-    print(result)
     products = Product.objects.filter(Product_Name__icontains = result)
-    print(products)
     return render(request,"ecom/search_result.html",{'products':products})
+
+def Select_Area(request):
+    areas = Areas.objects.all()
+    return render(request,"ecom/select_area.html",{'areas':areas})
+
+def Select_Scrap_Collector(request):
+    area1 = request.POST['area']
+    sc = SC.objects.filter(Area=area1)
+    return render(request,"ecom/select_scrap_collector.html",{'sc':sc})
     
+def Scrap_Request_Detail(request,key):
+    return render(request,"ecom/scrap_request_detail.html",{'id':key})
+    
+def My_Scrap_Request_Detail(request,key):
+    req = Customer_Scrap_Request.objects.get(id=key)
+    return render(request,"ecom/my_scrap_request_detail.html",{'req':req})
+
+
+
+def Confirm_Scrap_Request(request):
+    if request.method=="POST":
+        name = request.POST['name']
+        phone = request.POST['phone']
+        email = request.POST['email']
+        add = request.POST['add']
+        pincode = request.POST['pincode']
+        city = request.POST['city']
+        state = request.POST['state']
+        datetime = request.POST['datetime']
+        sc_id = request.POST['sc_id']
+
+        id = request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        customer=Customer.objects.get(User_Master=user)
+        sc = SC.objects.get(id=sc_id)
+
+        new_customer_scrap_request = Customer_Scrap_Request.objects.create(
+            Customer = customer,
+            SC = sc,
+            Name = name,
+            Phone = phone,
+            Email = email,
+            Address = add,
+            Pincode = pincode,
+            City = city,
+            State = state,
+            Datetime_Of_Pickup = datetime,
+
+        )
+        return redirect('my_scrap_requests')
+    return render(request,"ecom/index.html")
+    
+def My_Scrap_Requests(request):
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    customer=Customer.objects.get(User_Master=user)
+    req = Customer_Scrap_Request.objects.filter(Customer=customer)
+    return render(request,"ecom/my_scrap_requests.html",{'req':req})
 

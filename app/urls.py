@@ -47,6 +47,8 @@ urlpatterns = [
      path("add_tock/",views.Add_Stock,name="add_stock"),
      path("delete_stock/<int:key>",views.Delete_stock,name="delete_stock"),
      path("update_stock/<int:key>",views.Update_Stock,name="update_stock"),
+     path("sc_scrap_request_detail/<int:key>",views.Sc_Scrap_Request_Detail,name="sc_scrap_request_detail"),
+     path("change_request_status/<int:key>",views.Change_Request_Status,name="change_request_status"),
 
     
 
@@ -71,6 +73,14 @@ urlpatterns = [
      path("view_Invoice/<int:key>",views.View_Invoice,name="view_Invoice"),
      path("invoice_pdf/<int:key>",views.Invoice_pdf,name="invoice_pdf"),
      path("add_coomment/<int:key>",views.Add_coomment_ecom,name="add_coomment_ecom"),
+     path("select_area/",views.Select_Area,name="select_area"),
+     path("select_scrap_collector/",views.Select_Scrap_Collector,name="select_scrap_collector"),
+     path("scrap_request_detail/<int:key>",views.Scrap_Request_Detail,name="scrap_request_detail"),
+     path("my_scrap_request_detail/<int:key>",views.My_Scrap_Request_Detail,name="my_scrap_request_detail"),
+     path("confirm_scrap_request/",views.Confirm_Scrap_Request,name="confirm_scrap_request"),
+     path("my_scrap_requests/",views.My_Scrap_Requests,name="my_scrap_requests"),
+
+
      
      
 

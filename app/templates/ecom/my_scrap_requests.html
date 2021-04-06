@@ -1,0 +1,97 @@
+{% extends "ecom/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<section class="section-pagetop bg">
+    <div class="container">
+        <h2 class="title-page">My Scrap Requests</h2>
+    </div> <!-- container //  -->
+</section>
+<div class="card mb-3" style="width: 83%;margin-left: 9%;margin-top: 17px;">
+    <article class="card-body">
+        <header class="mb-4">
+           <h5 class="card-title">Scrap Requests</h5>
+        <div style="height: 20px;"></div>
+        {% if req %}
+        <center> 
+      
+            <div class="table-responsive" style="margin-top: 19px;">
+                <table class="table align-items-center table-flush table-striped">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>Id</th>
+                      <th>SC Name</th>
+  
+                      <th>Shop Name </th>
+                      <th>Datetime Of Pickup </th>
+
+                      <th>Status</th>
+  
+  
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in req %}
+  
+                    <tr style="background-color: white;">
+                      <td class="table-user">
+                        <img src="{{i.Profile_Pic.url}}" style="height: 41px;border-radius: 54px;">
+                        <b style="margin-left: 18px;">{{i.id}}</b>
+                      </td>
+                      <td>
+                        <span class="text-muted">{{i.SC.Firstname}} {{i.SC.Lastname}}</span>
+                      </td>
+  
+                    
+                     <td>
+                         {{i.SC.Shop_name}}
+                     </td>
+                     <td>
+                         {{i.Datetime_Of_Pickup}}
+                     </td>
+                     {% ifequal i.Is_Complited True %}
+                     <td class="table-actions">
+                       <span class="badge badge-success"
+                         style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 10px;">completed
+                         </span>
+                       {% else %}
+                     <td class="table-actions">
+                       <span class="badge badge-danger"
+                         style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 10px;">Pending</span>
+                       {% endifequal %}
+
+                      <td class="table-actions">
+  <center>
+                        <div>
+                          <a href="{% url 'my_scrap_request_detail' key=i.id %}" class="table-action" data-toggle="tooltip"
+                            data-original-title="View Profile">
+                            <button type="button"  class="btn btn-primary">
+                              <i class="fa fa-eye">
+                              </i>
+                            </button>
+                          </a>
+                        </div>
+                    </center>
+                     
+                      </td>
+                    </tr>
+  
+                    {% endfor %}
+  
+                  </tbody>
+                </table>
+              </div>
+    </center>
+    {% else %}
+    <center>
+      <h5> Opps!! There Is No Scrap Requests</h5>
+    </center>
+    {% endif %}
+        </header>
+        
+      
+</div> <!-- card.// -->
+
+{% endblock content %}
