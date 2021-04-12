@@ -1,0 +1,137 @@
+{% extends "rc/base.html" %}
+{% load static %}
+{% block content %}
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Scrap Request Detail</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Enter Scrap Request Detail</li>
+            </ol>
+          </nav>
+        </div>
+       
+      </div>
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+          
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+           
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+  </div>
+  <div class="row">
+    <div class="col-xl-8">
+      <div class="card" style="width: 153%;">
+        <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
+          <div class="row align-items-center">
+           <!-- Any Thing Write Here -->
+           <div class="col-xl-8 order-xl-1" style="margin-left: 200px;margin-top: 43px;">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row align-items-center">
+                    <div class="col-8">
+                      <h3 class="mb-0">Enter Scrap Request Detail </h3>
+                    </div>
+            
+                  </div>
+                </div>
+                <div class="card-body">
+                  <form method="POST" action="{% url 'rc_confirm_scrap_request' %}">
+                    <input type="hidden" name="stock_id" value="{{stock_id}}">
+                    {% csrf_token %}
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-10">
+                          <div class="form-group">
+                            <label class="form-control-label">Date Time Of Pickup</label>
+                            <input required type="datetime-local" class="form-control" name="datetime" placeholder="Enter Old Password"
+                              style="color: #172b4d;">
+                          </div>
+                        </div>
+                      </div>
+            
+                      <div class="row">
+                        <div class="col-lg-10">
+                          <div class="form-group">
+                            <label class="form-control-label">Enter Quantity (In Kg.) </label>
+                            <input required type="number" class="form-control" name="quantity" placeholder="Enter Quantity Of Scrap (In Kg.)"
+                              style="color: #172b4d;">
+                          </div>
+                        </div>
+            
+                      </div>
+            
+                      
+                    </div>
+            
+                </div>
+            
+                <hr class="my-4" />
+            
+                <div class="form-group">
+                  <center> <button type="submit" class="btn btn-primary btn-block" style="width: 241px;"> Confirm Request</button></center>
+                </div>
+            
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  
+  </div>
+  
+  {% if msg %}
+  {% ifequal msg 'Your Password Changed Succsessfully!!!' %}
+  <script>
+    Swal.fire(
+      '',
+      '{{msg}}',
+      'success'
+    )
+  </script>
+  {% else %}
+  <script>
+    Swal.fire(
+      '',
+      '{{msg}}',
+      'error'
+    )
+  </script>
+  {% endifequal %}
+  {% endif %}
+{% endblock content %}

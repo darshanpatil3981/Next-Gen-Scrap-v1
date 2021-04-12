@@ -213,7 +213,7 @@ def Validate_login(request):
                 except:
                     pass
                 
-                return redirect('rc_scrap_collectors')
+                return redirect('rc_purchase_scrap')
         else:
             message = "Incorect Password!!"
             return render(request,"app/login.html",{'msg':message,})        
@@ -263,12 +263,9 @@ def Reset_password(request):
 
 
 
-def Rc_scrap_collectors(request):
-    id=request.session.get("id")
-    user = User_Master.objects.get(id=id)
-    rc=RC.objects.get(User_Master=user)
-    sc=SC.objects.all()
-    return render(request,"rc/rc_scrap_collectors.html",{'user':user,'rc':rc,'sc':sc})
+def Rc_Purchase_Scrap(request):
+    cat = Scrap_Categories.objects.all()
+    return render(request,"rc/rc_purchase_scrap.html",{'cat':cat})
 
 
 def View_Sc_Profile(request,key):
@@ -460,8 +457,52 @@ def Request_Verify(request):
         return redirect('sc_profile')
 
 
+def Select_Sc(request,key):
+    cat = Scrap_Categories.objects.get(id=key)
+    name=cat.Name
+    stock = Scrap_Stock.objects.filter(Name=name,In_Stock=True)
+    return render(request,"rc/select_sc.html",{'stock':stock})
+
+def Enter_RC_Scrap_Request_Detail(request,key):
+    stock_id = key
+    return render(request,"rc/enter_scrap_request_detail.html",{'stock_id':stock_id})
+
+def RC_Confirm_Scrap_Request(request):
+    if request.method=="POST":
+        datetime = request.POST['datetime']
+        quantity = request.POST['quantity']
+        stock_id = request.POST['stock_id']
+
+        id=request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        rc=RC.objects.get(User_Master=user)
+        stock = Scrap_Stock.objects.get(id=stock_id)
+        sc_id = stock.SC.id
+        sc = SC.objects.get(id=sc_id)
+        print(sc)
+        new_rc_scrap_request = RC_Scrap_Request.objects.create(
+            RC = rc,
+            SC = sc,
+            Scrap_Stock = stock,
+            Quantity = quantity,
+            Datetime_of_request = datetime,
+        )
+    return redirect('rc_scrap_requests')
+        
+    
 
 
+def RC_Scrap_Requests(request):
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    rc=RC.objects.get(User_Master=user)
+    req = RC_Scrap_Request.objects.filter(RC=rc)
+    return render(request,"rc/rc_scrap_requests.html",{'req':req})
+
+def RC_Scrap_Request_Detail(request,key):
+    req = RC_Scrap_Request.objects.get(id=key)
+    print(req)
+    return render(request,"rc/rc_scrap_request_detail.html",{'req':req})
 
 
 def Subscription_detail(request):
@@ -989,8 +1030,12 @@ def Sc_Pricing(request):
     
 
 def Sc_Scrap_Stock(request):
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    sc=SC.objects.get(User_Master=user)
+
     scrap_categories = Scrap_Categories.objects.all()
-    scrap_stock = Scrap_Stock.objects.all()
+    scrap_stock = Scrap_Stock.objects.filter(SC=sc)
     return render(request,"sc/sc_scrap_sock.html",{'scrap_categories':scrap_categories,'scrap_stock':scrap_stock})
 
 def Sc_Scrap_Request_Customer(request):
@@ -1015,13 +1060,32 @@ def Change_Request_Status(request,key):
     req.save()
     return redirect('sc_scrap_request_customer')
 
+def Change_Request_Status_Rc(request,key):
+    req = RC_Scrap_Request.objects.get(id=key)
+    if (req.Is_Complited == True):
+        req.Is_Complited = False
+    elif(req.Is_Complited == False):
+        req.Is_Complited = True
+    req.save()
+    return redirect('sc_scrap_request_rc')
+
 
  
 
 
 
 def Sc_Scrap_Request_Rc(request):
-    return render(request,"sc/sc_scrap_request_rc.html")
+    id = request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    sc=SC.objects.get(User_Master=user)
+    print("------------------")
+    print(sc)
+    req = RC_Scrap_Request.objects.filter(SC=sc)
+    return render(request,"sc/sc_scrap_request_rc.html",{'req':req})
+
+def Scrap_Request_Detail_Rc(request,key):
+    req = RC_Scrap_Request.objects.get(id=key)
+    return render(request,"sc/sc_scrap_request_detail_rc.html",{'req':req})
 
 def Ngs_Admin(request):
     return render(request,"ngs_admin/scrap_categories.html")
@@ -1080,8 +1144,10 @@ def Add_Stock(request):
     user = User_Master.objects.get(id=id)
     sc=SC.objects.get(User_Master=user)
     cat_name=request.POST['sname']
+    q =  request.POST['quantity']
+   
     cat = Scrap_Categories.objects.get(Name=cat_name)
-    new_scrap = Scrap_Stock.objects.create(Name=cat.Name,Price=cat.Price,Image=cat.Image,In_Stock=True,SC=sc)
+    new_scrap = Scrap_Stock.objects.create(Name=cat.Name,Price=cat.Price,Image=cat.Image,In_Stock=True,SC=sc,Quantity=q)
     return redirect('sc_scrap_sock')
 
 def Delete_stock(request,key):
@@ -1094,6 +1160,7 @@ def Delete_stock(request,key):
 def Update_Stock(request,key):
     stock = Scrap_Stock.objects.get(id=key)
     if(stock.In_Stock==True):
+        stock.Quantity =0
         stock.In_Stock=False
     elif(stock.In_Stock==False):
         stock.In_Stock=True
@@ -1178,6 +1245,8 @@ def Select_Scrap_Collector(request):
 def Scrap_Request_Detail(request,key):
     return render(request,"ecom/scrap_request_detail.html",{'id':key})
     
+
+
 def My_Scrap_Request_Detail(request,key):
     req = Customer_Scrap_Request.objects.get(id=key)
     return render(request,"ecom/my_scrap_request_detail.html",{'req':req})
