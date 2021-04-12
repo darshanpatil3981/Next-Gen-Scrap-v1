@@ -133,6 +133,7 @@ class RC_Scrap_Request(models.Model):
 
 class Areas(models.Model):
     Name = models.CharField(max_length=30,null=True, blank=True)
+
 class Customer_Scrap_Request(models.Model):
     Customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
     SC = models.ForeignKey(SC,on_delete=models.CASCADE)
@@ -145,7 +146,6 @@ class Customer_Scrap_Request(models.Model):
     State = models.CharField(max_length=20,null=True, blank=True)
     Datetime_Of_Pickup = models.DateTimeField()
     Is_Complited = models.BooleanField(default=False)
-    
     
 
     
