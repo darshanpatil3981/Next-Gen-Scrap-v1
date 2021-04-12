@@ -84,12 +84,22 @@
                           <div class="form-group mb-3">
                            
                             <label class="form-control-label" for="exampleFormControlSelect1">Select Scrap Category</label>
-                            <select name="sname" class="form-control" id="exampleFormControlSelect1">
+                            <select name="sname" class="form-control" id="exampleFormControlSelect1" required>
                               {% for i in scrap_categories %}
                               <option>{{i.Name}}</option>
                               {% endfor %}
-                              
+                             
                             </select>
+                            <label style="padding-top: 10px;" class="form-control-label" for="exampleFormControlSelect1">Enter Quantity (In Kg.)</label>
+                            <div class="form-group">
+                              <div class="input-group input-group-merge input-group-alternative">
+                                <div class="input-group-prepend">
+                                  <input type="number"  class="form-control" name="quantity" id="" required>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                            
                           </div>
                           
                         
@@ -116,6 +126,7 @@
                         <th scope="col">Scrap Name</th>
                         <th scope="col">Image</th>
                         <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
                         <th scope="col">In Stock</th>
                         <th scope="col">Change Stock</th>
                         <th scope="col">Delete</th>
@@ -133,7 +144,8 @@
                             <div class="user-img pull-left" style="margin-left: 15px;padding-left: 10px;">
                               <img src="{{i.Image.url}}" class="img-circle img-responsive" alt="User Image" style="height: 80px;"> </div>
                           </td>
-                        <td> {{i.Price}}</td>
+                        <td>₹ {{i.Price}}</td>
+                        <td> {{i.Quantity}} Kg</td>
                         {% ifequal i.In_Stock True %}
                       <td><span class="badge badge-success" style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">Yes</span>   </td>
 			                  {% else %}

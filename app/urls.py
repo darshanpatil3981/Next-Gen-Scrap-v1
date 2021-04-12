@@ -19,7 +19,7 @@ urlpatterns = [
 
      #RC Dashboard
      path("rc_blank/",views.Rc_blank,name="rc_blank"),
-     path("rc_scrap_collectors/",views.Rc_scrap_collectors,name="rc_scrap_collectors"),
+     path("rc_purchase_scrap/",views.Rc_Purchase_Scrap,name="rc_purchase_scrap"),
      path("view_sc_profile/<int:key>",views.View_Sc_Profile,name="view_sc_profile"),
      path("rc_profile/",views.Rc_profile,name="rc_profile"),
      path("rc_update_profile/",views.Rc_update_profile,name="rc_update_profile"),
@@ -35,6 +35,12 @@ urlpatterns = [
      path("Invoice_Subscription/",views.Invoice_Subscription,name="invoice_subscription"),
      path("invoice_sub_pdf/<int:key>",views.Invoice_Sub_Pdf,name="invoice_sub_pdf"),
      path("request_verify/",views.Request_Verify,name="request_verify"),
+     path("select_sc/<int:key>",views.Select_Sc,name="select_sc"),
+     path("rc_scrap_request_detail/<int:key>",views.RC_Scrap_Request_Detail,name="rc_scrap_request_detail"),
+     path("enter_rc_scrap_request_detail/<int:key>",views.Enter_RC_Scrap_Request_Detail,name="enter_rc_scrap_request_detail"),
+     path("rc_confirm_scrap_request/",views.RC_Confirm_Scrap_Request,name="rc_confirm_scrap_request"),
+     path("rc_scrap_requests/",views.RC_Scrap_Requests,name="rc_scrap_requests"),
+    
 
      #SC Dashboard
      path("sc_update_profile/",views.Sc_Update_Profile,name="sc_update_profile"),
@@ -49,6 +55,8 @@ urlpatterns = [
      path("update_stock/<int:key>",views.Update_Stock,name="update_stock"),
      path("sc_scrap_request_detail/<int:key>",views.Sc_Scrap_Request_Detail,name="sc_scrap_request_detail"),
      path("change_request_status/<int:key>",views.Change_Request_Status,name="change_request_status"),
+     path("change_request_status_rc/<int:key>",views.Change_Request_Status_Rc,name="change_request_status_rc"),
+     path("scrap_request_detail_rc/<int:key>",views.Scrap_Request_Detail_Rc,name="scrap_request_detail_rc"),
 
     
 

@@ -1,0 +1,103 @@
+{% extends "rc/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Scrap Collectors</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Scrap Collectors</li>
+            </ol>
+          </nav>
+        </div>
+
+      </div>
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+  </div>
+  <div class="row">
+    <div class="col-xl-8">
+      <div class="card" style="width: 153%;">
+        <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
+          <div class="row align-items-center">
+            <!-- Any Thing Write Here -->
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <div class="row">
+                    {% for i in cat %}
+                    <div class="col-12 col-md-6 col-lg-3">
+                      <div class="card">
+                        <img class="card-img-top" src="{{i.Image.url}}" alt="Card image cap">
+                        <div class="card-body">
+                          <h4 style="height: 12px;" class="card-title"><a href="product.html" title="View Product">{{i.Name}}</a></h4>
+                          <p>₹ {{i.Price}} / Kg</p>
+                          <div class="row">
+
+                            <div class="col">
+                              <!-- <a href="#" class="btn btn-success btn-block">Make Reques</a> -->
+                              <a href="{% url 'select_sc' key=i.id %}"><button class="btn btn-success float-right" type="button" style="background-color: #55ce55;border-color: #55ce55;margin-right: 10px;">
+                                <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
+                                <span class="btn-inner--text">Make Request</span>
+                              </button></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor%}
+                    
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  {% endblock content %}

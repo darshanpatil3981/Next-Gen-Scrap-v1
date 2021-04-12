@@ -1,0 +1,151 @@
+
+{% extends "rc/base.html" %}
+{% load static %}
+{% block content %}
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Scrap Requests</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                <li class="breadcrumb-item"><a href="#"><i  class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="#" > Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">My Scrap Requests</li>
+              </ol>
+            </nav>
+          </div>
+         
+        </div>
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+              <!-- Card body -->
+            
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+              <!-- Card body -->
+             
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+              <!-- Card body -->
+              
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+              <!-- Card body -->
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+    </div>
+    <div class="row">
+      <div class="col-xl-8">
+        <div class="card" style="width: 153%;">
+          <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
+            <div class="row align-items-center">
+             <!-- Any Thing Write Here -->
+             {% if req %}
+        <center> 
+      
+            <div class="table-responsive" style="margin-top: 19px;">
+                <table class="table align-items-center table-flush table-striped">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>Id</th>
+                      <th>Scrap Collector Name</th>
+                      <th>Email</th>
+                      <th>Shop Name </th>
+                      <th>Datetime Of Pickup </th>
+
+                      <th>Status</th>
+  
+  
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in req %}
+  
+                    <tr style="background-color: white;">
+                      <td class="table-user">
+                        <b style="margin-left: 18px;">{{i.id}}</b>
+                      </td>
+                      <td>
+                        <span class="text-muted">{{i.SC.Firstname}} {{i.SC.Lastname}}</span>
+                      </td>
+  
+                    
+                     <td>
+                         {{i.SC.User_Master.Email}}
+                     </td>
+                     <td>
+                       {{i.SC.Shop_name}}
+                     </td>
+                     <td>
+                         {{i.Datetime_of_request}}
+                     </td>
+                     {% ifequal i.Is_Complited True %}
+                     <td class="table-actions">
+                       <span class="badge badge-success"
+                         style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 10px;">completed
+                         </span>
+                       {% else %}
+                     <td class="table-actions">
+                       <span class="badge badge-danger"
+                         style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 10px;">Pending</span>
+                       {% endifequal %}
+
+                      <td class="table-actions">
+  <center>
+                        <div>
+                          <a href="{% url 'rc_scrap_request_detail' key=i.id %}" class="table-action" data-toggle="tooltip"
+                            data-original-title="View Detail">
+                            <button type="button"  class="btn btn-primary">
+                              <i class="fa fa-eye">
+                              </i>
+                            </button>
+                          </a>
+                        </div>
+                    </center>
+                     
+                      </td>
+                    </tr>
+  
+                    {% endfor %}
+  
+                  </tbody>
+                </table>
+              </div>
+    </center>
+    {% else %}
+    <center>
+      <h5> Opps!! There Is No Scrap Requests</h5>
+    </center>
+    {% endif %}
+
+      <!-- end Writing here -->
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    
+    </div>
+
+
+
+{% endblock content %}
