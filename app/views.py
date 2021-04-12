@@ -599,7 +599,7 @@ def Invoice_Subscription(request):
         print("Filed")
         return render(request,"rc/invoice_subscription.html",)
 
-def Invoice_Sub_Pdf(request,key):
+def Invoice_Sub_Pdff(request,key):
     subscription = Subscription.objects.get(id=key)
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
