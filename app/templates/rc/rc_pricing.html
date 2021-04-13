@@ -229,9 +229,13 @@
                     <span class="d-block h3 text-white">{{subscription.Subscription_Starting_Date}}</span>
                   </div>
                   <div class="col">
-                    <span class="h6 surtitle text-light">Expiry date</span>
-                    <span class="d-block h3 text-white">{{subscription.Subscription_Ending_Date}}</span>
+                    <span class="h6 surtitle text-light" style="margin-left: 30px;">Expiry date</span>
+                    <span class="d-block h3 text-white" style="margin-left: 30px;">{{subscription.Subscription_Ending_Date}}</span>
                   </div>
+                  <a href="{% url 'view_subscription' %}"><button class="btn btn-success float-right" type="button" style="background-color: #55ce55;border-color: #55ce55; margin-right: 14px;">
+                    <span class="btn-inner--icon"><i class="fa fa-print" style="font-size: 17px;"></i></span>
+                    <span class="btn-inner--text"></span>
+                  </button></a>
                 </div>
               </div>
             </div>
@@ -314,8 +318,15 @@
                       <li class="pricing-features-item">1 Month</li>
                       <li class="pricing-features-item"> Subscription</li>
                     </ul>
+
                     <span class="pricing-price">₹ 100</span>
+                    {% if user.is_verified == True %}
                     <button type="submit" class="pricing-button is-featured" name="personal">Buy Now</button>
+                    {% else %}
+                    <div style="margin-top: 38px;">
+                    <a href="{% url 'rc_profile' %}" style="color: red;margin-top: 10px;" > Verify Profile First </a>
+                  </div>
+                    {% endif %}
                   </div>
           
                   <div class="pricing-plan">
@@ -326,8 +337,14 @@
                       <li class="pricing-features-item"> Subscription</li>
                     </ul>
                     <span class="pricing-price">₹ 600</span>
+                    {% if user.is_verified == True %}
+
                     <button type="submit" class="pricing-button is-featured" name="professional">Buy Now</button>
-          
+                    {% else %}
+                    <div style="margin-top: 38px;">
+                    <a href="{% url 'rc_profile' %}" style="color: red;margin-top: 10px;" > Verify Profile First </a>
+                  </div>
+                    {% endif %}
                   </div>
           
                   <div class="pricing-plan">
@@ -338,7 +355,13 @@
                       <li class="pricing-features-item"> Subscription</li>
                     </ul>
                     <span class="pricing-price">₹ 1200</span>
+                    {% if user.is_verified == True %}
                     <button type="submit" class="pricing-button is-featured" name="enterprise">Buy Now</button>
+                    {% else %}
+                    <div style="margin-top: 38px;">
+                    <a href="{% url 'rc_profile' %}" style="color: red;margin-top: 10px;" > Verify Profile First </a>
+                  </div>
+                    {% endif %}
                   </div>
           
                 </div>

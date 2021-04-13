@@ -50,6 +50,7 @@ urlpatterns = [
      path("Invoice_Subscription/",subscription.Invoice_Subscription,name="invoice_subscription"),
      path("invoice_sub_pdff/<int:key>",subscription.Invoice_Sub_Pdff,name="invoice_sub_pdff"),
      path("request_verify/",subscription.Request_Verify,name="request_verify"),
+     path("view_subscription/",subscription.View_subscription,name="view_subscription"),
     
 
      #SC Dashboard

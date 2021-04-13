@@ -96,11 +96,15 @@ def Invoice_Subscription(request):
         email_Subject = "Your Subscription Activated"
         if(user.Role=='RC'):
             rc=RC.objects.get(User_Master=user)
+            rc.Is_Subscription_Active=True
+            rc.save()
             sendmail_invoice_subscription(email_Subject,'invoice_subscription_email',email,{'subscription':subscription,'rc':rc,'user':user}) 
             return render(request,"rc/invoice_subscription.html",{'subscription':subscription,'rc':rc,'user':user})
 
         elif(user.Role=="SC"):
             sc=SC.objects.get(User_Master=user)
+            sc.Is_Subscription_Active = True
+            sc.save()
             sendmail_invoice_subscription_sc(email_Subject,'invoice_subscription_email',email,{'subscription':subscription,'sc':sc,'user':user})
             return render(request,"sc/invoice_subscription.html",{'subscription':subscription,'sc':sc,'user':user})
     except:
@@ -138,3 +142,12 @@ def Request_Verify(request):
         return redirect('rc_profile')
     elif(user.Role=="SC"):
         return redirect('sc_profile')
+
+def View_subscription(request):
+    id=request.session.get("id")
+    user = User_Master.objects.get(id=id)
+    if(user.Role=='RC'):
+        rc=RC.objects.get(User_Master=user)
+        subscription = Subscription.objects.get(User=user)
+        return render(request,"rc/invoice_subscription.html",{'subscription':subscription,'rc':rc,'user':user})
+

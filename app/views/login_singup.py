@@ -175,7 +175,7 @@ def Validate_login(request):
                 request.session['fname']=customer.Firstname
                 request.session['lname']=customer.Lastname
                
-             
+                
                 user = User_Master.objects.get(id=User.id)
                 customer = Customer.objects.get(User_Master=user)
                 cart_items = Cust_Cart.objects.filter(Customer=customer)
@@ -200,6 +200,8 @@ def Validate_login(request):
                     end_date = subscription.Subscription_Ending_Date
                     if(today_date>end_date):
                         subscription.Is_Active=False
+                        sc.Is_Subscription_Active = False
+                        sc.save()
                         subscription.save()
 
                         
@@ -213,12 +215,17 @@ def Validate_login(request):
                 request.session['fname']=rc.Firstname
                 request.session['lname']=rc.Lastname
                 request.session['pic']=rc.Profile_Pic.url
+                request.session['is_verified']=User.is_verified
+
+
                 try:
                     subscription = Subscription.objects.get(User=User)
                     today_date = datetime.now().date()
                     end_date = subscription.Subscription_Ending_Date
                     if(today_date>end_date):
                         subscription.Is_Active=False
+                        sc.Is_Subscription_Active = False
+                        sc.save()
                         subscription.save()
                 except:
                     pass

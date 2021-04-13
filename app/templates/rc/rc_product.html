@@ -1,8 +1,8 @@
 {% extends "rc/base.html" %}
 {% load static %}
 
-  {% block content %}
-  
+{% block content %}
+
 
 <!-- Starttttttt -->
 
@@ -20,32 +20,32 @@
             </ol>
           </nav>
         </div>
-       
+
       </div>
       <!-- Card stats -->
       <div class="row">
         <div class="col-xl-3 col-md-6">
           <div class="card card-stats">
             <!-- Card body -->
-          
+
           </div>
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="card card-stats">
             <!-- Card body -->
-           
+
           </div>
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="card card-stats">
             <!-- Card body -->
-            
+
           </div>
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="card card-stats">
             <!-- Card body -->
-            
+
           </div>
         </div>
       </div>
@@ -61,13 +61,22 @@
       <div class="card" style="width: 153%;">
         <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
           <div class="row align-items-center">
-           <!-- Any Thing Write Here -->
-           <div style="padding-left: 870px;padding-bottom: 20px;">
-            <button type="button" onclick="document.location='{% url 'rc_add_product' %}'" class="btn btn-labeled btn-success" style="height: 45px;">
-            <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
-            <span class="btn-label"  style="background-color: #2dce89; "><i class="fa fa-plus"></i></span>Add Product</button></div>
+            <!-- Any Thing Write Here -->
+            {% if rc.Is_Subscription_Active == True %}
+
+            <div style="padding-left: 870px;padding-bottom: 20px;">
+              <button type="button" onclick="document.location='{% url 'rc_add_product' %}'"
+                class="btn btn-labeled btn-success" style="height: 45px;">
+                <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
+                <span class="btn-label" style="background-color: #2dce89; "><i class="fa fa-plus"></i></span>Add
+                Product</button>
+              </div>
+               
+              
+              
+
             <div class="container">
-              <div class="row"> 
+              <div class="row">
                 <div class="col-12">
                   {% if products %}
                   <table class="table table-bordered">
@@ -87,23 +96,25 @@
                         <th scope="row">{{i.id}}</th>
                         <td id="{{i.id}}">{{i.Product_Name}}</td>
                         <td>
-                        <div class="row">
-                          <div class="user-img pull-left" style="margin-left: 15px;padding-left: 10px;">
-                            <img src="{{i.Product_Img.url}}" class="img-circle img-responsive" alt="User Image" style="height: 80px;"> </div>
+                          <div class="row">
+                            <div class="user-img pull-left" style="margin-left: 15px;padding-left: 10px;">
+                              <img src="{{i.Product_Img.url}}" class="img-circle img-responsive" alt="User Image"
+                                style="height: 80px;"> </div>
                         </td>
                         <td>{{i.Product_Price}}</td>
                         <td>Stock</td>
                         <td>
-                            <a href="{% url 'RC_view_product' key=i.id %}">
-                              <button type="submit" class="btn btn-primary" action="{% url 'RC_view_product' key=i.id %}"><i class="far fa-eye"></i></button>
-                            </a>
-                            <a href="{% url 'RC_edit_product' key=i.id %}">
-                              <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                            </a>
-                            <a href="{% url 'RC_delete_product' key=i.id %}" class="confirm-delete">
-                              <!-- <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" onclick="return confirm('Are you sure you want to delete this?')"></i></button> -->
-                              <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" ></i></button>
-                            </a>
+                          <a href="{% url 'RC_view_product' key=i.id %}">
+                            <button type="submit" class="btn btn-primary"
+                              action="{% url 'RC_view_product' key=i.id %}"><i class="far fa-eye"></i></button>
+                          </a>
+                          <a href="{% url 'RC_edit_product' key=i.id %}">
+                            <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                          </a>
+                          <a href="{% url 'RC_delete_product' key=i.id %}" class="confirm-delete">
+                            <!-- <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" onclick="return confirm('Are you sure you want to delete this?')"></i></button> -->
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                          </a>
                         </td>
                       </tr>
                       {% endfor %}
@@ -111,37 +122,64 @@
                   </table>
                   {% else %}
                   <p>
-                    Oops...! You dont have any product yet... Add some products.
+                  
+                        Oops...! You dont have any product yet... Add some products.
+                 
                   </p>
                   {% endif %}
                 </div>
               </div>
             </div>
-                
-          
-       
+            
+            {% else %}
+            <center> <h3>
+              <div style="padding-left: 850px;padding-bottom: 20px;">
+                        
+                <button type="button" onclick="document.location='{% url 'rc_pricing' %}'"
+                class="btn btn-labeled btn-danger" style="height: 45px;width: 170px;">
+                <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
+                <span class="btn-label "><i class="fa fa-unlock-alt" style="padding-right: 10px;"></i></span>Unlock Feature</button>
+              </div>
+              Oops...! You Didn't Purchase Subscription yet... Purchase Subscription To Unlock Thie Feature.
+             </h3>
+            </center>
+            {% endif %}
+           
+            
           </div>
         </div>
-        
+
       </div>
     </div>
-  
+
   </div>
-{% endblock content %}
-</body>
-<style>
-  .btn-label {position: relative;left: -12px;display: inline-block;padding: 6px 12px;background: rgba(0,0,0,0.15);border-radius: 3px 0 0 3px;}
-.btn-labeled {padding-top: 0;padding-bottom: 0;}
-.btn { margin-bottom:10px; }
-</style>
+  {% endblock content %}
+  </body>
+  <style>
+    .btn-label {
+      position: relative;
+      left: -12px;
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 3px 0 0 3px;
+    }
+
+    .btn-labeled {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .btn {
+      margin-bottom: 10px;
+    }
+  </style>
 
 
-<script>
-  
-$(document).on('click', '.confirm-delete', function(){
-    return confirm('Are you sure you want to delete product?');
-})
- 
-</script>
+  <script>
+    $(document).on('click', '.confirm-delete', function () {
+      return confirm('Are you sure you want to delete product?');
+    })
+  </script>
 
-</html> 
+  </html>

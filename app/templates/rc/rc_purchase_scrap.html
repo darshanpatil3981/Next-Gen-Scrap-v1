@@ -73,11 +73,19 @@
                           <div class="row">
 
                             <div class="col">
+                            {% if rc.Is_Subscription_Active == True %}
+                            
                               <!-- <a href="#" class="btn btn-success btn-block">Make Reques</a> -->
                               <a href="{% url 'select_sc' key=i.id %}"><button class="btn btn-success float-right" type="button" style="background-color: #55ce55;border-color: #55ce55;margin-right: 10px;">
                                 <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
                                 <span class="btn-inner--text">Make Request</span>
                               </button></a>
+                              {% else %}
+                              <a href="{% url 'rc_pricing' %}"><button class="btn btn-danger float-right" type="button" style="margin-right: 10px;">
+                                <span class="btn-inner--icon"><i class="fa fa-unlock-alt"></i></span>
+                                <span class="btn-inner--text">Unlock Feature</span>
+                              </button></a>
+                              {% endif %}
                             </div>
                           </div>
                         </div>

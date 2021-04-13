@@ -35,6 +35,7 @@ class SC(models.Model):
     State = models.CharField(max_length=30)
     Pincode = models.BigIntegerField()
     Contact = models.BigIntegerField(default=0)
+    Is_Subscription_Active = models.BooleanField(default=False)
     Profile_Pic = models.ImageField(upload_to='Profile_Pics',default="user.png")
 
 class RC(models.Model):
@@ -47,6 +48,7 @@ class RC(models.Model):
     State = models.CharField(max_length=30)
     Pincode = models.BigIntegerField()
     Contact = models.BigIntegerField(default=0)
+    Is_Subscription_Active = models.BooleanField(default=False)
     Profile_Pic = models.ImageField(upload_to='Profile_Pics',default="user.png")
 
 class Product(models.Model):
