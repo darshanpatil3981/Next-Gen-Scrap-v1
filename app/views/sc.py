@@ -101,7 +101,7 @@ def Sc_Scrap_Stock(request):
 
     scrap_categories = Scrap_Categories.objects.all()
     scrap_stock = Scrap_Stock.objects.filter(SC=sc)
-    return render(request,"sc/sc_scrap_sock.html",{'scrap_categories':scrap_categories,'scrap_stock':scrap_stock})
+    return render(request,"sc/sc_scrap_sock.html",{'sc':sc,'scrap_categories':scrap_categories,'scrap_stock':scrap_stock})
 
 def Sc_Scrap_Request_Customer(request):
     id = request.session.get("id")
@@ -110,7 +110,7 @@ def Sc_Scrap_Request_Customer(request):
     req = Customer_Scrap_Request.objects.filter(SC=sc)
     print('-------------')
     print(req)
-    return render(request,"sc/sc_scrap_request_customer.html",{'req':req})
+    return render(request,"sc/sc_scrap_request_customer.html",{'sc':sc,'req':req})
 
 def Sc_Scrap_Request_Detail(request,key):
     req = Customer_Scrap_Request.objects.get(id=key)
@@ -148,7 +148,7 @@ def Sc_Scrap_Request_Rc(request):
     print("------------------")
     print(sc)
     req = RC_Scrap_Request.objects.filter(SC=sc)
-    return render(request,"sc/sc_scrap_request_rc.html",{'req':req})
+    return render(request,"sc/sc_scrap_request_rc.html",{'sc':sc,'req':req})
 
 
 

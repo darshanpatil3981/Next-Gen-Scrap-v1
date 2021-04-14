@@ -192,6 +192,8 @@ def Validate_login(request):
                 request.session['fname']=sc.Firstname
                 request.session['lname']=sc.Lastname
                 request.session['pic']=sc.Profile_Pic.url
+                request.session['is_verified']=User.is_verified
+
 
                
                 try:

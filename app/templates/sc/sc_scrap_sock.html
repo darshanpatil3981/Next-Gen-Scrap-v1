@@ -63,6 +63,7 @@
         <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
           <div class="row align-items-center">
            <!-- Any Thing Write Here -->
+           {% if sc.Is_Subscription_Active == True %}
            <div style="padding-left: 830px;padding-bottom: 20px;">
             
             <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
@@ -73,6 +74,7 @@
               <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
                 <div class="modal-content">
                   <div class="modal-body p-0">
+
                     <div class="card bg-secondary border-0 mb-0">
                       <div class="card-header bg-transparent pb-5">
                         <div class="text-muted text-center mt-2 mb-3" ><label for=""> Add Scrap Stock</label></div>
@@ -183,7 +185,19 @@
               </div>
             </div>
                 
-          
+            {% else %}
+            <center> <h3>
+              <div style="padding-left: 830px;padding-bottom: 20px;">
+                        
+                <button type="button" onclick="document.location='{% url 'sc_pricing' %}'"
+                class="btn btn-labeled btn-danger" style="height: 45px;width: 190px;">
+                <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
+                <span class="btn-label "><i class="fa fa-unlock-alt" style="padding-right: 10px;"></i></span>Unlock Feature</button>
+              </div>
+              Oops...! You Didn't Purchase Subscription yet... Purchase Subscription To Unlock Thie Feature.
+             </h3>
+            </center>
+            {% endif %}
        
           </div>
         </div>

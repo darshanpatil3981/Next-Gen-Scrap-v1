@@ -150,4 +150,8 @@ def View_subscription(request):
         rc=RC.objects.get(User_Master=user)
         subscription = Subscription.objects.get(User=user)
         return render(request,"rc/invoice_subscription.html",{'subscription':subscription,'rc':rc,'user':user})
+    elif(user.Role=="SC"):
+        sc=SC.objects.get(User_Master=user)
+        subscription = Subscription.objects.get(User=user)
+        return render(request,"sc/invoice_subscription.html",{'subscription':subscription,'sc':sc,'user':user})
 

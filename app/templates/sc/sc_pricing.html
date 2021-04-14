@@ -306,37 +306,54 @@
                 <div class="panel pricing-table">
           
                   <div class="pricing-plan">
-                    <img src="https://s22.postimg.cc/8mv5gn7w1/paper-plane.png" alt="" class="pricing-img">
+                    <img src="{% static 'images/paper_plane.png' %}" alt="" class="pricing-img">
                     <h2 class="pricing-header">Personal</h2>
                     <ul class="pricing-features">
                       <li class="pricing-features-item">1 Month</li>
                       <li class="pricing-features-item"> Subscription</li>
                     </ul>
                     <span class="pricing-price">₹ 100</span>
+                    {% if user.is_verified == True %}
                     <button type="submit" class="pricing-button is-featured" name="personal">Buy Now</button>
+                    {% else %}
+                    <div style="margin-top: 38px;">
+                    <a href="{% url 'sc_profile' %}" style="color: red;margin-top: 10px;" > Verify Profile First </a>
+                  </div>
+                    {% endif %}
                   </div>
           
                   <div class="pricing-plan">
-                    <img src="https://s28.postimg.cc/ju5bnc3x9/plane.png" alt="" class="pricing-img">
+                    <img src="{% static 'images/plane.png' %}" alt="" class="pricing-img">
                     <h2 class="pricing-header">Professional</h2>
                     <ul class="pricing-features">
                       <li class="pricing-features-item">6 Month</li>
                       <li class="pricing-features-item"> Subscription</li>
                     </ul>
                     <span class="pricing-price">₹ 600</span>
+                    {% if user.is_verified == True %}
                     <button type="submit" class="pricing-button is-featured" name="professional">Buy Now</button>
-          
+                    {% else %}
+                    <div style="margin-top: 38px;">
+                    <a href="{% url 'sc_profile' %}" style="color: red;margin-top: 10px;" > Verify Profile First </a>
+                  </div>
+                    {% endif %}
                   </div>
           
                   <div class="pricing-plan">
-                    <img src="https://s21.postimg.cc/tpm0cge4n/space-ship.png" alt="" class="pricing-img">
+                    <img src="{% static 'images/space.png' %}" alt="" class="pricing-img">
                     <h2 class="pricing-header">Enterprise</h2>
                     <ul class="pricing-features">
                       <li class="pricing-features-item">1 Year</li>
                       <li class="pricing-features-item"> Subscription</li>
                     </ul>
                     <span class="pricing-price">₹ 1200</span>
+                    {% if user.is_verified == True %}
                     <button type="submit" class="pricing-button is-featured" name="enterprise">Buy Now</button>
+                    {% else %}
+                    <div style="margin-top: 38px;">
+                    <a href="{% url 'sc_profile' %}" style="color: red;margin-top: 10px;" > Verify Profile First </a>
+                  </div>
+                    {% endif %}
                   </div>
           
                 </div>
