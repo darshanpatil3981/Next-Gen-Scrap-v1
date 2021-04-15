@@ -97,6 +97,10 @@ def Sc_Profiles(request):
     sc=SC.objects.all()
     return render(request,"ngs_admin/sc_profiles.html",{'sc':sc})
 
+def Customer_Profiles(request):
+    customer = Customer.objects.all()
+    return render(request,"ngs_admin/customer_profiles.html",{'customer':customer})
+
 def Verify_Sc_Profile(request):
     sc = SC.objects.all()
     return render(request,"ngs_admin/verify_sc_profile.html",{'sc':sc})

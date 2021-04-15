@@ -69,7 +69,7 @@
               </li>
 
             </ul>
-
+            {% if sc %}
 
             <div class="table-responsive" style="margin-top: 19px;">
               <table class="table align-items-center table-flush table-striped">
@@ -146,6 +146,12 @@
                 </tbody>
               </table>
             </div>
+            {% else %}
+            <div class="table-responsive" style="margin-top: 19px;">
+
+            <center><h3>There Is No Recycle Companys Registed!!</h3></center>
+          </div>
+            {% endif %}
             <!-- Any thing end here -->
           </div>
         </div>

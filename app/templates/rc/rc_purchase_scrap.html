@@ -59,6 +59,7 @@
         <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
           <div class="row align-items-center">
             <!-- Any Thing Write Here -->
+            {% if cat %}
             <div class="container">
               <div class="row">
                 <div class="col">
@@ -99,7 +100,9 @@
 
               </div>
             </div>
-
+            {% else %}
+            <center><h3> There Is No Scrap Catagory!!</h3></center>
+            {% endif %}
           </div>
         </div>
 

@@ -127,6 +127,7 @@ urlpatterns = [
      path("change_verify_status/<int:key>",admin.Change_Verify_Status,name="change_verify_status"),
      path("sc_profiles/",admin.Sc_Profiles,name="sc_profiles"),
      path("rc_profiles/",admin.Rc_Profiles,name="rc_profiles"),
+     path("customer_profiles/",admin.Customer_Profiles,name="customer_profiles"),
      path("verified_rc_profiles/",admin.Verified_Rc_Profiles,name="verified_rc_profiles"),
      path("verify_sc_profile/",admin.Verify_Sc_Profile,name="verify_sc_profile"),
      path("admin_view_sc_profile/<int:key>",admin.Admin_view_Sc_profile,name="admin_view_sc_profile"),
