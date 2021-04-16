@@ -1,9 +1,8 @@
-
 {% extends "sc/base.html" %}
 {% load static %}
 
-  {% block content %}
-  <title>Scrap Stock</title>
+{% block content %}
+<title>Scrap Stock</title>
 
 <!-- Starttttttt -->
 
@@ -21,32 +20,32 @@
             </ol>
           </nav>
         </div>
-       
+
       </div>
       <!-- Card stats -->
       <div class="row">
         <div class="col-xl-3 col-md-6">
           <div class="card card-stats">
             <!-- Card body -->
-          
+
           </div>
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="card card-stats">
             <!-- Card body -->
-           
+
           </div>
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="card card-stats">
             <!-- Card body -->
-            
+
           </div>
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="card card-stats">
             <!-- Card body -->
-            
+
           </div>
         </div>
       </div>
@@ -62,69 +61,73 @@
       <div class="card" style="width: 153%;">
         <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
           <div class="row align-items-center">
-           <!-- Any Thing Write Here -->
-           {% if sc.Is_Subscription_Active == True %}
-           <div style="padding-left: 830px;padding-bottom: 20px;">
-            
-            <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
-            
-            <!-- Start Form -->
-            <button type="button" style="background-color:#ffd600; border-color:#ffd600" class="btn btn-icon btn-primary" data-toggle="modal" data-target="#modal-form">Add Scrap Stock</button>
-            <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-              <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
-                <div class="modal-content">
-                  <div class="modal-body p-0">
+            <!-- Any Thing Write Here -->
+            {% if sc.Is_Subscription_Active == True %}
+            <div style="padding-left: 830px;padding-bottom: 20px;">
 
-                    <div class="card bg-secondary border-0 mb-0">
-                      <div class="card-header bg-transparent pb-5">
-                        <div class="text-muted text-center mt-2 mb-3" ><label for=""> Add Scrap Stock</label></div>
+              <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
+
+              <!-- Start Form -->
+              <button type="button" style="background-color:#ffd600; border-color:#ffd600"
+                class="btn btn-icon btn-primary" data-toggle="modal" data-target="#modal-form">Add Scrap Stock</button>
+              <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form"
+                aria-hidden="true">
+                <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+                  <div class="modal-content">
+                    <div class="modal-body p-0">
+
+                      <div class="card bg-secondary border-0 mb-0">
+                        <div class="card-header bg-transparent pb-5">
+                          <div class="text-muted text-center mt-2 mb-3"><label for=""> Add Scrap Stock</label></div>
                         </div>
-                      <div class="card-body px-lg-5 py-lg-5">
-                        
-                        <form method="POST" role="form" action="{% url 'add_stock' %}">
-                          {% csrf_token %}
-                          <div class="form-group mb-3">
-                           
-                            <label class="form-control-label" for="exampleFormControlSelect1">Select Scrap Category</label>
-                            <select name="sname" class="form-control" id="exampleFormControlSelect1" required>
-                              {% for i in scrap_categories %}
-                              <option>{{i.Name}}</option>
-                              {% endfor %}
-                             
-                            </select>
-                            <label style="padding-top: 10px;" class="form-control-label" for="exampleFormControlSelect1">Enter Quantity (In Kg.)</label>
-                            <div class="form-group">
-                              <div class="input-group input-group-merge input-group-alternative">
-                                <div class="input-group-prepend">
-                                  <input type="number"  class="form-control" name="quantity" id="" required>
-                                  
+                        <div class="card-body px-lg-5 py-lg-5">
+
+                          <form method="POST" role="form" action="{% url 'add_stock' %}">
+                            {% csrf_token %}
+                            <div class="form-group mb-3">
+
+                              <label class="form-control-label" for="exampleFormControlSelect1">Select Scrap
+                                Category</label>
+                              <select name="sname" class="form-control" id="exampleFormControlSelect1" required>
+                                {% for i in scrap_categories %}
+                                <option>{{i.Name}}</option>
+                                {% endfor %}
+
+                              </select>
+                              <label style="padding-top: 10px;" class="form-control-label"
+                                for="exampleFormControlSelect1">Enter Quantity (In Kg.)</label>
+                              <div class="form-group">
+                                <div class="input-group input-group-merge input-group-alternative">
+                                  <div class="input-group-prepend">
+                                    <input type="number" class="form-control" name="quantity" id="" required>
+
+                                  </div>
                                 </div>
                               </div>
+
                             </div>
-                            
-                          </div>
-                          
-                        
-                          <div class="text-center">
-                            <button type="submit" class="btn btn-primary my-4">Add Scrap Stock</button>
-                          </div>
-                        </form>
+
+
+                            <div class="text-center">
+                              <button type="submit" class="btn btn-primary my-4">Add Scrap Stock</button>
+                            </div>
+                          </form>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!-- End Form -->
+            <!-- End Form -->
             <div class="container">
-              <div class="row"> 
+              <div class="row">
                 <div class="col-12">
                   {% if scrap_stock %}
                   <table class="table table-bordered">
                     <thead>
                       <tr>
-                      
+
                         <th scope="col">Scrap Name</th>
                         <th scope="col">Image</th>
                         <th scope="col">Price</th>
@@ -137,41 +140,48 @@
                     <tbody>
                       {% for i in scrap_stock %}
                       <tr>
-                       
-                       
-                        
+
+
+
                         <td id="{{i.id}}">{{i.Name}}</td>
                         <td>
                           <div class="row">
                             <div class="user-img pull-left" style="margin-left: 15px;padding-left: 10px;">
-                              <img src="{{i.Image.url}}" class="img-circle img-responsive" alt="User Image" style="height: 80px;"> </div>
-                          </td>
+                              <img src="{{i.Image.url}}" class="img-circle img-responsive" alt="User Image"
+                                style="height: 80px;"> </div>
+                        </td>
                         <td>₹ {{i.Price}}</td>
                         <td> {{i.Quantity}} Kg</td>
                         {% ifequal i.In_Stock True %}
-                      <td><span class="badge badge-success" style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">Yes</span>   </td>
-			                  {% else %}
-                      <td><span class="badge badge-danger" style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">No</span>   </td>
-                      {% endifequal %}
-                      
+                        <td><span class="badge badge-success"
+                            style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">Yes</span>
+                        </td>
+                        {% else %}
+                        <td><span class="badge badge-danger"
+                            style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">No</span>
+                        </td>
+                        {% endifequal %}
+
                         <td style="padding-left: 56px;width: 176px;">
-                           
-            
-                            <a href="{% url 'update_stock' key=i.id %}" class="confirm-delete">
-                              <!-- <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" onclick="return confirm('Are you sure you want to delete this?')"></i></button> -->
-                              <button type="submit"  class="btn btn-danger" style="background-color:#ffd600; border-color:#ffd600"><i class="fa fa-retweet" ></i></button>
-                            </a>
-                            
+
+
+                          <a href="{% url 'update_stock' key=i.id %}" class="confirm-delete">
+                            <!-- <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" onclick="return confirm('Are you sure you want to delete this?')"></i></button> -->
+                            <button type="submit" class="btn btn-danger"
+                              style="background-color:#ffd600; border-color:#ffd600"><i
+                                class="fa fa-retweet"></i></button>
+                          </a>
+
                         </td>
                         <td style="padding-left: 56px;width: 176px;">
-                           
-            
+
+
                           <a href="{% url 'delete_stock' key=i.id %}" class="confirm-delete">
                             <!-- <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" onclick="return confirm('Are you sure you want to delete this?')"></i></button> -->
-                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" ></i></button>
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                           </a>
-                          
-                      </td>
+
+                        </td>
                       </tr>
                       {% endfor %}
                     </tbody>
@@ -184,43 +194,57 @@
                 </div>
               </div>
             </div>
-                
+
             {% else %}
-            <center> <h3>
-              <div style="padding-left: 830px;padding-bottom: 20px;">
-                        
-                <button type="button" onclick="document.location='{% url 'sc_pricing' %}'"
-                class="btn btn-labeled btn-danger" style="height: 45px;width: 190px;">
-                <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
-                <span class="btn-label "><i class="fa fa-unlock-alt" style="padding-right: 10px;"></i></span>Unlock Feature</button>
-              </div>
-              Oops...! You Didn't Purchase Subscription yet... Purchase Subscription To Unlock Thie Feature.
-             </h3>
+            <center>
+              <h3>
+                <div style="padding-left: 830px;padding-bottom: 20px;">
+
+                  <button type="button" onclick="document.location='{% url 'sc_pricing' %}'"
+                    class="btn btn-labeled btn-danger" style="height: 45px;width: 190px;">
+                    <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
+                    <span class="btn-label "><i class="fa fa-unlock-alt" style="padding-right: 10px;"></i></span>Unlock
+                    Feature</button>
+                </div>
+                Oops...! You Didn't Purchase Subscription yet... Purchase Subscription To Unlock Thie Feature.
+              </h3>
             </center>
             {% endif %}
-       
+
           </div>
         </div>
-        
+
       </div>
     </div>
-  
+
   </div>
-{% endblock content %}
-</body>
-<style>
-  .btn-label {position: relative;left: -12px;display: inline-block;padding: 6px 12px;background: rgba(0,0,0,0.15);border-radius: 3px 0 0 3px;}
-.btn-labeled {padding-top: 0;padding-bottom: 0;}
-.btn { margin-bottom:10px; }
-</style>
+  {% endblock content %}
+  </body>
+  <style>
+    .btn-label {
+      position: relative;
+      left: -12px;
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 3px 0 0 3px;
+    }
+
+    .btn-labeled {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .btn {
+      margin-bottom: 10px;
+    }
+  </style>
 
 
-<script>
-  
-$(document).on('click', '.confirm-delete', function(){
-    return confirm('Are you sure you want to delete product?');
-})
- 
-</script>
+  <script>
+    $(document).on('click', '.confirm-delete', function () {
+      return confirm('Are you sure you want to delete product?');
+    })
+  </script>
 
-</html> 
+  </html>

@@ -1,0 +1,178 @@
+{% extends "ngs_admin/base.html" %}
+{% load static %}
+{% block content %}
+<title> Areas</title>
+<div class="header  pb-6" style="background-color: #5603ad;">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Areas</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Areas</li>
+            </ol>
+          </nav>
+        </div>
+
+      </div>
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+  </div>
+  <div class="row">
+    <div class="col-xl-8">
+      <div class="card" style="width: 153%;">
+        <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
+          <div class="row align-items-center">
+            <!-- Any Thing Write Here -->
+            <!-- <ul class="nav nav-tabs" style="font-size: 16px;">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'rc_profiles' %}">Customer Profiles</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'verify_rc_profile' %}">Verify RC Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'verified_rc_profiles' %}">Verified RC Profiles</a>
+              </li>
+
+            </ul> -->
+            {% if areas %}
+
+
+            <div class="table-responsive" style="margin-top: 19px;">
+              <button  data-toggle="modal" data-target="#modal-form" type="button" class="btn btn-labeled btn-success float-right" style="height: 45px;background-color: #5603ad;margin-right: 15px;width: 160px;">
+                
+                <span class="btn-label"  style="background-color: #5603ad;margin-right: 13px; "><i class="fa fa-plus"></i></span>Add Area</button></div>
+           
+              <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form"
+                aria-hidden="true">
+                <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+                  <div class="modal-content">
+                    <div class="modal-body p-0">
+
+                      <div class="card bg-secondary border-0 mb-0">
+                        <div class="card-header bg-transparent pb-5">
+                          <div class="text-muted text-center mt-2 mb-3"><label for=""> Add Area</label></div>
+                        </div>
+                        <div class="card-body px-lg-5 py-lg-5">
+
+                          <form method="POST" role="form" action="{% url 'add_area' %}">
+                            {% csrf_token %}
+                            <div class="form-group mb-3">
+
+                              <label class="form-control-label" for="exampleFormControlSelect1">Area Name</label>
+                                <input class="form-control" name="area" placeholder="Enter Area Name" type="text">
+                              
+
+                            </div>
+
+
+                            <div class="text-center">
+                              <button type="submit"  class="btn btn-primary my-4">Add Area</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <table class="table align-items-center table-flush table-striped" style="margin-top: 20px;">
+                <thead class="thead-light">
+                  <tr>
+                    <th>No.</th>
+                    <th>Areas</th>
+                    <th>Remove</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in areas %}
+
+                  <tr style="background-color: white;">
+                   
+                    <td>
+                      <span class="text-muted">{{forloop.counter}}</span>
+                    </td>
+                    <td>
+                      <span class="text-muted">{{i.Name}}</span>
+                    
+                    <td class="table-actions">
+
+
+
+
+                      <div>
+                        <a href="{% url 'remove_area' key=i.id %}" class="table-action" data-toggle="tooltip" data-original-title="Remove This Area">
+                          <button type="button" style="border-radius: 50px;" class="btn btn-danger">
+                            <i class="fa fa-times">
+                            </i>
+                          </button>
+                        </a>
+
+
+
+
+
+                      </div>
+                     
+                    </td>
+                  </tr>
+
+                  {% endfor %}
+
+                </tbody>
+              </table>
+            </div>
+            {% else %}
+            <div class="table-responsive" style="margin-top: 19px;">
+
+            <center><h3>There Is No Recycle Companys Registed!!</h3></center>
+          </div>
+            {% endif %}
+          
+            <!-- Any thing end here -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+  {% endblock content %}

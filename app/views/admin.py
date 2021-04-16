@@ -131,3 +131,19 @@ def Change_Verify_Status_Sc(request,key):
 def Verified_Sc_Profiles(request):
     sc=SC.objects.all()
     return render(request,"ngs_admin/verified_sc_profiles.html",{'sc':sc})
+
+def Areas11(request):
+    a = Areas.objects.all()
+    return render(request,"ngs_admin/areas.html",{'areas':a})
+
+def Add_Area(request):
+    area = request.POST['area']
+    new_area = Areas.objects.create(Name=area)
+    return redirect('areas')
+
+def Remove_Area(request,key):
+    area = Areas.objects.get(id=key)
+    area.delete()
+    return redirect('areas')
+
+    

@@ -134,6 +134,9 @@ urlpatterns = [
      path("admin_view_sc_profile/<int:key>",admin.Admin_view_Sc_profile,name="admin_view_sc_profile"),
      path("change_verify_status_sc/<int:key>",admin.Change_Verify_Status_Sc,name="change_verify_status_sc"),
      path("verified_sc_profiles/",admin.Verified_Sc_Profiles,name="verified_sc_profiles"),
+     path("areas/",admin.Areas11,name="areas"),
+     path("add_area/",admin.Add_Area,name="add_area"),
+     path("remove_area/<int:key>",admin.Remove_Area,name="remove_area"),
 
 
 
