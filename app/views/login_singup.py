@@ -43,6 +43,7 @@ def Forgot_password(request):
         if is_exist:
             otp = randint(100000,999999)
             encrypted_otp=make_password(otp)
+            print(otp)
             email_Subject = "Email Verification For Forgot Password"
             sendmail(email_Subject,'otpVerification_emailTemplate',email,{'name':'Dear customer','otp':otp})
             return render(request,"app/otp_verification.html",{'fpw':"fpw",'OTP':encrypted_otp,"EMAIL":email})
@@ -250,6 +251,7 @@ def Verify_OTP_forgotpw(request):
     role = request.POST['role']
     otp = str(otp)
     cotp = str(cotp)
+    print(otp)
     if check_password(cotp,otp):
          return render(request,"app/reset_password.html",{'EMAIL':email})
     else:

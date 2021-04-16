@@ -231,6 +231,10 @@ def RC_Confirm_Scrap_Request(request):
             Quantity = quantity,
             Datetime_of_request = datetime,
         )
+        email = user.Email
+        email_Subject = "Your Scrap request Has been Sent"
+        sendmail_scrap_request(email_Subject,'scrap_request_subscription_email',email,{'req':new_rc_scrap_request}) 
+
     return HttpResponseRedirect(reverse('rc_scrap_request_detail',args=[new_rc_scrap_request.id]))
     
     # return redirect('rc_scrap_requests')
