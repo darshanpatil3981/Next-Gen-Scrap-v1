@@ -231,7 +231,9 @@ def RC_Confirm_Scrap_Request(request):
             Quantity = quantity,
             Datetime_of_request = datetime,
         )
-    return redirect('rc_scrap_requests')
+    return HttpResponseRedirect(reverse('rc_scrap_request_detail',args=[new_rc_scrap_request.id]))
+    
+    # return redirect('rc_scrap_requests')
         
     
 

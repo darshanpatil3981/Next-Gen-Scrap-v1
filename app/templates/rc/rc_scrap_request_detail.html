@@ -55,7 +55,7 @@
     <div class="row">
       <div class="col-xl-8">
         <div class="card" style="width: 153%;">
-          <div class="card-header border-0" style="margin-top: -54px;height: 750px;">
+          <div class="card-header border-0" style="margin-top: -54px;height: 790px;">
      
              <!-- Any Thing Write Here -->
              
@@ -63,8 +63,11 @@
             
       
               <div class="item-content">
-              
-                <div class="info-table table-responsive">
+                <a href="{% url 'rc_scrap_requests' %}"><button class="btn btn-primary float-right" type="button" >
+                  <span class="btn-inner--icon"><i style="margin-right: 5px;" class="fa fa-arrow-left"></i></span>
+                  <span class="btn-inner--text">My Scrap Requests</span>
+                </button></a>
+                <div class="info-table table-responsive" style="padding-top: 20px;">
                   
                     <table class="table text-nowrap">
                         <tbody>
@@ -138,7 +141,9 @@
                            
                         </tbody>
                     </table>
+                   
                 </div>
+             
             </div>
 
       <!-- end Writing here -->

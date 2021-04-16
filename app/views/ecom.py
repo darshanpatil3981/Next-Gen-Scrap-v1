@@ -384,7 +384,9 @@ def Confirm_Scrap_Request(request):
             Datetime_Of_Pickup = datetime,
 
         )
-        return redirect('my_scrap_requests')
+        return HttpResponseRedirect(reverse('my_scrap_request_detail',args=[new_customer_scrap_request.id]))
+
+        # return redirect('my_scrap_requests')
     return render(request,"ecom/index.html")
     
 def My_Scrap_Requests(request):
