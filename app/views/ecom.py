@@ -399,3 +399,8 @@ def My_Scrap_Requests(request):
 def My_Scrap_Request_Detail(request,key):
     req = Customer_Scrap_Request.objects.get(id=key)
     return render(request,"ecom/my_scrap_request_detail.html",{'req':req})
+
+def Scrap_Prices(request):
+    cat = Scrap_Categories.objects.all()
+    return render(request,"ecom/scrap_prices.html",{'cat':cat})
+

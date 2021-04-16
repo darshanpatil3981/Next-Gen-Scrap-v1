@@ -1,0 +1,57 @@
+{% extends "ecom/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<title>Sscrap Prices</title>
+<section class="section-pagetop bg">
+    <div class="container">
+        <h2 class="title-page">Sscrap Prices</h2>
+    </div> <!-- container //  -->
+</section>
+<div class="card mb-3" style="width: 83%;margin-left: 9%;margin-top: 17px;">
+    <article class="card-body">
+        <header class="mb-4">
+            <h4 class="card-title">Scrap Prices</h4>
+        </header>
+      
+
+        {% if cat %}
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                {% for i in cat %}
+                <div class="col-12 col-md-6 col-lg-3" style="padding-bottom: 25px;">
+                  <div class="card">
+                    <img class="card-img-top" src="{{i.Image.url}}" alt="Card image cap">
+                    <div class="card-body">
+                      <h4 style="" class="card-title"><a title="View Product">{{i.Name}}</a></h4>
+                      <p>₹ {{i.Price}} / Kg</p>
+                      <div class="row">
+
+                        <div class="col">
+                        
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor%}
+                
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+        {% else %}
+        <center><h3> There Is No Scrap Catagory!!</h3></center>
+        {% endif %}
+        
+        
+    </article> 
+      
+</div> <!-- card.// -->
+
+{% endblock content %}

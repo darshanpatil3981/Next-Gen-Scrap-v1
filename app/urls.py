@@ -98,6 +98,7 @@ urlpatterns = [
      path("my_scrap_request_detail/<int:key>",ecom.My_Scrap_Request_Detail,name="my_scrap_request_detail"),
      path("confirm_scrap_request/",ecom.Confirm_Scrap_Request,name="confirm_scrap_request"),
      path("my_scrap_requests/",ecom.My_Scrap_Requests,name="my_scrap_requests"),
+     path("scrap_prices/",ecom.Scrap_Prices,name="scrap_prices"),
 
 
      
