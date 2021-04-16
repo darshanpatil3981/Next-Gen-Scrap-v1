@@ -316,7 +316,7 @@ def Invoice_pdf(request,key):
              'order':order,
              'product':product,
         }
-    pdf = render_to_pdf('ecom/invoice.html',data)
+    pdf = render_to_pdf('ecom/invoice_pdf.html',data)
     return HttpResponse(pdf, content_type='application/pdf')
     
 def temp(request):

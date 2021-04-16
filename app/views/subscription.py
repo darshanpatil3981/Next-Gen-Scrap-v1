@@ -129,7 +129,7 @@ def Invoice_Sub_Pdff(request,key):
                 'sc':sc,
                 'user':user
         }
-    pdf = render_to_pdf('rc/invoice_subscription.html',data)
+    pdf = render_to_pdf('app/invoice.html',data)
     return HttpResponse(pdf, content_type='application/pdf')
 
 
