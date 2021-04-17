@@ -11,10 +11,10 @@ from django.utils import timezone
 from django.template.loader import render_to_string
 from datetime import datetime, timedelta
 from django.http import JsonResponse
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 
 def Index(request):
-    products = Product.objects.all()
     if 'term' in request.GET:
         #qs = Product.objects.filter(Product_Name__istartswith=request.GET.get('term'))
         qs = Product.objects.filter(Product_Name__icontains=request.GET.get('term'))
@@ -24,7 +24,12 @@ def Index(request):
         print("================================================================")
         print(suggested_names)
         return JsonResponse(suggested_names,safe=False)
-    return render(request,"ecom/index.html",{'products':products})
+    
+    products = Product.objects.all().order_by('id')
+    paginator = Paginator(products,8)
+    page = request.GET.get('page')
+    paged_products = paginator.get_page(page)
+    return render(request,"ecom/index.html",{'products':paged_products})
  #Done   
 def Product_detail(request,key):
     product = Product.objects.get(pk=key)

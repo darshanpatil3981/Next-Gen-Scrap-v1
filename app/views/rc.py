@@ -11,6 +11,8 @@ from django.utils import timezone
 from django.template.loader import render_to_string
 from datetime import datetime, timedelta
 from django.http import JsonResponse
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 
 def Rc_Purchase_Scrap(request):
     cat = Scrap_Categories.objects.all()
@@ -97,10 +99,13 @@ def Rc_product(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(User_Master=user)
-    products=Product.objects.all().filter(RC=rc)
-    return render(request,"rc/rc_product.html",{'user':user,'rc':rc,'products':products})
+    products=Product.objects.all().filter(RC=rc).order_by('id')
 
-
+    paginator = Paginator(products,4)
+    page = request.GET.get('page')
+    paged_products = paginator.get_page(page)
+    return render(request,"rc/rc_product.html",{'user':user,'rc':rc,'products':paged_products})    
+    # return render(request,"rc/rc_product.html",{'user':user,'rc':rc,'products':products})
 
 def Rc_add_product(request):
     if request.method=="POST":
