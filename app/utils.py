@@ -49,6 +49,14 @@ def sendmail_scrap_request(subject,template,to,context):
     from_email = 'nextgenscrap@gmail.com'
     send_mail(subject, plain_message, from_email, [to], html_message=html_message)
 
+def sendmail_scrap_request_customer(subject,template,to,context):
+    subject = subject
+    template_str = 'ecom/'+ template+'.html'
+    html_message = render_to_string(template_str, {'data': context})
+    plain_message = strip_tags(html_message)
+    from_email = 'nextgenscrap@gmail.com'
+    send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
 def render_to_pdf(template_src, context_dict={}):
     template = get_template(template_src)
     html  = template.render(context_dict)
@@ -57,3 +65,4 @@ def render_to_pdf(template_src, context_dict={}):
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
     return None
+

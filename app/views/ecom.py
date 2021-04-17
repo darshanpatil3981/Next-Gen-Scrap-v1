@@ -384,6 +384,10 @@ def Confirm_Scrap_Request(request):
             Datetime_Of_Pickup = datetime,
 
         )
+
+        email = user.Email
+        email_Subject = "Your Scrap request Has been Sent"
+        sendmail_scrap_request_customer(email_Subject,'scrap_request_email',email,{'req':new_customer_scrap_request})
         return HttpResponseRedirect(reverse('my_scrap_request_detail',args=[new_customer_scrap_request.id]))
 
         # return redirect('my_scrap_requests')

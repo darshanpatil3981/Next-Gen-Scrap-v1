@@ -1,0 +1,94 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from demo.harnishdesign.net/html/koice/index-invoice-flights.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Mar 2021 15:34:55 GMT -->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://demo.harnishdesign.net/html/koice/images/favicon.png" rel="icon" />
+<title>Invoice</title>
+<meta name="author" content="harnishdesign.net">
+
+<!-- Web Fonts
+======================= -->
+ <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900' type='text/css'> 
+
+
+<link rel="stylesheet" type="text/css" href="http://demo.harnishdesign.net/html/koice/vendor/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="http://demo.harnishdesign.net/html/koice/vendor/font-awesome/css/all.min.css"/>
+<link rel="stylesheet" type="text/css" href="http://demo.harnishdesign.net/html/koice/css/stylesheet.css"/> 
+</head>
+<body>
+  
+<!-- Container -->
+<div class="container-fluid invoice-container"> 
+  <!-- Header -->
+  <header>
+    <div class="row align-items-center">
+      <center> <div class="col-sm-7 text-center text-sm-left mb-3 mb-sm-0"> <img id="logo" src="https://i.ibb.co/1TQpH1n/logo.png" style="height: 80px;" title="Koice" alt="Koice" /> </center></div>
+      <div class="col-sm-5 text-center text-sm-right">
+        <center><h1>Scrap Request Detail</h1></center>
+        
+      </div>
+    </div>
+    <hr>
+  </header>
+<h4> Your Scrap Request Has Been Sent To The Scrap Collector , The Detail About Scrap Request Is Given Below.</h4>
+<div class="info-table table-responsive">
+  <table class="table text-nowrap">
+      <tbody>
+        
+          <tr>
+              <td>ID :</td>
+              <td class="font-medium text-dark-medium">{{data.req.id}}</td>
+          </tr>
+
+          <tr>
+          <td>Datetime Of Pickup :</td>
+          <td class="font-medium text-dark-medium">{{data.req.Datetime_Of_Pickup}}</td>
+          </tr>
+
+          <tr>
+              <td>Name :</td>
+              <td class="font-medium text-dark-medium">{{data.req.Name}}</td>
+          </tr>
+          <tr>
+              <td>Phone Number :</td>
+              <td class="font-medium text-dark-medium">{{data.req.Phone}}</td>
+          </tr>
+
+          <tr>
+              <td>E-mail :</td>
+              <td class="font-medium text-dark-medium">{{data.req.Email}}</td>
+          </tr>
+
+          <td>Address :</td>
+          <td class="font-medium text-dark-medium">{{data.req.Address}}</td>
+          </tr>
+          </tr>
+          <td>State :</td>
+          <td class="font-medium text-dark-medium">{{data.req.State}}</td>
+          </tr>
+          <td>City :</td>
+          <td class="font-medium text-dark-medium">{{data.req.City}}</td>
+          </tr>
+
+          
+
+          <td>Pincode :</td>
+          <td class="font-medium text-dark-medium">{{data.req.Pincode}}</td>
+          </tr>
+          
+         
+      </tbody>
+  </table>
+</div>
+<h4 style="margin-left: 800px;"> Thank You</h4>
+<h4 style="margin-left: 800px;"> Team Next Gen Scrap</h4>
+</body>
+
+<!-- Mirrored from demo.harnishdesign.net/html/koice/index-invoice-flights.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Mar 2021 15:34:55 GMT -->
+</html>
