@@ -130,7 +130,32 @@ td,th {
                 </table>
               </div>
             </div>
+            <nav aria-label="..." class="float-right" style="margin-top: 15px;">
+              <ul class="pagination ">
+                {% if order_product.has_previous %}
+                <li class="page-item">
+                  <a style="width: 80px;" class="page-link"  href="?page={{ order_product.previous_page_number }}">Previous</a>
+                </li>
+                {% endif %}
+                {% for i in order_product.paginator.page_range %}
+                
+                  {% if order_product.number == i %}
+                    <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                  {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+  
+                {% endfor %}
+                {% if order_product.has_next %}
+                <li class="page-item">
+                  <a style="width: 80px;" class="page-link"  href="?page={{ order_product.next_page_number }}">Next</a>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
           </div>
+
+          
           {% else %}
           <center><h3> There Is No Orders From Customer!!</h3></center>
 
@@ -147,6 +172,8 @@ td,th {
             Oops...! You Didn't Purchase Subscription yet... Purchase Subscription To Unlock Thie Feature.
            </h3>
           </center>
+         
+        </div>
               {% endif %}
               
          

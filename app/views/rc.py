@@ -88,7 +88,11 @@ def Rc_orders(request):
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(User_Master=user)
     order_product =  Product_Order.objects.filter(RC_ID=rc.id,Payment_status="Success")
-    return render(request,"rc/rc_orders.html",{'user':user,'rc':rc,'order_product':order_product})
+    
+    paginator = Paginator(order_product,4)
+    page = request.GET.get('page')
+    paged_order_product = paginator.get_page(page)
+    return render(request,"rc/rc_orders.html",{'user':user,'rc':rc,'order_product':paged_order_product})
 
 def Rc_pricing(request):
     id=request.session.get("id")
