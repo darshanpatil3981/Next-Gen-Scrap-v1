@@ -19,7 +19,12 @@ def Rc_Purchase_Scrap(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(User_Master=user)
-    return render(request,"rc/rc_purchase_scrap.html",{'cat':cat,'rc':rc})
+
+    paginator = Paginator(cat,8)
+    page = request.GET.get('page')
+    paged_cat = paginator.get_page(page)
+
+    return render(request,"rc/rc_purchase_scrap.html",{'cat':paged_cat,'rc':rc})
 
 
 def View_Sc_Profile(request,key):
@@ -252,7 +257,10 @@ def RC_Scrap_Requests(request):
     user = User_Master.objects.get(id=id)
     rc=RC.objects.get(User_Master=user)
     req = RC_Scrap_Request.objects.filter(RC=rc)
-    return render(request,"rc/rc_scrap_requests.html",{'req':req,'rc':rc})
+    paginator = Paginator(req,6)
+    page = request.GET.get('page')
+    paged_req = paginator.get_page(page)
+    return render(request,"rc/rc_scrap_requests.html",{'req':paged_req,'rc':rc})
 
 def RC_Scrap_Request_Detail(request,key):
     req = RC_Scrap_Request.objects.get(id=key)
