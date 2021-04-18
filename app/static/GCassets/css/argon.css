@@ -22946,11 +22946,13 @@ textarea[resize='horizontal']
     margin: 0 3px;
     padding: 0;
 
-    border-radius: 50% !important;
+ 
 
     align-items: center;
     justify-content: center;
 }
+
+
 
 .pagination-lg .page-item .page-link,
 .pagination-lg .page-item span

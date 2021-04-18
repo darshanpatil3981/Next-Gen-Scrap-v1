@@ -70,10 +70,10 @@
                 <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
                 <span class="btn-label" style="background-color: #2dce89; "><i class="fa fa-plus"></i></span>Add
                 Product</button>
-              </div>
-               
-              
-              
+            </div>
+
+
+
 
             <div class="container">
               <div class="row">
@@ -121,50 +121,94 @@
                     </tbody>
                   </table>
 
-                  <div class="pagination">
-                    <span class="step-links">
+                  <!-- <div class="pagination">
+                    <ul class="pagination">
+                      <span class="step-links">
                         {% if products.has_previous %}
-                            <a href="?page=1">&laquo; first</a>
-                            <a href="?page={{ products.previous_page_number }}">previous</a>
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ products.previous_page_number }}">previous</a>
                         {% endif %}
-                
-                        <span class="current">
-                            Page {{ products.number }} of {{ products.paginator.num_pages }}.
-                        </span>
-                
-                        {% if products.has_next %}
-                            <a href="?page={{ products.next_page_number }}">next</a>
-                            <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
-                        {% endif %}
-                    </span>
-                </div>
 
+                        <span class="current">
+                          Page {{ products.number }} of {{ products.paginator.num_pages }}.
+                        </span>
+                        {% for i in products.paginator.page_range %}
+                        {% if users.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+
+                        {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if products.has_next %}
+
+                        <a href="?page={{ products.next_page_number }}">next</a>
+                        <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                      </span>
+                  </div> -->
+                  
+                  <nav aria-label="..." class="float-right" style="margin-top: 20px;">
+                    <ul class="pagination ">
+                      {% if products.has_previous %}
+                      <li class="page-item">
+                        <a style="width: 80px;" class="page-link"  href="?page={{ products.previous_page_number }}">Previous</a>
+                      </li>
+                      {% endif %}
+                      {% for i in products.paginator.page_range %}
+                      
+                        {% if products.number == i %}
+                          <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% else %}
+                          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+
+                      {% endfor %}
+
+                      <!-- <li class="page-item active">
+                        <span class="page-link">
+                          2
+                          <span class="sr-only">(current)</span>
+                        </span>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+                      {% if products.has_next %}
+                      <li class="page-item">
+                        <a style="width: 80px;" class="page-link"  href="?page={{ products.paginator.num_pages }}">Next</a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+               
                   {% else %}
                   <p>
-                  
-                        Oops...! You dont have any product yet... Add some products.
-                 
+
+                    Oops...! You dont have any product yet... Add some products.
+
                   </p>
                   {% endif %}
                 </div>
               </div>
             </div>
-            
+
             {% else %}
-            <center> <h3>
-              <div style="padding-left: 850px;padding-bottom: 20px;">
-                        
-                <button type="button" onclick="document.location='{% url 'rc_pricing' %}'"
-                class="btn btn-labeled btn-danger" style="height: 45px;width: 170px;">
-                <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
-                <span class="btn-label "><i class="fa fa-unlock-alt" style="padding-right: 10px;"></i></span>Unlock Feature</button>
-              </div>
-              Oops...! You Didn't Purchase Subscription yet... Purchase Subscription To Unlock Thie Feature.
-             </h3>
+            <center>
+              <h3>
+                <div style="padding-left: 850px;padding-bottom: 20px;">
+
+                  <button type="button" onclick="document.location='{% url 'rc_pricing' %}'"
+                    class="btn btn-labeled btn-danger" style="height: 45px;width: 170px;">
+                    <!-- <div style="padding-left: 909px;"><button type="button" onclick="{% url 'rc_add_product' %}" class="btn btn-labeled btn-success" style="height: 45px;"> -->
+                    <span class="btn-label "><i class="fa fa-unlock-alt" style="padding-right: 10px;"></i></span>Unlock
+                    Feature</button>
+                </div>
+                Oops...! You Didn't Purchase Subscription yet... Purchase Subscription To Unlock Thie Feature.
+              </h3>
             </center>
             {% endif %}
-           
-            
+
+
           </div>
         </div>
 
