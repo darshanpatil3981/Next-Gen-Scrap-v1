@@ -26,11 +26,13 @@
 
                 <div class="col form-group">
                   <label>First Name</label>
-                  <input type="text" name="fname" class="form-control" value="{{customer.Firstname}}">
+                  <input type="text" name="fname" class="form-control" value="{{customer.Firstname}}" pattern="^[a-zA-Z]+"
+                  title="First Name Should Contain Only Letters" required>
                 </div> <!-- form-group end.// -->
                 <div class="col form-group">
                   <label>Last Name</label>
-                  <input type="text" name="lname" class="form-control" value="{{customer.Lastname}}">
+                  <input type="text" name="lname" class="form-control" value="{{customer.Lastname}}" pattern="^[a-zA-Z]+"
+                  title="Last Name Should Contain Only Letters" required>
                 </div> <!-- form-group end.// -->
 
               </div> <!-- form-row.// -->
@@ -52,7 +54,8 @@
               <div class="form-row" style="padding-top: 13px;">
                 <div class="col-lg-8">
                   <label>Contect</label>
-                  <input type="text" class="form-control" name="contact" value="{{customer.Contact}}">
+                  <input type="text" class="form-control" name="contact" value="{{customer.Contact}}" pattern="^[0-9]{10}"
+                  title="Contect Must Contain 10 Digit Only" required>
                 </div> <!-- form-group end.// -->
               </div>
               <hr class="my-4" />
@@ -60,22 +63,25 @@
               <div class="form-row">
                 <div class="col form-group">
                   <label>Address</label>
-                  <input type="text" class="form-control" name="add" value="{{customer.Address}}">
+                  <input type="text" class="form-control" name="add" value="{{customer.Address}}" required>
                 </div> <!-- form-group end.// -->
               </div>
               <div class="form-row">
 
                 <div class="col form-group">
                   <label>City</label>
-                  <input type="text" class="form-control" name="city" value="{{customer.City}}">
+                  <input type="text" class="form-control" name="city" value="{{customer.City}}" pattern="^[a-zA-Z]+"
+                  title="City Must Contain Letters Only" required>
                 </div> <!-- form-group end.// -->
                 <div class="col form-group">
                   <label>State</label>
-                  <input type="text" class="form-control" name="state" value="{{customer.State}}">
+                  <input type="text" class="form-control" name="state" value="{{customer.State}}" pattern="^[a-zA-Z]+"
+                  title="State Must Contain Letters Only" required>
                 </div> <!-- form-group end.// -->
                 <div class="col form-group">
                   <label>Pin Code</label>
-                  <input type="text" class="form-control" name="pincode" value="{{customer.Pincode}}">
+                  <input type="text" class="form-control" name="pincode" value="{{customer.Pincode}}" pattern="^[0-9]{6}"
+                  title="Pincode Must Contain 6 Digit Only" required>
                 </div> <!-- form-group end.// -->
               </div>
 

@@ -123,14 +123,16 @@
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">First name</label>
                         <input type="text" id="input-first-name" class="form-control" placeholder="First name" name="fname"
-                          value="{{sc.Firstname}}"  style="color: #172b4d;">
+                          value="{{sc.Firstname}}"  style="color: #172b4d;" pattern="^[a-zA-Z]+"
+                          title="First Name Should Contain Only Letters" required>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-last-name">Last name</label>
                         <input type="text" id="input-last-name" class="form-control" placeholder="Last name" name="lname"
-                          value="{{sc.Lastname}}"  style="color: #172b4d;">
+                          value="{{sc.Lastname}}"  style="color: #172b4d;" pattern="^[a-zA-Z]+"
+                          title="Last Name Should Contain Only Letters" required>
                       </div>
                     </div>
                   </div>
@@ -168,13 +170,13 @@
                       <div class="form-group">
                         <label class="form-control-label" for="input-address">Address</label>
                         <input id="input-address" class="form-control" placeholder="Home Address" value="{{sc.Address}}" name="add"
-                          type="text"  style="color: #172b4d;">
+                          type="text"  style="color: #172b4d;" required>
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="form-control-label" for="exampleFormControlSelect1">Area</label>
-                    <select class="form-control" id="exampleFormControlSelect1" required name="area">
+                    <select class="form-control" id="exampleFormControlSelect1" required name="area" required>
                       <option value="" selected disabled hidden>Select Area</option>
                       {% for i in areas %}
                       <option>{{i.Name}}</option>
@@ -186,7 +188,8 @@
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Contect</label>
                         <input type="text" id="input-email" class="form-control" placeholder="1234567890" name="contact"
-                          value="{{sc.Contact}}"  style="color: #172b4d;">
+                          value="{{sc.Contact}}"  style="color: #172b4d;" pattern="^[0-9]{10}"
+                          title="Contect Must Contain 10 Digit Only" required>
                       </div>
                     </div>
                   </div>
@@ -195,21 +198,24 @@
                       <div class="form-group">
                         <label class="form-control-label" for="input-city">City</label>
                         <input type="text" id="input-city" class="form-control" placeholder="City" value="{{sc.City}}" name="city"
-                           style="color: #172b4d;">
+                           style="color: #172b4d;" pattern="^[a-zA-Z]+"
+                           title="City Must Contain Letters Only" required>
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label" for="input-country">State</label>
                         <input type="text" id="input-country" class="form-control" placeholder="State" name="state"
-                          value="{{sc.State}}"  style="color: #172b4d;">
+                          value="{{sc.State}}"  style="color: #172b4d;" pattern="^[a-zA-Z]+"
+                          title="State Must Contain Letters Only" required>
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label" for="input-country">Postal code</label>
-                        <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code"
-                        name="pincode" value="{{sc.Pincode}}"  style="color: #172b4d;">
+                        <input type="text" id="input-postal-code" class="form-control" placeholder="Postal code"
+                        name="pincode" value="{{sc.Pincode}}"  style="color: #172b4d;" pattern="^[0-9]{6}"
+                        title="Pincode Must Contain 6 Digit Only" required>
                       </div>
                     </div>
                   </div>

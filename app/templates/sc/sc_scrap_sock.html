@@ -88,8 +88,9 @@
 
                               <label class="form-control-label" for="exampleFormControlSelect1">Select Scrap
                                 Category</label>
-                              <select name="sname" class="form-control" id="exampleFormControlSelect1" required>
+                              <select required name="sname" class="form-control" id="exampleFormControlSelect1" required name="sname" required>
                                 {% for i in scrap_categories %}
+                                <option value="" selected disabled hidden>Select Scrap</option>
                                 <option>{{i.Name}}</option>
                                 {% endfor %}
 
