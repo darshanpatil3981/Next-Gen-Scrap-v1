@@ -136,9 +136,17 @@ def Invoice_Sub_Pdff(request,key):
 def Request_Verify(request):
     id=request.session.get("id")
     user = User_Master.objects.get(id=id)
-    user.Verify_Request=True
-    user.save()
+
+    doc_type = request.POST['doc_type']
+    doc_file = request.FILES['doc_file']
+
     if(user.Role=="RC"):
+        rc=RC.objects.get(User_Master=user)
+        rc.Document_Type = doc_type
+        rc.Document_File = doc_file
+        rc.save()
+        user.Verify_Request = True
+        user.save()
         return redirect('rc_profile')
     elif(user.Role=="SC"):
         return redirect('sc_profile')

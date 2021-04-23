@@ -10,8 +10,8 @@ class User_Master(models.Model):
     is_created = models.DateTimeField(auto_now=True,blank=False)
     is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    is_updated = models.DateTimeField(auto_now=True,blank=False)
     Verify_Request = models.BooleanField(default=False)
+
 
 class Customer(models.Model):
     User_Master = models.ForeignKey(User_Master,on_delete=models.CASCADE)
@@ -37,6 +37,8 @@ class SC(models.Model):
     Contact = models.BigIntegerField(default=0)
     Is_Subscription_Active = models.BooleanField(default=False)
     Profile_Pic = models.ImageField(upload_to='Profile_Pics',default="user.png")
+    Document_Type = models.CharField(max_length = 30,null=True)
+    Document_File = models.FileField(upload_to ='User_Documents/',null=True)
 
 class RC(models.Model):
     User_Master = models.ForeignKey(User_Master,on_delete=models.CASCADE)
@@ -50,6 +52,8 @@ class RC(models.Model):
     Contact = models.BigIntegerField(default=0)
     Is_Subscription_Active = models.BooleanField(default=False)
     Profile_Pic = models.ImageField(upload_to='Profile_Pics',default="user.png")
+    Document_Type = models.CharField(max_length = 30,null=True)
+    Document_File = models.FileField(upload_to ='User_Documents/',null=True)
 
 class Product(models.Model):
     RC = models.ForeignKey(RC,on_delete=models.CASCADE)
