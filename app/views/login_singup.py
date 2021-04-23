@@ -117,7 +117,7 @@ def create_Customer(request):
     if fname!="" or lname!="" or email!="" or pswd!="" or cpswd!="":      
             if pswd==cpswd:
                 encrypted_pw=make_password(pswd)
-                newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role="Customer",is_created=True,is_verified=False,is_active=False,is_updated=False)
+                newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role="Customer",is_created=True,is_verified=False,is_active=False)
                 newCustomer = Customer.objects.create(User_Master=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
                 return render(request,"app/login.html")
             else:
@@ -142,7 +142,7 @@ def create_gc_rc(request):
     if fname!="" or lname!="" or email!="" or pswd!="" or cpswd!="":
         if pswd==cpswd:
             encrypted_pw=make_password(pswd)
-            newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role=role,is_created=True,is_verified=False,is_active=False,is_updated=False)
+            newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role=role,is_created=True,is_verified=False,is_active=False)
             if role=="SC":
                 newsc = SC.objects.create(User_Master=newUser,Firstname=fname,Lastname=lname,Shop_name=cname,Address="",City="",State="",Pincode=000000,Contact=0)
             if role=="RC":
