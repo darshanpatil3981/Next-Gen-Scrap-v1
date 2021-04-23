@@ -149,6 +149,12 @@ def Request_Verify(request):
         user.save()
         return redirect('rc_profile')
     elif(user.Role=="SC"):
+        sc=SC.objects.get(User_Master=user)
+        sc.Document_Type = doc_type
+        sc.Document_File = doc_file
+        sc.save()
+        user.Verify_Request = True
+        user.save()
         return redirect('sc_profile')
 
 def View_subscription(request):

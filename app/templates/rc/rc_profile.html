@@ -121,15 +121,18 @@
                           </div>
                           <div class="card-body px-lg-5 py-lg-5">
 
-                            <form method="POST" role="form" action="{% url 'request_verify' %}" enctype="multipart/form-data">
+                            <form method="POST" role="form" action="{% url 'request_verify' %}"
+                              enctype="multipart/form-data">
                               {% csrf_token %}
                               <div class="form-group mb-3">
 
-                                <label class="form-control-label" for="exampleFormControlSelect1" style="margin-bottom:18px;">Select Document
+                                <label class="form-control-label" for="exampleFormControlSelect1"
+                                  style="margin-bottom:18px;">Select Document
                                   Type</label>
                                 <div class="form-group">
 
-                                  <select class="form-control" id="exampleFormControlSelect1" required name="doc_type" required>
+                                  <select class="form-control" id="exampleFormControlSelect1" required name="doc_type"
+                                    required>
                                     <option value="" selected disabled hidden>Select Document</option>
 
                                     <option>Adhar Card</option>
@@ -145,14 +148,16 @@
 
                               <div class="form-group mb-3">
 
-                                <label class="form-control-label" for="exampleFormControlSelect1" style="margin-bottom:18px;">Upload Document</label>
+                                <label class="form-control-label" for="exampleFormControlSelect1"
+                                  style="margin-bottom:18px;">Upload Document</label>
                                 <div class="form-group">
 
-                                  
-                                  <input accept=".jpg,.gif,.png" type="file" class="form-group " style="border-color: white;" name="doc_file" id="" required>
-                               
 
-                                 
+                                  <input accept=".pdf" type="file" class="form-group " style="border-color: white;"
+                                    name="doc_file" id="" required>
+
+
+
                                 </div>
 
 
@@ -161,7 +166,7 @@
 
 
                               <div class="text-center">
-                                <button type="submit" class="btn btn-primary my-4">Add Area</button>
+                                <button type="submit" class="btn btn-primary my-4">Submit</button>
                               </div>
                             </form>
                           </div>

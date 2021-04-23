@@ -103,7 +103,74 @@
                     {% ifequal sc.User_Master.Verify_Request True %}
                     <button type="button" class="btn btn-outline-secondary" style="border-color: #cbdeea;">Requested</button> 
                     {% else %}
-                    <a href="{% url 'request_verify' %}"><button type="button" class="btn btn-outline-secondary" style="border-color: #cbdeea;">Request Verify</button></a>
+                   <button type="button" data-toggle="modal" data-target="#modal-form" class="btn btn-outline-secondary" style="border-color: #cbdeea;">Request Verify</button>
+                   <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body p-0">
+
+                        <div class="card bg-secondary border-0 mb-0">
+                          <div class="card-header bg-transparent pb-5">
+                            <div class="text-muted text-center mt-2 mb-3"><label for=""> Upload Valid Document</label>
+                            </div>
+                          </div>
+                          <div class="card-body px-lg-5 py-lg-5">
+
+                            <form method="POST" role="form" action="{% url 'request_verify' %}"
+                              enctype="multipart/form-data">
+                              {% csrf_token %}
+                              <div class="form-group mb-3">
+
+                                <label class="form-control-label" for="exampleFormControlSelect1"
+                                  style="margin-bottom:18px;">Select Document
+                                  Type</label>
+                                <div class="form-group">
+
+                                  <select class="form-control" id="exampleFormControlSelect1" required name="doc_type"
+                                    required>
+                                    <option value="" selected disabled hidden>Select Document</option>
+
+                                    <option>Adhar Card</option>
+                                    <option>Pan Card</option>
+                                    <option>Election Card</option>
+                                    <option>Driving License</option>
+
+                                  </select>
+                                </div>
+
+
+                              </div>
+
+                              <div class="form-group mb-3">
+
+                                <label class="form-control-label" for="exampleFormControlSelect1"
+                                  style="margin-bottom:18px;">Upload Document</label>
+                                <div class="form-group">
+
+
+                                  <input accept=".pdf" type="file" class="form-group " style="border-color: white;"
+                                    name="doc_file" id="" required>
+
+
+
+                                </div>
+
+
+                              </div>
+
+
+
+                              <div class="text-center">
+                                <button type="submit" class="btn btn-primary my-4">Submit</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                     {% endifequal %}
                   </div>
                   
