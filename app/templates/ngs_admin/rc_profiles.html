@@ -148,6 +148,32 @@
 
                 </tbody>
               </table>
+              <nav aria-label="..." class="float-right" style="margin-top: 20px;">
+
+                <ul class="pagination ">
+              
+                  {% if rc.has_previous %}
+                  <li class="page-item">
+                    <a style="width: 80px;" class="page-link"  href="?page={{ rc.previous_page_number }}">Previous</a>
+                  </li>
+                  {% endif %}
+
+                  {% for i in rc.paginator.page_range %}
+                  
+                    {% if rc.number == i %}
+                      <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% else %}
+                      <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+  
+                  {% endfor %}
+                  {% if rc.has_next %}
+                  <li class="page-item">
+                    <a style="width: 80px;" class="page-link"  href="?page={{ rc.next_page_number }}">Next</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </nav>
             </div>
             {% else %}
             <div class="table-responsive" style="margin-top: 19px;">

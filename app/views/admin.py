@@ -11,6 +11,8 @@ from django.utils import timezone
 from django.template.loader import render_to_string
 from datetime import datetime, timedelta
 from django.http import JsonResponse
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 
 
 
@@ -18,8 +20,12 @@ def Ngs_Admin(request):
     return render(request,"ngs_admin/scrap_categories.html")
 
 def Scrap_Categories1(request):
+    
     scrap_categories = Scrap_Categories.objects.all()
-    return render(request,"ngs_admin/scrap_categories.html",{'scrap_categories':scrap_categories})
+    paginator = Paginator(scrap_categories,5)
+    page = request.GET.get('page')
+    paged_cat = paginator.get_page(page)
+    return render(request,"ngs_admin/scrap_categories.html",{'scrap_categories':paged_cat})
 
 def Add_Scrap_Categories(request):
 
@@ -88,7 +94,12 @@ def Change_Verify_Status(request,key):
     
 def Rc_Profiles(request):
     rc=RC.objects.all()
-    return render(request,"ngs_admin/rc_profiles.html",{'rc':rc})
+
+    paginator = Paginator(rc,5)
+    page = request.GET.get('page')
+    paged_rc = paginator.get_page(page)
+    return render(request,"ngs_admin/rc_profiles.html",{'rc':paged_rc})
+
 def Verified_Rc_Profiles(request):
     rc=RC.objects.all()
     return render(request,"ngs_admin/verified_rc_profiles.html",{'rc':rc})

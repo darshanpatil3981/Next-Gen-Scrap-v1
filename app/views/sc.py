@@ -11,6 +11,8 @@ from django.utils import timezone
 from django.template.loader import render_to_string
 from datetime import datetime, timedelta
 from django.http import JsonResponse
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 
 def Sc_Profile(request):
     id=request.session.get("id")
@@ -101,16 +103,23 @@ def Sc_Scrap_Stock(request):
 
     scrap_categories = Scrap_Categories.objects.all()
     scrap_stock = Scrap_Stock.objects.filter(SC=sc)
-    return render(request,"sc/sc_scrap_sock.html",{'sc':sc,'scrap_categories':scrap_categories,'scrap_stock':scrap_stock})
+
+    paginator = Paginator(scrap_stock,4)
+    page = request.GET.get('page')
+    paged_scrap_stock = paginator.get_page(page)
+    return render(request,"sc/sc_scrap_sock.html",{'sc':sc,'scrap_categories':scrap_categories,'scrap_stock':paged_scrap_stock})
 
 def Sc_Scrap_Request_Customer(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
     sc=SC.objects.get(User_Master=user)
     req = Customer_Scrap_Request.objects.filter(SC=sc)
-    print('-------------')
-    print(req)
-    return render(request,"sc/sc_scrap_request_customer.html",{'sc':sc,'req':req})
+
+    paginator = Paginator(req,7)
+    page = request.GET.get('page')
+    paged_req = paginator.get_page(page)
+
+    return render(request,"sc/sc_scrap_request_customer.html",{'sc':sc,'req':paged_req})
 
 def Sc_Scrap_Request_Detail(request,key):
     req = Customer_Scrap_Request.objects.get(id=key)
@@ -145,10 +154,13 @@ def Sc_Scrap_Request_Rc(request):
     id = request.session.get("id")
     user = User_Master.objects.get(id=id)
     sc=SC.objects.get(User_Master=user)
-    print("------------------")
-    print(sc)
     req = RC_Scrap_Request.objects.filter(SC=sc)
-    return render(request,"sc/sc_scrap_request_rc.html",{'sc':sc,'req':req})
+
+    paginator = Paginator(req,7)
+    page = request.GET.get('page')
+    paged_req = paginator.get_page(page)
+
+    return render(request,"sc/sc_scrap_request_rc.html",{'sc':sc,'req':paged_req})
 
 
 

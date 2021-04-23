@@ -59,7 +59,7 @@
   <div class="row">
     <div class="col-xl-8">
       <div class="card" style="width: 153%;">
-        <div class="card-header border-0" style="margin-top: -54px;height: 950px;">
+        <div class="card-header border-0" style="margin-top: -54px;height: 770px;">
           <div class="row align-items-center">
            <!-- Any Thing Write Here -->
            <div style="padding-left: 870px;padding-bottom: 20px;">
@@ -107,6 +107,29 @@
                       {% endfor %}
                     </tbody>
                   </table>
+                  <nav aria-label="..." class="float-right" style="margin-top: 20px;">
+                    <ul class="pagination ">
+                      {% if scrap_categories.has_previous %}
+                      <li class="page-item">
+                        <a style="width: 80px;" class="page-link"  href="?page={{ scrap_categories.previous_page_number }}">Previous</a>
+                      </li>
+                      {% endif %}
+                      {% for i in scrap_categories.paginator.page_range %}
+                      
+                        {% if scrap_categories.number == i %}
+                          <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% else %}
+                          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+      
+                      {% endfor %}
+                      {% if scrap_categories.has_next %}
+                      <li class="page-item">
+                        <a style="width: 80px;" class="page-link"  href="?page={{ scrap_categories.next_page_number }}">Next</a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                  </nav>
                   {% else %}
                   <p>
                     Oops...! You Dont Have Any Scrap Categories yet... Add Some New.

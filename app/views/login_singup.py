@@ -171,7 +171,7 @@ def Validate_login(request):
         User = User_Master.objects.get(Email=email)
         if check_password(password,User.Password):
             if User.Role=="Customer":
-                request.session['id']=User.id
+                request.session['id'] = User.id
                 customer=Customer.objects.get(User_Master=User)
                 request.session['fname']=customer.Firstname
                 request.session['lname']=customer.Lastname

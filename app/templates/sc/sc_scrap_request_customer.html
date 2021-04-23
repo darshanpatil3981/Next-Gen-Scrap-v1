@@ -56,7 +56,7 @@
     <div class="row">
       <div class="col-xl-8">
         <div class="card" style="width: 153%;">
-          <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
+          <div class="card-header border-0" style="margin-top: -54px;height: 700px;">
             <div class="row align-items-center">
              <!-- Any Thing Write Here -->
              {% if sc.Is_Subscription_Active == True %}
@@ -131,7 +131,32 @@
   
                   </tbody>
                 </table>
+                <nav aria-label="..." class="float-right" style="margin-top: 30px;">
+                  <ul class="pagination ">
+                    {% if req.has_previous %}
+                    <li class="page-item">
+                      <a style="width: 80px;" class="page-link"  href="?page={{ req.previous_page_number }}">Previous</a>
+                    </li>
+                    {% endif %}
+                    {% for i in req.paginator.page_range %}
+                    
+                      {% if req.number == i %}
+                        <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                      {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+            
+                    {% endfor %}
+                    {% if req.has_next %}
+                    <li class="page-item">
+                      <a style="width: 80px;" class="page-link"  href="?page={{ req.next_page_number }}">Next</a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+                
               </div>
+
     </center>
     {% else %}
     <center>

@@ -84,9 +84,9 @@ def Rc_update_profile(request):
     
 
 def Rc_orders(request):
-    id=request.session.get("id")
+    id = request.session.get("id")
     user = User_Master.objects.get(id=id)
-    rc=RC.objects.get(User_Master=user)
+    rc = RC.objects.get(User_Master=user)
     order_product =  Product_Order.objects.filter(RC_ID=rc.id,Payment_status="Success")
     
     paginator = Paginator(order_product,4)
