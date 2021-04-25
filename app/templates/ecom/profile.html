@@ -1,147 +1,153 @@
-{% extends "ecom/base.html" %}
+{% extends "ecom/base1.html" %}
 {% load static %}
 
 
 {% block content %}
 <title>Profile</title>
-<section class="section-content padding-y bg">
-  <div class="container" style="margin-right: 118px;background-color: white;width: 1079px;border-radius: 8px;">
-    <div class="container" style="margin-right: 20px;">
-
-      <div class="row" style="margin-left: 20px;padding-top: 28px;">
-
-
-
-        <!-- ============================ COMPONENT PROFILE  ================================= -->
-        <div class="card mb-4" style="border-radius: 8px;">
-          <div class="card-body">
-            <h4 class="card-title mb-4">User Profile</h4>
-            <form method="POST" action="{% url 'customer_update_profile' %}" enctype="multipart/form-data">
-
-              <h6 class="heading-small text-muted mb-4">Basic information</h6>
-              <div class="form-row">
-
-                <div class="col form-group">
-                  <label>First Name</label>
-                  <input type="text" name="fname" class="form-control" value="{{customer.Firstname}}" disabled>
-                </div> <!-- form-group end.// -->
-                <div class="col form-group">
-                  <label>Last Name</label>
-                  <input type="text" name="lname" class="form-control" value="{{customer.Lastname}}" disabled>
-                </div> <!-- form-group end.// -->
-
-              </div> <!-- form-row.// -->
-
-              <hr class="my-4" />
-              <h6 class="heading-small text-muted mb-4">Contact information</h6>
-              <div class="form-row">
-                <div class="col-lg-8">
-                  <label>Email</label>
-                  <input type="email" name="email" class="form-control" value="{{user.Email}}" disabled>
-                </div> <!-- form-group end.// -->
-              </div>
-              <div class="form-row" style="padding-top: 13px;">
-                <div class="col-lg-8">
-                  <label>Contect</label>
-                  <input type="text" class="form-control" name="contact" value="{{customer.Contact}}" disabled>
-                </div> <!-- form-group end.// -->
-              </div>
-              <hr class="my-4" />
-              <h6 class="heading-small text-muted mb-4">Address</h6>
-              <div class="form-row">
-                <div class="col form-group">
-                  <label>Address</label>
-                  <input type="text" class="form-control" name="add" value="{{customer.Address}}" disabled>
-                </div> <!-- form-group end.// -->
-              </div>
-              <div class="form-row">
-
-                <div class="col form-group">
-                  <label>City</label>
-                  <input type="text" class="form-control" name="city" value="{{customer.City}}" disabled>
-                </div> <!-- form-group end.// -->
-                <div class="col form-group">
-                  <label>State</label>
-                  <input type="text" class="form-control" name="state" value="{{customer.State}}" disabled>
-                </div> <!-- form-group end.// -->
-                <div class="col form-group">
-                  <label>Pin Code</label>
-                  <input type="text" class="form-control" name="pincode" value="{{customer.Pincode}}" disabled>
-                </div> <!-- form-group end.// -->
-              </div>
-
-
-
-             
-
-            </form>
-          </div> <!-- card-body.// -->
-        </div> <!-- card .// -->
-
-        <!-- ============================ COMPONENT PROFILE END.// ================================= -->
-
-
-        <div class="card mb-4" style="margin-left: 15px;height: 429px;">
-          <div class="card-body">
-
-
-            <div class="form-group">
-              {% ifequal customer.Profile_Pic "" %}
-              <img src="{% static 'images/user.png' %}" name="profile_pic" style="height: 200px; width: 200px;"
-                class="img-sm rounded-circle border">
-              {% else %}
-              <img src="{{customer.Profile_Pic.url}}" name="profile_pic" style="height: 200px; width: 200px;"
-                class="img-sm rounded-circle border">
-              {% endifequal %}
-
-            </div>
-
-            <div class="text-center">
-              <h5 class="h3">
-                {{customer.Firstname}} {{customer.Lastname}}<span class="font-weight-light"></span>
-
-              </h5>
-              <a href="{% url 'customer_update_profile' %}" class="btn btn-neutral">Edit profile</a>
-              
-            </div>
-            <a href="{% url 'change_password' %}" class="btn btn-neutral" style="margin-left: 20px;">Change Password</a>
-            {% ifequal customer.City "" %}
-            {% else %}
-
-            <div class="text-center">
-
-              {{customer.City}} , {{customer.State}}<span class="font-weight-light"></span>
-              {% endifequal %}
-
-
-            </div>
-
-
-            <div class="text-center">
-
-              {{user.Email}}<span class="font-weight-light"></span>
-
-            </div>
-            <div class="text-center">
-              {% ifequal customer.Contact 0 %}
-              {% else %}
-              +91{{customer.Contact}} <span class="font-weight-light"></span>
-              {% endifequal %}
-
-            </div>
-
-
-
-
-
-
-            </form>
-          </div> <!-- card-body.// -->
-        </div> <!-- card .// -->
-
-      </div> <!-- container .//  -->
-    </div>
+<hr>
+<section class="ftco-section contact-section ">
+  <div class="container">
+    <section class="section-content padding-y bg">
+      <div class="container" >
+        <div class="container" >
+    
+          <div class="row" style="width: 210%;">
+    
+    
+    
+            <!-- ============================ COMPONENT PROFILE  ================================= -->
+            <div class="card mb-2" style="border-radius: 8px;">
+              <div class="card-body">
+                <h4 class="card-title mb-4">User Profile</h4>
+                <form method="POST" action="{% url 'customer_update_profile' %}" enctype="multipart/form-data">
+    
+                  <h6 class="heading-small text-muted mb-4">Basic information</h6>
+                  <div class="form-row">
+    
+                    <div class="col form-group">
+                      <label>First Name</label>
+                      <input type="text" name="fname" class="form-control" value="{{customer.Firstname}}" disabled>
+                    </div> <!-- form-group end.// -->
+                    <div class="col form-group">
+                      <label>Last Name</label>
+                      <input type="text" name="lname" class="form-control" value="{{customer.Lastname}}" disabled>
+                    </div> <!-- form-group end.// -->
+    
+                  </div> <!-- form-row.// -->
+    
+                  <hr class="my-4" />
+                  <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                  <div class="form-row">
+                    <div class="col-lg-8">
+                      <label>Email</label>
+                       <input type="email" name="email" class="form-control" value="{{user.Email}}" disabled>
+                    </div> <!-- form-group end.// -->
+                  </div>
+                  <div class="form-row" style="padding-top: 13px;">
+                    <div class="col-lg-8">
+                      <label>Contect</label>
+                      <input type="text" class="form-control" name="contact" value="{{customer.Contact}}" disabled>
+                    </div> <!-- form-group end.// -->
+                  </div>
+                  <hr class="my-4" />
+                  <h6 class="heading-small text-muted mb-4">Address</h6>
+                  <div class="form-row">
+                    <div class="col form-group">
+                      <label>Address</label>
+                      <input type="text" class="form-control" name="add" value="{{customer.Address}}" disabled>
+                    </div> <!-- form-group end.// -->
+                  </div>
+                  <div class="form-row">
+    
+                    <div class="col form-group">
+                      <label>City</label>
+                      <input type="text" class="form-control" name="city" value="{{customer.City}}" disabled>
+                    </div> <!-- form-group end.// -->
+                    <div class="col form-group">
+                      <label>State</label>
+                      <input type="text" class="form-control" name="state" value="{{customer.State}}" disabled>
+                    </div> <!-- form-group end.// -->
+                    <div class="col form-group">
+                      <label>Pin Code</label>
+                      <input type="text" class="form-control" name="pincode" value="{{customer.Pincode}}" disabled>
+                    </div> <!-- form-group end.// -->
+                  </div>
+    
+    
+    
+                 
+    
+                </form>
+              </div> <!-- card-body.// -->
+            </div> <!-- card .// -->
+    
+            <!-- ============================ COMPONENT PROFILE END.// ================================= -->
+    
+    
+            <div class="card mb-4" style="margin-left: 15px;height: 470px;">
+              <div class="card-body">
+    
+    
+                <div class="form-group">
+                  {% ifequal customer.Profile_Pic "" %}
+                  <img src="{% static 'images/user.png' %}" name="profile_pic" style="height: 200px; width: 200px;"
+                    class="img-sm rounded-circle border">
+                  {% else %}
+                  <img src="{{customer.Profile_Pic.url}}" name="profile_pic" style="height: 200px; width: 200px;"
+                    class="img-sm rounded-circle border">
+                  {% endifequal %}
+    
+                </div>
+    
+                <div class="text-center">
+                  <h5 class="h3">
+                    {{customer.Firstname}} {{customer.Lastname}}<span class="font-weight-light"></span>
+    
+                  </h5>
+                  <a href="{% url 'customer_update_profile' %}" class="btn btn-neutral">Edit profile</a>
+                  
+                </div>
+                <a href="{% url 'change_password' %}" class="btn btn-neutral" style="margin-left: 20px;">Change Password</a>
+                {% ifequal customer.City "" %}
+                {% else %}
+    
+                <div class="text-center">
+    
+                  {{customer.City}} , {{customer.State}}<span class="font-weight-light"></span>
+                  {% endifequal %}
+    
+    
+                </div>
+    
+    
+                <div class="text-center">
+    
+                  {{user.Email}}<span class="font-weight-light"></span>
+    
+                </div>
+                <div class="text-center">
+                  {% ifequal customer.Contact 0 %}
+                  {% else %}
+                  +91{{customer.Contact}} <span class="font-weight-light"></span>
+                  {% endifequal %}
+    
+                </div>
+    
+    
+    
+    
+    
+    
+                </form>
+              </div> <!-- card-body.// -->
+            </div> <!-- card .// -->
+    
+          </div> <!-- container .//  -->
+        </div>
+    </section>
+  </div>
 </section>
+
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
 {% endblock content %}

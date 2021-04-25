@@ -1,12 +1,13 @@
-{% extends "ecom/base.html" %}
+{% extends "ecom/base1.html" %}
 {% load static %}
 
 
 {% block content %}
 <title>Checkout</title>
+<hr>
 <section class="section-pagetop bg">
     <div class="container">
-        <h2 class="title-page">Check Out</h2>
+        <h2 class="title-page" style="padding-top: 4%;padding-bottom: 3%;">Check Out</h2>
     </div> <!-- container //  -->
 </section>
 <div class="card mb-3" style="width: 83%;margin-left: 9%;margin-top: 17px;">
@@ -23,7 +24,7 @@
                             style="height: 100px;width: 120px;" class="border img-xs"></div>
                     <figcaption class="info">
                         <p>{{i.Product.Product_Name}} </p>
-                        <span>{{i.Quantity}}x ₹{{i.Product.Product_Price}} =  Total ₹{{i.Total_Amount}} </span>
+                        <span>{{i.Quantity}} x ₹{{i.Product.Product_Price}} =  Total ₹{{i.Total_Amount}} </span>
                     </figcaption>
                 </figure>
 
@@ -39,7 +40,7 @@
                     <div class="aside"><img src="{{new_cart_item.Product.Product_Img.url}}"
                             style="height: 100px;width: 120px;" class="border img-xs"></div>
                     <figcaption class="info">
-                        <p>{{new_cart_item.Product.Product_Name}} </p>
+                        <h1>{{new_cart_item.Product.Product_Name}} </h1>
                         <span>{{new_cart_item.Quantity}}x ₹{{new_cart_item.Product.Product_Price}} =  Total ₹{{new_cart_item.Total_Amount}} </span>
                     </figcaption>
                 </figure>
@@ -139,5 +140,5 @@
     </article> 
       
 </div> <!-- card.// -->
-
+<br><br><br><br><br>
 {% endblock content %}

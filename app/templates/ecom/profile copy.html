@@ -1,51 +1,37 @@
-{% extends "ecom/base1.html" %}
+{% extends "ecom/base.html" %}
 {% load static %}
 
 
 {% block content %}
-<title>Update Profile</title>
-<hr>
-<section class="ftco-section contact-section ">
-  <div class="container">
-
+<title>Profile</title>
 <section class="section-content padding-y bg">
-  <div class="container" >
-    <div class="container" >
+  <div class="container" style="margin-right: 118px;background-color: white;width: 1079px;border-radius: 8px;">
+    <div class="container" style="margin-right: 20px;">
 
-      <div class="row" style="width: 210%;" >
+      <div class="row" style="margin-left: 20px;padding-top: 28px;">
 
 
 
         <!-- ============================ COMPONENT PROFILE  ================================= -->
         <div class="card mb-4" style="border-radius: 8px;">
           <div class="card-body">
-            <h4 class="card-title mb-4">Edit Profile</h4>
+            <h4 class="card-title mb-4">User Profile</h4>
             <form method="POST" action="{% url 'customer_update_profile' %}" enctype="multipart/form-data">
-
-              {% csrf_token %}
 
               <h6 class="heading-small text-muted mb-4">Basic information</h6>
               <div class="form-row">
 
                 <div class="col form-group">
                   <label>First Name</label>
-                  <input type="text" name="fname" class="form-control" value="{{customer.Firstname}}" pattern="^[a-zA-Z]+"
-                  title="First Name Should Contain Only Letters" required>
+                  <input type="text" name="fname" class="form-control" value="{{customer.Firstname}}" disabled>
                 </div> <!-- form-group end.// -->
                 <div class="col form-group">
                   <label>Last Name</label>
-                  <input type="text" name="lname" class="form-control" value="{{customer.Lastname}}" pattern="^[a-zA-Z]+"
-                  title="Last Name Should Contain Only Letters" required>
+                  <input type="text" name="lname" class="form-control" value="{{customer.Lastname}}" disabled>
                 </div> <!-- form-group end.// -->
 
               </div> <!-- form-row.// -->
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-control-label" for="input-email">Profile Picture</label>
-                  <input type="file" id="fileInput" name="profile_pic" class="form-control"
-                    style="border-color: white;" onchange="preview_propic(this);" />
-                </div>
-              </div> <!-- form-row.// -->
+
               <hr class="my-4" />
               <h6 class="heading-small text-muted mb-4">Contact information</h6>
               <div class="form-row">
@@ -57,8 +43,7 @@
               <div class="form-row" style="padding-top: 13px;">
                 <div class="col-lg-8">
                   <label>Contect</label>
-                  <input type="text" class="form-control" name="contact" value="{{customer.Contact}}" pattern="^[0-9]{10}"
-                  title="Contect Must Contain 10 Digit Only" required>
+                  <input type="text" class="form-control" name="contact" value="{{customer.Contact}}" disabled>
                 </div> <!-- form-group end.// -->
               </div>
               <hr class="my-4" />
@@ -66,50 +51,47 @@
               <div class="form-row">
                 <div class="col form-group">
                   <label>Address</label>
-                  <input type="text" class="form-control" name="add" value="{{customer.Address}}" required>
+                  <input type="text" class="form-control" name="add" value="{{customer.Address}}" disabled>
                 </div> <!-- form-group end.// -->
               </div>
               <div class="form-row">
 
                 <div class="col form-group">
                   <label>City</label>
-                  <input type="text" class="form-control" name="city" value="{{customer.City}}" pattern="^[a-zA-Z]+"
-                  title="City Must Contain Letters Only" required>
+                  <input type="text" class="form-control" name="city" value="{{customer.City}}" disabled>
                 </div> <!-- form-group end.// -->
                 <div class="col form-group">
                   <label>State</label>
-                  <input type="text" class="form-control" name="state" value="{{customer.State}}" pattern="^[a-zA-Z]+"
-                  title="State Must Contain Letters Only" required>
+                  <input type="text" class="form-control" name="state" value="{{customer.State}}" disabled>
                 </div> <!-- form-group end.// -->
                 <div class="col form-group">
                   <label>Pin Code</label>
-                  <input type="text" class="form-control" name="pincode" value="{{customer.Pincode}}" pattern="^[0-9]{6}"
-                  title="Pincode Must Contain 6 Digit Only" required>
+                  <input type="text" class="form-control" name="pincode" value="{{customer.Pincode}}" disabled>
                 </div> <!-- form-group end.// -->
               </div>
 
 
 
+             
 
-
-
+            </form>
           </div> <!-- card-body.// -->
         </div> <!-- card .// -->
 
         <!-- ============================ COMPONENT PROFILE END.// ================================= -->
 
 
-        <div class="card mb-4" style="margin-left: 15px;height: 383px;">
+        <div class="card mb-4" style="margin-left: 15px;height: 429px;">
           <div class="card-body">
 
 
             <div class="form-group">
               {% ifequal customer.Profile_Pic "" %}
               <img src="{% static 'images/user.png' %}" name="profile_pic" style="height: 200px; width: 200px;"
-                class="img-sm rounded-circle border" id="preview_propic_img" />
+                class="img-sm rounded-circle border">
               {% else %}
               <img src="{{customer.Profile_Pic.url}}" name="profile_pic" style="height: 200px; width: 200px;"
-                class="img-sm rounded-circle border" id="preview_propic_img" />
+                class="img-sm rounded-circle border">
               {% endifequal %}
 
             </div>
@@ -119,8 +101,10 @@
                 {{customer.Firstname}} {{customer.Lastname}}<span class="font-weight-light"></span>
 
               </h5>
-
+              <a href="{% url 'customer_update_profile' %}" class="btn btn-neutral">Edit profile</a>
+              
             </div>
+            <a href="{% url 'change_password' %}" class="btn btn-neutral" style="margin-left: 20px;">Change Password</a>
             {% ifequal customer.City "" %}
             {% else %}
 
@@ -135,7 +119,7 @@
 
             <div class="text-center">
 
-              {{customer.Email}}<span class="font-weight-light"></span>
+              {{user.Email}}<span class="font-weight-light"></span>
 
             </div>
             <div class="text-center">
@@ -143,22 +127,20 @@
               {% else %}
               +91{{customer.Contact}} <span class="font-weight-light"></span>
               {% endifequal %}
-              <input  type="button" class="btn btn-primary btn-block mx-auto" value="Upload Profile Picture"
-                onclick="document.getElementById('fileInput').click();" style="margin-top: 98px;border-radius: 5px;" />
-            </div>
-          </div> <!-- card-body.// -->
-         
-        </div> <!-- card .// -->
-       
 
-        
+            </div>
+
+
+
+
+
+
+            </form>
+          </div> <!-- card-body.// -->
+        </div> <!-- card .// -->
+
       </div> <!-- container .//  -->
-      <button type="submit" style="width: 220px;margin-left: 420px;" class="btn btn-primary btn-block" > Update Profile
-      </button>
-    </form>
     </div>
-</section>
-</div>
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 

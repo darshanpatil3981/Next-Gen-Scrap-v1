@@ -1,13 +1,12 @@
-{% extends "ecom/base1.html" %}
+{% extends "ecom/base.html" %}
 {% load static %}
 
 
 {% block content %}
 <title>Shipping Detail</title>
-<hr>
 <section class="section-pagetop bg">
   <div class="container">
-    <h2 class="title-page" style="padding-top: 4%;padding-bottom: 3%;">Shipping Detail</h2>
+    <h2 class="title-page">Shipping Detail</h2>
   </div> <!-- container //  -->
 </section>
 <div class="card mb-3" style="width: 83%;margin-left: 9%;margin-top: 17px;">
@@ -58,7 +57,7 @@
     </div>
 
     <center>
-      <div style="padding-top: 6%;padding-bottom: 3px;">
+      <div style="padding-top: 20px;">
         <form action="{% url 'invoice' %}" method="POST">
           {% csrf_token %}
           <script src="https://checkout.razorpay.com/v1/checkout.js" 

@@ -1,29 +1,30 @@
-{% extends "ecom/base.html" %}
+{% extends "ecom/base1.html" %}
 {% load static %}
 
 
 {% block content %}
 <title>Scrap Requests Detail</title>
+<hr>
 <section class="section-pagetop bg">
     <div class="container">
-        <h2 class="title-page">My Scrap Requests Detail</h2>
+        <h2 class="title-page" style="padding-top: 4%;padding-bottom: 3%;">My Scrap Requests Detail</h2>
     </div> <!-- container //  -->
 </section>
 
 <div class="card mb-3" style="width: 83%;margin-left: 9%;margin-top: 17px;">
-    <a href="{% url 'my_scrap_requests' %}" style="margin-top: 15px;margin-right: 15px;"><button class="btn btn-primary float-right" type="button" >
+    <a href="{% url 'my_scrap_requests' %}" style="margin-top: 15px;margin-right: 15px;"><button style="margin-top: 2%;margin-right: 2%;" class="btn btn-primary float-right" type="button" >
         <span class="btn-inner--icon"><i style="margin-right: 5px;" class="fa fa-arrow-left"></i></span>
         <span class="btn-inner--text">My Scrap Requests</span>
       </button></a>
     <article class="card-body">
         <header class="mb-4">
-           <h5 class="card-title">Scrap Request Detail</h5>
+           <h5 class="card-title" >Scrap Request Detail</h5>
         <div style="height: 20px;"></div>
         <center> 
       
           <div class="item-content">
             <div class="info-table table-responsive">
-                <table class="table text-nowrap">
+                <table class="table">
                     <tbody>
                       
                         <tr>

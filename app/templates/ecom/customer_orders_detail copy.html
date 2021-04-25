@@ -1,0 +1,70 @@
+{% extends "ecom/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<title>Order Detail</title>
+
+<section class="section-pagetop bg">
+    <div class="container">
+        <h2 class="title-page">Order Detail</h2>
+    </div> <!-- container //  -->
+</section>
+<div class="card mb-3" style="width: 83%;margin-left: 9%;margin-top: 17px;">
+    
+
+      
+            <div class="row">
+              <div class="col-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      
+                      <th scope="col">Product Name</th>
+                      <th scope="col">Product Image</th>
+        
+                      <th scope="col">Ordre Date</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Price</th>
+                      
+                      
+                      
+            
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if order_product %}
+                    {% for i in order_product %}
+                    <tr>
+                      
+                      <td>{{i.Product.Product_Name}}</td>
+                      <td>
+                        <div class="row">
+        
+                          <div class="user-img pull-left" style="margin-left: 33px;padding-left: 20px;"><img
+                              src="{{i.Product.Product_Img.url}}"
+                              class="img-circle img-responsive" alt="User Image" style="height: 90px;"> </div>
+        
+                      </td>
+                      <td>{{i.Order_ID.Datetime_of_payment}} </td>
+                      <td>{{i.Quantity}}</td>
+                      <td>{{i.Price}} Rs. </td>
+                      
+                     
+                  
+                    </tr>
+                    
+                    {% endfor %}
+                    {% endif %}           
+                   
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          
+    
+             
+
+</div> <!-- card.// -->
+
+{% endblock content %}

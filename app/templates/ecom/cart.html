@@ -1,222 +1,103 @@
-{% extends "ecom/base.html" %}
+{% extends "ecom/base1.html" %}
 {% load static %}
 
 <title>Cart</title>
 {% block content %}
-<section class="section-pagetop bg">
+<hr>
+
+<section class="ftco-section contact-section ">
     <div class="container">
-        <h2 class="title-page">Shopping cart</h2>
-    </div> <!-- container //  -->
-</section>
-<!-- ========================= SECTION INTRO END// ========================= -->
+        
+        <section class="ftco-section ftco-cart">
+            
+            <div class="container">
+                
+                <div class="row">
+                    <div class="col-md-12 ftco-animate">
+                        <div class="cart-list">
+                            {% if cust_cart %}
+                            <table class="table">
+                                <thead class="thead-primary">
+                                    <tr class="text-center">
+                                        
+                                        <th>Product Image</th>
+                                        <th>Product Name</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
 
-<!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content padding-y">
-    <div class="container">
-        {% if cust_cart %}
-        <div class="row">
-            <main class="col-md-12">
-                <div class="card">
-
-                    <table class="table table-borderless table-shopping-cart">
-                        <thead class="text-muted">
-                            <tr class="small text-uppercase">
-                                <th scope="col">Product</th>
-                                <th scope="col" width="120">Quantity</th>
-                                <th scope="col" width="120">Price</th>
-                                <th scope="col" class="text-right" width="200"> </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for i in cust_cart %}
-                            <tr>
-                                <td>
-                                    <figure class="itemside">
-                                        <div class="aside"><img style="width: 235px;height: 140px;" src="{{i.Product.Product_Img.url}}"
-                                                class="img-sm"></div>
-                                        <figcaption class="info" style="margin-left: 40px;font-size: 20px;width: 235px;">
-                                            <a href="#" class="title text-dark">{{i.Product_ID.Product_Name}}</a>
-                                            <p class="text-muted small">Seller Name : {{i.Product.Seller_Name}} <br></p>
-                                        </figcaption>
-                                    </figure>
-                                </td>
-                                <td>
-
-                                    <div class="form-group col-md flex-grow-0">
-                                        <label>Quantity</label>
-
-                                        <form action="{% url 'edit_order' key=i.id %}" method="post">
-                                            {% csrf_token %}
-                                        <div class="input-group mb-3 input-spinner"> 
-                                            
-                                                <div class="input-group-prepend">
-                                                    <button type="submit" name="update_plus">+</button>
-                                                    <!-- <button type="submit" onclick="return confirm('Do you want to update quantity?');" name="update_plus">+</button> -->
-                                                    <!-- <button class="btn btn-light" type="submit" onclick="return confirm('Do you want to update quantity?');" name="update_plus">+</button> -->
-                                                </div>
-                                                <input type="text" class="form-control" value="{{i.Quantity}}"  name="Quant">
-                                                <div class="input-group-append">
-                                                    <button type="submit" name="update_minus">&minus;</button>
-                                                    <!-- <button type="submit" onclick="return confirm('Do you want to update quantity?');" name="update_minus">&minus;</button> -->
-                                                    <!-- <button class="btn btn-light" type="button" id="button-minus">&minus;</button> -->
-                                                </div>
-                                            
-                                        </div>
-                                    </form>
-                                    </div>
-
-
-                                    <!-- <select class="form-control">
-                <option>1</option>
-                <option>2</option>	
-                <option>3</option>	
-                <option>4</option>	
-            </select>  -->
-                                </td>
-                                <td>
-                                    <div class="price-wrap">
-                                        <var class="price">₹ {{i.Total_Amount}} </var>
-                                        <small class="text-muted"> {{i.Product_ID.Product_Price}} / per item </small>
-                                    </div> <!-- price-wrap .// -->
-                                </td>
-                                <!-- <td class="text-right">
-                                    <a href="" class="btn btn-light"> Edit order</a>
-                                    <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a> 
-                             
-                                    
-                                </td> -->
-                                <td class="text-right">
+                                    </tr>
+                                </thead>
+                                <tbody>
                                    
-                                    <!-- <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>  -->
-                                    <a href="{% url 'remove_cart_item' key=i.id %}" onclick="return confirm('Are you sure you want to remove this item from cart?');" class="btn btn-light"> Remove</a>
-                                    
-                                </td>
-                            </tr>
-                            {% endfor %}
-
-                        </tbody>
-                    </table>
-
-                    <div class="card-body border-top">
-                        <a href="{% url 'checkout' %}" class="btn btn-primary float-md-right"> Make Purchase <i
-                                class="fa fa-chevron-right"></i> </a>
-                        <a href="{% url 'index' %}" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
-                    </div>
-                </div> <!-- card.// -->
-
-                <div class="alert alert-success mt-3">
-                    <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
-                </div>
-
-            </main> <!-- col.// -->
-            <!-- <aside class="col-md-3">
-            <div class="card mb-3">
-                <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <label>Have coupon?</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="" placeholder="Coupon code">
-                            <span class="input-group-append"> 
-                                <button class="btn btn-primary">Apply</button>
-                            </span>
+                                    {% for i in cust_cart %}
+                                    <tr class="text-center">
+                                       
+    
+                                        <td class="image-prod">
+                                            <div class="img" style="background-image:url({{i.Product.Product_Img.url}});"></div>
+                                        </td>
+    
+                                        <td class="product-name">
+                                            <h3>{{i.Product.Product_Name}}</h3>
+                                            <p>{{i.Product.Product_Desc}}</p>
+                                        </td>
+                                        <td class="total"> ₹ {{i.Product.Product_Price}}/Per Item</td>
+                                        
+    
+                                        <td>
+                                            
+                                                <!-- <input type="text" name="quantity"
+                                                    class="quantity form-control input-number" value="{{i.Quantity}}" min="1" max="100"> -->
+                                                    <form action="{% url 'edit_order' key=i.id %}" method="post">
+                                                        {% csrf_token %}
+                                                    <div class="input-group mb-3 input-spinner"> 
+                                                        
+                                                            <div class="input-group-prepend">
+                                                                <button type="submit" name="update_plus" style="width: 50px;">+</button>
+                                                                <!-- <button type="submit" onclick="return confirm('Do you want to update quantity?');" name="update_plus">+</button> -->
+                                                                <!-- <button class="btn btn-light" type="submit" onclick="return confirm('Do you want to update quantity?');" name="update_plus">+</button> -->
+                                                            </div>
+                                                            <input type="text" class="quantity form-control input-number" value="{{i.Quantity}}"  name="Quant">
+                                                            <div class="input-group-append">
+                                                                <button type="submit" name="update_minus" style="width: 50px;">&minus;</button>
+                                                                <!-- <button type="submit" onclick="return confirm('Do you want to update quantity?');" name="update_minus">&minus;</button> -->
+                                                                <!-- <button class="btn btn-light" type="button" id="button-minus">&minus;</button> -->
+                                                            </div>
+                                                        
+                                                    </div>
+                                                </form>
+                                                <a href="{% url 'remove_cart_item' key=i.id %}" style="border-radius: 5px;" onclick="return confirm('Are you sure you want to remove this item from cart?');" class="btn btn-light"> Remove</a>
+            
+                                          
+                                        </td>
+                                        <td class="price">₹ {{i.Total_Amount}}</td>
+                         
+                                        
+                                    </tr><!-- END TR-->
+    
+                                  {% endfor %}
+                                        
+     
+                                </tbody>
+                            </table>
+                            {% else %}
+                            <h3>There Is No Products In Your Cart</h3>
+                            {% endif %}
+                        </div>
+                        <div class="card-body border-top" style="padding-top: 5%;">
+                            {% if cust_cart %}
+                            <a style="border-radius: 50px;height: 40px;" href="{% url 'checkout' %}" class="btn btn-primary float-md-right"> Make Purchase <i
+                                    class="fa fa-chevron-right"></i> </a>
+                                    {% endif %}
+                            <a href="{% url 'index' %}" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
                         </div>
                     </div>
-                </form>
-                </div> 
-            </div> 
-            <div class="card">
-                <div class="card-body">
-                        <dl class="dlist-align">
-                          <dt>Total price:</dt>
-                          <dd class="text-right">INR 568</dd>
-                        </dl>
-                        <dl class="dlist-align">
-                          <dt>Discount:</dt>
-                          <dd class="text-right">INR 658</dd>
-                        </dl>
-                        <dl class="dlist-align">
-                          <dt>Total:</dt>
-                          <dd class="text-right  h5"><strong>₹1,650</strong></dd>
-                        </dl>
-                        <hr>
-                        <p class="text-center mb-3">
-                            <img src="{% static 'ecomassets/images/misc/payments.png' %}" height="26">
-                        </p>
-                        
-                </div> 
-            </div>  
-        </aside>  -->
-        </div>
-        {% endif %}
-        <!-- <div class="card mb-3" style="margin-top: 18px;">
-        <article class="card-body">
-            <header class="mb-4">
-                <h4 class="card-title">Review cart</h4>
-            </header>
-                <div class="row">
-                    <div class="col-md-6">
-                        <figure class="itemside  mb-3">
-                            <div class="aside"><img src="{% static 'ecomassets/images/items/1.jpg' %}" class="border img-xs"></div>
-                            <figcaption class="info">
-                                <p>Name of the product goes here or title </p>
-                                <span>2x $290 = Total: $430 </span>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="col-md-6">
-                        <figure class="itemside  mb-3">
-                            <div class="aside"><img src="{% static 'ecomassets/images/items/2.jpg' %}" class="border img-xs"></div>
-                            <figcaption class="info">
-                                <p>Name of the product goes here or title </p>
-                                <span>2x $290 = Total: $430 </span>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="col-md-6">
-                        <figure class="itemside mb-3">
-                            <div class="aside"><img src="{% static 'ecomassets/images/items/3.jpg' %}" class="border img-xs"></div>
-                            <figcaption class="info">
-                                <p>Name of the product goes here or title </p>
-                                <span>1x $290 = Total: $290 </span>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="col-md-6">
-                        <figure class="itemside  mb-3">
-                            <div class="aside"><img src="{% static 'ecomassets/images/items/4.jpg' %}" class="border img-xs"></div>
-                            <figcaption class="info">
-                                <p>Name of the product goes here or title </p>
-                                <span>4x $290 = Total: $430 </span>
-                            </figcaption>
-                        </figure>
-                    </div> 
-                </div> 
-        </article> 
-        <article class="card-body border-top">
-    
-            <dl class="row">
-              <dt class="col-sm-10">Subtotal: <span class="float-right text-muted">2 items</span></dt>
-              <dd class="col-sm-2 text-right"><strong>$1,568</strong></dd>
-    
-              <dt class="col-sm-10">Discount: <span class="float-right text-muted">10% offer</span></dt>
-              <dd class="col-sm-2 text-danger text-right"><strong>$29</strong></dd>
-    
-              <dt class="col-sm-10">Delivery charge: <span class="float-right text-muted">Express delivery</span></dt>
-              <dd class="col-sm-2 text-right"><strong>$120</strong></dd>
-    
-              <dt class="col-sm-10">Tax: <span class="float-right text-muted">5%</span></dt>
-              <dd class="col-sm-2 text-right text-success"><strong>$7</strong></dd>
-    
-              <dt class="col-sm-10">Total:</dt>
-              <dd class="col-sm-2 text-right"><strong class="h5 text-dark">$1,650</strong></dd>
-            </dl>
-    
-        </article>
-    </div>  -->
-
+                </div>
+                
+            </div>
+        </section>
     </div>
-
 </section>
 
 <!-- <script>

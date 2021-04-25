@@ -34,7 +34,7 @@
 	<link rel="stylesheet" href="{% static 'app/css/flaticon.css' %}">
 	<link rel="stylesheet" href="{% static 'app/css/icomoon.css' %}">
 	<link rel="stylesheet" href="{% static 'app/css/style.css' %}">
-
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	
 </head>
 
@@ -76,9 +76,12 @@
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Sell Scrap</a></li>
-					<li class="nav-item"><a href="{% url 'index' %}" class="nav-link">My Scrap Requests</a></li>
-					<li class="nav-item"><a href="{% url 'index' %}" class="nav-link">My Orders</a></li>
+					<li class="nav-item"><a href="{% url 'scrap_prices' %}" class="nav-link">Scrap Prices </a></li>
+					
+
+					<li class="nav-item"><a href="{% url 'select_area' %}" class="nav-link">Sell Scrap</a></li>
+					<li class="nav-item"><a href="{% url 'my_scrap_requests' %}" class="nav-link">My Scrap Requests</a></li>
+					<li class="nav-item"><a href="{% url 'customer_orders' %}" class="nav-link">My Orders</a></li>
 
 		
 
@@ -169,9 +172,11 @@
                     <div class="d-flex">
                         <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
                             <li><a href="{% url 'index' %}" class="py-2 d-block">Recycled Products</a></li>
-                            <li><a href="#" class="py-2 d-block">Scrp Collector
+                            <li><a href="{% url 'select_area' %}" class="py-2 d-block"> Sell Scrap
                             </a></li>
-                            <li><a href="#" class="py-2 d-block">Recycle Company </a></li>
+                            <li><a href="{% url 'my_scrap_requests' %}" class="py-2 d-block">My Scrap Requests  </a></li>
+                            <li><a href="{% url 'scrap_prices' %}" class="py-2 d-block">Scrap Prices  </a></li>
+                            <li><a href="{% url 'customer_orders' %}" class="py-2 d-block">My Orders  </a></li>
                         </ul>
                         
                     </div>
