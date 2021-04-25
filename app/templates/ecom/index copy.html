@@ -1,0 +1,137 @@
+{% extends "ecom/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<title>Home</title>
+
+<!-- ========================= SECTION INTRO ========================= -->
+<section class="section-intro">
+
+    <div class="intro-banner-wrap">
+        <img src="{% static 'ecomassets/images/banners/1.png' %}" class="w-100 img-fluid">
+    </div>
+
+</section>
+<!-- ========================= SECTION INTRO END// ========================= -->
+
+
+<!-- ========================= SECTION SPECIAL ========================= -->
+<section class="section-specials padding-y border-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <figure class="itemside">
+                    <div class="aside">
+                        <span class="icon-sm rounded-circle bg-primary">
+                            <i class="fa fa-money-bill-alt white"></i>
+                        </span>
+                    </div>
+                    <figcaption class="info">
+                        <h6 class="title">Reasonable prices</h6>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labor </p>
+                    </figcaption>
+                </figure> <!-- iconbox // -->
+            </div><!-- col // -->
+            <div class="col-md-4">
+                <figure class="itemside">
+                    <div class="aside">
+                        <span class="icon-sm rounded-circle bg-danger">
+                            <i class="fa fa-comment-dots white"></i>
+                        </span>
+                    </div>
+                    <figcaption class="info">
+                        <h6 class="title">Customer support 24/7 </h6>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labor </p>
+                    </figcaption>
+                </figure> <!-- iconbox // -->
+            </div><!-- col // -->
+            <div class="col-md-4">
+                <figure class="itemside">
+                    <div class="aside">
+                        <span class="icon-sm rounded-circle bg-success">
+                            <i class="fa fa-truck white"></i>
+                        </span>
+                    </div>
+                    <figcaption class="info">
+                        <h6 class="title">Quick delivery</h6>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labor </p>
+                    </figcaption>
+                </figure> <!-- iconbox // -->
+            </div><!-- col // -->
+        </div> <!-- row.// -->
+
+    </div> <!-- container.// -->
+</section>
+<!-- ========================= SECTION SPECIAL END// ========================= -->
+
+
+
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name  padding-y-sm">
+    <div class="container">
+
+        <header class="section-heading">
+            <!-- <a href="#" class="btn btn-outline-primary float-right">See all</a> -->
+            <h3 class="section-title">Recycled Products</h3>
+        </header><!-- sect-heading -->
+
+
+        <div class="row">
+            {% if products %}
+            {% for i in products %}
+            <div class="col-md-3">
+                <div href="{% url 'product_detail' key=i.id %}" class="card card-product-grid">
+                    <a href="{% url 'product_detail' key=i.id %}" class="img-wrap"> <img src="{{i.Product_Img.url}}">
+                    </a>
+                    <figcaption class="info-wrap">
+                        <a href="{% url 'product_detail' key=i.id %}" class="title">{{i.Product_Name}}</a>
+                        <div class="price mt-1">₹ {{i.Product_Price}}</div> <!-- price-wrap.// -->
+                    </figcaption>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div> <!-- row.// -->
+        <div style="padding-bottom: 40px;">
+            <nav aria-label="..." class="float-right">
+                <ul class="pagination ">
+                    {% if products.has_previous %}
+                    <li class="page-item">
+                        <a style="width: 80px;" class="page-link"
+                            href="?page={{ products.previous_page_number }}">Previous</a>
+                    </li>
+                    {% endif %}
+                    {% for i in products.paginator.page_range %}
+
+                    {% if products.number == i %}
+                    <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+
+                    {% endfor %}
+
+
+                    {% if products.has_next %}
+                    <li class="page-item">
+                        <a style="width: 80px;" class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+
+        </div>
+    </div><!-- container // -->
+
+</section>
+
+{% endif %}
+<!-- ========================= SECTION  END// ========================= -->
+{% endblock content %}

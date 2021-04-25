@@ -1,0 +1,254 @@
+{% extends "ecom/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<title>Product Detail</title>
+<section class="section-content padding-y bg">
+  <div class="container">
+
+    <!-- ============================ COMPONENT 1 ================================= -->
+    {% if product %}
+    <div class="card">
+      <div class="row no-gutters">
+        <aside class="col-md-6">
+          <article class="gallery-wrap">
+            <div class="img-big-wrap">
+              <div> <a href="#"><img src="{{product.Product_Img.url}}" style="width: 553px;"></a></div>
+            </div> <!-- slider-product.// -->
+            <div class="thumbs-wrap">
+              <a href="#" class="item-thumb"> <img src="{% static 'ecomassets/images/items/1.jpg' %}"></a>
+              <a href="#" class="item-thumb"> <img src="{% static 'ecomassets/images/items/2.jpg' %}"></a>
+              <a href="#" class="item-thumb"> <img src="{% static 'ecomassets/images/items/3.jpg' %}"></a>
+              <a href="#" class="item-thumb"> <img src="{% static 'ecomassets/images/items/4.jpg' %}"></a>
+            </div> <!-- slider-nav.// -->
+          </article> <!-- gallery-wrap .end// -->
+        </aside>
+        <main class="col-md-6 border-left">
+          <article class="content-body">
+
+            <h2 class="title">{{product.Product_Name}}</h2>
+
+            <div class="rating-wrap my-3">
+              <ul class="rating-stars">
+                <li style="width:80%" class="stars-active">
+                  <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </li>
+                <li>
+                  <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </li>
+              </ul>
+              <!-- <small class="label-rating text-muted">132 reviews</small>
+        <small class="label-rating text-success"> <i class="fa fa-clipboard-check"></i> 154 orders </small> -->
+            </div> <!-- rating-wrap.// -->
+
+            <div class="mb-3">
+              <var class="price h4">₹ {{product.Product_Price}}</var>
+              <span class="text-muted">/per unit</span>
+            </div> <!-- price-detail-wrap .// -->
+
+            <p>{{product.Product_Desc}}</p>
+
+
+            <dl class="row">
+              <dt class="col-sm-3">Seller</dt>
+              <dd class="col-sm-9">{{product.Seller_Name}}</dd>
+
+              <!-- <dt class="col-sm-3">Color</dt>
+      <dd class="col-sm-9">Brown</dd>
+    
+      <dt class="col-sm-3">Delivery</dt>
+      <dd class="col-sm-9">Russia, USA, and Europe </dd> -->
+            </dl>
+
+            <hr>
+            <div class="form-row">
+              <div class="form-group col-md flex-grow-0">
+                <label>Quantity</label>
+                  <div class="input-group mb-3 input-spinner">
+                  <div class="input-group-prepend">
+                    <button class="btn btn-light" type="button" id="button-plus" name="update_plus">+</button>
+                  </div>
+                  <input type="text" class="form-control" value="1" id="quantity">
+                  <div class="input-group-append">
+                    <button class="btn btn-light" type="button" id="button-minus" name="update_minus">&minus;</button>
+                  </div>
+                </div>
+              </div> <!-- col.// -->
+              <div class="form-group col-md">
+                <!-- <label>Select size</label>
+                    <div class="mt-1">
+                        <label class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" name="select_size" checked="" class="custom-control-input">
+                          <div class="custom-control-label">Small</div>
+                        </label>
+    
+                        <label class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" name="select_size" class="custom-control-input">
+                          <div class="custom-control-label">Medium</div>
+                        </label>
+    
+                        <label class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" name="select_size" class="custom-control-input">
+                          <div class="custom-control-label">Large</div>
+                        </label>
+    
+                    </div> -->
+              </div> <!-- col.// -->
+            </div> <!-- row.// -->
+
+
+
+
+            <form action="{% url 'cart_buy' key=product.id %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="quantity_copy" id="quantity_copy" value="1">
+              <button type="submit" name="buy_now" class="btn btn-primary">Buy Now</button>
+              <button type="submit" name="add_to_cart" class="btn btn-primary"> ADD TO CART</button>
+              <!-- <button type="submit" class="btn  btn-primary" name="buy_now"> Buy now </button> -->
+              <!-- <button type="submit" class="btn btn-outline-primary" name="add_to_cart"><span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i></button> -->
+              <!-- <a href="" class="btn  btn-primary"> Buy now </a> -->
+              <!-- <a href="" class="btn  btn-outline-primary"><span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i></a> -->
+              <!-- <a href="" class="btn  btn-outline-primary" > <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i></a> -->
+            </form>
+          </article> <!-- product-info-aside .// -->
+        </main> <!-- col.// -->
+      </div> <!-- row.// -->
+    </div> <!-- card.// -->
+
+    <!-- AHI AAVU JOIE COMMENT SECTION  -->
+    {% endif %}
+    <!-- ============================ COMPONENT 1 END .// ================================= -->
+
+
+
+
+
+    {% if editing_order %}
+    <div class="card">
+      <div class="row no-gutters">
+        <aside class="col-md-6">
+          <article class="gallery-wrap">
+            <div class="img-big-wrap">
+              <div> <a href="#"><img src="{{editing_order.Product.Product_Img.url}}" style="width: 553px;"></a></div>
+            </div> <!-- slider-product.// -->
+            <div class="thumbs-wrap">
+              <a href="#" class="item-thumb"> <img src="{% static 'ecomassets/images/items/1.jpg' %}"></a>
+              <a href="#" class="item-thumb"> <img src="{% static 'ecomassets/images/items/2.jpg' %}"></a>
+              <a href="#" class="item-thumb"> <img src="{% static 'ecomassets/images/items/3.jpg' %}"></a>
+              <a href="#" class="item-thumb"> <img src="{% static 'ecomassets/images/items/4.jpg' %}"></a>
+            </div> <!-- slider-nav.// -->
+          </article> <!-- gallery-wrap .end// -->
+        </aside>
+        <main class="col-md-6 border-left">
+          <article class="content-body">
+
+            <h2 class="title">{{editing_order.Product.Product_Name}}</h2>
+
+            <div class="rating-wrap my-3">
+              <ul class="rating-stars">
+                <li style="width:80%" class="stars-active">
+                  <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </li>
+                <li>
+                  <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </li>
+              </ul>
+            </div> <!-- rating-wrap.// -->
+
+            <div class="mb-3">
+              <var class="price h4">Rs. {{editing_order.Product.Product_Price}}</var>
+              <span class="text-muted">/per unit</span>
+            </div> <!-- price-detail-wrap .// -->
+
+            <p>{{editing_order.Product.Product_Desc}}</p>
+
+
+            <dl class="row">
+              <dt class="col-sm-3">Seller</dt>
+              <dd class="col-sm-9">{{editing_order.Product.Seller_Name}}</dd>
+
+            </dl>
+
+            <hr>
+            <div class="form-row">
+              <div class="form-group col-md flex-grow-0">
+                <label>Quantity</label>
+                <div class="input-group mb-3 input-spinner">
+                  <div class="input-group-prepend">
+                    <button class="btn btn-light" type="button" id="button-plus">+</button>
+                  </div>
+                  <input type="text" class="form-control" value="{{editing_order.Quantity}}" id="quantity">
+                  <div class="input-group-append">
+                    <button class="btn btn-light" type="button" id="button-minus">&minus;</button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md">
+
+              </div>
+            </div>
+
+            <form action="{% url 'cart_buy' key=product.id %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="quantity_copy" id="quantity_copy" value="{{editing_order.Quantity}}">
+              <!-- <button type="submit" name="buy_now">Buy Now</button> -->
+              <button type="submit" name="save_changes_in_order"> Save Changes</button>
+            </form>
+          </article>
+        </main>
+      </div>
+    </div>
+    {% endif %}
+
+
+
+
+
+
+    <br><br>
+    <section>
+      <div class="container">
+        <div class="row">
+          {% if comments %}
+          <div class="col-sm-5 col-md-6 col-12 pb-4">
+            <h1>Comments</h1>
+            {% for i in comments %}
+            <div class="comment mt-4 text-justify float-left" style="padding-right: 160px;">
+              {% ifequal i.Customer.Profile_Pic "" %}
+              <img src="{% static 'images/user.png' %}" alt="" class="rounded-circle" width="40" height="40">
+              {% else %}
+              <img src="{{i.Customer.Profile_Pic.url}}" alt="" class="rounded-circle" width="40" height="40">
+              {% endifequal %}
+              <h4>{{i.Customer.Firstname}} {{i.Customer.Lastname}}</h4> <span>- {{i.Comment_time}}</span> <br>
+              <p>{{i.Comment_text}}</p>
+            </div>
+            {% endfor %}
+
+
+          </div>
+          {% endif %}
+          <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4" style="margin-left: 186px;">
+            <form id="algin-form" style="margin-left: -161px;" action="{% url 'add_coomment_ecom' key=product.id %}"
+              method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <h4>Leave a comment</h4> <label for="message">Message</label>
+                <textarea name="cmt_msg" id="" msg cols="30" rows="5" class="form-control" required></textarea>
+              </div>
+              <div class="form-group"> <button type="submit" id="post" class="btn btn-primary">Post Comment</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endblock content %}

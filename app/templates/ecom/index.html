@@ -1,135 +1,170 @@
-{% extends "ecom/base.html" %}
+{% extends "ecom/base1.html" %}
 {% load static %}
 
 
 {% block content %}
 <title>Home</title>
-
-<!-- ========================= SECTION INTRO ========================= -->
-<section class="section-intro">
-
-    <div class="intro-banner-wrap">
-        <img src="{% static 'ecomassets/images/banners/1.png' %}" class="w-100 img-fluid">
-    </div>
-    
-    </section>
-    <!-- ========================= SECTION INTRO END// ========================= -->
-    
-    
-    <!-- ========================= SECTION SPECIAL ========================= -->
-    <section class="section-specials padding-y border-bottom">
-    <div class="container">	
-    <div class="row">
-    <div class="col-md-4">	
-                <figure class="itemside">
-                    <div class="aside">
-                        <span class="icon-sm rounded-circle bg-primary">
-                            <i class="fa fa-money-bill-alt white"></i>
-                        </span>
-                    </div>
-                    <figcaption class="info">
-                        <h6 class="title">Reasonable prices</h6>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labor </p>
-                    </figcaption>
-                </figure> <!-- iconbox // -->
-        </div><!-- col // -->
-        <div class="col-md-4">
-                <figure class="itemside">
-                    <div class="aside">
-                        <span class="icon-sm rounded-circle bg-danger">
-                            <i class="fa fa-comment-dots white"></i>
-                        </span>
-                    </div>
-                    <figcaption class="info">
-                        <h6 class="title">Customer support 24/7 </h6>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labor </p>
-                    </figcaption>
-                </figure> <!-- iconbox // -->
-        </div><!-- col // -->
-        <div class="col-md-4">
-                <figure class="itemside">
-                    <div class="aside">
-                        <span class="icon-sm rounded-circle bg-success">
-                            <i class="fa fa-truck white"></i>
-                        </span>
-                    </div>
-                    <figcaption class="info">
-                        <h6 class="title">Quick delivery</h6>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labor </p>
-                    </figcaption>
-                </figure> <!-- iconbox // -->
-        </div><!-- col // -->
-    </div> <!-- row.// -->
-    
-    </div> <!-- container.// -->
-    </section>
-    <!-- ========================= SECTION SPECIAL END// ========================= -->
-    
-    
-    
-    
-    <!-- ========================= SECTION  ========================= -->
-    <section class="section-name  padding-y-sm">
+<div class="hero-wrap hero-bread" style="background-image: url({% static 'app/images/index_bg.jpg' %});">
     <div class="container">
-    
-    <header class="section-heading">
-        <!-- <a href="#" class="btn btn-outline-primary float-right">See all</a> -->
-        <h3 class="section-title">Recycled Products</h3>
-    </header><!-- sect-heading -->
-    
-        
-    <div class="row">
-        {% if products %}
-        {% for i in products %}
-        <div class="col-md-3">
-            <div href="{% url 'product_detail' key=i.id %}" class="card card-product-grid">
-                <a href="{% url 'product_detail' key=i.id %}" class="img-wrap"> <img src="{{i.Product_Img.url}}"> </a>
-                <figcaption class="info-wrap">
-                    <a href="{% url 'product_detail' key=i.id %}" class="title">{{i.Product_Name}}</a>
-                    <div class="price mt-1">₹ {{i.Product_Price}}</div> <!-- price-wrap.// -->
-                </figcaption>
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Home</a></span> <span> Recycled
+                        Products</span></p>
+                <h1 class="mb-0 bread" style="color: #82ae46; "> Recycled Products</h1>
             </div>
         </div>
-        {% endfor %}
-     
-        
-    </div> <!-- row.// -->
-    <div style="padding-bottom: 40px;">
+    </div>
+
+</div>
+
+
+<section class="ftco-section" >
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4">	
+                    <article class="card card-body">
+                        <figure class="itemside">
+                            <div class="aside" style="margin-left: 40%;margin-top: 2%;margin-bottom: 7%;">
+                                <span class="icon-sm rounded-circle" style="background-color: #00b517;border-radius: 50%;flex-grow: 0;    -webkit-box-flex: 0;flex-shrink: 0;    text-align: center;display: inline-block;    font-size: 20px;line-height: 68px;height: 68px;    width: 68px;">
+                                    <i class="fa fa-money" style="color: white;font-size: 30px;"></i>
+                                </span>
+                            </div>
+                            <figcaption class="info">
+                                <center><h5 class="title">Reasonable prices</h5></center>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labor </p>
+                            </figcaption>
+                        </figure> <!-- iconbox // -->
+                    </article> <!-- panel-lg.// -->
+                </div><!-- col // -->
+                <div class="col-md-4">
+                    <article class="card card-body">
+                        <figure class="itemside">
+                            <div class="aside" style="margin-left: 40%;margin-top: 2%;margin-bottom: 7%;">
+                                <span class="icon-sm rounded-circle" style="background-color: #00b517;border-radius: 50%;flex-grow: 0;    -webkit-box-flex: 0;flex-shrink: 0;    text-align: center;display: inline-block;    font-size: 20px;line-height: 68px;height: 68px;    width: 68px;">
+                                
+                                    <i class="fa fa-commenting-o" style="color: white;font-size: 30px;"></i>
+                                </span>
+                            </div>
+                            <figcaption class="info">
+                                <h5 class="title">Customer support 24/7 </h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labor </p>
+                            </figcaption>
+                        </figure> <!-- iconbox // -->
+                    </article> <!-- panel-lg.// -->
+                </div><!-- col // -->
+                <div class="col-md-4">
+                    <article class="card card-body">
+                        <figure class="itemside">
+                            <div class="aside" style="margin-left: 40%;margin-top: 2%;margin-bottom: 7%;">
+                            
+                                <span class="icon-sm rounded-circle" style="background-color: #00b517;border-radius: 50%;flex-grow: 0;    -webkit-box-flex: 0;flex-shrink: 0;    text-align: center;display: inline-block;    font-size: 20px;line-height: 68px;height: 68px;    width: 68px;">
+                        
+                                    <i class="fa fa-truck" style="color: white;font-size: 30px;"></i>
+
+                                </span>
+                            </div>
+                            <figcaption class="info">
+                                <h5 class="title">Quick delivery</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labor </p>
+                            </figcaption>
+                        </figure> <!-- iconbox // -->
+                    </article> <!-- panel-lg.// -->
+                </div><!-- col // -->
+            </div> <!-- row.// -->
+            <!-- ============================ COMPONENT 2 END .// ================================= -->
+            
+
+    </div> 
+</section>
+
+<section class="ftco-section" style="padding-top: 0px;">
+
+    <div class="container">
+        <div class="row">
+            {% if products %}
+            {% for i in products %}
+            <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="product">
+                    <a href="{% url 'product_detail' key=i.id %}" class="img-prod"><img class="img-fluid"
+                            src="{{i.Product_Img.url}}">
+
+                        <div class="overlay"></div>
+                    </a>
+
+                    <div class="text py-3 pb-4 px-3 text-center">
+                        <h3><a href="#">{{i.Product_Name}}</a></h3>
+                        <div class="d-flex">
+                            <div class="pricing">
+                                <p class="price"><span class="price-sale">₹ {{i.Product_Price}}</span></p>
+                            </div>
+                        </div>
+                        <div class="bottom-area d-flex px-3">
+                            <div class="m-auto d-flex">
+                                <a href="{% url 'product_detail' key=i.id %}"
+                                    class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                    <span><i class="fa fa-eye"></i></span>
+                                </a>
+                                <a  href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                    <span  ><i  class="ion-ios-cart"></i></span>
+                                </a>
+                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                                    <span><i class="ion-ios-heart"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% endif %}
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <center>
+    <div style="padding-bottom: 40px;padding-right: 44%;">
         <nav aria-label="..." class="float-right" >
             <ul class="pagination ">
-              {% if products.has_previous %}
-              <li class="page-item">
-                <a style="width: 80px;" class="page-link"  href="?page={{ products.previous_page_number }}">Previous</a>
-              </li>
-              {% endif %}
-              {% for i in products.paginator.page_range %}
-    
-                {% if products.number == i %}
-                  <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-                {% else %}
-                  <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% if products.has_previous %}
+                <li class="page-item">
+                    <a style="width: 80px;" class="page-link"
+                        href="?page={{ products.previous_page_number }}">Previous</a>
+                </li>
                 {% endif %}
-    
-              {% endfor %}
-    
-              
-              {% if products.has_next %}
-              <li class="page-item">
-                <a style="width: 80px;" class="page-link"  href="?page={{ products.next_page_number }}">Next</a>
-              </li>
-              {% endif %}
+                {% for i in products.paginator.page_range %}
+
+                {% if products.number == i %}
+                <li style="background-color: #82ae46;;"  class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+
+                {% endfor %}
+
+
+                {% if products.has_next %}
+                <li class="page-item">
+                    <a style="width: 80px;" class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+                </li>
+                {% endif %}
             </ul>
-          </nav>
-        
-    
+        </nav>
+
+
     </div>
-        </div><!-- container // -->
-    
-    </section>
-    
-    {% endif %}
-    <!-- ========================= SECTION  END// ========================= -->
-    {% endblock content %}
+</center>
+</section>
+
+
+{% endblock content %}
