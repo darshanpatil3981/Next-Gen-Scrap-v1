@@ -8,11 +8,17 @@ from .views import ecom
 from .views import admin
 urlpatterns = [
 # Default link
-     path("",login_singup.Login_Page,name="login"),
+     path("login/",login_singup.Login_Page,name="login"),
 
 # Direct Render
     
+    #New
+    path("",login_singup.Home,name="home"),
+    path("about_us/",login_singup.About_Us,name="about_us"),
+    path("contact/",login_singup.Contact,name="contact"),
+
     #Signup Process
+     
      path("signup_as/",login_singup.Signup_as,name="signup_as"),
      path("enter_email/",login_singup.Enter_email,name="enter_email"),
      path("otp_verification/",login_singup.Otp_verification,name="otp_verification"),

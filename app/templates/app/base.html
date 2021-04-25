@@ -1,153 +1,105 @@
 {% load static %}
-<!DOCTYPE HTML>
+
+<!DOCTYPE html>
+
 <html lang="en">
 
-<!-- Mirrored from bootstrap-ecommerce.com/templates/alistyle-html/_HTML-Components/_header-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Sep 2020 06:50:25 GMT -->
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Bootstrap-ecommerce by Vosidiy M.">
-
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" type="image/png" href="{% static 'images/logo.png' %}" />
-   
 
-    <!-- jQuery -->
-    <script src="{% static 'js/jquery-2.0.0.min.js' %}" type="text/javascript"></script>
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{% static 'app/css/open-iconic-bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'app/css/animate.css' %}">
 
-    <!-- Bootstrap4 files-->
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'app/css/owl.theme.default.min.css' %}">
+	<link rel="stylesheet" href="{% static 'app/css/magnific-popup.css' %}">
 
-    <!-- Font awesome 5 -->
-    <link href="{% static 'fonts/fontawesome/css/all.min.css' %}" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'app/css/aos.css' %}">
 
-    <!-- custom style -->
-    <link href="{% static 'css/ui.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+	<link rel="stylesheet" href="{% static 'app/css/ionicons.min.css' %}">
 
-    <!-- custom javascript -->
-    <script src="{% static 'js/script.js' %}" type="text/javascript"></script>
+	<link rel="stylesheet" href="{% static 'app/css/bootstrap-datepicker.css' %}">
+	<link rel="stylesheet" href="{% static 'app/css/jquery.timepicker.css' %}">
 
+
+	<link rel="stylesheet" href="{% static 'app/css/flaticon.css' %}">
+	<link rel="stylesheet" href="{% static 'app/css/icomoon.css' %}">
+	<link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+	
 </head>
 
-<body>
- <!-- ========================= HEADER START ========================= -->
-    <header class="section-header">
-        <section class="header-main border-bottom">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-sm-4 col-md-4 col-5">
-                        <a href="http://bootstrap-ecommerce.com/" class="brand-wrap">
-                            <img class="logo" src="{% static 'images/logo.png' %}">
-                        </a> <!-- brand-wrap.// -->
-                    </div>
-                    <div class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block">
-                        <form action="#" class="search-wrap">
-                            <div class="input-group w-100">
-                                <input type="text" class="form-control" style="width:55%;" placeholder="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form> <!-- search-wrap .end// -->
-                    </div> <!-- col.// -->
-                    <div class="col-lg-5 col-xl-4 col-sm-8 col-md-4 col-7">
-                        <div class="widgets-wrap d-flex justify-content-end">
-                            <div class="widget-header">
-                                <a href="#" class="ml-4 icontext">
-                                    <div class="icon"><i class="text-primary fa fa-lg fa-heart"></i></div>
-                                    <div class="text">
-                                        <small class="text-muted">Favorites</small>
-                                        <div>0 item</div>
-                                    </div>
-                                </a>
-                            </div> <!-- widget .// -->
-                            <div class="widget-header">
-                                <a href="#" class="ml-4 icontext">
-                                    <div class="icon"><i class="text-primary fa fa-lg fa-shopping-cart"></i></div>
-                                    <div class="text">
-                                        <small class="text-muted">Cart</small>
-                                        <div>3 items</div>
-                                    </div>
-                                </a>
-                            </div> <!-- widget .// -->
-                            <div class="widget-header dropdown">
-                                <a href="#" class="ml-4 icontext" data-toggle="dropdown" data-offset="20,10">
-                                 <div class="icon"><i class="text-primary fa fa-lg fa-user"></i></div>
-                                    <div class="text">
-                                        <small class="text-muted">Hello.</small>
-                                        <div>Login <i class="fa fa-caret-down"></i></div>
-                                    </div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Profile setting</a>
-                                    <a class="dropdown-item" href="#">My orders</a>
-                                    <hr class="dropdown-divider">
-                                    <a class="dropdown-item" href="#">Log out</a>
-                                </div> <!--  dropdown-menu .// -->
-                            </div> <!-- widget  dropdown.// -->
-                        </div> <!-- widgets-wrap.// -->
-                    </div> <!-- col.// -->
-                </div> <!-- row.// -->
-            </div> <!-- container.// -->
-        </section> <!-- header-main .// -->
+<body class="goto-here">
+	<div class="py-1 bg-primary">
+		<div class="container">
+			<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+				<div class="col-lg-12 d-block">
+					<div class="row d-flex">
+						<div class="col-md pr-4 d-flex topper align-items-center">
+							<div class="icon mr-2 d-flex justify-content-center align-items-center"><span
+									class="icon-phone2"></span></div>
+							<span class="text">+91 7878231921</span>
+						</div>
+						<div class="col-md pr-4 d-flex topper align-items-center">
+							<div class="icon mr-2 d-flex justify-content-center align-items-center"><span
+									class="icon-paper-plane"></span></div>
+							<span class="text">nextbenscrap@email.com</span>
+						</div>
+						<div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+							<span class="text">Online Scrap And &amp; Recycled Products Solution</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="{% url 'home' %}">NextGen Scrap</a>
+			<!-- <div class="brand-wrap">
+			<a href=""><img class="logo" src="images/logo.png" style="max-height: 48px;"></a>
+		</div> -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
+
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="index.html" class="nav-link">Recycled Products</a></li>
+					<li class="nav-item"><a href="index.html" class="nav-link">Scrap </a></li>
+
+					<li class="nav-item"><a href="{% url 'about_us' %}" class="nav-link">About</a></li>
+					<li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+					<!-- <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+			 -->
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">Login/SignUp</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<a class="dropdown-item" href="{% url 'login' %}">Login</a>
+							<a class="dropdown-item" href="{% url 'signup_as' %}">SignUp</a>
+
+						</div>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- END nav -->
 
 
-        <nav class="navbar navbar-expand-md navbar-main border-bottom">
-            <div class="container">
-                <form class="d-md-none my-2">
-                    <div class="input-group">
-                        <input type="search" name="search" class="form-control" placeholder="Search" required="">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-secondary"> <i class="fas fa-search"></i> </button>
-                        </div>
-                    </div>
-                </form>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dropdown6">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="dropdown6">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com/" data-toggle="dropdown"> All
-                                categories</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="http://bootstrap-ecommerce.com/">Foods and Drink</a>
-                                <a class="dropdown-item" href="http://bootstrap-ecommerce.com/">Home interior</a>
-                                <a class="dropdown-item" href="http://bootstrap-ecommerce.com/">Computer electronics</a>
-                                <a class="dropdown-item" href="http://bootstrap-ecommerce.com/">Clothing</a>
-                                <a class="dropdown-item" href="http://bootstrap-ecommerce.com/">Gardening and
-                                    flowers</a>
-                                <a class="dropdown-item" href="http://bootstrap-ecommerce.com/">Hand made items</a>
-                                <a class="dropdown-item" href="http://bootstrap-ecommerce.com/">Smartphones</a>
-                                <a class="dropdown-item" href="http://bootstrap-ecommerce.com/">Digital products</a>
-                            </div>
-                        </li>
-                        <li class="nav-item"> <a class="nav-link" href="http://bootstrap-ecommerce.com/">Hot deals</a>
-                        </li>
-                        <li class="nav-item"> <a class="nav-link" href="http://bootstrap-ecommerce.com/">Markets</a>
-                        </li>
-                        <li class="nav-item"> <a class="nav-link" href="http://bootstrap-ecommerce.com/">Blog</a> </li>
-                    </ul>
-
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a href="#" class="nav-link">Dashboard</a></li>
-                        <li class="nav-item"><a href="#" class="btn btn-primary ml-md-4"><i class="fa fa-plus"></i> Post
-                                item </a></li>
-                    </ul>
-                </div> <!-- collapse .// -->
-            </div> <!-- container .// -->
-        </nav>
-
-    </header> <!-- section-header.// -->
-
-
-
+  
     <!-- ========================= HEADER END// ========================= -->
 
     {% block content %}
@@ -155,73 +107,104 @@
     {% endblock content %}
 
     
-</body>
 
 <!-- Mirrored from bootstrap-ecommerce.com/templates/alistyle-html/_HTML-Components/_header-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Sep 2020 06:50:29 GMT -->
 
 
 <!-- ========================= FOOTER ========================= -->
-<footer class="section-footer border-top">
+<footer class="ftco-footer ftco-section">
     <div class="container">
-        <section class="footer-top padding-y">
-            <div class="row">
-                <aside class="col-md-4">
-                    <article class="mr-3">
-                        <img src="{% static 'images/logo.png' %}" class="logo-footer">
-                        <p class="mt-3">Some short text about company like You might remember the Dell computer
-                            commercials in which a youth reports this exciting news to his friends.</p>
-                        <div>
-                            <a class="btn btn-icon btn-light" title="Facebook" target="_blank" href="#"><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-icon btn-light" title="Instagram" target="_blank" href="#"><i
-                                    class="fab fa-instagram"></i></a>
-                            <a class="btn btn-icon btn-light" title="Youtube" target="_blank" href="#"><i
-                                    class="fab fa-youtube"></i></a>
-                            <a class="btn btn-icon btn-light" title="Twitter" target="_blank" href="#"><i
-                                    class="fab fa-twitter"></i></a>
-                        </div>
-                    </article>
-                </aside>
-                <aside class="col-sm-3 col-md-2">
-                    <h6 class="title">About</h6>
-                    <ul class="list-unstyled">
-                        <li> <a href="#">About us</a></li>
-                        <li> <a href="#">Services</a></li>
-                        <li> <a href="#">Rules and terms</a></li>
-                        <li> <a href="#">Blogs</a></li>
-                    </ul>
-                </aside>
-                <aside class="col-sm-3 col-md-2">
-                    <h6 class="title">Services</h6>
-                    <ul class="list-unstyled">
-                        <li> <a href="#">Help center</a></li>
-                        <li> <a href="#">Money refund</a></li>
-                        <li> <a href="#">Terms and Policy</a></li>
-                        <li> <a href="#">Open dispute</a></li>
-                    </ul>
-                </aside>
-                <aside class="col-sm-3  col-md-2">
-                    <h6 class="title">For users</h6>
-                    <ul class="list-unstyled">
-                        <li> <a href="#"> User Login </a></li>
-                        <li> <a href="#"> User register </a></li>
-                        <li> <a href="#"> Account Setting </a></li>
-                        <li> <a href="#"> My Orders </a></li>
-                        <li> <a href="#"> My Wishlist </a></li>
-                    </ul>
-                </aside>
-                <aside class="col-sm-2  col-md-2">
-                    <h6 class="title">Our app</h6>
-                    <a href="#" class="d-block mb-2"><img src="{% static 'images/misc/appstore.png' %}" height="40"></a>
-                    <a href="#" class="d-block mb-2"><img src="{% static 'images/misc/playmarket.png' %}" height="40"></a>
-                </aside>
-            </div> <!-- row.// -->
-        </section> <!-- footer-top.// -->
+        <div class="row">
+            <div class="mouse">
+                <a href="#" class="mouse-icon">
+                    <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+                </a>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">NEXT GEN SCRAP</h2>
+                    <p>Recycle And Reuse Made Easy.</p>
 
-        
-    </div><!-- //container -->
+                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+        <a class="navbar-brand" href="index.html">NextGen Scrap</a>
+
+                        <!-- <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4 ml-md-5">
+                    <h2 class="ftco-heading-2">Menu</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'home' %}" class="py-2 d-block">Home</a></li>
+                        <li><a href="{% url 'about_us' %}" class="py-2 d-block">About</a></li>
+                        <li><a href="{% url 'contact' %}" class="py-2 d-block">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">Services</h2>
+                    <div class="d-flex">
+                        <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+                            <li><a href="#" class="py-2 d-block">Recycled Products</a></li>
+                            <li><a href="#" class="py-2 d-block">Scrp Collector
+                            </a></li>
+                            <li><a href="#" class="py-2 d-block">Recycle Company </a></li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">Contact</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li><span class="icon icon-map-marker"></span><span class="text">203 Somark Complex SG Highway Ahmedabad , 364822 , Gujarat , India</span></li>
+                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+91 7878231921</span></a></li>
+                            <li><a href="#"><span class="icon icon-envelope"></span><span
+                                        class="text">nextgenscrap.com</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </footer>
-<!-- ========================= FOOTER END // ========================= -->
 
+
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+            stroke="#F96D00" /></svg></div>
+
+
+<script src="{% static 'app/js/jquery.min.js' %}"></script>
+<script src="{% static 'app/js/jquery-migrate-3.0.1.min.js' %}"></script>
+<script src="{% static 'app/js/popper.min.js' %}"></script>
+<script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'app/js/jquery.easing.1.3.js' %}"></script>
+<script src="{% static 'app/js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'app/js/jquery.stellar.min.js' %}"></script>
+<script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'app/js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'app/js/aos.js' %}"></script>
+<script src="{% static 'app/js/jquery.animateNumber.min.js' %}"></script>
+<script src="{% static 'app/js/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'app/js/scrollax.min.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false">
+</script>
+<script src="{% static 'app/js/google-map.js' %}"></script>
+<script src="{% static 'app/js/main.js' %}"></script>
+
+</body>
 
 </html>

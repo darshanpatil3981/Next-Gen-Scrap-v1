@@ -1,4 +1,9 @@
+
+{% extends "app/base.html" %}
 {% load static %}
+
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +15,6 @@
 	<link rel="icon" type="image/png" href="{% static 'images/logo.png' %}" />
 
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'loginassets/vendor/bootstrap/css/bootstrap.min.css' %}">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css"
 		href="{% static 'loginassets/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
@@ -31,7 +35,8 @@
 <body>
 
 	<div class="limiter">
-		<div class="container-login100">
+		<div class="container-login100" style="background-color: #82ae46;">
+		
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="{% static 'loginassets/images/logo.png' %}" alt="IMG">
@@ -118,6 +123,8 @@
 		})
 	</script>
 	<!--===============================================================================================-->
-	<script src="{% static 'loginassets/js/main.js' %}></script>
+	
 </body>
 </html>
+
+{% endblock content %}

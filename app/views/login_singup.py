@@ -267,3 +267,13 @@ def Reset_password(request):
     User.save()
     message = "Your Password Chnaged successfully"
     return render(request,"app/login.html",{'msg':message})
+
+
+def About_Us(request):
+    return render(request,"app/about.html")
+    
+def Home(request):
+    return render(request,"app/index.html")
+    
+def Contact(request):
+    return render(request,"app/contact.html")
