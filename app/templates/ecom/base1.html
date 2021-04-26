@@ -72,6 +72,7 @@
 				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
+			{% if request.session.fname %}
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
@@ -86,7 +87,7 @@
 		
 
 					<li  class="nav-item cta cta-colored"><a href="{% url 'cart' %}" class="nav-link"><span class="icon-shopping_cart"></span>[{{request.session.cart_items}}]</a></li>
-                    {% if request.session.fname %}
+                    
 
                     <li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
@@ -98,7 +99,23 @@
 						</div>
 					</li>
 
-                    {% else %}
+                  
+					
+                   
+
+				</ul>
+			</div>
+			{% else %}
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Recycled Products</a></li>
+					<li class="nav-item"><a href="{% url 'scrap_prices' %}" class="nav-link">Scrap </a></li>
+
+					<li class="nav-item"><a href="{% url 'about_us' %}" class="nav-link">About</a></li>
+					<li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+					<!-- <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+			 -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false">Login/SignUp</a>
@@ -108,10 +125,11 @@
 
 						</div>
 					</li>
-                    {% endif %}
 
 				</ul>
 			</div>
+
+			{% endif %}
 		</div>
 	</nav>
 	<!-- END nav -->
@@ -170,6 +188,8 @@
                 <div class="ftco-footer-widget mb-4">
                     <h2 class="ftco-heading-2">Services</h2>
                     <div class="d-flex">
+						{% if request.session.fname %}
+
                         <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
                             <li><a href="{% url 'index' %}" class="py-2 d-block">Recycled Products</a></li>
                             <li><a href="{% url 'select_area' %}" class="py-2 d-block"> Sell Scrap
@@ -178,6 +198,13 @@
                             <li><a href="{% url 'scrap_prices' %}" class="py-2 d-block">Scrap Prices  </a></li>
                             <li><a href="{% url 'customer_orders' %}" class="py-2 d-block">My Orders  </a></li>
                         </ul>
+
+						{% else %}
+						<ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+                            <li><a href="{% url 'index' %}" class="py-2 d-block">Recycled Products</a></li>
+                            <li><a href="{% url 'scrap_prices' %}" class="py-2 d-block">Scrap Prices  </a></li>
+                        </ul>
+						{% endif %}
                         
                     </div>
                 </div>

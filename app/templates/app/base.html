@@ -5,7 +5,7 @@
 <html lang="en">
 
 <head>
-	
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" type="image/png" href="{% static 'images/logo.png' %}" />
@@ -14,7 +14,7 @@
 		rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
-	
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{% static 'app/css/open-iconic-bootstrap.min.css' %}">
 	<link rel="stylesheet" href="{% static 'app/css/animate.css' %}">
@@ -34,7 +34,7 @@
 	<link rel="stylesheet" href="{% static 'app/css/flaticon.css' %}">
 	<link rel="stylesheet" href="{% static 'app/css/icomoon.css' %}">
 	<link rel="stylesheet" href="{% static 'app/css/style.css' %}">
-	
+
 </head>
 
 <body class="goto-here">
@@ -76,7 +76,7 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Recycled Products</a></li>
-					<li class="nav-item"><a href="index.html" class="nav-link">Scrap </a></li>
+					<li class="nav-item"><a href="{% url 'scrap_prices' %}" class="nav-link">Scrap </a></li>
 
 					<li class="nav-item"><a href="{% url 'about_us' %}" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
@@ -99,111 +99,113 @@
 	<!-- END nav -->
 
 
-  
-    <!-- ========================= HEADER END// ========================= -->
 
-    {% block content %}
+	<!-- ========================= HEADER END// ========================= -->
 
-    {% endblock content %}
+	{% block content %}
 
-    
-
-<!-- Mirrored from bootstrap-ecommerce.com/templates/alistyle-html/_HTML-Components/_header-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Sep 2020 06:50:29 GMT -->
+	{% endblock content %}
 
 
-<!-- ========================= FOOTER ========================= -->
-<footer class="ftco-footer ftco-section">
-    <div class="container">
-        <div class="row">
-            <div class="mouse">
-                <a href="#" class="mouse-icon">
-                    <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-                </a>
-            </div>
-        </div>
-        <div class="row mb-5">
-            <div class="col-md">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">NEXT GEN SCRAP</h2>
-                    <p>Recycle And Reuse Made Easy.</p>
 
-                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-        <a class="navbar-brand" href="index.html">NextGen Scrap</a>
+	<!-- Mirrored from bootstrap-ecommerce.com/templates/alistyle-html/_HTML-Components/_header-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Sep 2020 06:50:29 GMT -->
 
-                        <!-- <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+
+	<!-- ========================= FOOTER ========================= -->
+	<footer class="ftco-footer ftco-section">
+		<div class="container">
+			<div class="row">
+				<div class="mouse">
+					<a href="#" class="mouse-icon">
+						<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+					</a>
+				</div>
+			</div>
+			<div class="row mb-5">
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">NEXT GEN SCRAP</h2>
+						<p>Recycle And Reuse Made Easy.</p>
+
+						<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+							<a class="navbar-brand" href="index.html">NextGen Scrap</a>
+
+							<!-- <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                         <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
                         <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li> -->
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="ftco-footer-widget mb-4 ml-md-5">
-                    <h2 class="ftco-heading-2">Menu</h2>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'home' %}" class="py-2 d-block">Home</a></li>
-                        <li><a href="{% url 'about_us' %}" class="py-2 d-block">About</a></li>
-                        <li><a href="{% url 'contact' %}" class="py-2 d-block">Contact Us</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Services</h2>
-                    <div class="d-flex">
-                        <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
-                            <li><a href="{% url 'index' %}" class="py-2 d-block">Recycled Products</a></li>
-                            <li><a href="#" class="py-2 d-block">Scrp Collector
-                            </a></li>
-                            <li><a href="#" class="py-2 d-block">Recycle Company </a></li>
-                        </ul>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Contact</h2>
-                    <div class="block-23 mb-3">
-                        <ul>
-                            <li><span class="icon icon-map-marker"></span><span class="text">203 Somark Complex SG Highway Ahmedabad , 364822 , Gujarat , India</span></li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+91 7878231921</span></a></li>
-                            <li><a href="#"><span class="icon icon-envelope"></span><span
-                                        class="text">nextgenscrap.com</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4 ml-md-5">
+						<h2 class="ftco-heading-2">Menu</h2>
+						<ul class="list-unstyled">
+							<li><a href="{% url 'home' %}" class="py-2 d-block">Home</a></li>
+							<li><a href="{% url 'about_us' %}" class="py-2 d-block">About</a></li>
+							<li><a href="{% url 'contact' %}" class="py-2 d-block">Contact Us</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Services</h2>
+						<div class="d-flex">
+							<ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+								<li><a href="{% url 'index' %}" class="py-2 d-block">Recycled Products</a></li>
+								<li><a href="#" class="py-2 d-block">Scrp Collector
+									</a></li>
+								<li><a href="#" class="py-2 d-block">Recycle Company </a></li>
+							</ul>
 
-    </div>
-</footer>
+						</div>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Contact</h2>
+						<div class="block-23 mb-3">
+							<ul>
+								<li><span class="icon icon-map-marker"></span><span class="text">203 Somark Complex SG
+										Highway Ahmedabad , 364822 , Gujarat , India</span></li>
+								<li><a href="#"><span class="icon icon-phone"></span><span class="text">+91
+											7878231921</span></a></li>
+								<li><a href="#"><span class="icon icon-envelope"></span><span
+											class="text">nextgenscrap.com</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 
-
-
-<!-- loader -->
-<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-            stroke="#F96D00" /></svg></div>
+		</div>
+	</footer>
 
 
-<script src="{% static 'app/js/jquery.min.js' %}"></script>
-<script src="{% static 'app/js/jquery-migrate-3.0.1.min.js' %}"></script>
-<script src="{% static 'app/js/popper.min.js' %}"></script>
-<script src="{% static 'app/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'app/js/jquery.easing.1.3.js' %}"></script>
-<script src="{% static 'app/js/jquery.waypoints.min.js' %}"></script>
-<script src="{% static 'app/js/jquery.stellar.min.js' %}"></script>
-<script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
-<script src="{% static 'app/js/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'app/js/aos.js' %}"></script>
-<script src="{% static 'app/js/jquery.animateNumber.min.js' %}"></script>
-<script src="{% static 'app/js/bootstrap-datepicker.js' %}"></script>
-<script src="{% static 'app/js/scrollax.min.js' %}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false">
-</script>
-<script src="{% static 'app/js/google-map.js' %}"></script>
-<script src="{% static 'app/js/main.js' %}"></script>
+
+	<!-- loader -->
+	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+				stroke="#F96D00" /></svg></div>
+
+
+	<script src="{% static 'app/js/jquery.min.js' %}"></script>
+	<script src="{% static 'app/js/jquery-migrate-3.0.1.min.js' %}"></script>
+	<script src="{% static 'app/js/popper.min.js' %}"></script>
+	<script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'app/js/jquery.easing.1.3.js' %}"></script>
+	<script src="{% static 'app/js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'app/js/jquery.stellar.min.js' %}"></script>
+	<script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'app/js/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'app/js/aos.js' %}"></script>
+	<script src="{% static 'app/js/jquery.animateNumber.min.js' %}"></script>
+	<script src="{% static 'app/js/bootstrap-datepicker.js' %}"></script>
+	<script src="{% static 'app/js/scrollax.min.js' %}"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false">
+	</script>
+	<script src="{% static 'app/js/google-map.js' %}"></script>
+	<script src="{% static 'app/js/main.js' %}"></script>
 
 </body>
 
