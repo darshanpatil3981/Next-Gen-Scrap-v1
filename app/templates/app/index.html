@@ -14,7 +14,7 @@
 						<div class="col-md-12 ftco-animate text-center">
 							<h1 class="mb-2">100% Online Scrap Solution </h1>
 							<h2 class="subheading mb-4">Easy To make Scrap Requests</h2>
-							<p><a href="#" class="btn btn-primary">Make Scrap Request</a></p>
+							<p><a href="{% url 'login' %}" class="btn btn-primary">Make Scrap Request</a></p>
 						</div>
 
 					</div>
@@ -29,7 +29,7 @@
 						<div class="col-sm-12 ftco-animate text-center">
 							<h1 class="mb-2">Recycle Company Sell Eco Friendly Recycled Products</h1>
 							<h2 class="subheading mb-4">We deliver &amp; Recycled Products</h2>
-							<p><a href="#" class="btn btn-primary">Buy Products</a></p>
+							<p><a href="{% url 'index' %}" class="btn btn-primary">Buy Products</a></p>
 						</div>
 
 					</div>
@@ -133,7 +133,7 @@
 								<div class="text text-center">
 									<h2>Scrap</h2>
 									<p>Make Scrap Request From Home Easily</p>
-									<p><a href="#" class="btn btn-primary">Make Request now</a></p>
+									<p><a href="{% url 'login' %}" class="btn btn-primary">Make Request now</a></p>
 								</div>
 							</div>
 						</div>
@@ -178,7 +178,7 @@
 				<div class="col-md-12 heading-section text-center ftco-animate">
 					<span class="subheading">Featured Recycled Products</span>
 					<h2 class="mb-4">Discover Our Recycled Products</h2>
-					<p><a href="#" class="btn btn-primary">View Products</a></p>
+					<p><a href="{% url 'index' %}" class="btn btn-primary">View Products</a></p>
 					<p>Our Recycle Companies Sell Excellent Quality Recycled Products</p>
 				</div>
 			</div>
@@ -590,4 +590,5 @@
         </div>
       </div>
     </section> -->
+	<br><br><br><br>
 	{% endblock content %}
