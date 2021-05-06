@@ -143,6 +143,10 @@ urlpatterns = [
      path("areas/",admin.Areas11,name="areas"),
      path("add_area/",admin.Add_Area,name="add_area"),
      path("remove_area/<int:key>",admin.Remove_Area,name="remove_area"),
+     path("ecom_transactions/",admin.Ecomtransaction,name="ecom_transactions"),
+     path("subscription_transaction/",admin.Subscription_transaction,name="subscription_transaction"),
+     path("admin_view_Subscription/<int:key>",admin.admin_view_Subscription,name="admin_view_Subscription"),
+     
 
 
 

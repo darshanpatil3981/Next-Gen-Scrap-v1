@@ -1,0 +1,185 @@
+{% extends "ngs_admin/base.html" %}
+{% load static %}
+{% block content %}
+<title>Scrap Collector Profiles</title>
+
+<div class="header  pb-6" style="background-color: #5603ad;">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">SC Profiles</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">SC Profile</li>
+            </ol>
+          </nav>
+        </div>
+
+      </div>
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <!-- Card body -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+  </div>
+  <div class="row">
+    <div class="col-xl-8">
+      <div class="card" style="width: 153%;">
+        <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
+          <div class="row align-items-center">
+            <!-- Any Thing Write Here -->
+            {% if subscription %}
+
+
+            <div class="table-responsive" style="margin-top: 19px;"></div>
+
+            <table class="table align-items-center table-flush table-striped" style="margin-top: 20px;">
+              <thead class="thead-light">
+                <tr>
+                  <th>Subscription Id</th>
+                 
+                  <th>Transaction Id</th>
+                 
+                  <th>Total Amount</th>
+                  <th>Transaction Date</th>
+                  <th>Method</th>
+                  <th>Satus</th>
+                  <th>View Detail</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in subscription %}
+                  
+
+                <tr>
+
+                  <td>
+                    <span class="text-muted">{{i.id}}</span>
+                  </td>
+                  <td>
+                    <span class="text-muted">{{i.Razorpay_payment_id}}</span>
+                  </td>
+                  <td>
+                    <span class="text-muted">₹ {{i.Subscription_Amount}}</span>
+                  </td>
+                  <td>
+                    <span class="text-muted">{{i.Subscription_Starting_Date}}</span>
+                  </td>
+                  <td>
+                    <span class="text-muted">Razorpay</span>
+                  </td>
+                  <td>
+                    <span class="text-muted"><span class="badge badge-success"
+                      style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">Success</span></span>
+                  </td>
+
+                  <td class="table-actions">
+
+
+
+
+                    <div>
+                      <a href="{% url 'admin_view_Subscription' key=i.id %}" class="table-action" data-toggle="tooltip"
+                        data-original-title="View Detail">
+                        <button type="button" style="border-radius: 50px;" class="btn btn-primary">
+                          <i class="far fa-eye">
+                          </i>
+                        </button>
+                      </a>
+
+
+
+
+
+                    </div>
+                    
+                  </td>
+
+                </tr>
+
+
+
+               
+                {% endfor %}
+
+              </tbody>
+            </table>
+            <nav aria-label="..." class="float-right" style="margin-top: 20px;margin-left: 680px;">
+
+              <ul class="pagination ">
+            
+                {% if orders.has_previous %}
+                <li class="page-item">
+                  <a style="width: 80px;" class="page-link"  href="?page={{ orders.previous_page_number }}">Previous</a>
+                </li>
+                {% endif %}
+
+                {% for i in orders.paginator.page_range %}
+                
+                  {% if orders.number == i %}
+                    <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                  {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+
+                {% endfor %}
+                {% if orders.has_next %}
+                <li class="page-item">
+                  <a style="width: 80px;" class="page-link"  href="?page={{ orders.next_page_number }}">Next</a>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
+          </div>
+          {% else %}
+          <div class="table-responsive" style="margin-top: 19px;">
+
+            <center>
+              <h3>There Is No Recycle Companys Registed!!</h3>
+            </center>
+          </div>
+          {% endif %}
+
+          <!-- Any thing end here -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+{% endblock content %}

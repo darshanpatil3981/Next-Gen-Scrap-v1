@@ -75,6 +75,29 @@
               <i class="fa fa-map-marker" style="color: #5603ad  ;"></i>
               <span class="nav-link-text"  href="{% url 'customer_profiles' %}">Areas</span>
             </a>
+            <a class="nav-link" href="#navbar-forms" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-forms">
+              <i class="fa fa-inr" style="color: #5603ad  ;"></i>
+              <span class="nav-link-text">Transaction</span>
+            </a>
+
+            <div class="collapse" id="navbar-forms">
+              <ul class="nav nav-sm flex-column">
+                <li class="nav-item">
+                  <a href="{% url 'ecom_transactions' %}" class="nav-link">
+                    <span class="sidenav-mini-icon">  </span>
+                    <span class="sidenav-normal"> E-Commerce </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'subscription_transaction' %}" class="nav-link">
+                    
+                    <span class="sidenav-normal"> Subscription </span>
+                  </a>
+                </li>
+               
+              </ul>
+            </div>
+           
           </li>
             
           </ul>

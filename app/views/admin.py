@@ -157,4 +157,27 @@ def Remove_Area(request,key):
     area.delete()
     return redirect('areas')
 
+def Ecomtransaction(request):
+    orders =  Order.objects.filter(Payment_status="Success")
+    paginator = Paginator(orders,6)
+    page = request.GET.get('page')
+    paged_order = paginator.get_page(page)
+    return render(request,"ngs_admin/ecomtr.html",{'orders':paged_order})
+
+def Subscription_transaction(request):
+    subscription =  Subscription.objects.all()
+    paginator = Paginator(subscription,6)
+    page = request.GET.get('page')
+    paged_subscription = paginator.get_page(page)
+    return render(request,"ngs_admin/Subscription_transaction.html",{'subscription':paged_subscription})
+
+
+def admin_view_Subscription(request,key):
+    subscription = Subscription.objects.get(id=key)
+    user = subscription.User
+    rc=RC.objects.get(User_Master=user) 
+    return render(request,"rc/invoice_subscription.html",{'subscription':subscription,'rc':rc,'user':user})
+
+
+    
     
