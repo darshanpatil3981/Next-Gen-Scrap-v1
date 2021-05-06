@@ -162,14 +162,20 @@ def Ecomtransaction(request):
     paginator = Paginator(orders,6)
     page = request.GET.get('page')
     paged_order = paginator.get_page(page)
-    return render(request,"ngs_admin/ecomtr.html",{'orders':paged_order})
+    totalt = 0
+    for i in orders:
+        totalt = totalt + i.Total_Amount
+    return render(request,"ngs_admin/ecomtr.html",{'orders':paged_order,'totalt':totalt})
 
 def Subscription_transaction(request):
     subscription =  Subscription.objects.all()
     paginator = Paginator(subscription,6)
     page = request.GET.get('page')
     paged_subscription = paginator.get_page(page)
-    return render(request,"ngs_admin/Subscription_transaction.html",{'subscription':paged_subscription})
+    totalt = 0
+    for i in subscription:
+        totalt = totalt + i.Subscription_Amount
+    return render(request,"ngs_admin/Subscription_transaction.html",{'subscription':paged_subscription,'totalt':totalt})
 
 
 def admin_view_Subscription(request,key):

@@ -8,12 +8,12 @@
     <div class="header-body">
       <div class="row align-items-center py-4">
         <div class="col-lg-6 col-7">
-          <h6 class="h2 text-white d-inline-block mb-0">SC Profiles</h6>
+          <h6 class="h2 text-white d-inline-block mb-0">Transaction</h6>
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
               <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">SC Profile</li>
+              <li class="breadcrumb-item active" aria-current="page">E-Commerce Transaction</li>
             </ol>
           </nav>
         </div>
@@ -52,11 +52,30 @@
 <!-- Page content -->
 <div class="container-fluid mt--6">
   <div class="row">
+    <div class="col-xl-3 col-md-6">
+      <div class="card card-stats">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0">Total Transaction</h5>
+              <span class="h2 font-weight-bold mb-0">₹ {{totalt}}</span>
+            </div>
+            <div class="col-auto">
+              <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                <i class="fa fa-inr"></i>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-xl-8">
       <div class="card" style="width: 153%;">
-        <div class="card-header border-0" style="margin-top: -54px;height: 676px;">
+        <div class="card-header border-0" style="margin-top: -17px;height: 676px;">
           <div class="row align-items-center">
             <!-- Any Thing Write Here -->
             {% if orders %}
@@ -68,9 +87,9 @@
               <thead class="thead-light">
                 <tr>
                   <th>Order Id</th>
-                 
+
                   <th>Transaction Id</th>
-                 
+
                   <th>Total Amount</th>
                   <th>Transaction Date</th>
                   <th>Method</th>
@@ -80,7 +99,7 @@
               </thead>
               <tbody>
                 {% for i in orders %}
-                  
+
 
                 <tr>
 
@@ -101,7 +120,7 @@
                   </td>
                   <td>
                     <span class="text-muted"><span class="badge badge-success"
-                      style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">Success</span></span>
+                        style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">Success</span></span>
                   </td>
 
                   <td class="table-actions">
@@ -123,14 +142,14 @@
 
 
                     </div>
-                    
+
                   </td>
 
                 </tr>
 
 
 
-               
+
                 {% endfor %}
 
               </tbody>
@@ -138,25 +157,25 @@
             <nav aria-label="..." class="float-right" style="margin-top: 20px;margin-left: 680px;">
 
               <ul class="pagination ">
-            
+
                 {% if orders.has_previous %}
                 <li class="page-item">
-                  <a style="width: 80px;" class="page-link"  href="?page={{ orders.previous_page_number }}">Previous</a>
+                  <a style="width: 80px;" class="page-link" href="?page={{ orders.previous_page_number }}">Previous</a>
                 </li>
                 {% endif %}
 
                 {% for i in orders.paginator.page_range %}
-                
-                  {% if orders.number == i %}
-                    <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-                  {% else %}
-                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-                  {% endif %}
+
+                {% if orders.number == i %}
+                <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
 
                 {% endfor %}
                 {% if orders.has_next %}
                 <li class="page-item">
-                  <a style="width: 80px;" class="page-link"  href="?page={{ orders.next_page_number }}">Next</a>
+                  <a style="width: 80px;" class="page-link" href="?page={{ orders.next_page_number }}">Next</a>
                 </li>
                 {% endif %}
               </ul>
