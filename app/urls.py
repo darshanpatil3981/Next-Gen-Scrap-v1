@@ -105,6 +105,7 @@ urlpatterns = [
      path("confirm_scrap_request/",ecom.Confirm_Scrap_Request,name="confirm_scrap_request"),
      path("my_scrap_requests/",ecom.My_Scrap_Requests,name="my_scrap_requests"),
      path("scrap_prices/",ecom.Scrap_Prices,name="scrap_prices"),
+     path("cancel_order/<int:key>",ecom.Cancel_Order,name="cancel_order"),
 
 
      

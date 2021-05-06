@@ -25,6 +25,7 @@
               <th scope="col">Total Amount</th>
               <!-- <th scope="col">Quantity</th> -->
               <th scope="col">Payment </th>
+              <th scope="col">Order Status </th>
               <th scope="col">Transaction Id </th>
               <th scope="col">View Detail </th>
               <th scope="col">Invoice</th>
@@ -60,6 +61,16 @@
               <td><span class="badge badge-success"
                   style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">Success</span>
               </td>
+              {% if i.Status == 'Canceled' %}
+
+              <td><span class="badge badge-danger"
+                  style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">Canceled</span>
+              </td>
+              {% else %}
+              <td><span class="badge badge-primary"
+                  style="padding-top: 7px;padding-bottom: 7px;padding-right: 10px;padding-left: 10px;font-size: 14px;margin-top: 4px;margin-left: 18px;">Pending</span>
+              </td>
+              {% endif %}
               <td>{{i.Razorpay_order_id}}</td>
               <td>
                 <a href="{% url 'customer_orders_detail' key=i.id %}">

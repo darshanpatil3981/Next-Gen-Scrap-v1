@@ -9,8 +9,14 @@
   <div class="container">
 
     <section class="section-pagetop bg">
+      
       <div class="container">
-          <h2 class="title-page" style="padding-top: 4%;padding-bottom: 3%;">Order Detail</h2>
+        
+          <h2 class="title-page" style="padding-top: 4%;padding-bottom: 3%;">Order  Detail  <a href="{% url 'cancel_order' key=id %}"><button class="btn btn-danger float-right" style="border-radius: 5px;" type="button">
+            <span class="btn-inner--icon"><i class="fa fa-times" style="margin-right: 3px;"></i></span>
+            <span class="btn-inner--text">Cancel Order</span>
+          </button></a></h2>
+          
       </div> <!-- container //  -->
   </section>
 
@@ -24,6 +30,7 @@
             <th scope="col">Product Image</th>
 
             <th scope="col">Ordre Date</th>
+            <th scope="col">Estimate Delivery Date </th>
             <th scope="col">Quantity</th>
             <th scope="col">Price</th>
             
@@ -47,6 +54,7 @@
 
             </td>
             <td>{{i.Order.Datetime_of_payment}} </td>
+            <td>{{i.Order.Estimate_Delivery_Date}} </td>
             <td>{{i.Quantity}}</td>
             <td>{{i.Price}} Rs. </td>
             
