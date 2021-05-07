@@ -118,7 +118,7 @@ def create_Customer(request):
             if pswd==cpswd:
                 encrypted_pw=make_password(pswd)
                 newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role="Customer",is_created=True,is_verified=False,is_active=False)
-                newCustomer = Customer.objects.create(User_Master=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
+                newCustomer = Customer.objects.create(User_Master=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0)
                 return render(request,"app/login.html")
             else:
                 message = "Password Does Not Match"
