@@ -184,6 +184,19 @@ def admin_view_Subscription(request,key):
     rc=RC.objects.get(User_Master=user) 
     return render(request,"rc/invoice_subscription.html",{'subscription':subscription,'rc':rc,'user':user})
 
+def contect_messages(request):
+    messages = contect_Messages.objects.all()
+    return render(request,"ngs_admin/contect_messages.html",{'messages':messages})
+
+def contect_message_detail(request,key):
+    msg = contect_Messages.objects.get(id=key)
+    return render(request,"ngs_admin/contect_message_detail.html",{'msg':msg})
+
+def delete_contect_message(request,key):
+    msg = contect_Messages.objects.get(id=key)
+    msg.delete()
+    return redirect('contect_messages')
+
 
     
     

@@ -276,4 +276,12 @@ def Home(request):
     return render(request,"app/index.html")
     
 def Contact(request):
-    return render(request,"app/contact.html")
+    if request.method=="POST":
+        name = request.POST['name'] 
+        email = request.POST['email'] 
+        subject = request.POST['subject'] 
+        msg = request.POST['msg'] 
+        newmsg = contect_Messages.objects.create(Name=name,Email=email,Subject=subject,Message=msg)
+        return render(request,"app/contact.html")
+    else:
+        return render(request,"app/contact.html")

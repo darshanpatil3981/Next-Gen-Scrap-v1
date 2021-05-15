@@ -147,6 +147,9 @@ urlpatterns = [
      path("ecom_transactions/",admin.Ecomtransaction,name="ecom_transactions"),
      path("subscription_transaction/",admin.Subscription_transaction,name="subscription_transaction"),
      path("admin_view_Subscription/<int:key>",admin.admin_view_Subscription,name="admin_view_Subscription"),
+     path("contect_messages/",admin.contect_messages,name="contect_messages"),
+     path("contect_message_detail/<int:key>",admin.contect_message_detail,name="contect_message_detail"),
+     path("delete_contect_message/<int:key>",admin.delete_contect_message,name="delete_contect_message"),
      
 
 
