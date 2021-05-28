@@ -36,6 +36,49 @@
 	<link rel="stylesheet" href="{% static 'app/css/style.css' %}">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	
+	<script>
+		function preview_propic(input) {
+		if (input.files && input.files[0]) {
+		   var reader = new FileReader();
+		   reader.onload = function (e) {
+				$('#preview_propic_img').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	</script>
+
+
+<!-- DARSHAN SCRIPT -->
+<script type="text/javascript">
+	$(document).ready(function() {
+	
+		$("#button-plus, #button-minus").on("click", function()
+		{  
+		  var $button = $(this);
+		  var oldValue = $button.parent().parent().find("#quantity").val();
+		  if ($button.text() == "+") {
+				  var newVal = parseFloat(oldValue) + 1;
+		  }
+		  else {
+			if (oldValue > 0) { 
+				var newVal = parseFloat(oldValue) - 1;  // Don't allow decrementing below zero
+			} 
+			else {
+			   newVal = 0;
+			}
+		  }
+			$button.parent().parent().find("input").val(newVal);
+			$("#quantity_copy").val(newVal);
+	  
+		});
+	
+	}); 
+	
+	
+	</script>
+	  <!-- DARSHAN SCRIPT END -->
+
 </head>
 
 <body class="goto-here">
