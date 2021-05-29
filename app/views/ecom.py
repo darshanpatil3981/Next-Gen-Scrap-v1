@@ -111,7 +111,16 @@ def add_to_cart_or_buy_now(request,key):
         user = User_Master.objects.get(id=id)
         customer = Customer.objects.get(User_Master=user)
         product = Product.objects.get(id=key)
-        quantity = request.POST['quantity_copy']
+        try:
+            quantity = request.POST['quantity_copy']
+        except:
+            quantity = 1
+            per_pro_price = product.Product_Price
+            total_amt = int(quantity)*int(per_pro_price)
+            new_cart_item = Cust_Cart.objects.create(Customer=customer,Product=product,Quantity=quantity,Total_Amount=total_amt)
+            cart_i_up = int(request.session['cart_items']) + 1
+            request.session['cart_items'] = cart_i_up
+            return HttpResponseRedirect(reverse('index'))
 
         if 'add_to_cart' in request.POST:
             per_pro_price = product.Product_Price
