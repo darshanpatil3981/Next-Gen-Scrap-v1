@@ -360,7 +360,7 @@ def Add_coomment_ecom(request,key):
 def Search(request):
     result = request.POST['result']
     products = Product.objects.filter(Product_Name__icontains = result)
-    return render(request,"ecom/search_result.html",{'products':products})
+    return render(request,"ecom/search2.html",{'products':products})
 
 def Select_Area(request):
     areas = Areas.objects.all()
