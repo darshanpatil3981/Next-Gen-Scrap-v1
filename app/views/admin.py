@@ -75,7 +75,10 @@ def Delete_Scrap_Category(request,key):
 
 def Admin_view_rc_profile(request,key):
     rc=RC.objects.get(id=key)
-    return render(request,"ngs_admin/admin_view_rc_profile.html",{'rc':rc})
+    flag = 0
+    if rc.Document_File == "":
+        flag = 1
+    return render(request,"ngs_admin/admin_view_rc_profile.html",{'rc':rc,'f':flag})
 
 def Change_Verify_Status(request,key):
     rc=RC.objects.get(id=key)
@@ -118,7 +121,10 @@ def Verify_Sc_Profile(request):
 
 def Admin_view_Sc_profile(request,key):
     sc=SC.objects.get(id=key)
-    return render(request,"ngs_admin/admin_view_sc_profile.html",{'sc':sc})
+    flag = 0
+    if sc.Document_File == "":
+        flag = 1
+    return render(request,"ngs_admin/admin_view_sc_profile.html",{'sc':sc,'f':flag})
 
 def Change_Verify_Status_Sc(request,key):
     sc=SC.objects.get(id=key)
