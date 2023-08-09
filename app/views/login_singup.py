@@ -118,7 +118,7 @@ def create_Customer(request):
             if pswd==cpswd:
                 encrypted_pw=make_password(pswd)
                 newUser = User_Master.objects.create(Email=email,Password=encrypted_pw,Role="Customer",is_created=True,is_verified=False,is_active=False)
-                newCustomer = Customer.objects.create(User_Master=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0,Profile_Pic="")
+                newCustomer = Customer.objects.create(User_Master=newUser,Firstname=fname,Lastname=lname,Address="",City="",State="",Pincode=000000,Contact=0)
                 return render(request,"app/login.html")
             else:
                 message = "Password Does Not Match"
@@ -276,4 +276,12 @@ def Home(request):
     return render(request,"app/index.html")
     
 def Contact(request):
-    return render(request,"app/contact.html")
+    if request.method=="POST":
+        name = request.POST['name'] 
+        email = request.POST['email'] 
+        subject = request.POST['subject'] 
+        msg = request.POST['msg'] 
+        newmsg = contect_Messages.objects.create(Name=name,Email=email,Subject=subject,Message=msg)
+        return render(request,"app/contact.html")
+    else:
+        return render(request,"app/contact.html")

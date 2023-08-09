@@ -105,6 +105,7 @@ urlpatterns = [
      path("confirm_scrap_request/",ecom.Confirm_Scrap_Request,name="confirm_scrap_request"),
      path("my_scrap_requests/",ecom.My_Scrap_Requests,name="my_scrap_requests"),
      path("scrap_prices/",ecom.Scrap_Prices,name="scrap_prices"),
+     path("cancel_order/<int:key>",ecom.Cancel_Order,name="cancel_order"),
 
 
      
@@ -146,6 +147,9 @@ urlpatterns = [
      path("ecom_transactions/",admin.Ecomtransaction,name="ecom_transactions"),
      path("subscription_transaction/",admin.Subscription_transaction,name="subscription_transaction"),
      path("admin_view_Subscription/<int:key>",admin.admin_view_Subscription,name="admin_view_Subscription"),
+     path("contect_messages/",admin.contect_messages,name="contect_messages"),
+     path("contect_message_detail/<int:key>",admin.contect_message_detail,name="contect_message_detail"),
+     path("delete_contect_message/<int:key>",admin.delete_contect_message,name="delete_contect_message"),
      
 
 

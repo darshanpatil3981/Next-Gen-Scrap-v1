@@ -75,8 +75,10 @@ class Order(models.Model):
     Customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
     Total_Amount = models.FloatField(default=0)
     Sub_Total_Amount = models.FloatField(default=0)
-    Payment_status= models.CharField(max_length=20, null=True, blank=True)
+    Payment_status = models.CharField(max_length=20, null=True, blank=True)
+    Status = models.CharField(max_length=20, null=True, blank=True)
     Datetime_of_payment = models.DateField(null=True) 
+    Estimate_Delivery_Date = models.DateField(null=True) 
     Invoice_No = models.BigIntegerField(default=0)
     Razorpay_order_id = models.CharField(max_length=500, null=True, blank=True)
     Razorpay_payment_id = models.CharField(max_length=500, null=True, blank=True)
@@ -153,6 +155,12 @@ class Customer_Scrap_Request(models.Model):
     Datetime_Of_Pickup = models.DateTimeField()
     Is_Complited = models.BooleanField(default=False)
     
+class contect_Messages(models.Model):
+    Name = models.CharField(max_length=50,null=True, blank=True)
+    Email = models.CharField(max_length=50,null=True, blank=True)
+    Subject = models.CharField(max_length=100,null=True, blank=True)
+    Message = models.CharField(max_length=500,null=True, blank=True)
+
 
     
 

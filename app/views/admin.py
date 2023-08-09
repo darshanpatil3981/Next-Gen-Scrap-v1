@@ -75,7 +75,10 @@ def Delete_Scrap_Category(request,key):
 
 def Admin_view_rc_profile(request,key):
     rc=RC.objects.get(id=key)
-    return render(request,"ngs_admin/admin_view_rc_profile.html",{'rc':rc})
+    flag = 0
+    if rc.Document_File == "":
+        flag = 1
+    return render(request,"ngs_admin/admin_view_rc_profile.html",{'rc':rc,'f':flag})
 
 def Change_Verify_Status(request,key):
     rc=RC.objects.get(id=key)
@@ -118,7 +121,10 @@ def Verify_Sc_Profile(request):
 
 def Admin_view_Sc_profile(request,key):
     sc=SC.objects.get(id=key)
-    return render(request,"ngs_admin/admin_view_sc_profile.html",{'sc':sc})
+    flag = 0
+    if sc.Document_File == "":
+        flag = 1
+    return render(request,"ngs_admin/admin_view_sc_profile.html",{'sc':sc,'f':flag})
 
 def Change_Verify_Status_Sc(request,key):
     sc=SC.objects.get(id=key)
@@ -162,14 +168,20 @@ def Ecomtransaction(request):
     paginator = Paginator(orders,6)
     page = request.GET.get('page')
     paged_order = paginator.get_page(page)
-    return render(request,"ngs_admin/ecomtr.html",{'orders':paged_order})
+    totalt = 0
+    for i in orders:
+        totalt = totalt + i.Total_Amount
+    return render(request,"ngs_admin/ecomtr.html",{'orders':paged_order,'totalt':totalt})
 
 def Subscription_transaction(request):
     subscription =  Subscription.objects.all()
     paginator = Paginator(subscription,6)
     page = request.GET.get('page')
     paged_subscription = paginator.get_page(page)
-    return render(request,"ngs_admin/Subscription_transaction.html",{'subscription':paged_subscription})
+    totalt = 0
+    for i in subscription:
+        totalt = totalt + i.Subscription_Amount
+    return render(request,"ngs_admin/Subscription_transaction.html",{'subscription':paged_subscription,'totalt':totalt})
 
 
 def admin_view_Subscription(request,key):
@@ -177,6 +189,19 @@ def admin_view_Subscription(request,key):
     user = subscription.User
     rc=RC.objects.get(User_Master=user) 
     return render(request,"rc/invoice_subscription.html",{'subscription':subscription,'rc':rc,'user':user})
+
+def contect_messages(request):
+    messages = contect_Messages.objects.all()
+    return render(request,"ngs_admin/contect_messages.html",{'messages':messages})
+
+def contect_message_detail(request,key):
+    msg = contect_Messages.objects.get(id=key)
+    return render(request,"ngs_admin/contect_message_detail.html",{'msg':msg})
+
+def delete_contect_message(request,key):
+    msg = contect_Messages.objects.get(id=key)
+    msg.delete()
+    return redirect('contect_messages')
 
 
     

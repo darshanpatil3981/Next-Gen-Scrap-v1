@@ -117,7 +117,9 @@
                                         <td>Pincode :</td>
                                         <td class="font-medium text-dark-medium">{{sc.Pincode}}</td>
                                         </tr>
+{% if f == 1 %}
 
+{% else %}
                                         
                                         <td> Document Type </td>
                                         <td class="font-medium text-dark-medium">{{sc.Document_Type}}</td>
@@ -126,6 +128,7 @@
                                         <td> Document </td>
                                         <td class="font-medium text-dark-medium"><a href="{{sc.Document_File.url}}"> <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 20px;"></i></a></td>
                                     </tr>
+                                {% endif %}
                                     </tbody>
                                 </table>
                             </div>

@@ -1,0 +1,115 @@
+{% extends "ecom/base1.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<title>Home</title>
+
+<div class="hero-wrap hero-bread" style="background-image: url({% static 'app/images/index_bg.jpg' %});">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Home</a></span> <span> Recycled
+                        Products</span></p>
+                <h1 class="mb-0 bread" style="color: #82ae46; "> Recycled Products</h1>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<section class="ftco-section" style="padding-top: 70px;">
+
+    <div class="container">
+        <div class="row">
+            {% if products %}
+        {% for i in products %}
+            <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="product">
+                    <a href="{% url 'product_detail' key=i.id %}" class="img-prod"><img class="img-fluid"
+                            src="{{i.Product_Img.url}}">
+
+                        <div class="overlay"></div>
+                    </a>
+
+                    <div class="text py-3 pb-4 px-3 text-center">
+                        <h3><a href="#">{{i.Product_Name}}</a></h3>
+                        <div class="d-flex">
+                            <div class="pricing">
+                                <p class="price"><span class="price-sale">₹ {{i.Product_Price}}</span></p>
+                            </div>
+                        </div>
+                        <div class="bottom-area d-flex px-3">
+                            <div class="m-auto d-flex">
+                                <a href="{% url 'product_detail' key=i.id %}"
+                                    class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                    <span><i class="fa fa-eye"></i></span>
+                                </a>
+                                <a  href="{% url 'cart_buy' key=i.id %}" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                    <span  ><i  class="ion-ios-cart"></i></span>
+                                </a>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% endif %}
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <center>
+        <section class="ftco-section" style="padding-top: 60px;">
+
+            <div class="container">
+    <div style="padding-bottom: 40px;padding-right: 44%;">
+        <nav aria-label="..." class="float-right" >
+            <ul class="pagination ">
+                {% if products.has_previous %}
+                <li class="page-item">
+                    <a style="width: 80px;" class="page-link"
+                        href="?page={{ products.previous_page_number }}">Previous</a>
+                </li>
+                {% endif %}
+                {% for i in products.paginator.page_range %}
+
+                {% if products.number == i %}
+                <li style="background-color: #82ae46;;"  class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+
+                {% endfor %}
+
+
+                {% if products.has_next %}
+                <li class="page-item">
+                    <a style="width: 80px;" class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+
+    </div>
+</center>
+</section>
+</div>
+
+</section>
+
+
+{% endblock content %}

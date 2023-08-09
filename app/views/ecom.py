@@ -106,32 +106,44 @@ def Change_password(request):
     
 #done
 def add_to_cart_or_buy_now(request,key):
-    id = request.session.get("id")
-    user = User_Master.objects.get(id=id)
-    customer = Customer.objects.get(User_Master=user)
-    product = Product.objects.get(id=key)
-    quantity = request.POST['quantity_copy']
+    if 'id' in request.session:
+        id = request.session.get("id")
+        user = User_Master.objects.get(id=id)
+        customer = Customer.objects.get(User_Master=user)
+        product = Product.objects.get(id=key)
+        try:
+            quantity = request.POST['quantity_copy']
+        except:
+            quantity = 1
+            per_pro_price = product.Product_Price
+            total_amt = int(quantity)*int(per_pro_price)
+            new_cart_item = Cust_Cart.objects.create(Customer=customer,Product=product,Quantity=quantity,Total_Amount=total_amt)
+            cart_i_up = int(request.session['cart_items']) + 1
+            request.session['cart_items'] = cart_i_up
+            return HttpResponseRedirect(reverse('index'))
 
-    if 'add_to_cart' in request.POST:
-        per_pro_price = product.Product_Price
-        total_amt = int(quantity)*int(per_pro_price)
-        new_cart_item = Cust_Cart.objects.create(Customer=customer,Product=product,Quantity=quantity,Total_Amount=total_amt)
-        # AHI "ITEM ADDED TO CART SUCCESSFULLY NO MESSAGE FIRE KARAVO CHE... EK MESSAGE LAI RENDER MA PASS KARVO PADE"
-        # PN RENDER MA PASS KARE TYARE PRODUCT na OBJECTS.ALL() KARI MOKALJE NAI TO ERROR MARSE
-        # return render(request,"ecom/index.html",{'user':user,'customer':customer,'products':product})
-        cart_i_up = int(request.session['cart_items']) + 1
-        request.session['cart_items'] = cart_i_up
-        return HttpResponseRedirect(reverse('product_detail',args=[product.id]))
+        if 'add_to_cart' in request.POST:
+            per_pro_price = product.Product_Price
+            total_amt = int(quantity)*int(per_pro_price)
+            new_cart_item = Cust_Cart.objects.create(Customer=customer,Product=product,Quantity=quantity,Total_Amount=total_amt)
+            # AHI "ITEM ADDED TO CART SUCCESSFULLY NO MESSAGE FIRE KARAVO CHE... EK MESSAGE LAI RENDER MA PASS KARVO PADE"
+            # PN RENDER MA PASS KARE TYARE PRODUCT na OBJECTS.ALL() KARI MOKALJE NAI TO ERROR MARSE
+            # return render(request,"ecom/index.html",{'user':user,'customer':customer,'products':product})
+            cart_i_up = int(request.session['cart_items']) + 1
+            request.session['cart_items'] = cart_i_up
+            return HttpResponseRedirect(reverse('product_detail',args=[product.id]))
 
-    elif 'buy_now' in request.POST:
-        per_pro_price = product.Product_Price
-        total_amt = int(quantity)*int(per_pro_price)
-        total = total_amt + 40
-        new_cart_item = Cust_Cart.objects.create(Customer=customer,Product=product,Quantity=quantity,Total_Amount=total_amt)
-        cart_i_up = int(request.session['cart_items']) + 1
-        request.session['cart_items'] = cart_i_up
-        return render(request,"ecom/checkout.html",{'new_cart_item':new_cart_item,'item':quantity,'sub_total':total_amt,'total':total})
+        elif 'buy_now' in request.POST:
+            per_pro_price = product.Product_Price
+            total_amt = int(quantity)*int(per_pro_price)
+            total = total_amt + 40
+            new_cart_item = Cust_Cart.objects.create(Customer=customer,Product=product,Quantity=quantity,Total_Amount=total_amt)
+            cart_i_up = int(request.session['cart_items']) + 1
+            request.session['cart_items'] = cart_i_up
+            return render(request,"ecom/checkout.html",{'new_cart_item':new_cart_item,'item':quantity,'sub_total':total_amt,'total':total})
         # return HttpResponseRedirect(reverse('checkout'))
+    else:
+        return redirect('login')
 
 
 #done
@@ -265,7 +277,10 @@ def Invoice(request):
     order.Razorpay_order_id = response['razorpay_order_id']
     order.Razorpay_payment_id = response['razorpay_payment_id']
     date1 = datetime.now().date()
+    Estimate_Delivery_Date = date1+timedelta(days=7)
     order.Datetime_of_payment = date1
+    order.Status = "Pending"
+    order.Estimate_Delivery_Date = Estimate_Delivery_Date
     order.razorpay_signature =  response['razorpay_signature']
     order.save()
     product_order = Product_Order.objects.filter(Order=order)
@@ -311,7 +326,7 @@ def Customer_orders_detail(request,key):
     user = User_Master.objects.get(id=id)
     customer=Customer.objects.get(User_Master=user)
     order_product =  Product_Order.objects.filter(Order=key,Customer=customer.id,Payment_status="Success")
-    return render(request,"ecom/customer_orders_detail.html",{'order_product':order_product,})
+    return render(request,"ecom/customer_orders_detail.html",{'order_product':order_product,'id':key})
 
 def Invoice_pdf(request,key):
     order=Order.objects.get(id=key)
@@ -345,7 +360,7 @@ def Add_coomment_ecom(request,key):
 def Search(request):
     result = request.POST['result']
     products = Product.objects.filter(Product_Name__icontains = result)
-    return render(request,"ecom/search_result.html",{'products':products})
+    return render(request,"ecom/search2.html",{'products':products})
 
 def Select_Area(request):
     areas = Areas.objects.all()
@@ -412,4 +427,10 @@ def My_Scrap_Request_Detail(request,key):
 def Scrap_Prices(request):
     cat = Scrap_Categories.objects.all()
     return render(request,"ecom/scrap_prices.html",{'cat':cat})
+
+def Cancel_Order(request,key):
+    order = Order.objects.get(id=key)
+    order.Status = "Canceled"
+    order.save()
+    return redirect('customer_orders')
 
